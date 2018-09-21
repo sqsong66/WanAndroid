@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">WanAndroid</string>
+    <string name="title_activity_login">LoginActivity</string>
+
+    <string name="text_user_name">用户名</string>
+    <string name="text_user_name_helper">请输入用户名</string>
 </resources>
