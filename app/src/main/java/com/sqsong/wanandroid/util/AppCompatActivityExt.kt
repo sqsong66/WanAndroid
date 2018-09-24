@@ -16,6 +16,11 @@
 package com.sqsong.wanandroid.util
 
 
+import android.content.Context
+import android.view.View
+import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
+import android.widget.EditText
 import androidx.annotation.IdRes
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
@@ -66,4 +71,20 @@ private inline fun FragmentManager.transact(action: FragmentTransaction.() -> Un
     beginTransaction().apply {
         action()
     }.commit()
+}
+
+fun AppCompatActivity.setupUi(rootView: View) {
+    if (rootView !is EditText) {
+        rootView.setOnTouchListener { view, _ ->
+            var inputManager: InputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            inputManager.hideSoftInputFromWindow(view.windowToken, 0)
+            false
+        }
+    }
+
+    if (rootView is ViewGroup) {
+        for (i in 0..(rootView.childCount - 1)) {
+            setupUi(rootView.getChildAt(i))
+        }
+    }
 }

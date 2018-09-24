@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">WanAndroid</string>
+    <string name="title_activity_login">LoginActivity</string>
+
+    <string name="text_user_name">用户名</string>
+    <string name="text_user_password">密码</string>
+    <string name="text_user_name_helper">请输入用户名</string>
+    <string name="text_register_tips">还没注册？去注册</string>
+    <string name="text_forget_password">忘记密码</string>
+    <string name="text_login">登录</string>
+    <string name="text_register">注册</string>
+    <string name="text_confirm_password">确认密码</string>
+    <string name="text_developing">开发中...</string>
+    <string name="text_loading">加载中...</string>
+    <string name="text_theme_switcher">选择主题</string>
+    <string name="text_cancel">取消</string>
+    <string name="text_save">保存</string>
+
+    <string name="text_desc_default">默认</string>
+    <string name="text_desc_black">黑色</string>
+    <string name="text_desc_red">红色</string>
+    <string name="text_desc_purple">紫色</string>
+    <string name="text_desc_indigo">靛青色</string>
+    <string name="text_desc_green">绿色</string>
+    <string name="text_desc_orange">橘色</string>
+    <string name="text_desc_bluegrey">蓝灰色</string>
+</resources>

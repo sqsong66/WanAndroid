@@ -8,29 +8,26 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
     <ImageView
-        android:id="@+id/close_iv"
+        android:id="@+id/back_iv"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:layout_marginStart="24dp"
         android:layout_marginLeft="24dp"
         android:layout_marginTop="24dp"
         android:background="@drawable/bg_login_close"
         android:clickable="true"
-        android:contentDescription="close"
-        android:focusable="auto"
         android:padding="8dp"
-        android:src="@drawable/ic_close"
+        android:src="@drawable/ic_arrow_back"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <!--?selectableItemBackgroundBorderless-->
 
     <TextView
-        android:id="@+id/login_title_tv"
+        android:id="@+id/register_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
-        android:text="@string/text_login"
+        android:text="@string/text_register"
         android:textAllCaps="true"
         android:textColor="@color/colorWhite"
         android:textSize="50sp"
@@ -38,7 +35,7 @@
         app:fontFamily="@font/pacifico"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/close_iv" />
+        app:layout_constraintTop_toBottomOf="@id/back_iv" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/user_name_input_layout"
@@ -50,13 +47,14 @@
         android:layout_marginRight="32dp"
         android:hint="@string/text_user_name"
         android:textColorHint="@color/colorWhiteHint"
+        app:boxStrokeWidth="2px"
         app:counterEnabled="true"
         app:counterMaxLength="10"
         app:counterTextAppearance="@style/LoginTextInputAppearance"
         app:errorEnabled="true"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/login_title_tv">
+        app:layout_constraintTop_toBottomOf="@id/register_tv">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/user_name_edit"
@@ -100,27 +98,39 @@
             android:textSize="18sp" />
     </com.google.android.material.textfield.TextInputLayout>
 
-    <TextView
-        android:id="@+id/forget_password_tv"
-        android:layout_width="wrap_content"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/confirm_password_input_layout"
+        style="@style/Widget.Design.TextInputLayout"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="32dp"
         android:layout_marginTop="10dp"
         android:layout_marginRight="32dp"
-        android:background="@drawable/bg_login_normal_click"
-        android:clickable="true"
-        android:focusable="auto"
-        android:paddingLeft="12dp"
-        android:paddingTop="6dp"
-        android:paddingRight="12dp"
-        android:paddingBottom="6dp"
-        android:text="@string/text_forget_password"
-        android:textColor="@color/colorWhite"
-        android:textSize="14sp"
+        android:hint="@string/text_confirm_password"
+        android:textColorHint="@color/colorWhiteHint"
+        app:counterEnabled="true"
+        app:counterMaxLength="10"
+        app:counterTextAppearance="@style/LoginTextInputAppearance"
+        app:hintTextAppearance="@style/LoginTextInputAppearance"
+        app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/password_input_layout" />
+        app:layout_constraintTop_toBottomOf="@id/password_input_layout"
+        app:passwordToggleEnabled="true"
+        app:passwordToggleTint="@color/colorWhite">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:inputType="textPassword"
+            android:selectAllOnFocus="true"
+            android:singleLine="true"
+            android:textColor="@color/colorWhite"
+            android:textSize="18sp" />
+    </com.google.android.material.textfield.TextInputLayout>
 
     <Button
-        android:id="@+id/login_btn"
+        android:id="@+id/register_btn"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
@@ -130,29 +140,11 @@
         android:layout_marginRight="32dp"
         android:background="@drawable/bg_login_btn"
         android:padding="12dp"
-        android:text="Login"
+        android:text="@string/text_register"
         android:textColor="@color/colorWhite"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/forget_password_tv" />
-
-    <TextView
-        android:id="@+id/register_tips_tv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:background="@drawable/bg_login_normal_click"
-        android:clickable="true"
-        android:paddingLeft="12dp"
-        android:paddingTop="6dp"
-        android:paddingRight="12dp"
-        android:paddingBottom="6dp"
-        android:text="@string/text_register_tips"
-        android:textColor="@color/colorWhite"
-        android:textSize="18sp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/login_btn" />
+        app:layout_constraintTop_toBottomOf="@+id/confirm_password_input_layout" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

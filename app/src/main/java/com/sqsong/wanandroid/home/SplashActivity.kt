@@ -31,7 +31,7 @@ class SplashActivity : BaseActivity(), View.OnClickListener {
                 R.drawable.splash_image03, R.drawable.splash_image04, R.drawable.splash_image05)
         splash_iv.showImage(this, images[Random().nextInt(5)], -1)
 
-        timer = object : CountDownTimer(5500, 1000) {
+        timer = object : CountDownTimer(SPLASH_TIME, 1000) {
             override fun onTick(millisUntilFinished: Long) {
                 Log.e("sqsong", "Time -> $millisUntilFinished")
                 val time: Int = (millisUntilFinished / 1000).toInt()
@@ -55,4 +55,7 @@ class SplashActivity : BaseActivity(), View.OnClickListener {
         startHomeActivity()
     }
 
+    companion object {
+        private const val SPLASH_TIME: Long = 2200
+    }
 }

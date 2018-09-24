@@ -16,6 +16,14 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".home.HomeActivity1"
+            android:label="@string/title_activity_home1"
+            android:theme="@style/AppTheme"></activity>
+        <activity
+            android:name=".home.HomeActity1"
+            android:label="@string/title_activity_home_actity1"
+            android:theme="@style/AppTheme" />
+        <activity
             android:name=".home.SplashActivity"
             android:theme="@style/AppTheme.TransparentTheme">
             <intent-filter>
@@ -24,11 +32,20 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".home.HomeActivity" />
+        <activity
+            android:name=".home.HomeActivity"
+            android:theme="@style/AppTheme" />
         <activity
             android:name=".home.LoginActivity"
             android:label="@string/title_activity_login"
-            android:theme="@style/AppTheme"></activity>
+            android:theme="@style/AppTheme.LoginTheme" />
+        <activity
+            android:name=".home.RegisterActivity"
+            android:theme="@style/AppTheme.LoginTheme" />
+
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
     </application>
 
 </manifest>

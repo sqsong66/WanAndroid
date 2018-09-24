@@ -2,6 +2,28 @@
     <string name="app_name">WanAndroid</string>
     <string name="title_activity_login">LoginActivity</string>
 
-    <string name="text_user_name">用户名</string>
-    <string name="text_user_name_helper">请输入用户名</string>
+    <string name="text_user_name">User Name</string>
+    <string name="text_user_password">Password</string>
+    <string name="text_user_name_helper">Please input user name</string>
+    <string name="text_register_tips">Not account yet? Create one</string>
+    <string name="text_forget_password">Forget password?</string>
+    <string name="text_login">Login</string>
+    <string name="text_register">Register</string>
+    <string name="text_confirm_password">Confirm password</string>
+    <string name="text_developing">Developing...</string>
+    <string name="text_loading">Loading...</string>
+    <string name="text_theme_switcher">Theme Switcher</string>
+    <string name="text_cancel">Cancel</string>
+    <string name="text_save">Save</string>
+
+    <string name="text_desc_default">Default</string>
+    <string name="text_desc_black">Black</string>
+    <string name="text_desc_red">Red</string>
+    <string name="text_desc_purple">Purple</string>
+    <string name="text_desc_indigo">Indigo</string>
+    <string name="text_desc_green">Green</string>
+    <string name="text_desc_orange">Orange</string>
+    <string name="text_desc_bluegrey">BlueGrey</string>
+    <string name="title_activity_home_actity1">HomeActity1</string>
+    <string name="title_activity_home1">HomeActivity1</string>
 </resources>

@@ -3,6 +3,7 @@ package com.sqsong.wanandroid.base
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
+import com.sqsong.wanandroid.theme.ThemeOverlayUtil
 
 abstract class BaseActivity : AppCompatActivity() {
 
@@ -15,11 +16,13 @@ abstract class BaseActivity : AppCompatActivity() {
     abstract fun initEvent()
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        ThemeOverlayUtil.applyThemeOverlay(this)
         super.onCreate(savedInstanceState)
         beforeInflateView()
         setContentView(getLayoutResId())
         initView()
         initEvent()
+        BaseApplication.INSTANCE.addActivity(this)
     }
 
     /**
@@ -45,5 +48,8 @@ abstract class BaseActivity : AppCompatActivity() {
         return super.onOptionsItemSelected(item)
     }
 
-
+    override fun onDestroy() {
+        super.onDestroy()
+        BaseApplication.INSTANCE.removeActivity(this)
+    }
 }
