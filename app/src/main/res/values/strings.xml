@@ -24,6 +24,4 @@
     <string name="text_desc_green">Green</string>
     <string name="text_desc_orange">Orange</string>
     <string name="text_desc_bluegrey">BlueGrey</string>
-    <string name="title_activity_home_actity1">HomeActity1</string>
-    <string name="title_activity_home1">HomeActivity1</string>
 </resources>

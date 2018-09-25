@@ -2,13 +2,16 @@ package com.sqsong.wanandroid.home
 
 import android.content.Intent
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.snackbar.Snackbar
 import com.sqsong.wanandroid.R
-import com.sqsong.wanandroid.base.BaseActivity
+import com.sqsong.wanandroid.common.inter.ChangeThemeAnnotation
+import com.sqsong.wanandroid.common.inter.IAppCompatActivity
 import com.sqsong.wanandroid.util.setupUi
 import kotlinx.android.synthetic.main.activity_login.*
 
-class LoginActivity : BaseActivity(), View.OnClickListener {
+@ChangeThemeAnnotation
+class LoginActivity : AppCompatActivity(), IAppCompatActivity, View.OnClickListener {
 
     override fun getLayoutResId(): Int {
         return R.layout.activity_login

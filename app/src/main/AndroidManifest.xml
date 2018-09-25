@@ -15,14 +15,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity
-            android:name=".home.HomeActivity1"
-            android:label="@string/title_activity_home1"
-            android:theme="@style/AppTheme"></activity>
-        <activity
-            android:name=".home.HomeActity1"
-            android:label="@string/title_activity_home_actity1"
-            android:theme="@style/AppTheme" />
+
+        <meta-data
+            android:name="design_width_in_dp"
+            android:value="410"/>
+        <meta-data
+            android:name="design_height_in_dp"
+            android:value="680"/>
+
         <activity
             android:name=".home.SplashActivity"
             android:theme="@style/AppTheme.TransparentTheme">

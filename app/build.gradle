@@ -43,4 +43,7 @@ dependencies {
 
     // Latest material component
     implementation "com.google.android.material:material:$rootProject.ext.material_component_version"
+
+    // Auto size
+    implementation "me.jessyan:autosize:$rootProject.ext.autosize_version"
 }

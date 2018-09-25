@@ -16,9 +16,12 @@ import androidx.fragment.app.DialogFragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.sqsong.wanandroid.R
+import com.sqsong.wanandroid.base.BaseApplication
 import com.sqsong.wanandroid.common.GridSpaceItemDecoration
-import com.sqsong.wanandroid.common.OnItemClickListener
+import com.sqsong.wanandroid.common.inter.OnItemClickListener
+import com.sqsong.wanandroid.util.Constants
 import com.sqsong.wanandroid.util.DensityUtil
+import com.sqsong.wanandroid.util.PreferenceHelper
 import com.sqsong.wanandroid.view.CircleView
 
 class ThemeSwitcherDialog : DialogFragment(), OnItemClickListener<ColorPalette> {
@@ -26,16 +29,8 @@ class ThemeSwitcherDialog : DialogFragment(), OnItemClickListener<ColorPalette> 
     private var mCheckedPos = 0
     private var mColorPalette: ColorPalette? = null
     private var mAdapter: ThemeColorAdapter? = null
-    private var mSaveListener: OnThemeOverlaySavedListener? = null
     private var mThemeOverlayList = mutableListOf<ColorPalette>()
     private lateinit var mThemeResourceProvider: ThemeResourceProvider
-
-    override fun onAttach(context: Context?) {
-        super.onAttach(context)
-        if (context is OnThemeOverlaySavedListener) {
-            mSaveListener = context
-        }
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -57,6 +52,9 @@ class ThemeSwitcherDialog : DialogFragment(), OnItemClickListener<ColorPalette> 
             val primaryColor = typedArray?.getColor(0, Color.TRANSPARENT)
             val primaryDarkColor = typedArray?.getColor(1, Color.TRANSPARENT)
             val secondaryColor = typedArray?.getColor(2, Color.TRANSPARENT)
+
+            val index = PreferenceHelper.getInstance().getValue(Constants.THEMEOVERLAY_INDEX, 0)
+
             val colorPalette = ColorPalette(paletteOverlay, primaryColor,
                     primaryDarkColor, secondaryColor, descTypedArray.getString(i), i == 0)
             mThemeOverlayList.add(colorPalette)
@@ -70,7 +68,9 @@ class ThemeSwitcherDialog : DialogFragment(), OnItemClickListener<ColorPalette> 
                 ?.setView(createDialogView(activity?.layoutInflater))
                 ?.setNegativeButton(R.string.text_cancel, null)
                 ?.setPositiveButton(R.string.text_save) { _, _ ->
-                    mSaveListener?.onThemeOverlaySaved(mColorPalette, mCheckedPos)
+                    PreferenceHelper.getInstance().putValue(Constants.THEMEOVERLAY_INDEX, mCheckedPos)
+                    ThemeOverlayUtil.setThemeOverlay(mColorPalette?.themeOverlay, BaseApplication.INSTANCE.getActivityList())
+                    dismiss()
                 }
         val dialog = dialogBuilder?.create()
         return dialog ?: super.onCreateDialog(savedInstanceState)
@@ -90,8 +90,6 @@ class ThemeSwitcherDialog : DialogFragment(), OnItemClickListener<ColorPalette> 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         dialog.setCanceledOnTouchOutside(false)
-        val params = dialog.window.attributes
-        params.width = DensityUtil.getScreenWidth() - DensityUtil.dip2px(30) * 2
     }
 
     override fun onItemClick(data: ColorPalette?, position: Int) {
@@ -109,10 +107,6 @@ class ThemeSwitcherDialog : DialogFragment(), OnItemClickListener<ColorPalette> 
     companion object {
         val THEME_OVERLAY_ATTRS = intArrayOf(R.attr.colorPrimary, R.attr.colorPrimaryDark, R.attr.colorSecondary)
     }
-}
-
-interface OnThemeOverlaySavedListener {
-    fun onThemeOverlaySaved(palette: ColorPalette?, themeIndex: Int)
 }
 
 data class ColorPalette(

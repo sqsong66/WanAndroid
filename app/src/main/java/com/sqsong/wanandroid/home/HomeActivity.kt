@@ -1,18 +1,20 @@
 package com.sqsong.wanandroid.home
 
+import android.util.Log
 import android.util.TypedValue
+import android.view.MenuItem
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.sqsong.wanandroid.R
-import com.sqsong.wanandroid.base.BaseActivity
-import com.sqsong.wanandroid.base.BaseApplication
-import com.sqsong.wanandroid.theme.ColorPalette
-import com.sqsong.wanandroid.theme.OnThemeOverlaySavedListener
-import com.sqsong.wanandroid.theme.ThemeOverlayUtil
+import com.sqsong.wanandroid.common.inter.ChangeThemeAnnotation
+import com.sqsong.wanandroid.common.inter.IAppCompatActivity
 import com.sqsong.wanandroid.theme.ThemeSwitcherDialog
+import com.sqsong.wanandroid.util.DensityUtil
 import com.sqsong.wanandroid.util.showCircleImage
 import kotlinx.android.synthetic.main.content_home.*
 
-class HomeActivity : BaseActivity(), OnThemeOverlaySavedListener {
+@ChangeThemeAnnotation
+class HomeActivity : AppCompatActivity(), IAppCompatActivity {
 
     override fun getLayoutResId(): Int {
         return R.layout.activity_home
@@ -30,10 +32,17 @@ class HomeActivity : BaseActivity(), OnThemeOverlaySavedListener {
             ThemeSwitcherDialog().show(supportFragmentManager, "")
         }
 
+        val screenDpWidth = DensityUtil.getScreenDpWidth(this)
+        val screenDpHeight = DensityUtil.getScreenDpHeight(this)
+        Log.e("sqsong", "Screen width dp: $screenDpWidth, height dp: $screenDpHeight")
     }
 
-    override fun onThemeOverlaySaved(palette: ColorPalette?, themeIndex: Int) {
-        ThemeOverlayUtil.setThemeOverlay(this, palette?.themeOverlay)
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        if (item?.itemId == android.R.id.home) {
+            finish()
+            return true
+        }
+        return super.onOptionsItemSelected(item)
     }
 
 }

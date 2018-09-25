@@ -1,12 +1,15 @@
 package com.sqsong.wanandroid.home
 
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import com.sqsong.wanandroid.R
-import com.sqsong.wanandroid.base.BaseActivity
+import com.sqsong.wanandroid.common.inter.ChangeThemeAnnotation
+import com.sqsong.wanandroid.common.inter.IAppCompatActivity
 import com.sqsong.wanandroid.util.setupUi
 import kotlinx.android.synthetic.main.activity_register.*
 
-class RegisterActivity : BaseActivity(), View.OnClickListener {
+@ChangeThemeAnnotation
+class RegisterActivity : AppCompatActivity(), IAppCompatActivity, View.OnClickListener {
 
     override fun getLayoutResId(): Int {
         return R.layout.activity_register

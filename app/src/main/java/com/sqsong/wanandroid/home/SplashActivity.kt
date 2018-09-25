@@ -4,16 +4,17 @@ import android.content.Intent
 import android.os.CountDownTimer
 import android.util.Log
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.sqsong.wanandroid.R
-import com.sqsong.wanandroid.base.BaseActivity
+import com.sqsong.wanandroid.common.inter.IAppCompatActivity
 import com.sqsong.wanandroid.util.dpToPx
 import com.sqsong.wanandroid.util.getStatusBarHeight
 import com.sqsong.wanandroid.util.showImage
 import kotlinx.android.synthetic.main.activity_splash.*
 import java.util.*
 
-class SplashActivity : BaseActivity(), View.OnClickListener {
+class SplashActivity : AppCompatActivity(), IAppCompatActivity, View.OnClickListener {
 
     private lateinit var timer: CountDownTimer
 
@@ -47,7 +48,7 @@ class SplashActivity : BaseActivity(), View.OnClickListener {
 
     private fun startHomeActivity() {
         startActivity(Intent(this, LoginActivity::class.java))
-        finish()
+        // finish()
     }
 
     override fun onClick(v: View?) {

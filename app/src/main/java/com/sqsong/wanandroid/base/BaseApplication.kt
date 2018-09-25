@@ -1,36 +1,34 @@
 package com.sqsong.wanandroid.base
 
+import android.app.Activity
 import android.app.Application
+import com.sqsong.wanandroid.common.ActivityLifecycleCallbackImpl
 
 class BaseApplication : Application() {
 
-    var mActivityList = mutableListOf<BaseActivity>()
+    private lateinit var mActivityLifecycleCallback: ActivityLifecycleCallbackImpl
 
     override fun onCreate() {
         super.onCreate()
         INSTANCE = this
+
+        mActivityLifecycleCallback = ActivityLifecycleCallbackImpl()
+        registerActivityLifecycleCallbacks(mActivityLifecycleCallback)
     }
 
-    open fun addActivity(activity: BaseActivity) {
-        if (!mActivityList.contains(activity)) {
-            mActivityList.add(activity)
+    open fun getActivityList(): List<Activity?> {
+        return mActivityLifecycleCallback.getActivityList()
+    }
+
+    open fun quitApp() {
+        for (activity in getActivityList()) {
+            activity?.finish()
         }
-    }
-
-    open fun removeActivity(activity: BaseActivity) {
-        if (mActivityList.contains(activity)) {
-            mActivityList.remove(activity)
-        }
-    }
-
-    open fun getActivityList(): List<BaseActivity> {
-        return mActivityList
     }
 
     companion object {
         lateinit var INSTANCE: BaseApplication
             private set
-
     }
 
 }

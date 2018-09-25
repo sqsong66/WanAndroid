@@ -2,7 +2,7 @@ package com.sqsong.wanandroid.theme
 
 import android.app.Activity
 import androidx.annotation.StyleRes
-import com.sqsong.wanandroid.base.BaseApplication
+import com.sqsong.wanandroid.common.inter.ChangeThemeAnnotation
 
 class ThemeOverlayUtil {
 
@@ -11,16 +11,13 @@ class ThemeOverlayUtil {
         @StyleRes
         var mThemeOverlays: Int? = 0
 
-        fun setThemeOverlay(activity: Activity?, themeOverlays: Int?) {
+        fun setThemeOverlay(themeOverlays: Int?, activityList: List<Activity?>) {
             if (ThemeOverlayUtil.mThemeOverlays != themeOverlays) {
-                ThemeOverlayUtil.mThemeOverlays = themeOverlays
-                // activity?.recreate()
-                val activityList = BaseApplication.INSTANCE.getActivityList()
-                if (activityList != null && !activityList.isEmpty()) {
-                    for (activity in activityList) {
-                        activity.recreate()
-                    }
+                for (activity in activityList) {
+                    if ((activity?.javaClass?.isAnnotationPresent(ChangeThemeAnnotation::class.java))!!)
+                        activity?.recreate()
                 }
+                ThemeOverlayUtil.mThemeOverlays = themeOverlays
             }
         }
 
