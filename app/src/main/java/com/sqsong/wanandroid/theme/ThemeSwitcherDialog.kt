@@ -53,26 +53,29 @@ class ThemeSwitcherDialog : DialogFragment(), OnItemClickListener<ColorPalette> 
             val primaryDarkColor = typedArray?.getColor(1, Color.TRANSPARENT)
             val secondaryColor = typedArray?.getColor(2, Color.TRANSPARENT)
 
-            val index = PreferenceHelper.getInstance().getValue(Constants.THEMEOVERLAY_INDEX, 0)
-
+            val index by PreferenceHelper(Constants.THEMEOVERLAY_INDEX, 0)
+            mCheckedPos = index
             val colorPalette = ColorPalette(paletteOverlay, primaryColor,
-                    primaryDarkColor, secondaryColor, descTypedArray.getString(i), i == 0)
+                    primaryDarkColor, secondaryColor, descTypedArray.getString(i), i == index)
             mThemeOverlayList.add(colorPalette)
             typedArray?.recycle()
         }
     }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        var dialogBuilder = activity?.let { AlertDialog.Builder(it) }
-        dialogBuilder?.setTitle(R.string.text_theme_switcher)
-                ?.setView(createDialogView(activity?.layoutInflater))
-                ?.setNegativeButton(R.string.text_cancel, null)
-                ?.setPositiveButton(R.string.text_save) { _, _ ->
-                    PreferenceHelper.getInstance().putValue(Constants.THEMEOVERLAY_INDEX, mCheckedPos)
-                    ThemeOverlayUtil.setThemeOverlay(mColorPalette?.themeOverlay, BaseApplication.INSTANCE.getActivityList())
-                    dismiss()
-                }
-        val dialog = dialogBuilder?.create()
+        val dialog = activity?.let { AlertDialog.Builder(it) }?.run {
+            setTitle(R.string.text_theme_switcher)
+            setView(createDialogView(activity?.layoutInflater))
+            setNegativeButton(R.string.text_cancel, null)
+            setPositiveButton(R.string.text_save) { _, _ ->
+                var index by PreferenceHelper(Constants.THEMEOVERLAY_INDEX, 0)
+                index = mCheckedPos
+                ThemeOverlayUtil.setThemeOverlay(mColorPalette?.themeOverlay, BaseApplication.INSTANCE.getActivityList())
+                dismiss()
+            }
+            create()
+        }
+
         return dialog ?: super.onCreateDialog(savedInstanceState)
     }
 

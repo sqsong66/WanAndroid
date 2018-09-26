@@ -48,7 +48,7 @@ class SplashActivity : AppCompatActivity(), IAppCompatActivity, View.OnClickList
 
     private fun startHomeActivity() {
         startActivity(Intent(this, LoginActivity::class.java))
-        // finish()
+        finish()
     }
 
     override fun onClick(v: View?) {
