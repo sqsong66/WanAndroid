@@ -46,4 +46,27 @@ dependencies {
 
     // Auto size
     implementation "me.jessyan:autosize:$rootProject.ext.autosize_version"
+
+    // Rxjava  RxAndroid
+    implementation "io.reactivex.rxjava2:rxkotlin:$rootProject.ext.rxjava_version"
+    implementation "io.reactivex.rxjava2:rxandroid:$rootProject.ext.rxandroid_version"
+
+    // Gson
+    implementation "com.google.code.gson:gson:$rootProject.ext.gson_version"
+
+    // Retrofit
+    implementation "com.squareup.retrofit2:retrofit:$rootProject.ext.retrofit_version"
+    implementation "com.squareup.retrofit2:adapter-rxjava2:$rootProject.ext.retrofit_version"
+    implementation "com.squareup.retrofit2:converter-gson:$rootProject.ext.retrofit_version"
+
+    // Log interceptor
+    implementation "com.squareup.okhttp3:logging-interceptor:$rootProject.ext.http_log_interceptor_version"
+
+    // Dagger2
+    implementation "com.google.dagger:dagger:$rootProject.ext.dagger2_version"
+    annotationProcessor "com.google.dagger:dagger-compiler:$rootProject.ext.dagger2_version"
+    implementation "com.google.dagger:dagger-android:$rootProject.ext.dagger2_version"
+    // if you use the support libraries
+    implementation "com.google.dagger:dagger-android-support:$rootProject.ext.dagger2_version"
+    annotationProcessor "com.google.dagger:dagger-android-processor:$rootProject.ext.dagger2_version"
 }
