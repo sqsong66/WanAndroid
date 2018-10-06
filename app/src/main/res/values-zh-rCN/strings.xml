@@ -16,6 +16,10 @@
     <string name="text_theme_switcher">选择主题</string>
     <string name="text_cancel">取消</string>
     <string name="text_save">保存</string>
+    <string name="text_unknown_error">未知错误</string>
+    <string name="text_network_not_available">网络未连接</string>
+    <string name="text_address_not_reachable">无法连接到该地址</string>
+    <string name="text_network_timeout">服务器连接超时</string>
 
     <string name="text_desc_default">默认</string>
     <string name="text_desc_black">黑色</string>

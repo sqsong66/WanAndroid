@@ -1,6 +1,7 @@
 package com.sqsong.wanandroid.network
 
 import com.sqsong.wanandroid.base.HomeBannerBean
+import com.sqsong.wanandroid.util.Constants
 import io.reactivex.Observable
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -16,7 +17,7 @@ class RetrofitRequestManager {
     constructor() {
         val retrofit = Retrofit.Builder().let {
             it.client(createOkHttpClient())
-                    .baseUrl(BASE_URL)
+                    .baseUrl(Constants.BASE_URL)
                     .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                     .addConverterFactory(GsonConverterFactory.create())
                     .build()
@@ -26,13 +27,15 @@ class RetrofitRequestManager {
 
     private fun createOkHttpClient(): OkHttpClient {
         val interceptor = HttpLoggingInterceptor().apply {
-            level = HttpLoggingInterceptor.Level.BASIC
+            level = HttpLoggingInterceptor.Level.BODY
         }
         return OkHttpClient.Builder().let {
-            it.connectTimeout(DEFAULT_TIME_OUT, TimeUnit.MILLISECONDS)
-                    .readTimeout(DEFAULT_TIME_OUT, TimeUnit.MILLISECONDS)
-                    .writeTimeout(DEFAULT_TIME_OUT, TimeUnit.MILLISECONDS)
+            it.connectTimeout(Constants.DEFAULT_TIME_OUT, TimeUnit.MILLISECONDS)
+                    .readTimeout(Constants.DEFAULT_TIME_OUT, TimeUnit.MILLISECONDS)
+                    .writeTimeout(Constants.DEFAULT_TIME_OUT, TimeUnit.MILLISECONDS)
                     .addInterceptor(interceptor)
+                    .followRedirects(false)
+                    .followSslRedirects(false)
                     .build()
         }
     }
@@ -42,9 +45,6 @@ class RetrofitRequestManager {
     }
 
     companion object {
-
-        private const val DEFAULT_TIME_OUT: Long = 10000
-        private const val BASE_URL: String = "http://www.wanandroid.com/"
 
         private var INSTANCE: RetrofitRequestManager? = null
 

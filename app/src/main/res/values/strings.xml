@@ -15,6 +15,10 @@
     <string name="text_theme_switcher">Theme Switcher</string>
     <string name="text_cancel">Cancel</string>
     <string name="text_save">Save</string>
+    <string name="text_unknown_error">Unknown error</string>
+    <string name="text_network_not_available">Network not available</string>
+    <string name="text_address_not_reachable">Address not reachable</string>
+    <string name="text_network_timeout">Network connect timeout</string>
 
     <string name="text_desc_default">Default</string>
     <string name="text_desc_black">Black</string>

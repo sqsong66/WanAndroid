@@ -3,29 +3,33 @@ package com.sqsong.wanandroid.home
 import android.util.Log
 import android.util.TypedValue
 import android.view.MenuItem
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.sqsong.wanandroid.R
 import com.sqsong.wanandroid.base.HomeBannerBean
 import com.sqsong.wanandroid.common.inter.ChangeThemeAnnotation
 import com.sqsong.wanandroid.common.inter.IAppCompatActivity
-import com.sqsong.wanandroid.network.RetrofitRequestManager
+import com.sqsong.wanandroid.network.ApiException
+import com.sqsong.wanandroid.network.ApiService
+import com.sqsong.wanandroid.network.ObserverImpl
 import com.sqsong.wanandroid.theme.ThemeSwitcherDialog
 import com.sqsong.wanandroid.util.DensityUtil
+import com.sqsong.wanandroid.util.LogUtil
 import com.sqsong.wanandroid.util.showCircleImage
-import io.reactivex.Observer
+import dagger.android.support.DaggerAppCompatActivity
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.content_home.*
-import org.reactivestreams.Subscriber
-import org.reactivestreams.Subscription
+import javax.inject.Inject
 
 @ChangeThemeAnnotation
-class HomeActivity : AppCompatActivity(), IAppCompatActivity {
+class HomeActivity : DaggerAppCompatActivity(), IAppCompatActivity {
 
-    val disposable = CompositeDisposable()
+    @Inject
+    lateinit var mApiService: ApiService
+
+    @Inject
+    lateinit var disposable: CompositeDisposable
 
     override fun getLayoutResId(): Int {
         return R.layout.activity_home
@@ -46,27 +50,18 @@ class HomeActivity : AppCompatActivity(), IAppCompatActivity {
         val screenDpWidth = DensityUtil.getScreenDpWidth(this)
         val screenDpHeight = DensityUtil.getScreenDpHeight(this)
         Log.e("sqsong", "Screen width dp: $screenDpWidth, height dp: $screenDpHeight")
-
-        RetrofitRequestManager.getInstance().getHomeBanner()
+        mApiService.getHomeBanner()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(object : Observer<HomeBannerBean>{
-                    override fun onComplete() {
-
+                .subscribe(object : ObserverImpl<HomeBannerBean>(disposable) {
+                    override fun onFail(error: ApiException) {
+                        LogUtil.e("sqsong", "Error code: " + error.code
+                                + ", message: " + error.message + ", showMessage: " + error.showMessage)
                     }
 
-                    override fun onSubscribe(d: Disposable) {
-
+                    override fun onSuccess(data: HomeBannerBean) {
+                        LogUtil.e("sqsong", "Result -> " + data.toString())
                     }
-
-                    override fun onNext(t: HomeBannerBean) {
-
-                    }
-
-                    override fun onError(e: Throwable) {
-
-                    }
-
                 })
     }
 
@@ -80,7 +75,7 @@ class HomeActivity : AppCompatActivity(), IAppCompatActivity {
 
     override fun onDestroy() {
         super.onDestroy()
-        disposable.clear()
+        disposable.dispose()
     }
 
 }

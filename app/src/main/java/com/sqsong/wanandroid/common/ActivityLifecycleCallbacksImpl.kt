@@ -7,7 +7,7 @@ import com.sqsong.wanandroid.common.inter.ChangeThemeAnnotation
 import com.sqsong.wanandroid.common.inter.IAppCompatActivity
 import com.sqsong.wanandroid.theme.ThemeOverlayUtil
 
-class ActivityLifecycleCallbackImpl : Application.ActivityLifecycleCallbacks {
+class ActivityLifecycleCallbacksImpl : Application.ActivityLifecycleCallbacks {
 
     private var mActivityList = mutableListOf<Activity?>()
 
