@@ -32,6 +32,13 @@
         <item name="android:textColorHint">@color/colorWhite</item>
     </style>
 
+    <style name="LoginErrorAppearance">
+        <item name="android:textColor">?colorError</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColorHint">?colorError</item>
+    </style>
+
+
     <style name="LoginTextInputStyle" parent="Widget.Design.TextInputLayout">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>

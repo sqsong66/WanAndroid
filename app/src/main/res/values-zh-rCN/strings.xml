@@ -31,4 +31,7 @@
     <string name="text_desc_bluegrey">蓝灰色</string>
 
     <string name="text_token_expired">该操作需要登录，请先登录</string>
+    <string name="text_user_name_empty">用户名不可以为空</string>
+    <string name="text_password_empty">密码不可以为空</string>
+    <string name="text_password_too_short">密码长度必须大于6</string>
 </resources>

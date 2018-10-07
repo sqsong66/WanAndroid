@@ -30,4 +30,7 @@
     <string name="text_desc_bluegrey">BlueGrey</string>
 
     <string name="text_token_expired">This action needs login, please login first</string>
+    <string name="text_user_name_empty">User name cannot empty</string>
+    <string name="text_password_empty">Password cannot empty</string>
+    <string name="text_password_too_short">Password length must greater then 6</string>
 </resources>

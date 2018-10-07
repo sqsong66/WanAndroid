@@ -5,48 +5,56 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorError">@color/colorRed</item>
     </style>
 
     <style name="ThemeOverlay.Palette.Black" parent="AppTheme.LoginTheme">
         <item name="colorPrimary">@color/colorBlackPrimary</item>
         <item name="colorPrimaryDark">@color/colorBlackPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorError">@color/colorRed</item>
     </style>
 
     <style name="ThemeOverlay.Palette.Red" parent="AppTheme.LoginTheme">
         <item name="colorPrimary">@color/colorRedPrimary</item>
         <item name="colorPrimaryDark">@color/colorRedPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorError">@color/colorWhite</item>
     </style>
 
     <style name="ThemeOverlay.Palette.Purple" parent="AppTheme.LoginTheme">
         <item name="colorPrimary">@color/colorPurplePrimary</item>
         <item name="colorPrimaryDark">@color/colorPurplePrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorError">@color/colorRed</item>
     </style>
 
     <style name="ThemeOverlay.Palette.Indigo" parent="AppTheme.LoginTheme">
         <item name="colorPrimary">@color/colorIndigoPrimary</item>
         <item name="colorPrimaryDark">@color/colorIndigoPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorError">@color/colorRed</item>
     </style>
 
     <style name="ThemeOverlay.Palette.Green" parent="AppTheme.LoginTheme">
         <item name="colorPrimary">@color/colorGreenPrimary</item>
         <item name="colorPrimaryDark">@color/colorGreenPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorError">@color/colorRed</item>
     </style>
 
     <style name="ThemeOverlay.Palette.Orange" parent="AppTheme.LoginTheme">
         <item name="colorPrimary">@color/colorOrangePrimary</item>
         <item name="colorPrimaryDark">@color/colorOrangePrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorError">@color/colorRed</item>
     </style>
 
     <style name="ThemeOverlay.Palette.BlueGrey" parent="AppTheme.LoginTheme">
         <item name="colorPrimary">@color/colorBlueGreyPrimary</item>
         <item name="colorPrimaryDark">@color/colorBlueGreyPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorError">@color/colorRed</item>
     </style>
 
 </resources>

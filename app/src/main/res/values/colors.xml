@@ -11,6 +11,7 @@
     <color name="mtrl_textinput_default_box_stroke_color" tools:override="true">
         @color/colorWhite
     </color>
+    <color name="colorRed">#FF0000</color>
 
     <!-- Theme Color -->
     <color name="colorBlackPrimary">#212121</color>

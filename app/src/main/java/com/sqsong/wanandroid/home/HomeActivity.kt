@@ -14,11 +14,10 @@ import com.sqsong.wanandroid.network.ObserverImpl
 import com.sqsong.wanandroid.theme.ThemeSwitcherDialog
 import com.sqsong.wanandroid.util.DensityUtil
 import com.sqsong.wanandroid.util.LogUtil
+import com.sqsong.wanandroid.util.RxJavaHelper
 import com.sqsong.wanandroid.util.showCircleImage
 import dagger.android.support.DaggerAppCompatActivity
-import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.content_home.*
 import javax.inject.Inject
 
@@ -47,28 +46,14 @@ class HomeActivity : DaggerAppCompatActivity(), IAppCompatActivity {
 
         text.setOnClickListener {
             // LoadingProgressDialog.newInstance("").show(supportFragmentManager, "")
-            // mThemeDialog.show(supportFragmentManager, "")
-
-            mApiService.getDoneTodoList()
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(object: ObserverImpl<HomeBannerBean>(){
-                        override fun onSuccess(data: HomeBannerBean) {
-
-                        }
-
-                        override fun onFail(error: ApiException) {
-
-                        }
-                    })
+            mThemeDialog.show(supportFragmentManager, "")
         }
 
         val screenDpWidth = DensityUtil.getScreenDpWidth(this)
         val screenDpHeight = DensityUtil.getScreenDpHeight(this)
         Log.e("sqsong", "Screen width dp: $screenDpWidth, height dp: $screenDpHeight")
         mApiService.getHomeBanner()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
+                .compose(RxJavaHelper.compose())
                 .subscribe(object : ObserverImpl<HomeBannerBean>(disposable) {
                     override fun onFail(error: ApiException) {
                         LogUtil.e("sqsong", "Error code: " + error.errorCode

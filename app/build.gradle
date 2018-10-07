@@ -22,6 +22,10 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
 }
 
 dependencies {
@@ -50,6 +54,9 @@ dependencies {
     // Rxjava  RxAndroid
     implementation "io.reactivex.rxjava2:rxkotlin:$rootProject.ext.rxjava_version"
     implementation "io.reactivex.rxjava2:rxandroid:$rootProject.ext.rxandroid_version"
+
+    // RxBinding
+    implementation "com.jakewharton.rxbinding2:rxbinding-kotlin:$rootProject.ext.rxbinding_version"
 
     // Gson
     implementation "com.google.code.gson:gson:$rootProject.ext.gson_version"

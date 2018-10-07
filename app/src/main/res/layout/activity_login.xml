@@ -8,7 +8,7 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
     <ImageView
-        android:id="@+id/close_iv"
+        android:id="@+id/closeIv"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_marginStart="24dp"
@@ -29,7 +29,7 @@
         android:id="@+id/login_title_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="24dp"
         android:text="@string/text_login"
         android:textAllCaps="true"
         android:textColor="@color/colorWhite"
@@ -38,10 +38,10 @@
         app:fontFamily="@font/pacifico"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/close_iv" />
+        app:layout_constraintTop_toBottomOf="@id/closeIv" />
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/user_name_input_layout"
+        android:id="@+id/userNameInputLayout"
         style="@style/Widget.Design.TextInputLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -54,12 +54,13 @@
         app:counterMaxLength="10"
         app:counterTextAppearance="@style/LoginTextInputAppearance"
         app:errorEnabled="true"
+        app:errorTextAppearance="@style/LoginErrorAppearance"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/login_title_tv">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/user_name_edit"
+            android:id="@+id/userNameEdit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="text"
@@ -70,7 +71,7 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/password_input_layout"
+        android:id="@+id/passwordInputLayout"
         style="@style/Widget.Design.TextInputLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -80,16 +81,17 @@
         android:hint="@string/text_user_password"
         android:textColorHint="@color/colorWhiteHint"
         app:counterEnabled="true"
-        app:counterMaxLength="10"
+        app:counterMaxLength="20"
         app:counterTextAppearance="@style/LoginTextInputAppearance"
         app:hintTextAppearance="@style/LoginTextInputAppearance"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/user_name_input_layout"
+        app:layout_constraintTop_toBottomOf="@id/userNameInputLayout"
         app:passwordToggleEnabled="true"
         app:passwordToggleTint="@color/colorWhite">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/passwordEdit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
@@ -101,7 +103,7 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
-        android:id="@+id/forget_password_tv"
+        android:id="@+id/forgetPasswordTv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
@@ -117,10 +119,10 @@
         android:textColor="@color/colorWhite"
         android:textSize="14sp"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/password_input_layout" />
+        app:layout_constraintTop_toBottomOf="@id/passwordInputLayout" />
 
     <Button
-        android:id="@+id/login_btn"
+        android:id="@+id/loginBtn"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
@@ -135,24 +137,34 @@
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/forget_password_tv" />
+        app:layout_constraintTop_toBottomOf="@id/forgetPasswordTv" />
 
     <TextView
-        android:id="@+id/register_tips_tv"
+        android:id="@+id/registerTipsTv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="30dp"
         android:background="@drawable/bg_login_normal_click"
         android:clickable="true"
         android:paddingLeft="12dp"
         android:paddingTop="6dp"
         android:paddingRight="12dp"
-        android:paddingBottom="6dp"
+        android:paddingBottom="2dp"
         android:text="@string/text_register_tips"
         android:textColor="@color/colorWhite"
-        android:textSize="18sp"
+        android:textSize="16sp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/login_btn" />
+        app:layout_constraintTop_toBottomOf="@id/loginBtn" />
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="@color/colorWhite"
+        app:layout_constraintLeft_toLeftOf="@id/registerTipsTv"
+        app:layout_constraintRight_toRightOf="@id/registerTipsTv"
+        app:layout_constraintTop_toBottomOf="@id/registerTipsTv" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
