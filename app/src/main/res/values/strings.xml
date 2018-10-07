@@ -28,4 +28,6 @@
     <string name="text_desc_green">Green</string>
     <string name="text_desc_orange">Orange</string>
     <string name="text_desc_bluegrey">BlueGrey</string>
+
+    <string name="text_token_expired">This action needs login, please login first</string>
 </resources>

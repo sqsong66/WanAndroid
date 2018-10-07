@@ -1,7 +1,11 @@
 package com.sqsong.wanandroid.network
 
+import android.content.Intent
+import android.widget.Toast
 import com.sqsong.wanandroid.R
 import com.sqsong.wanandroid.base.BaseApplication
+import com.sqsong.wanandroid.base.BaseModel
+import com.sqsong.wanandroid.login.LoginActivity
 import com.sqsong.wanandroid.util.NetworkUtil
 import io.reactivex.Observer
 import io.reactivex.disposables.CompositeDisposable
@@ -13,13 +17,18 @@ import java.net.SocketTimeoutException
 import java.net.UnknownHostException
 import java.util.concurrent.TimeoutException
 
-abstract class ObserverImpl<T>(private val disposable: CompositeDisposable? = null) : Observer<T> {
+abstract class ObserverImpl<T : BaseModel<*>>(private val disposable: CompositeDisposable? = null) : Observer<T> {
 
     abstract fun onSuccess(data: T)
 
     abstract fun onFail(error: ApiException)
 
     override fun onNext(t: T) {
+        if (t.errorCode == -1001) {
+            onError(ApiException(ApiException.ERROR_TOKEN_EXPIRED,
+                    t.errorMsg, BaseApplication.INSTANCE.applicationContext.getString(R.string.text_token_expired)))
+            return
+        }
         onSuccess(t)
     }
 
@@ -28,28 +37,45 @@ abstract class ObserverImpl<T>(private val disposable: CompositeDisposable? = nu
     }
 
     override fun onError(e: Throwable) {
-        onFail(ApiException.parseException(e))
+        val apiException = ApiException.parseException(e)
+        if (apiException.errorCode == ApiException.ERROR_TOKEN_EXPIRED) {
+            quitAndStartLogin(apiException.showMessage)
+            return
+        }
+        onFail(apiException)
     }
 
     override fun onSubscribe(d: Disposable) {
         disposable?.add(d)
     }
+
+    private fun quitAndStartLogin(showMessage: String) {
+        BaseApplication.INSTANCE.quitApp()
+        val context = BaseApplication.INSTANCE.applicationContext
+        Toast.makeText(context, showMessage, Toast.LENGTH_SHORT).show()
+        CookieManager.getInstance(context).clearCookieInfo()
+        val intent = Intent(context, LoginActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+        context.startActivity(intent)
+    }
+
 }
 
-class ApiException(val code: Int, override val message: String?, val showMessage: String) : Exception() {
+class ApiException(val errorCode: Int, override val message: String?, val showMessage: String) : Exception() {
 
     companion object {
 
         const val ERROR_UNKONWN = -1
         const val ERROR_UNKONWN_HOST = -2
         const val ERROR_CONNECT_TIMEOUT = -3
+        const val ERROR_TOKEN_EXPIRED = -4
 
         fun parseException(error: Throwable): ApiException {
             if (error is ApiException) return error
 
             val context = BaseApplication.INSTANCE.applicationContext
-            var showMessage: String
-            var code: Int
+            val showMessage: String
+            val code: Int
             if (error is UnknownHostException || error is HttpException) {
                 code = ERROR_UNKONWN_HOST
                 showMessage = if (!NetworkUtil.isNetworkAvaiable(context)) {

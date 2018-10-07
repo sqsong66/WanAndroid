@@ -1,4 +1,4 @@
-package com.sqsong.wanandroid.home
+package com.sqsong.wanandroid.login
 
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity

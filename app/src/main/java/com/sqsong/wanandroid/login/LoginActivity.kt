@@ -1,4 +1,4 @@
-package com.sqsong.wanandroid.home
+package com.sqsong.wanandroid.login
 
 import android.content.Intent
 import android.view.View
@@ -7,6 +7,7 @@ import com.google.android.material.snackbar.Snackbar
 import com.sqsong.wanandroid.R
 import com.sqsong.wanandroid.common.inter.ChangeThemeAnnotation
 import com.sqsong.wanandroid.common.inter.IAppCompatActivity
+import com.sqsong.wanandroid.home.HomeActivity
 import com.sqsong.wanandroid.util.setupUi
 import kotlinx.android.synthetic.main.activity_login.*
 

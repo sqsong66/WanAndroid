@@ -29,4 +29,6 @@
     <string name="text_desc_green">绿色</string>
     <string name="text_desc_orange">橘色</string>
     <string name="text_desc_bluegrey">蓝灰色</string>
+
+    <string name="text_token_expired">该操作需要登录，请先登录</string>
 </resources>

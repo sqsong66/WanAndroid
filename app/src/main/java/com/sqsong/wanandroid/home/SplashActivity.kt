@@ -8,6 +8,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.sqsong.wanandroid.R
 import com.sqsong.wanandroid.common.inter.IAppCompatActivity
+import com.sqsong.wanandroid.login.LoginActivity
+import com.sqsong.wanandroid.util.Constants
 import com.sqsong.wanandroid.util.dpToPx
 import com.sqsong.wanandroid.util.getStatusBarHeight
 import com.sqsong.wanandroid.util.showImage
@@ -32,7 +34,7 @@ class SplashActivity : AppCompatActivity(), IAppCompatActivity, View.OnClickList
                 R.drawable.splash_image03, R.drawable.splash_image04, R.drawable.splash_image05)
         splash_iv.showImage(this, images[Random().nextInt(5)], -1)
 
-        timer = object : CountDownTimer(SPLASH_TIME, 1000) {
+        timer = object : CountDownTimer(Constants.SPLASH_TIME, 1000) {
             override fun onTick(millisUntilFinished: Long) {
                 Log.e("sqsong", "Time -> $millisUntilFinished")
                 val time: Int = (millisUntilFinished / 1000).toInt()
@@ -56,7 +58,4 @@ class SplashActivity : AppCompatActivity(), IAppCompatActivity, View.OnClickList
         startHomeActivity()
     }
 
-    companion object {
-        private const val SPLASH_TIME: Long = 2200
-    }
 }

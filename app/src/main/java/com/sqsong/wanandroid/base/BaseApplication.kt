@@ -2,12 +2,13 @@ package com.sqsong.wanandroid.base
 
 import android.app.Activity
 import android.app.Application
+import android.content.SharedPreferences
 import com.sqsong.wanandroid.common.ActivityLifecycleCallbacksImpl
-import com.sqsong.wanandroid.dagger.DaggerApplicationComponent
+import com.sqsong.wanandroid.dagger.component.DaggerApplicationComponent
 import com.sqsong.wanandroid.theme.ThemeOverlayUtil
 import com.sqsong.wanandroid.theme.ThemeResourceProvider
 import com.sqsong.wanandroid.util.Constants
-import com.sqsong.wanandroid.util.PreferenceHelper
+import com.sqsong.wanandroid.util.PreferenceHelper.get
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasActivityInjector
@@ -16,7 +17,10 @@ import javax.inject.Inject
 class BaseApplication : Application(), HasActivityInjector {
 
     @Inject
-    lateinit var injector: DispatchingAndroidInjector<Activity>
+    lateinit var mInjector: DispatchingAndroidInjector<Activity>
+
+    @Inject
+    lateinit var mPreferences: SharedPreferences
 
     @Inject
     lateinit var mActivityLifecycleCallback: ActivityLifecycleCallbacksImpl
@@ -40,13 +44,13 @@ class BaseApplication : Application(), HasActivityInjector {
     private fun setupThemeStyle() {
         val provider = ThemeResourceProvider()
         val colorTypedArray = resources.obtainTypedArray(provider.getThemeColors())
-        var index by PreferenceHelper(Constants.THEMEOVERLAY_INDEX, 0)
+        val index: Int = mPreferences[Constants.THEMEOVERLAY_INDEX] ?: 0
         val themeOverlay = colorTypedArray.getResourceId(index, 0)
         ThemeOverlayUtil.mThemeOverlays = themeOverlay
     }
 
     override fun activityInjector(): AndroidInjector<Activity> {
-        return injector
+        return mInjector
     }
 
     open fun getActivityList(): List<Activity?> {

@@ -37,11 +37,11 @@
             android:name=".home.HomeActivity"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".home.LoginActivity"
+            android:name=".login.LoginActivity"
             android:label="@string/title_activity_login"
             android:theme="@style/AppTheme.LoginTheme" />
         <activity
-            android:name=".home.RegisterActivity"
+            android:name=".login.RegisterActivity"
             android:theme="@style/AppTheme.LoginTheme" />
 
         <meta-data

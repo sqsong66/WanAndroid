@@ -1,4 +1,4 @@
-package com.sqsong.wanandroid.dagger
+package com.sqsong.wanandroid.dagger.scope
 
 import javax.inject.Scope
 

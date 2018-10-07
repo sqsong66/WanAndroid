@@ -3,6 +3,7 @@ package com.sqsong.wanandroid.theme
 import android.annotation.SuppressLint
 import android.app.Dialog
 import android.content.Context
+import android.content.SharedPreferences
 import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -22,6 +23,8 @@ import com.sqsong.wanandroid.common.inter.OnItemClickListener
 import com.sqsong.wanandroid.util.Constants
 import com.sqsong.wanandroid.util.DensityUtil
 import com.sqsong.wanandroid.util.PreferenceHelper
+import com.sqsong.wanandroid.util.PreferenceHelper.get
+import com.sqsong.wanandroid.util.PreferenceHelper.set
 import com.sqsong.wanandroid.view.CircleView
 
 class ThemeSwitcherDialog : DialogFragment(), OnItemClickListener<ColorPalette> {
@@ -29,11 +32,13 @@ class ThemeSwitcherDialog : DialogFragment(), OnItemClickListener<ColorPalette> 
     private var mCheckedPos = 0
     private var mColorPalette: ColorPalette? = null
     private var mAdapter: ThemeColorAdapter? = null
+    private lateinit var mPreferences: SharedPreferences
     private var mThemeOverlayList = mutableListOf<ColorPalette>()
     private lateinit var mThemeResourceProvider: ThemeResourceProvider
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        mPreferences = PreferenceHelper.defaultPrefs(context!!)
         mThemeResourceProvider = ThemeResourceProvider()
         initializeColors()
     }
@@ -53,10 +58,9 @@ class ThemeSwitcherDialog : DialogFragment(), OnItemClickListener<ColorPalette> 
             val primaryDarkColor = typedArray?.getColor(1, Color.TRANSPARENT)
             val secondaryColor = typedArray?.getColor(2, Color.TRANSPARENT)
 
-            val index by PreferenceHelper(Constants.THEMEOVERLAY_INDEX, 0)
-            mCheckedPos = index
+            mCheckedPos = mPreferences[Constants.THEMEOVERLAY_INDEX] ?: 0
             val colorPalette = ColorPalette(paletteOverlay, primaryColor,
-                    primaryDarkColor, secondaryColor, descTypedArray.getString(i), i == index)
+                    primaryDarkColor, secondaryColor, descTypedArray.getString(i), i == mCheckedPos)
             mThemeOverlayList.add(colorPalette)
             typedArray?.recycle()
         }
@@ -68,8 +72,7 @@ class ThemeSwitcherDialog : DialogFragment(), OnItemClickListener<ColorPalette> 
             setView(createDialogView(activity?.layoutInflater))
             setNegativeButton(R.string.text_cancel, null)
             setPositiveButton(R.string.text_save) { _, _ ->
-                var index by PreferenceHelper(Constants.THEMEOVERLAY_INDEX, 0)
-                index = mCheckedPos
+                mPreferences[Constants.THEMEOVERLAY_INDEX] = mCheckedPos
                 ThemeOverlayUtil.setThemeOverlay(mColorPalette?.themeOverlay, BaseApplication.INSTANCE.getActivityList())
                 dismiss()
             }

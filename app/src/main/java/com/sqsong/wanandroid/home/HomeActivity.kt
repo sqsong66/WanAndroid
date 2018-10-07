@@ -29,6 +29,9 @@ class HomeActivity : DaggerAppCompatActivity(), IAppCompatActivity {
     lateinit var mApiService: ApiService
 
     @Inject
+    lateinit var mThemeDialog: ThemeSwitcherDialog
+
+    @Inject
     lateinit var disposable: CompositeDisposable
 
     override fun getLayoutResId(): Int {
@@ -44,7 +47,20 @@ class HomeActivity : DaggerAppCompatActivity(), IAppCompatActivity {
 
         text.setOnClickListener {
             // LoadingProgressDialog.newInstance("").show(supportFragmentManager, "")
-            ThemeSwitcherDialog().show(supportFragmentManager, "")
+            // mThemeDialog.show(supportFragmentManager, "")
+
+            mApiService.getDoneTodoList()
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(object: ObserverImpl<HomeBannerBean>(){
+                        override fun onSuccess(data: HomeBannerBean) {
+
+                        }
+
+                        override fun onFail(error: ApiException) {
+
+                        }
+                    })
         }
 
         val screenDpWidth = DensityUtil.getScreenDpWidth(this)
@@ -55,11 +71,12 @@ class HomeActivity : DaggerAppCompatActivity(), IAppCompatActivity {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(object : ObserverImpl<HomeBannerBean>(disposable) {
                     override fun onFail(error: ApiException) {
-                        LogUtil.e("sqsong", "Error code: " + error.code
+                        LogUtil.e("sqsong", "Error code: " + error.errorCode
                                 + ", message: " + error.message + ", showMessage: " + error.showMessage)
                     }
 
                     override fun onSuccess(data: HomeBannerBean) {
+                        val list = data.data
                         LogUtil.e("sqsong", "Result -> " + data.toString())
                     }
                 })
