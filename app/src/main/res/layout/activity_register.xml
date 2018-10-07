@@ -129,7 +129,7 @@
             android:textSize="18sp" />
     </com.google.android.material.textfield.TextInputLayout>
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/register_btn"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
