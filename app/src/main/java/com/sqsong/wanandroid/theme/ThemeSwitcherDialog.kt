@@ -1,10 +1,7 @@
 package com.sqsong.wanandroid.theme
 
-import android.annotation.SuppressLint
 import android.app.Dialog
 import android.content.Context
-import android.content.SharedPreferences
-import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -13,57 +10,29 @@ import android.widget.ImageView
 import androidx.annotation.ColorInt
 import androidx.annotation.StyleRes
 import androidx.appcompat.app.AlertDialog
-import androidx.fragment.app.DialogFragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.sqsong.wanandroid.R
-import com.sqsong.wanandroid.base.BaseApplication
 import com.sqsong.wanandroid.common.GridSpaceItemDecoration
 import com.sqsong.wanandroid.common.inter.OnItemClickListener
-import com.sqsong.wanandroid.util.Constants
 import com.sqsong.wanandroid.util.DensityUtil
-import com.sqsong.wanandroid.util.PreferenceHelper
-import com.sqsong.wanandroid.util.PreferenceHelper.get
-import com.sqsong.wanandroid.util.PreferenceHelper.set
 import com.sqsong.wanandroid.view.CircleView
+import dagger.android.support.DaggerAppCompatDialogFragment
+import javax.inject.Inject
 
-class ThemeSwitcherDialog : DialogFragment(), OnItemClickListener<ColorPalette> {
+class ThemeSwitcherDialog @Inject constructor() : DaggerAppCompatDialogFragment(), OnItemClickListener<ColorPalette> {
+
+    @Inject
+    lateinit var mThemeSwitcherManager: ThemeSwitcherManager
 
     private var mCheckedPos = 0
     private var mColorPalette: ColorPalette? = null
     private var mAdapter: ThemeColorAdapter? = null
-    private lateinit var mPreferences: SharedPreferences
     private var mThemeOverlayList = mutableListOf<ColorPalette>()
-    private lateinit var mThemeResourceProvider: ThemeResourceProvider
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        mPreferences = PreferenceHelper.defaultPrefs(context!!)
-        mThemeResourceProvider = ThemeResourceProvider()
-        initializeColors()
-    }
-
-    @SuppressLint("ResourceType")
-    private fun initializeColors() {
-        val colorTypedArray = resources.obtainTypedArray(mThemeResourceProvider.getThemeColors())
-        val descTypedArray = resources.obtainTypedArray(mThemeResourceProvider.getThemeColorDesc())
-        if (colorTypedArray.length() != descTypedArray.length()) {
-            throw IllegalArgumentException("Color array length not match description array length.")
-        }
-        mThemeOverlayList.clear()
-        for (i in 0 until colorTypedArray.length()) {
-            @StyleRes val paletteOverlay = colorTypedArray.getResourceId(i, 0)
-            val typedArray = context?.obtainStyledAttributes(paletteOverlay, THEME_OVERLAY_ATTRS)
-            val primaryColor = typedArray?.getColor(0, Color.TRANSPARENT)
-            val primaryDarkColor = typedArray?.getColor(1, Color.TRANSPARENT)
-            val secondaryColor = typedArray?.getColor(2, Color.TRANSPARENT)
-
-            mCheckedPos = mPreferences[Constants.THEMEOVERLAY_INDEX] ?: 0
-            val colorPalette = ColorPalette(paletteOverlay, primaryColor,
-                    primaryDarkColor, secondaryColor, descTypedArray.getString(i), i == mCheckedPos)
-            mThemeOverlayList.add(colorPalette)
-            typedArray?.recycle()
-        }
+        mCheckedPos = mThemeSwitcherManager.getThemeColorIndex()
     }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
@@ -72,8 +41,7 @@ class ThemeSwitcherDialog : DialogFragment(), OnItemClickListener<ColorPalette> 
             setView(createDialogView(activity?.layoutInflater))
             setNegativeButton(R.string.text_cancel, null)
             setPositiveButton(R.string.text_save) { _, _ ->
-                mPreferences[Constants.THEMEOVERLAY_INDEX] = mCheckedPos
-                ThemeOverlayUtil.setThemeOverlay(mColorPalette?.themeOverlay, BaseApplication.INSTANCE.getActivityList())
+                mThemeSwitcherManager.setThemeOverlayRes(mCheckedPos)
                 dismiss()
             }
             create()
@@ -87,7 +55,7 @@ class ThemeSwitcherDialog : DialogFragment(), OnItemClickListener<ColorPalette> 
         val decoration = GridSpaceItemDecoration(4, DensityUtil.dip2px(16), true)
         recycler.layoutManager = GridLayoutManager(context, 4)
         recycler.addItemDecoration(decoration)
-        mAdapter = ThemeColorAdapter(context, mThemeOverlayList)
+        mAdapter = ThemeColorAdapter(context, mThemeSwitcherManager.getThemeOverlayList())
         mAdapter?.setOnItemClickListener(this)
         recycler.adapter = mAdapter
         return recycler

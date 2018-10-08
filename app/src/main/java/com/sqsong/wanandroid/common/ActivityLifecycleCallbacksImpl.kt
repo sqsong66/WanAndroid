@@ -5,11 +5,19 @@ import android.app.Application
 import android.os.Bundle
 import com.sqsong.wanandroid.common.inter.ChangeThemeAnnotation
 import com.sqsong.wanandroid.common.inter.IAppCompatActivity
-import com.sqsong.wanandroid.theme.ThemeOverlayUtil
+import com.sqsong.wanandroid.theme.ThemeSwitcherManager
+import javax.inject.Inject
 
 class ActivityLifecycleCallbacksImpl : Application.ActivityLifecycleCallbacks {
 
-    private var mActivityList = mutableListOf<Activity?>()
+    @Inject
+    constructor()
+
+    @Inject
+    lateinit var mActivityList: MutableList<Activity?>
+
+    @Inject
+    lateinit var mThemeManager: ThemeSwitcherManager
 
     override fun onActivityCreated(activity: Activity?, savedInstanceState: Bundle?) {
         if (!mActivityList.contains(activity)) {
@@ -18,7 +26,8 @@ class ActivityLifecycleCallbacksImpl : Application.ActivityLifecycleCallbacks {
 
         // 设置主题
         if ((activity?.javaClass?.isAnnotationPresent(ChangeThemeAnnotation::class.java))!!)
-            ThemeOverlayUtil.applyThemeOverlay(activity)
+//            ThemeOverlayUtil.applyThemeOverlay(activity)
+            mThemeManager.applyThemeOverlay(activity)
 
         // 处理Activity事件
         if (activity is IAppCompatActivity) {
@@ -54,7 +63,4 @@ class ActivityLifecycleCallbacksImpl : Application.ActivityLifecycleCallbacks {
 
     }
 
-    open fun getActivityList(): List<Activity?> {
-        return mActivityList
-    }
 }

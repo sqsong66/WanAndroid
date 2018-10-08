@@ -25,6 +25,9 @@ class BaseApplication : Application(), HasActivityInjector {
     @Inject
     lateinit var mActivityLifecycleCallback: ActivityLifecycleCallbacksImpl
 
+    @Inject
+    lateinit var mActivityList: MutableList<Activity?>
+
     override fun onCreate() {
         super.onCreate()
         INSTANCE = this
@@ -37,14 +40,14 @@ class BaseApplication : Application(), HasActivityInjector {
     }
 
     private fun init() {
-        setupThemeStyle()
+       // setupThemeStyle()
         registerActivityLifecycleCallbacks(mActivityLifecycleCallback)
     }
 
     private fun setupThemeStyle() {
         val provider = ThemeResourceProvider()
         val colorTypedArray = resources.obtainTypedArray(provider.getThemeColors())
-        val index: Int = mPreferences[Constants.THEMEOVERLAY_INDEX] ?: 0
+        val index: Int = mPreferences[Constants.THEMEOVERLAY_INDEX, 0] ?: 0
         val themeOverlay = colorTypedArray.getResourceId(index, 0)
         ThemeOverlayUtil.mThemeOverlays = themeOverlay
     }
@@ -53,14 +56,14 @@ class BaseApplication : Application(), HasActivityInjector {
         return mInjector
     }
 
-    open fun getActivityList(): List<Activity?> {
-        return mActivityLifecycleCallback.getActivityList()
-    }
-
     open fun quitApp() {
-        for (activity in getActivityList()) {
+        for (activity in mActivityList) {
             activity?.finish()
         }
+    }
+
+    fun getActivityList(): List<Activity?> {
+        return mActivityList
     }
 
     companion object {

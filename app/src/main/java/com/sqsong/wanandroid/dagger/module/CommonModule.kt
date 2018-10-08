@@ -1,8 +1,9 @@
 package com.sqsong.wanandroid.dagger.module
 
+import android.app.Activity
 import android.content.Context
 import android.content.SharedPreferences
-import com.sqsong.wanandroid.common.ActivityLifecycleCallbacksImpl
+import com.sqsong.wanandroid.theme.ThemeSwitcherManager
 import com.sqsong.wanandroid.util.PreferenceHelper
 import dagger.Module
 import dagger.Provides
@@ -19,14 +20,20 @@ class CommonModule {
 
     @Singleton
     @Provides
-    fun provideActivityLifecycleCallbacks(): ActivityLifecycleCallbacksImpl {
-        return ActivityLifecycleCallbacksImpl()
+    fun provideActivityList(): List<Activity?> {
+        return mutableListOf()
     }
 
     @Singleton
     @Provides
     fun providePreferences(context: Context): SharedPreferences {
         return PreferenceHelper.defaultPrefs(context)
+    }
+
+    @Singleton
+    @Provides
+    fun provideThemeSwitcherManager(context: Context): ThemeSwitcherManager {
+        return ThemeSwitcherManager(context)
     }
 
 }
