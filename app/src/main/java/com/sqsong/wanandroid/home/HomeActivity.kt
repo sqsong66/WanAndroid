@@ -3,6 +3,7 @@ package com.sqsong.wanandroid.home
 import android.util.Log
 import android.util.TypedValue
 import android.view.MenuItem
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import com.sqsong.wanandroid.R
 import com.sqsong.wanandroid.base.HomeBannerBean
@@ -38,6 +39,13 @@ class HomeActivity : DaggerAppCompatActivity(), IAppCompatActivity {
     }
 
     override fun initEvent() {
+        // bottomNavigationView.menu.getItem(4).isVisible = true
+        bottomNavigationView.setOnNavigationItemSelectedListener {
+            val itemId = it.itemId
+            Toast.makeText(this, it.title, Toast.LENGTH_SHORT).show()
+            return@setOnNavigationItemSelectedListener true
+        }
+
         text.text = "Hello Kotlin."
         text.setTextSize(TypedValue.COMPLEX_UNIT_SP, 25.toFloat())
         text.setTextColor(ContextCompat.getColor(this, R.color.colorAccent))

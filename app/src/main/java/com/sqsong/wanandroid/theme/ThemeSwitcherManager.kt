@@ -8,30 +8,29 @@ import android.graphics.Color
 import androidx.annotation.StyleRes
 import com.sqsong.wanandroid.common.inter.ChangeThemeAnnotation
 import com.sqsong.wanandroid.util.Constants
-import com.sqsong.wanandroid.util.PreferenceHelper
 import com.sqsong.wanandroid.util.PreferenceHelper.get
 import com.sqsong.wanandroid.util.PreferenceHelper.set
 import javax.inject.Inject
 
 class ThemeSwitcherManager {
 
-    @Inject
-    lateinit var mProvider: ThemeResourceProvider
+    private var mProvider: ThemeResourceProvider
 
-//    @Inject
-    lateinit var mPreferences: SharedPreferences
+    private var mPreferences: SharedPreferences
 
-    @Inject
-    lateinit var mActivityList: MutableList<Activity?>
+    private var mActivityList: MutableList<Activity?>
 
     private val mContext: Context
     private var mThemeColorIndex: Int = 0
     private val mThemeColorList = mutableListOf<ColorPalette>()
 
     @Inject
-    constructor(context: Context) {
-        mContext = context
-        mPreferences = PreferenceHelper.defaultPrefs(context)
+    constructor(context: Context, sourceProvider: ThemeResourceProvider,
+                preferences: SharedPreferences, activityList: MutableList<Activity?>) {
+        this.mContext = context
+        this.mActivityList = activityList
+        this.mProvider = sourceProvider
+        this.mPreferences = preferences
         mThemeColorIndex = mPreferences[Constants.THEMEOVERLAY_INDEX, 0] ?: 0
     }
 
@@ -77,7 +76,7 @@ class ThemeSwitcherManager {
     fun applyThemeOverlay(activity: Activity) {
         val overlayList = getThemeOverlayList()
         if (mThemeColorIndex >= 0 && mThemeColorIndex < overlayList.size) {
-            val palette = overlayList.get(mThemeColorIndex)
+            val palette = overlayList[mThemeColorIndex]
             activity.setTheme(palette.themeOverlay)
         }
     }

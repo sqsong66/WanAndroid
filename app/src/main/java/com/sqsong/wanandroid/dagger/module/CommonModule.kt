@@ -3,6 +3,7 @@ package com.sqsong.wanandroid.dagger.module
 import android.app.Activity
 import android.content.Context
 import android.content.SharedPreferences
+import com.sqsong.wanandroid.theme.ThemeResourceProvider
 import com.sqsong.wanandroid.theme.ThemeSwitcherManager
 import com.sqsong.wanandroid.util.PreferenceHelper
 import dagger.Module
@@ -32,8 +33,17 @@ class CommonModule {
 
     @Singleton
     @Provides
-    fun provideThemeSwitcherManager(context: Context): ThemeSwitcherManager {
-        return ThemeSwitcherManager(context)
+    fun provideThemeResourceProvider(): ThemeResourceProvider {
+        return ThemeResourceProvider()
+    }
+
+    @Singleton
+    @Provides
+    fun provideThemeSwitcherManager(context: Context,
+                                    sourceProvider: ThemeResourceProvider,
+                                    preferences: SharedPreferences,
+                                    activityList: MutableList<Activity?>): ThemeSwitcherManager {
+        return ThemeSwitcherManager(context, sourceProvider, preferences, activityList)
     }
 
 }

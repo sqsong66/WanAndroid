@@ -55,7 +55,9 @@ class ThemeSwitcherDialog @Inject constructor() : DaggerAppCompatDialogFragment(
         val decoration = GridSpaceItemDecoration(4, DensityUtil.dip2px(16), true)
         recycler.layoutManager = GridLayoutManager(context, 4)
         recycler.addItemDecoration(decoration)
-        mAdapter = ThemeColorAdapter(context, mThemeSwitcherManager.getThemeOverlayList())
+        mThemeOverlayList.clear()
+        mThemeOverlayList.addAll(mThemeSwitcherManager.getThemeOverlayList())
+        mAdapter = ThemeColorAdapter(context, mThemeOverlayList)
         mAdapter?.setOnItemClickListener(this)
         recycler.adapter = mAdapter
         return recycler

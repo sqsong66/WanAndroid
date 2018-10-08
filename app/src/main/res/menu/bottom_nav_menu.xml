@@ -35,5 +35,5 @@
         android:enabled="true"
         android:icon="@drawable/ic_star_vd_theme_24"
         android:title="Page4"
-        android:visible="false" />
+        android:visible="true" />
 </menu>
