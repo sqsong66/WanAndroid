@@ -4,7 +4,7 @@ import android.content.Intent
 import android.widget.Toast
 import com.sqsong.wanandroid.R
 import com.sqsong.wanandroid.base.BaseApplication
-import com.sqsong.wanandroid.base.BaseModel
+import com.sqsong.wanandroid.base.BaseBean
 import com.sqsong.wanandroid.login.LoginActivity
 import com.sqsong.wanandroid.util.NetworkUtil
 import io.reactivex.Observer
@@ -17,7 +17,7 @@ import java.net.SocketTimeoutException
 import java.net.UnknownHostException
 import java.util.concurrent.TimeoutException
 
-abstract class ObserverImpl<T : BaseModel<*>>(private val disposable: CompositeDisposable? = null) : Observer<T> {
+abstract class ObserverImpl<T : BaseBean<*>>(private val disposable: CompositeDisposable? = null) : Observer<T> {
 
     abstract fun onSuccess(data: T)
 

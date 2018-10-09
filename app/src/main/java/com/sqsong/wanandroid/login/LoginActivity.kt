@@ -51,7 +51,7 @@ class LoginActivity : DaggerAppCompatActivity(), IAppCompatActivity {
                         else -> return@map 0
                     }
                 }.subscribe {
-                    when (it) {
+                    /*when (it) {
                         -1 -> {
                             userNameInputLayout.isErrorEnabled = true
                             userNameInputLayout.error = getString(R.string.text_user_name_empty)
@@ -60,12 +60,13 @@ class LoginActivity : DaggerAppCompatActivity(), IAppCompatActivity {
                             passwordInputLayout.isErrorEnabled = true
                             passwordInputLayout.error = getString(R.string.text_password_empty)
                         }
-                        3 -> {
+                        -3 -> {
                             passwordInputLayout.isErrorEnabled = true
                             passwordInputLayout.error = getString(R.string.text_password_too_short)
                         }
                         else -> startActivity(Intent(this, HomeActivity::class.java))
-                    }
+                    }*/
+                    startActivity(Intent(this, HomeActivity::class.java))
                 })
     }
 

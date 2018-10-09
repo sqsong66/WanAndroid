@@ -10,6 +10,10 @@
         <item>@style/ThemeOverlay.Palette.Green</item>
         <item>@style/ThemeOverlay.Palette.Orange</item>
         <item>@style/ThemeOverlay.Palette.BlueGrey</item>
+        <item>@style/ThemeOverlay.Palette.Yellow</item>
+        <item>@style/ThemeOverlay.Palette.Brown</item>
+        <item>@style/ThemeOverlay.Palette.Pink</item>
+        <item>@style/ThemeOverlay.Palette.Blue</item>
     </array>
 
     <array name="theme_palette_desc_array">
@@ -21,6 +25,10 @@
         <item>@string/text_desc_green</item>
         <item>@string/text_desc_orange</item>
         <item>@string/text_desc_bluegrey</item>
+        <item>@string/text_desc_yellow</item>
+        <item>@string/text_desc_brown</item>
+        <item>@string/text_desc_pink</item>
+        <item>@string/text_desc_blue</item>
     </array>
 
 </resources>

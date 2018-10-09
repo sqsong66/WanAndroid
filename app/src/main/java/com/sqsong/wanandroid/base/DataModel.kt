@@ -1,13 +1,13 @@
 package com.sqsong.wanandroid.base
 
-abstract class BaseModel<T> {
+abstract class BaseBean<T> {
     val errorCode: Int = 0
     val errorMsg: String? = null
     abstract var data: T
 }
 
 /********************* Begin: Home banner bean ***********************/
-data class HomeBannerBean(override var data: List<HomeBannerData>) : BaseModel<List<HomeBannerData>>()
+data class HomeBannerBean(override var data: List<HomeBannerData>) : BaseBean<List<HomeBannerData>>()
 
 data class HomeBannerData(val desc: String,
                           val id: Int,

@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <attr name="colorNormalText" format="reference|color" />
+    <attr name="colorPrimaryLight" format="reference|color" />
+
     <declare-styleable name="CircleView">
         <attr name="bgColor" format="color" />
     </declare-styleable>

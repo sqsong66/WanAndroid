@@ -28,9 +28,21 @@
     <string name="text_desc_green">Green</string>
     <string name="text_desc_orange">Orange</string>
     <string name="text_desc_bluegrey">BlueGrey</string>
+    <string name="text_desc_yellow">Yellow</string>
+    <string name="text_desc_brown">Brown</string>
+    <string name="text_desc_pink">Pink</string>
+    <string name="text_desc_blue">Blue</string>
+
+    <string name="text_home">Home</string>
+    <string name="text_knowledge_syste">Knowledge System</string>
+    <string name="text_knowledge_syste_short">Knowledge</string>
+    <string name="text_navigation">Navigation</string>
+    <string name="text_project">Project</string>
 
     <string name="text_token_expired">This action needs login, please login first</string>
     <string name="text_user_name_empty">User name cannot empty</string>
     <string name="text_password_empty">Password cannot empty</string>
-    <string name="text_password_too_short">Password length must greater then 6</string>
+    <string name="text_password_too_short">Password length must greater than 6</string>
+
+    <string name="text_theme">Theme</string>
 </resources>

@@ -34,7 +34,6 @@ class ThemeSwitcherManager {
         mThemeColorIndex = mPreferences[Constants.THEMEOVERLAY_INDEX, 0] ?: 0
     }
 
-
     @SuppressLint("ResourceType")
     fun getThemeOverlayList(): MutableList<ColorPalette> {
         if (!mThemeColorList.isEmpty()) return mThemeColorList
@@ -68,7 +67,7 @@ class ThemeSwitcherManager {
         mPreferences[Constants.THEMEOVERLAY_INDEX] = mThemeColorIndex
         for (activity in mActivityList) {
             if ((activity?.javaClass?.isAnnotationPresent(ChangeThemeAnnotation::class.java))!!)
-                activity?.recreate()
+                activity.recreate()
         }
         mThemeColorIndex = themeColorIndex
     }

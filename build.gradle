@@ -20,6 +20,7 @@ ext {
     http_log_interceptor_version = '3.11.0'
     cookie_jar_version = 'v1.0.1'
     rxbinding_version = '2.2.0'
+    butterknife_version = '8.8.1'
 }
 
 buildscript {

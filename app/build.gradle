@@ -78,4 +78,8 @@ dependencies {
     // if you use the support libraries
     implementation "com.google.dagger:dagger-android-support:$rootProject.ext.dagger2_version"
     kapt "com.google.dagger:dagger-android-processor:$rootProject.ext.dagger2_version"
+
+    // ButterKnife
+    implementation "com.jakewharton:butterknife:$rootProject.ext.butterknife_version"
+    kapt "com.jakewharton:butterknife-compiler:$rootProject.ext.butterknife_version"
 }
