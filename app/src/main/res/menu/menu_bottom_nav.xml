@@ -21,7 +21,7 @@
         android:icon="@drawable/ic_home"
         android:title="@string/text_home" />
     <item
-        android:id="@+id/action_page_2"
+        android:id="@+id/action_knowledge"
         android:enabled="true"
         android:icon="@drawable/ic_knowledge_system"
         android:title="@string/text_knowledge_syste_short" />
@@ -31,7 +31,7 @@
         android:icon="@drawable/ic_explore"
         android:title="@string/text_navigation" />
     <item
-        android:id="@+id/action_page_4"
+        android:id="@+id/action_project"
         android:enabled="true"
         android:icon="@drawable/ic_project"
         android:title="@string/text_project"
