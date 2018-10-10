@@ -12,9 +12,10 @@ import com.sqsong.wanandroid.home.fragment.KnowledgeFragment
 import com.sqsong.wanandroid.home.fragment.NavigationFragment
 import com.sqsong.wanandroid.home.fragment.ProjectFragment
 import com.sqsong.wanandroid.theme.ThemeSwitcherDialog
+import com.sqsong.wanandroid.util.DensityUtil
+import com.sqsong.wanandroid.util.SnackbarUtil
 import dagger.android.support.DaggerAppCompatActivity
 import kotlinx.android.synthetic.main.activity_home.*
-import kotlinx.android.synthetic.main.content_home.*
 import javax.inject.Inject
 
 @ChangeThemeAnnotation
@@ -22,6 +23,18 @@ class HomeActivity : DaggerAppCompatActivity(), IAppCompatActivity {
 
     @Inject
     lateinit var mThemeDialog: ThemeSwitcherDialog
+
+    @Inject
+    lateinit var mHomeFragment: HomeFragment
+
+    @Inject
+    lateinit var mKnowledgeFragment: KnowledgeFragment
+
+    @Inject
+    lateinit var mNavigationFragment: NavigationFragment
+
+    @Inject
+    lateinit var mProjectFragment: ProjectFragment
 
     private val mFragmentList = mutableListOf<Fragment>()
 
@@ -31,14 +44,20 @@ class HomeActivity : DaggerAppCompatActivity(), IAppCompatActivity {
 
     override fun initEvent() {
         setSupportActionBar(toolbar)
+        // supportActionBar?.elevation = DensityUtil.dip2px(8).toFloat()
         setupFragments()
+
+        fab.setOnClickListener {
+            SnackbarUtil.showSnackText(fab, "Fab clicked")
+            // SnackbarUtil.showToastText(it.context, "Fab clicked")
+        }
     }
 
     private fun setupFragments() {
-        mFragmentList.add(HomeFragment())
-        mFragmentList.add(KnowledgeFragment())
-        mFragmentList.add(NavigationFragment())
-        mFragmentList.add(ProjectFragment())
+        mFragmentList.add(mHomeFragment)
+        mFragmentList.add(mKnowledgeFragment)
+        mFragmentList.add(mNavigationFragment)
+        mFragmentList.add(mProjectFragment)
         val fragmentPagerAdapter = FragmentPagerAdapter(supportFragmentManager, mFragmentList)
         viewPager.adapter = fragmentPagerAdapter
         viewPager.offscreenPageLimit = 4

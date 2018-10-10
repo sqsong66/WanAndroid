@@ -42,9 +42,9 @@
     <color name="colorBlueGreyPrimaryDark">#29434e</color>
     <color name="colorBlueGreyPrimaryLight">#819ca9</color>
 
-    <color name="colorYellowPrimary">#f57f17</color>
-    <color name="colorYellowPrimaryDark">#bc5100</color>
-    <color name="colorYellowPrimaryLight">#ffb04c</color>
+    <color name="colorYellowPrimary">#ffde03</color>
+    <color name="colorYellowPrimaryDark">#c7ad00</color>
+    <color name="colorYellowPrimaryLight">#ffff54</color>
 
     <color name="colorBrownPrimary">#6d4c41</color>
     <color name="colorBrownPrimaryDark">#40241a</color>
