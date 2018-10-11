@@ -7,7 +7,7 @@ abstract class BaseBean<T> {
 }
 
 /********************* Begin: Home banner bean ***********************/
-data class HomeBannerBean(override var data: List<HomeBannerData>) : BaseBean<List<HomeBannerData>>()
+data class HomeBannerBean(override var data: MutableList<HomeBannerData>) : BaseBean<MutableList<HomeBannerData>>()
 
 data class HomeBannerData(val desc: String,
                           val id: Int,

@@ -6,4 +6,18 @@
     <declare-styleable name="CircleView">
         <attr name="bgColor" format="color" />
     </declare-styleable>
+
+    <declare-styleable name="CirclePagerIndicator">
+        <attr name="normalDotColor" format="color"></attr>
+        <attr name="focusedDotColor" format="color"></attr>
+        <attr name="normalDotRadius" format="dimension"></attr>
+        <attr name="focusedDotRadius" format="dimension"></attr>
+        <attr name="dotSpace" format="dimension"></attr>
+    </declare-styleable>
+
+    <declare-styleable name="BannerView">
+        <attr name="loop" format="boolean" />
+        <attr name="duration" format="integer" />
+        <attr name="showIndicator" format="boolean" />
+    </declare-styleable>
 </resources>
