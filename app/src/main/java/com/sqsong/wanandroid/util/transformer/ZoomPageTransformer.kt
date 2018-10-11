@@ -20,20 +20,24 @@ class ZoomPageTransformer(private val mViewPager: ViewPager) : ViewPager.PageTra
             if (mTranslationX == 0f) {
                 mTranslationX = (2.0f - MAX_SCALE_FACTOR - MIN_SCALE_FACTOR) * width / 2.0f
             }
-            if (currentPos <= -1.0f) {
-                translationX = mTranslationX
-                scaleX = MIN_SCALE_FACTOR
-                scaleY = MIN_SCALE_FACTOR
-            } else if (currentPos <= 1.0f) {
-                val scale = (MAX_SCALE_FACTOR - MIN_SCALE_FACTOR) * Math.abs(1.0f - Math.abs(currentPos))
-                val transX = -mTranslationX * currentPos
-                translationX = transX
-                scaleX = MIN_SCALE_FACTOR + scale
-                scaleY = MIN_SCALE_FACTOR + scale
-            } else {
-                translationX = -mTranslationX
-                scaleX = MIN_SCALE_FACTOR
-                scaleY = MIN_SCALE_FACTOR
+            when {
+                currentPos <= -1.0f -> {
+                    translationX = mTranslationX
+                    scaleX = MIN_SCALE_FACTOR
+                    scaleY = MIN_SCALE_FACTOR
+                }
+                currentPos <= 1.0f -> {
+                    val scale = (MAX_SCALE_FACTOR - MIN_SCALE_FACTOR) * Math.abs(1.0f - Math.abs(currentPos))
+                    val transX = -mTranslationX * currentPos
+                    translationX = transX
+                    scaleX = MIN_SCALE_FACTOR + scale
+                    scaleY = MIN_SCALE_FACTOR + scale
+                }
+                else -> {
+                    translationX = -mTranslationX
+                    scaleX = MIN_SCALE_FACTOR
+                    scaleY = MIN_SCALE_FACTOR
+                }
             }
         }
     }

@@ -18,6 +18,7 @@
     <declare-styleable name="BannerView">
         <attr name="loop" format="boolean" />
         <attr name="duration" format="integer" />
+        <attr name="pagerScrollDuration" format="integer" />
         <attr name="showIndicator" format="boolean" />
     </declare-styleable>
 </resources>

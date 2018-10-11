@@ -12,7 +12,6 @@ import com.sqsong.wanandroid.home.fragment.KnowledgeFragment
 import com.sqsong.wanandroid.home.fragment.NavigationFragment
 import com.sqsong.wanandroid.home.fragment.ProjectFragment
 import com.sqsong.wanandroid.theme.ThemeSwitcherDialog
-import com.sqsong.wanandroid.util.DensityUtil
 import com.sqsong.wanandroid.util.SnackbarUtil
 import dagger.android.support.DaggerAppCompatActivity
 import kotlinx.android.synthetic.main.activity_home.*

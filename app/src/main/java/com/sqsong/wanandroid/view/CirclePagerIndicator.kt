@@ -40,7 +40,7 @@ class CirclePagerIndicator @JvmOverloads constructor(context: Context, attrs: At
         mFocusedColor = ta.getColor(R.styleable.CirclePagerIndicator_focusedDotColor, Color.RED)
         mNormalRadius = ta.getDimension(R.styleable.CirclePagerIndicator_normalDotRadius, dip2px(3f).toFloat())
         mFocusRadius = ta.getDimension(R.styleable.CirclePagerIndicator_focusedDotRadius, dip2px(5f).toFloat())
-        mDotSpace = ta.getDimensionPixelOffset(R.styleable.CirclePagerIndicator_dotSpace, dip2px(8f))
+        mDotSpace = ta.getDimensionPixelOffset(R.styleable.CirclePagerIndicator_dotSpace, dip2px(10f))
         ta.recycle()
 
         mPaint = Paint(Paint.ANTI_ALIAS_FLAG)

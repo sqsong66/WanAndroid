@@ -64,7 +64,7 @@ class ThemeSwitcherManager {
 
     fun setThemeOverlayRes(themeColorIndex: Int) {
         if (mThemeColorIndex == themeColorIndex) return
-        mPreferences[Constants.THEMEOVERLAY_INDEX] = mThemeColorIndex
+        mPreferences[Constants.THEMEOVERLAY_INDEX] = themeColorIndex
         for (activity in mActivityList) {
             if ((activity?.javaClass?.isAnnotationPresent(ChangeThemeAnnotation::class.java))!!)
                 activity.recreate()

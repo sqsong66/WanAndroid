@@ -12,6 +12,7 @@
         @color/colorWhite
     </color>
     <color name="colorRed">#FF0000</color>
+    <color name="colorBannerDot">#AAFFFFFF</color>
 
     <!-- Theme Color -->
     <color name="colorBlackPrimary">#212121</color>

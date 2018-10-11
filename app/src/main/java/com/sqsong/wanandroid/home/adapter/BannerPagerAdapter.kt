@@ -16,7 +16,7 @@ import com.sqsong.wanandroid.base.HomeBannerData
 import com.sqsong.wanandroid.common.GlideApp
 import com.sqsong.wanandroid.util.DensityUtil
 
-class BannerPagerAdapter(context: Context,
+class BannerPagerAdapter(private val context: Context,
                          private val bannerList: MutableList<HomeBannerData>) : PagerAdapter() {
 
     private var mImageHeight: Int? = 0
@@ -24,16 +24,17 @@ class BannerPagerAdapter(context: Context,
 
     fun setImageHeight(imageHeight: Int) {
         this.mImageHeight = imageHeight
+        notifyDataSetChanged()
     }
 
     override fun instantiateItem(container: ViewGroup, position: Int): Any {
         val view = mInflater.inflate(R.layout.layout_home_banner, null)
         val imageView = view.findViewById<ImageView>(R.id.imageView)
-        imageView.layoutParams.height = mImageHeight!!
+
         val transformation = MultiTransformation(CenterCrop(), RoundedCorners(DensityUtil.dip2px(5)))
 
         val bannerData = bannerList[position % bannerList.size]
-        GlideApp.with(imageView)
+        GlideApp.with(context)
                 .load(bannerData.imagePath)
                 .placeholder(R.drawable.placeholder)
                 .centerCrop()
@@ -41,6 +42,7 @@ class BannerPagerAdapter(context: Context,
                 .apply(RequestOptions.bitmapTransform(transformation))
                 .into(imageView)
         container.addView(view)
+        view.layoutParams.height = mImageHeight!!
         return view
     }
 
@@ -53,6 +55,10 @@ class BannerPagerAdapter(context: Context,
     }
 
     override fun getCount(): Int {
-        return bannerList.size * 10000
+        return bannerList.size * SIZE_MULTIPLE
+    }
+
+    companion object {
+        const val SIZE_MULTIPLE = 1000
     }
 }
