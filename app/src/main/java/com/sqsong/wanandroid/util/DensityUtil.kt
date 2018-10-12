@@ -2,6 +2,8 @@ package com.sqsong.wanandroid.util
 
 import android.content.Context
 import android.content.res.Resources
+import android.util.TypedValue
+
 
 object DensityUtil {
 
@@ -31,6 +33,23 @@ object DensityUtil {
     fun getScreenDpHeight(context: Context): Float {
         val displayMetrics = context.resources.displayMetrics
         return displayMetrics.heightPixels / displayMetrics.density
+    }
+
+    fun getNavigationBarHeight(context: Context): Int {
+        val resources = context.resources
+        val resourceId = resources.getIdentifier("navigation_bar_height", "dimen", "android")
+        return if (resourceId > 0) {
+            resources.getDimensionPixelSize(resourceId)
+        } else 0
+    }
+
+    fun getToolbarHeight(context: Context): Int {
+        val tv = TypedValue()
+        var actionBarHeight = 0
+        if (context.theme.resolveAttribute(android.R.attr.actionBarSize, tv, true)) {
+            actionBarHeight = TypedValue.complexToDimensionPixelSize(tv.data, context.resources.displayMetrics)
+        }
+        return actionBarHeight
     }
 
 }

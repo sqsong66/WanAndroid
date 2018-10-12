@@ -2,7 +2,10 @@ package com.sqsong.wanandroid.home
 
 import android.view.Menu
 import android.view.MenuItem
+import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.core.view.GravityCompat
 import androidx.fragment.app.Fragment
+import com.google.android.material.navigation.NavigationView
 import com.sqsong.wanandroid.R
 import com.sqsong.wanandroid.common.inter.ChangeThemeAnnotation
 import com.sqsong.wanandroid.common.inter.IAppCompatActivity
@@ -15,10 +18,11 @@ import com.sqsong.wanandroid.theme.ThemeSwitcherDialog
 import com.sqsong.wanandroid.util.SnackbarUtil
 import dagger.android.support.DaggerAppCompatActivity
 import kotlinx.android.synthetic.main.activity_home.*
+import kotlinx.android.synthetic.main.activity_home_new.*
 import javax.inject.Inject
 
 @ChangeThemeAnnotation
-class HomeActivity : DaggerAppCompatActivity(), IAppCompatActivity {
+class HomeActivity : DaggerAppCompatActivity(), IAppCompatActivity, NavigationView.OnNavigationItemSelectedListener {
 
     @Inject
     lateinit var mThemeDialog: ThemeSwitcherDialog
@@ -38,13 +42,21 @@ class HomeActivity : DaggerAppCompatActivity(), IAppCompatActivity {
     private val mFragmentList = mutableListOf<Fragment>()
 
     override fun getLayoutResId(): Int {
-        return R.layout.activity_home
+        return R.layout.activity_home_new
     }
 
     override fun initEvent() {
-        setSupportActionBar(toolbar)
-        // supportActionBar?.elevation = DensityUtil.dip2px(8).toFloat()
+        setupDrawer()
         setupFragments()
+    }
+
+    private fun setupDrawer() {
+        setSupportActionBar(toolbar)
+        val toggle = ActionBarDrawerToggle(
+                this, drawer_layout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
+        drawer_layout.addDrawerListener(toggle)
+        toggle.syncState()
+        nav_view.setNavigationItemSelectedListener(this)
 
         fab.setOnClickListener {
             SnackbarUtil.showSnackText(fab, "Fab clicked")
@@ -80,6 +92,32 @@ class HomeActivity : DaggerAppCompatActivity(), IAppCompatActivity {
         toolbar.title = title
     }
 
+    override fun onNavigationItemSelected(menuItem: MenuItem): Boolean {
+        when (menuItem.itemId) {
+            R.id.nav_camera -> {
+                // Handle the camera action
+            }
+            R.id.nav_gallery -> {
+
+            }
+            R.id.nav_slideshow -> {
+
+            }
+            R.id.nav_manage -> {
+
+            }
+            R.id.nav_share -> {
+
+            }
+            R.id.nav_send -> {
+
+            }
+        }
+
+        drawer_layout.closeDrawer(GravityCompat.START)
+        return true
+    }
+
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_home, menu)
         return super.onCreateOptionsMenu(menu)
@@ -91,6 +129,14 @@ class HomeActivity : DaggerAppCompatActivity(), IAppCompatActivity {
             return true
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    override fun onBackPressed() {
+        if (drawer_layout.isDrawerOpen(GravityCompat.START)) {
+            drawer_layout.closeDrawer(GravityCompat.START)
+        } else {
+            super.onBackPressed()
+        }
     }
 
 }

@@ -10,8 +10,8 @@
     <string name="text_login">Login</string>
     <string name="text_register">Register</string>
     <string name="text_confirm_password">Confirm password</string>
-    <string name="text_developing">Developing...</string>
-    <string name="text_loading">Loading...</string>
+    <string name="text_developing">Developing…</string>
+    <string name="text_loading">Loading…</string>
     <string name="text_theme_switcher">Theme Switcher</string>
     <string name="text_cancel">Cancel</string>
     <string name="text_save">Save</string>
@@ -45,4 +45,9 @@
     <string name="text_password_too_short">Password length must greater than 6</string>
 
     <string name="text_theme">Theme</string>
+    <string name="text_empty_tips">Oops, There is nothing!</string>
+    <string name="text_error_tips">Oops, There are something wrong!</string>
+    <string name="text_retry">Retry</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
 </resources>

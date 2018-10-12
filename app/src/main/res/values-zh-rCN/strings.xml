@@ -11,8 +11,8 @@
     <string name="text_login">登录</string>
     <string name="text_register">注册</string>
     <string name="text_confirm_password">确认密码</string>
-    <string name="text_developing">开发中...</string>
-    <string name="text_loading">加载中...</string>
+    <string name="text_developing">开发中…</string>
+    <string name="text_loading">加载中…</string>
     <string name="text_theme_switcher">选择主题</string>
     <string name="text_cancel">取消</string>
     <string name="text_save">保存</string>
@@ -46,4 +46,9 @@
     <string name="text_password_too_short">密码长度必须大于6</string>
 
     <string name="text_theme">主题</string>
+    <string name="text_empty_tips">哎呀，什么也没有！</string>
+    <string name="text_error_tips">哎呀，不知哪里出错啦！</string>
+    <string name="text_retry">重试</string>
+    <string name="navigation_drawer_open">打开导航菜单</string>
+    <string name="navigation_drawer_close">关闭导航菜单</string>
 </resources>

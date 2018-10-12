@@ -8,7 +8,7 @@ import javax.inject.Inject
 class NavigationFragment @Inject constructor() : BaseFragment() {
 
     override fun getLayoutResId(): Int {
-        return R.layout.fragment_navigation
+        return R.layout.fragment_navigation_backup
     }
 
     override fun initView(view: View) {

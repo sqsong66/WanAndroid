@@ -16,13 +16,15 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-
         <meta-data
             android:name="design_width_in_dp"
             android:value="410" />
         <meta-data
             android:name="design_height_in_dp"
             android:value="680" />
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
 
         <activity
             android:name=".home.SplashActivity"
@@ -35,7 +37,7 @@
         </activity>
         <activity
             android:name=".home.HomeActivity"
-            android:theme="@style/AppTheme" />
+            android:theme="@style/AppTheme.LoginTheme" />
         <activity
             android:name=".login.LoginActivity"
             android:label="@string/title_activity_login"
@@ -43,10 +45,6 @@
         <activity
             android:name=".login.RegisterActivity"
             android:theme="@style/AppTheme.LoginTheme" />
-
-        <meta-data
-            android:name="preloaded_fonts"
-            android:resource="@array/preloaded_fonts" />
     </application>
 
 </manifest>

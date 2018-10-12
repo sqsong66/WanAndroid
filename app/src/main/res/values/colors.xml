@@ -13,6 +13,8 @@
     </color>
     <color name="colorRed">#FF0000</color>
     <color name="colorBannerDot">#AAFFFFFF</color>
+    <color name="colorDefaultIconTint">#DBDBDB</color>
+    <color name="colorDefaultIconBg">#F6F6F6</color>
 
     <!-- Theme Color -->
     <color name="colorBlackPrimary">#212121</color>

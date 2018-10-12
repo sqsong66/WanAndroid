@@ -8,7 +8,7 @@ import javax.inject.Inject
 class ProjectFragment @Inject constructor() : BaseFragment() {
 
     override fun getLayoutResId(): Int {
-        return R.layout.fragment_project
+        return R.layout.layout_default_error //fragment_project
     }
 
     override fun initView(view: View) {

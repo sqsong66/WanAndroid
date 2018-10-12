@@ -30,7 +30,8 @@ class BannerPagerAdapter(private val context: Context,
     override fun instantiateItem(container: ViewGroup, position: Int): Any {
         val view = mInflater.inflate(R.layout.layout_home_banner, null)
         val imageView = view.findViewById<ImageView>(R.id.imageView)
-        // imageView.layoutParams.height = mImageHeight!!
+        // 设置一下ImageView的高度，防止图片显示不全
+        imageView.layoutParams.height = mImageHeight!!
         val transformation = MultiTransformation(CenterCrop(), RoundedCorners(DensityUtil.dip2px(5)))
 
         val bannerData = bannerList[position % bannerList.size]

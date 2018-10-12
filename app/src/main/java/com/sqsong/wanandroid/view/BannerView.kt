@@ -8,7 +8,8 @@ import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
-import android.view.animation.LinearInterpolator
+import android.view.animation.AccelerateDecelerateInterpolator
+import android.view.animation.AccelerateInterpolator
 import android.widget.FrameLayout
 import android.widget.ImageView
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -108,7 +109,7 @@ class BannerView @JvmOverloads constructor(context: Context, attrs: AttributeSet
     private fun setViewPagerScrollDuration() {
         val scroller = ViewPager::class.java.getDeclaredField("mScroller")
         scroller.isAccessible = true
-        val interpolator = LinearInterpolator()
+        val interpolator = AccelerateDecelerateInterpolator()
         val fixedSpeedScroller = FixedSpeedScroller(context, interpolator)
         fixedSpeedScroller.setFixedDuration(pagerScrollDuration)
         scroller.set(viewPager, fixedSpeedScroller)
