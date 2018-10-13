@@ -66,6 +66,7 @@ class BannerView @JvmOverloads constructor(context: Context, attrs: AttributeSet
     private fun initView(context: Context) {
         val view = LayoutInflater.from(context).inflate(R.layout.layout_banner, this, false)
         addView(view)
+        val viewParams = view.layoutParams
 
         viewPager = view.findViewById(R.id.viewPager)
         indicator = view.findViewById(R.id.indicator)
@@ -100,7 +101,7 @@ class BannerView @JvmOverloads constructor(context: Context, attrs: AttributeSet
                         val resultWidth = DensityUtil.getScreenWidth() - params.leftMargin - params.rightMargin
                         val resultHeight = height * resultWidth / width
                         params.height = resultHeight
-                        layoutParams.height = resultHeight + params.topMargin + params.bottomMargin
+                        viewParams.height = resultHeight + params.topMargin + params.bottomMargin
                     }
                 })
     }

@@ -117,6 +117,7 @@ class CirclePagerIndicator @JvmOverloads constructor(context: Context, attrs: At
 
     fun setViewPager(viewPager: ViewPager, dotCount: Int) {
         mDotCount = dotCount
+        requestLayout()
         viewPager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
             override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
                 this@CirclePagerIndicator.onPageScrolled(position, positionOffset)
