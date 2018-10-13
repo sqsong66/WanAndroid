@@ -6,7 +6,7 @@
     android:background="@color/colorWhite">
 
     <ImageView
-        android:id="@+id/empty_iv"
+        android:id="@+id/error_iv"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_marginTop="160dp"
@@ -20,7 +20,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/desc_tv"
+        android:id="@+id/error_desc_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
@@ -28,7 +28,7 @@
         android:textSize="16sp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/empty_iv" />
+        app:layout_constraintTop_toBottomOf="@+id/error_iv" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/retry_btn"
@@ -42,6 +42,6 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/desc_tv" />
+        app:layout_constraintTop_toBottomOf="@+id/error_desc_tv" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

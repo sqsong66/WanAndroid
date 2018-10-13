@@ -9,7 +9,6 @@ import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AccelerateDecelerateInterpolator
-import android.view.animation.AccelerateInterpolator
 import android.widget.FrameLayout
 import android.widget.ImageView
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -67,7 +66,6 @@ class BannerView @JvmOverloads constructor(context: Context, attrs: AttributeSet
     private fun initView(context: Context) {
         val view = LayoutInflater.from(context).inflate(R.layout.layout_banner, this, false)
         addView(view)
-        layoutParams = LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, DensityUtil.dip2px(150))
 
         viewPager = view.findViewById(R.id.viewPager)
         indicator = view.findViewById(R.id.indicator)
@@ -90,6 +88,7 @@ class BannerView @JvmOverloads constructor(context: Context, attrs: AttributeSet
                 .centerCrop()
                 .apply(RequestOptions.bitmapTransform(transformation))
                 .into(defaultImage!!)
+        // 根据图片高度来计算banner高度
         GlideApp.with(this)
                 .asBitmap()
                 .load(R.drawable.placeholder)
@@ -141,7 +140,6 @@ class BannerView @JvmOverloads constructor(context: Context, attrs: AttributeSet
             defaultImage?.visibility = View.VISIBLE
             return
         }
-        defaultImage?.visibility = View.GONE
 
         // 测量好第一张图片的高度后，再更新adapter中的数据
         GlideApp.with(this).asBitmap().load(bannerList[0].imagePath).into(object : SimpleTarget<Bitmap>() {
@@ -152,10 +150,11 @@ class BannerView @JvmOverloads constructor(context: Context, attrs: AttributeSet
                 val resultHeight = height * screenWidth / width
                 layoutParams.height = resultHeight + (viewPager!!.paddingTop + viewPager!!.paddingBottom)
                 mBannerList.addAll(bannerList)
-                mBannerAdapter?.setImageHeight(resultHeight)
-                indicator?.setViewPager(viewPager!!, mBannerList.size)
+                mBannerAdapter?.setImageSize(screenWidth, resultHeight)
                 val item = mBannerList.size * BannerPagerAdapter.SIZE_MULTIPLE / 2 - ((mBannerList.size * BannerPagerAdapter.SIZE_MULTIPLE) % mBannerList.size)
                 viewPager?.currentItem = item
+                indicator?.setViewPager(viewPager!!, mBannerList.size)
+                defaultImage?.visibility = View.GONE
                 if (loop) startLoop()
             }
         })

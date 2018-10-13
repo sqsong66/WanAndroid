@@ -11,13 +11,12 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="160dp"
         android:indeterminateTint="?colorPrimary"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/desc_tv"
+        android:id="@+id/error_desc_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"

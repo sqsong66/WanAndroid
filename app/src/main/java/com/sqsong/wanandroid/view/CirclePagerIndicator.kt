@@ -11,6 +11,7 @@ import android.view.View
 import android.view.animation.LinearInterpolator
 import androidx.viewpager.widget.ViewPager
 import com.sqsong.wanandroid.R
+import com.sqsong.wanandroid.util.LogUtil
 import java.util.*
 
 /**
@@ -18,12 +19,12 @@ import java.util.*
  */
 class CirclePagerIndicator @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0) : View(context, attrs, defStyleAttr) {
 
-    private var mPaint: Paint? = null
+    private var mDotCount = 3
     private var mDotSpace: Int = 0
     private var mCurrentPos: Int = 0
+    private var mPaint: Paint? = null
     private var mNormalColor: Int = 0
     private var mFocusedColor: Int = 0
-    private var mDotCount = 3
     private var mIndicatorX: Float = 0.toFloat()
     private var mFocusRadius: Float = 0.toFloat()
     private var mNormalRadius: Float = 0.toFloat()
@@ -57,6 +58,7 @@ class CirclePagerIndicator @JvmOverloads constructor(context: Context, attrs: At
     }
 
     override fun onDraw(canvas: Canvas) {
+        if (mCirclePoints.isEmpty()) return
         drawCircles(canvas)
         drawIndicator(canvas)
     }
@@ -68,6 +70,7 @@ class CirclePagerIndicator @JvmOverloads constructor(context: Context, attrs: At
             val pointF = mCirclePoints[i % mCirclePoints.size]
             canvas.drawCircle(pointF.x, pointF.y, mNormalRadius, mPaint!!)
         }
+
     }
 
     private fun drawIndicator(canvas: Canvas) {
@@ -120,7 +123,7 @@ class CirclePagerIndicator @JvmOverloads constructor(context: Context, attrs: At
             }
 
             override fun onPageSelected(position: Int) {
-                mCurrentPos = position
+                mCurrentPos = position % dotCount
             }
 
             override fun onPageScrollStateChanged(state: Int) {

@@ -19,10 +19,12 @@ import com.sqsong.wanandroid.util.DensityUtil
 class BannerPagerAdapter(private val context: Context,
                          private val bannerList: MutableList<HomeBannerData>) : PagerAdapter() {
 
+    private var mImageWidth: Int? = 0
     private var mImageHeight: Int? = 0
     private val mInflater: LayoutInflater = LayoutInflater.from(context)
 
-    fun setImageHeight(imageHeight: Int) {
+    fun setImageSize(imageWidth: Int, imageHeight: Int) {
+        this.mImageWidth = imageWidth
         this.mImageHeight = imageHeight
         notifyDataSetChanged()
     }
@@ -30,8 +32,6 @@ class BannerPagerAdapter(private val context: Context,
     override fun instantiateItem(container: ViewGroup, position: Int): Any {
         val view = mInflater.inflate(R.layout.layout_home_banner, null)
         val imageView = view.findViewById<ImageView>(R.id.imageView)
-        // 设置一下ImageView的高度，防止图片显示不全
-        imageView.layoutParams.height = mImageHeight!!
         val transformation = MultiTransformation(CenterCrop(), RoundedCorners(DensityUtil.dip2px(5)))
 
         val bannerData = bannerList[position % bannerList.size]
@@ -39,6 +39,7 @@ class BannerPagerAdapter(private val context: Context,
                 .load(bannerData.imagePath)
                 .placeholder(R.drawable.placeholder)
                 .centerCrop()
+                .override(mImageWidth!!, mImageHeight!!)
                 .transition(DrawableTransitionOptions.withCrossFade())
                 .apply(RequestOptions.bitmapTransform(transformation))
                 .into(imageView)
