@@ -38,6 +38,9 @@
         <item name="android:textColorHint">?colorError</item>
     </style>
 
+    <style name="ChipAppearance">
+        <item name="android:textSize">12sp</item>
+    </style>
 
     <style name="LoginTextInputStyle" parent="Widget.Design.TextInputLayout">
         <item name="android:layout_width">match_parent</item>

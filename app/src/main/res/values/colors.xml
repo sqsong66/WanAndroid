@@ -15,6 +15,7 @@
     <color name="colorBannerDot">#AAFFFFFF</color>
     <color name="colorDefaultIconTint">#DBDBDB</color>
     <color name="colorDefaultIconBg">#F6F6F6</color>
+    <color name="colorNormalText">#232F34</color>
 
     <!-- Theme Color -->
     <color name="colorBlackPrimary">#212121</color>

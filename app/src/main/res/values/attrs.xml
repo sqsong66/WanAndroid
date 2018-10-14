@@ -21,4 +21,15 @@
         <attr name="pagerScrollDuration" format="integer" />
         <attr name="showIndicator" format="boolean" />
     </declare-styleable>
+
+    <declare-styleable name="CircleTextView">
+        <attr name="backgroundColor" format="color" />
+        <attr name="textColor" format="color" />
+        <attr name="textSize" format="dimension" />
+        <attr name="padding" format="dimension" />
+        <attr name="borderWidth" format="dimension" />
+        <attr name="borderColor" format="color" />
+        <attr name="text" format="string" />
+    </declare-styleable>
+
 </resources>

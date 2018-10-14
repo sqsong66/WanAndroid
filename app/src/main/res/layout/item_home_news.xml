@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="16dp"
+    app:cardBackgroundColor="@color/colorWhite"
+    app:cardCornerRadius="5dp"
+    app:cardElevation="8dp"
+    app:layout_constraintTop_toBottomOf="@id/bannerView">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_home_item"
+        android:clickable="true">
+
+        <com.sqsong.wanandroid.view.CircleTextView
+            android:id="@+id/name_circle_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginRight="16dp"
+            app:backgroundColor="?colorPrimary"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:text="S"
+            app:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/author_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="16dp"
+            android:text="Hongyang"
+            android:textColor="@color/colorNormalText"
+            android:textSize="15sp"
+            app:layout_constraintLeft_toRightOf="@id/name_circle_text"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <View
+            android:id="@+id/line"
+            android:layout_width="12dp"
+            android:layout_height="1dp"
+            android:layout_marginLeft="5dp"
+            android:background="@color/colorNormalText"
+            app:layout_constraintBottom_toBottomOf="@id/author_tv"
+            app:layout_constraintLeft_toRightOf="@id/author_tv"
+            app:layout_constraintTop_toTopOf="@id/author_tv" />
+
+        <TextView
+            android:id="@+id/time_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="16dp"
+            android:text="3 hours ago"
+            android:textColor="@color/colorNormalText"
+            android:textSize="15sp"
+            app:layout_constraintLeft_toRightOf="@id/line"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/title_tv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="16dp"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:text="XMVP：一个通过泛型实现的MVP框架2年的演化路"
+            android:textColor="@color/colorNormalText"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/name_circle_text" />
+
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chapter_chip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="16dp"
+            android:checkable="false"
+            android:enabled="false"
+            android:text="热门专题"
+            android:textAppearance="@style/ChipAppearance"
+            android:textColor="@color/colorNormalText"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/title_tv"
+            app:textEndPadding="15dp"
+            app:textStartPadding="15dp" />
+
+        <com.google.android.material.chip.Chip
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="16dp"
+            android:checkable="false"
+            android:enabled="false"
+            android:text="项目架构"
+            android:textAppearance="@style/ChipAppearance"
+            android:textColor="@color/colorNormalText"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toRightOf="@id/chapter_chip"
+            app:layout_constraintTop_toBottomOf="@id/title_tv"
+            app:textEndPadding="15dp"
+            app:textStartPadding="15dp" />
+
+        <ImageView
+            android:id="@+id/collection_iv"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/bg_home_item_circle"
+            android:clickable="true"
+            android:padding="8dp"
+            android:src="@drawable/ic_star"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toRightOf="parent" />
+        <!--?selectableItemBackgroundBorderless-->
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>

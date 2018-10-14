@@ -5,17 +5,22 @@ import com.google.gson.GsonBuilder
 import com.sqsong.wanandroid.R
 import com.sqsong.wanandroid.base.BaseFragment
 import com.sqsong.wanandroid.base.HomeBannerBean
+import com.sqsong.wanandroid.util.SnackbarUtil
 import kotlinx.android.synthetic.main.fragment_home.*
+import kotlinx.android.synthetic.main.item_home_news.*
 import javax.inject.Inject
 
-class HomeFragment @Inject constructor() : BaseFragment() {
+class HomeFragment @Inject constructor() : BaseFragment(), View.OnClickListener {
+    override fun onClick(v: View?) {
+        SnackbarUtil.showToastText(context!!, "Star")
+    }
 
     override fun getLayoutResId(): Int {
         return R.layout.fragment_home
     }
 
     override fun initView(view: View) {
-
+        collection_iv.setOnClickListener(this)
     }
 
     override fun initEvent() {

@@ -9,4 +9,6 @@
     <dimen name="navigation_drawer_width">240dp</dimen>
     <dimen name="nav_header_height">176dp</dimen>
     <dimen name="nav_header_vertical_spacing">8dp</dimen>
+    <dimen name="default_text_size">16sp</dimen>
+    <dimen name="default_padding">5dp</dimen>
 </resources>

@@ -74,7 +74,8 @@ class BannerView @JvmOverloads constructor(context: Context, attrs: AttributeSet
         defaultImage = view.findViewById(R.id.default_iv)
 
         setViewPagerScrollDuration()
-        viewPager?.setPageTransformer(true, ZoomPageTransformer(viewPager!!))
+        viewPager?.setPageTransformer(true, ZoomPageTransformer(viewPager!!)
+                /*AlphaAndScalePageTransformer()*/)
         viewPager?.pageMargin = DensityUtil.dip2px(10)
 
         val transformation = MultiTransformation(CenterCrop(), RoundedCorners(DensityUtil.dip2px(5)))
@@ -139,10 +140,8 @@ class BannerView @JvmOverloads constructor(context: Context, attrs: AttributeSet
         // 测量好第一张图片的高度后，再更新adapter中的数据
         GlideApp.with(this).asBitmap().load(bannerList[0].imagePath).into(object : SimpleTarget<Bitmap>() {
             override fun onResourceReady(resource: Bitmap, transition: Transition<in Bitmap>?) {
-                val width = resource.width
-                val height = resource.height
                 val screenWidth = DensityUtil.getScreenWidth() - (viewPager!!.paddingLeft + viewPager!!.paddingRight)
-                val resultHeight = height * screenWidth / width
+                val resultHeight = resource.height * screenWidth / resource.width
                 setupPagerAdapter(bannerList, screenWidth, resultHeight)
             }
         })
