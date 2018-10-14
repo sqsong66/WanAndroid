@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.viewpager.widget.PagerAdapter
+import androidx.viewpager.widget.ViewPager
 import com.bumptech.glide.load.MultiTransformation
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
@@ -17,6 +18,7 @@ import com.sqsong.wanandroid.common.GlideApp
 import com.sqsong.wanandroid.util.DensityUtil
 
 class BannerPagerAdapter(private val context: Context,
+                         private val viewPager: ViewPager,
                          private val bannerList: MutableList<HomeBannerData>) : PagerAdapter() {
 
     private var mImageWidth: Int? = 0
@@ -39,7 +41,6 @@ class BannerPagerAdapter(private val context: Context,
                 .load(bannerData.imagePath)
                 .placeholder(R.drawable.placeholder)
                 .centerCrop()
-                .override(mImageWidth!!, mImageHeight!!)
                 .transition(DrawableTransitionOptions.withCrossFade())
                 .apply(RequestOptions.bitmapTransform(transformation))
                 .into(imageView)
@@ -60,7 +61,15 @@ class BannerPagerAdapter(private val context: Context,
         return bannerList.size * SIZE_MULTIPLE
     }
 
+    override fun finishUpdate(container: ViewGroup) {
+        var currentItem = viewPager.currentItem
+        if (currentItem == count) {
+            currentItem = 0
+            viewPager.setCurrentItem(currentItem, false)
+        }
+    }
+
     companion object {
-        const val SIZE_MULTIPLE = 1000
+        const val SIZE_MULTIPLE = 500
     }
 }

@@ -26,6 +26,7 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="20dp"
+        android:visibility="gone"
         app:dotSpace="8dp"
         app:focusedDotColor="?colorPrimary"
         app:focusedDotRadius="3dp"

@@ -7,7 +7,6 @@ import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
-import android.view.ViewGroup
 import android.view.animation.AccelerateDecelerateInterpolator
 import android.widget.FrameLayout
 import android.widget.ImageView
@@ -38,8 +37,10 @@ class BannerView @JvmOverloads constructor(context: Context, attrs: AttributeSet
     private var viewPager: ViewPager? = null
     private var defaultImage: ImageView? = null
     private var indicator: CirclePagerIndicator? = null
-    private var mBannerAdapter: BannerPagerAdapter? = null
     private var mBannerList = mutableListOf<HomeBannerData>()
+    private val mBannerAdapter by lazy {
+        BannerPagerAdapter(context, viewPager!!, mBannerList)
+    }
 
     private val mLoopRunnable = object : Runnable {
         override fun run() {
@@ -71,15 +72,8 @@ class BannerView @JvmOverloads constructor(context: Context, attrs: AttributeSet
         viewPager = view.findViewById(R.id.viewPager)
         indicator = view.findViewById(R.id.indicator)
         defaultImage = view.findViewById(R.id.default_iv)
-        if (showIndicator) {
-            indicator?.visibility = View.VISIBLE
-        } else {
-            indicator?.visibility = View.GONE
-        }
 
         setViewPagerScrollDuration()
-        mBannerAdapter = BannerPagerAdapter(context, mBannerList)
-        viewPager?.adapter = mBannerAdapter
         viewPager?.setPageTransformer(true, ZoomPageTransformer(viewPager!!))
         viewPager?.pageMargin = DensityUtil.dip2px(10)
 
@@ -149,16 +143,27 @@ class BannerView @JvmOverloads constructor(context: Context, attrs: AttributeSet
                 val height = resource.height
                 val screenWidth = DensityUtil.getScreenWidth() - (viewPager!!.paddingLeft + viewPager!!.paddingRight)
                 val resultHeight = height * screenWidth / width
-                layoutParams.height = resultHeight + (viewPager!!.paddingTop + viewPager!!.paddingBottom)
-                mBannerList.addAll(bannerList)
-                mBannerAdapter?.setImageSize(screenWidth, resultHeight)
-                val item = mBannerList.size * BannerPagerAdapter.SIZE_MULTIPLE / 2 - ((mBannerList.size * BannerPagerAdapter.SIZE_MULTIPLE) % mBannerList.size)
-                viewPager?.currentItem = item
-                indicator?.setViewPager(viewPager!!, mBannerList.size)
-                defaultImage?.visibility = View.GONE
-                if (loop) startLoop()
+                setupPagerAdapter(bannerList, screenWidth, resultHeight)
             }
         })
+    }
+
+    private fun setupPagerAdapter(bannerList: MutableList<HomeBannerData>, screenWidth: Int, resultHeight: Int) {
+        defaultImage?.visibility = View.GONE
+        mBannerList.clear()
+        mBannerList.addAll(bannerList)
+        viewPager?.adapter = mBannerAdapter
+        mBannerAdapter.setImageSize(screenWidth, resultHeight)
+
+        val item = mBannerList.size * BannerPagerAdapter.SIZE_MULTIPLE / 2 - ((mBannerList.size * BannerPagerAdapter.SIZE_MULTIPLE) % mBannerList.size)
+        viewPager?.currentItem = item
+        indicator?.setViewPager(viewPager!!, mBannerList.size)
+        if (showIndicator) {
+            indicator?.visibility = View.VISIBLE
+        } else {
+            indicator?.visibility = View.GONE
+        }
+        if (loop) startLoop()
     }
 
 }
