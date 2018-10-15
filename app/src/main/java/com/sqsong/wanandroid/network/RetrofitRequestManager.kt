@@ -1,6 +1,6 @@
 package com.sqsong.wanandroid.network
 
-import com.sqsong.wanandroid.base.HomeBannerBean
+import com.sqsong.wanandroid.data.HomeBannerBean
 import com.sqsong.wanandroid.util.Constants
 import io.reactivex.Observable
 import okhttp3.OkHttpClient

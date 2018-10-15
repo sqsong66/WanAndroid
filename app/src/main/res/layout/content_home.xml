@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context=".home.HomeActivity"
+    tools:context=".ui.home.HomeActivity"
     tools:showIn="@layout/activity_home">
 
     <com.sqsong.wanandroid.view.NoScrollViewPager

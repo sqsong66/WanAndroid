@@ -19,9 +19,9 @@ import com.bumptech.glide.request.RequestOptions
 import com.bumptech.glide.request.target.SimpleTarget
 import com.bumptech.glide.request.transition.Transition
 import com.sqsong.wanandroid.R
-import com.sqsong.wanandroid.base.HomeBannerData
 import com.sqsong.wanandroid.common.GlideApp
-import com.sqsong.wanandroid.home.adapter.BannerPagerAdapter
+import com.sqsong.wanandroid.data.HomeBannerData
+import com.sqsong.wanandroid.ui.home.adapter.BannerPagerAdapter
 import com.sqsong.wanandroid.util.DensityUtil
 import com.sqsong.wanandroid.util.transformer.ZoomPageTransformer
 
@@ -45,7 +45,11 @@ class BannerView @JvmOverloads constructor(context: Context, attrs: AttributeSet
     private val mLoopRunnable = object : Runnable {
         override fun run() {
             val currentItem: Int = viewPager?.currentItem!!
-            viewPager?.setCurrentItem(currentItem + 1, true)
+            if (currentItem == (viewPager?.adapter?.count?.minus(1))) {
+                viewPager?.currentItem = 0
+            } else {
+                viewPager?.currentItem = currentItem + 1
+            }
             mHandler.postDelayed(this, duration.toLong())
         }
     }

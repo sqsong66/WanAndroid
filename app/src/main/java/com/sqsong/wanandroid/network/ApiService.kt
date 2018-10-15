@@ -1,8 +1,7 @@
 package com.sqsong.wanandroid.network
 
-import com.sqsong.wanandroid.base.HomeBannerBean
+import com.sqsong.wanandroid.data.HomeBannerBean
 import io.reactivex.Observable
-import io.reactivex.Observer
 import retrofit2.http.GET
 import retrofit2.http.POST
 

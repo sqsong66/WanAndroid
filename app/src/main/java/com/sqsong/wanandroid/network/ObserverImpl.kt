@@ -3,9 +3,9 @@ package com.sqsong.wanandroid.network
 import android.content.Intent
 import android.widget.Toast
 import com.sqsong.wanandroid.R
-import com.sqsong.wanandroid.base.BaseApplication
-import com.sqsong.wanandroid.base.BaseBean
-import com.sqsong.wanandroid.login.LoginActivity
+import com.sqsong.wanandroid.BaseApplication
+import com.sqsong.wanandroid.data.BaseBean
+import com.sqsong.wanandroid.ui.login.LoginActivity
 import com.sqsong.wanandroid.util.NetworkUtil
 import io.reactivex.Observer
 import io.reactivex.disposables.CompositeDisposable

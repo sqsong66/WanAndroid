@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="16dp"
@@ -13,10 +14,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/bg_home_item"
-        android:clickable="true">
+        android:clickable="true"
+        android:focusable="true">
 
         <com.sqsong.wanandroid.view.CircleTextView
-            android:id="@+id/name_circle_text"
+            android:id="@+id/nameCircleTv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
@@ -25,10 +27,13 @@
             app:backgroundColor="?colorPrimary"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:text="S"
-            app:textSize="12sp" />
+            app:padding="4dp"
+            app:text="H"
+            app:textSize="10sp"
+            tools:ignore="SmallSp" />
 
         <com.sqsong.wanandroid.view.LabelView
+            android:id="@+id/labelView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintRight_toRightOf="parent"
@@ -43,41 +48,54 @@
             app:lv_text_size="10sp" />
 
         <TextView
-            android:id="@+id/author_tv"
-            android:layout_width="wrap_content"
+            android:id="@+id/authorTv"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginLeft="5dp"
+            android:ellipsize="end"
+            android:gravity="start"
+            android:maxLines="1"
             android:text="Hongyang"
-            android:textColor="@color/colorNormalText"
+            android:textColor="@color/colorTextActive"
             android:textSize="15sp"
-            app:layout_constraintLeft_toRightOf="@id/name_circle_text"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintBottom_toBottomOf="@id/nameCircleTv"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintLeft_toRightOf="@id/nameCircleTv"
+            app:layout_constraintRight_toLeftOf="@id/timeIv"
+            app:layout_constraintTop_toTopOf="@id/nameCircleTv"
+            tools:text="Hongyang" />
 
-        <View
-            android:id="@+id/line"
-            android:layout_width="12dp"
-            android:layout_height="1dp"
-            android:layout_marginLeft="5dp"
-            android:background="@color/colorNormalText"
-            app:layout_constraintBottom_toBottomOf="@id/author_tv"
-            app:layout_constraintLeft_toRightOf="@id/author_tv"
-            app:layout_constraintTop_toTopOf="@id/author_tv" />
+        <ImageView
+            android:id="@+id/timeIv"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginRight="5dp"
+            android:src="@drawable/ic_time"
+            android:tint="@color/colorIconTint"
+            app:layout_constraintBottom_toBottomOf="@id/authorTv"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintRight_toLeftOf="@id/timeTv"
+            app:layout_constraintTop_toTopOf="@id/authorTv" />
 
         <TextView
-            android:id="@+id/time_tv"
+            android:id="@+id/timeTv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
-            android:layout_marginTop="16dp"
+            android:ellipsize="end"
+            android:maxLines="1"
             android:text="3 hours ago"
-            android:textColor="@color/colorNormalText"
+            android:textColor="@color/colorTextActive"
             android:textSize="15sp"
-            app:layout_constraintLeft_toRightOf="@id/line"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintBottom_toBottomOf="@id/timeIv"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintRight_toLeftOf="@id/labelView"
+            app:layout_constraintTop_toTopOf="@id/timeIv"
+            tools:text="3 hours ago" />
 
         <TextView
-            android:id="@+id/title_tv"
+            android:id="@+id/titleTv"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
@@ -86,18 +104,20 @@
             android:ellipsize="end"
             android:maxLines="2"
             android:text="XMVP：一个通过泛型实现的MVP框架2年的演化路"
-            android:textColor="@color/colorNormalText"
+            android:textColor="@color/colorTextActive"
             android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/name_circle_text" />
+            app:layout_constraintTop_toBottomOf="@id/nameCircleTv"
+            tools:text="XMVP：一个通过泛型实现的MVP框架2年的演化路" />
 
 
         <com.google.android.material.chip.Chip
-            android:id="@+id/chapter_chip"
+            android:id="@+id/chapterChip"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
             android:layout_marginLeft="16dp"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="16dp"
@@ -105,16 +125,19 @@
             android:enabled="false"
             android:text="热门专题"
             android:textAppearance="@style/ChipAppearance"
-            android:textColor="@color/colorNormalText"
+            android:textColor="@color/colorTextInActive"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/title_tv"
+            app:layout_constraintTop_toBottomOf="@id/titleTv"
             app:textEndPadding="15dp"
-            app:textStartPadding="15dp" />
+            app:textStartPadding="15dp"
+            tools:text="热门专题" />
 
         <com.google.android.material.chip.Chip
+            android:id="@+id/subChapterChip"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
             android:layout_marginLeft="16dp"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="16dp"
@@ -122,26 +145,27 @@
             android:enabled="false"
             android:text="项目架构"
             android:textAppearance="@style/ChipAppearance"
-            android:textColor="@color/colorNormalText"
+            android:textColor="@color/colorTextInActive"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toRightOf="@id/chapter_chip"
-            app:layout_constraintTop_toBottomOf="@id/title_tv"
+            app:layout_constraintLeft_toRightOf="@id/chapterChip"
+            app:layout_constraintTop_toBottomOf="@id/titleTv"
             app:textEndPadding="15dp"
-            app:textStartPadding="15dp" />
+            app:textStartPadding="15dp"
+            tools:text="项目架构" />
 
-        <ImageView
-            android:id="@+id/collection_iv"
-            android:layout_width="45dp"
-            android:layout_height="45dp"
+        <com.sqsong.wanandroid.view.CheckableImageView
+            android:id="@+id/starIv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
-            android:layout_marginBottom="8dp"
             android:background="@drawable/bg_home_item_circle"
-            android:clickable="true"
             android:padding="8dp"
-            android:src="@drawable/ic_star"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintRight_toRightOf="parent" />
-        <!--?selectableItemBackgroundBorderless-->
+            android:src="@drawable/selector_star"
+            android:tint="?colorPrimary"
+            app:layout_constraintBottom_toBottomOf="@id/subChapterChip"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@id/subChapterChip" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.cardview.widget.CardView>
