@@ -8,7 +8,6 @@ import dagger.android.ContributesAndroidInjector
 @Module
 abstract class KnowledgeModule {
 
-    @FragmentScope
     @ContributesAndroidInjector
     abstract fun contributeKnowledgeFragment(): KnowledgeFragment
 

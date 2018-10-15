@@ -11,12 +11,14 @@ import butterknife.Unbinder
 import com.sqsong.wanandroid.mvp.IPresenter
 import com.sqsong.wanandroid.mvp.IView
 import dagger.android.support.DaggerFragment
+import javax.inject.Inject
 
-abstract class BaseFragment<P : IPresenter> : DaggerFragment(), IView {
+abstract class BaseFragment<P : IPresenter<*>> : DaggerFragment(), IView {
 
     private lateinit var mUnBinder: Unbinder
 
-    var mPresenter: P? = null
+    @Inject
+    lateinit var mPresenter: P
 
     @LayoutRes
     abstract fun getLayoutResId(): Int

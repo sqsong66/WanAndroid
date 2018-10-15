@@ -4,10 +4,10 @@ import io.reactivex.disposables.CompositeDisposable
 
 open class BasePresenter<V, M> constructor(var mView: V? = null,
                                            var mModel: M? = null,
-                                           var mCompositeDisposable: CompositeDisposable? = null) : IPresenter where V : IView, M : IModel {
+                                           var mCompositeDisposable: CompositeDisposable? = null) : IPresenter<V> where V : IView, M : IModel {
 
-    override fun onCreate() {
-        // init something.
+    override fun onAttach(view: V) {
+        mView = view
     }
 
     override fun onDestroy() {

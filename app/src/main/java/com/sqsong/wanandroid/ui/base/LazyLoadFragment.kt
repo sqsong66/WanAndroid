@@ -3,7 +3,7 @@ package com.sqsong.wanandroid.ui.base
 import android.os.Bundle
 import com.sqsong.wanandroid.mvp.IPresenter
 
-abstract class LazyLoadFragment<P : IPresenter> : BaseFragment<P>() {
+abstract class LazyLoadFragment<P : IPresenter<*>> : BaseFragment<P>() {
 
     private var mIsVisible = false
     private var mIsInitiated = false

@@ -1,8 +1,8 @@
 package com.sqsong.wanandroid.mvp
 
-interface IPresenter {
+interface IPresenter<V: IView> {
 
-    fun onCreate()
+    fun onAttach(view: V)
 
     fun onDestroy()
 

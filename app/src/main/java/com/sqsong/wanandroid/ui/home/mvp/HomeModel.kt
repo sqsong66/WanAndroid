@@ -5,7 +5,7 @@ import com.sqsong.wanandroid.network.ApiService
 import io.reactivex.Observable
 import javax.inject.Inject
 
-class HomeModel @Inject constructor(private val apiService: ApiService) : HomeContract.Model {
+class HomeModel @Inject constructor(val apiService: ApiService) : HomeContract.Model {
 
     override fun getBannerData(): Observable<HomeBannerBean> {
         return apiService.getHomeBanner()

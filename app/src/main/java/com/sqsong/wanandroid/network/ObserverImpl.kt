@@ -19,7 +19,7 @@ import java.util.concurrent.TimeoutException
 
 abstract class ObserverImpl<T : BaseBean<*>>(private val disposable: CompositeDisposable? = null) : Observer<T> {
 
-    abstract fun onSuccess(data: T)
+    abstract fun onSuccess(bean: T)
 
     abstract fun onFail(error: ApiException)
 
