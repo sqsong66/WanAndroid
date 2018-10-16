@@ -17,7 +17,6 @@ class ZoomPageTransformer(private val mViewPager: ViewPager) : ViewPager.PageTra
             mOffset = paddingLeft / (width - paddingLeft - paddingRight)
         }
         val currentPos = position - mOffset
-        LogUtil.e("Position: $position, currentPos: $currentPos")
         view.apply {
             if (mTranslationX == 0f) {
                 mTranslationX = (2.0f - MAX_SCALE_FACTOR - MIN_SCALE_FACTOR) * width / 2.0f

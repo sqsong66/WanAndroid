@@ -60,7 +60,7 @@ class BannerView @JvmOverloads constructor(context: Context, attrs: AttributeSet
     }
 
     private fun initParams(context: Context, attrs: AttributeSet?) {
-        val typedArray = context.obtainStyledAttributes(attrs, R.styleable.CirclePagerIndicator)
+        val typedArray = context.obtainStyledAttributes(attrs, R.styleable.BannerView)
         loop = typedArray.getBoolean(R.styleable.BannerView_loop, true)
         duration = typedArray.getInteger(R.styleable.BannerView_duration, 5000)
         showIndicator = typedArray.getBoolean(R.styleable.BannerView_showIndicator, true)
@@ -69,7 +69,8 @@ class BannerView @JvmOverloads constructor(context: Context, attrs: AttributeSet
     }
 
     private fun initView(context: Context) {
-        val view = LayoutInflater.from(context).inflate(R.layout.layout_banner, this, false)
+        val inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+        val view = inflater.inflate(R.layout.layout_banner, this, false)
         addView(view)
         val viewParams = view.layoutParams
 

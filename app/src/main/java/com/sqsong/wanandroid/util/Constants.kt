@@ -9,4 +9,10 @@ object Constants {
     const val DEFAULT_TIME_OUT: Long = 10000
 
     const val SPLASH_TIME: Long = 2200
+
+    const val ITEM_TYPE_HEADER = 0
+
+    const val ITEM_TYPE_CONTENT = 1
+
+    const val ITEM_TYPE_FOOTER = 2
 }

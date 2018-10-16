@@ -11,6 +11,14 @@ import com.sqsong.wanandroid.R
 
 object SnackbarUtil {
 
+    fun showNormalSnack(view: View, text: String) {
+        Snackbar.make(view, text, Snackbar.LENGTH_SHORT).show()
+    }
+
+    fun showNormalToast(context: Context, text: String) {
+        Toast.makeText(context, text, Toast.LENGTH_SHORT).show()
+    }
+
     fun showSnackText(view: View, text: String) {
         val snackbar = Snackbar.make(view, text, Snackbar.LENGTH_SHORT)
         /*val a = view.context.obtainStyledAttributes(TypedValue().data, intArrayOf(R.attr.colorPrimary))

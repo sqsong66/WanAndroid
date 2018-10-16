@@ -7,15 +7,15 @@ import com.sqsong.wanandroid.di.module.AppModule
 import com.sqsong.wanandroid.di.module.CommonModule
 import com.sqsong.wanandroid.di.module.HttpModule
 import dagger.BindsInstance
+import dagger.Component
+import dagger.android.AndroidInjector
 import dagger.android.support.AndroidSupportInjectionModule
 import javax.inject.Singleton
 
 @Singleton
-@dagger.Component(modules = [AppModule::class, CommonModule::class, HttpModule::class,
+@Component(modules = [AppModule::class, CommonModule::class, HttpModule::class,
     AndroidSupportInjectionModule::class, ActivityBindingModule::class])
-interface ApplicationComponent {
-
-    fun inject(application: BaseApplication)
+interface ApplicationComponent : AndroidInjector<BaseApplication> {
 
     @dagger.Component.Builder
     interface Builder {

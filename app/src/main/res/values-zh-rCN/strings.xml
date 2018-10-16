@@ -13,6 +13,7 @@
     <string name="text_confirm_password">确认密码</string>
     <string name="text_developing">开发中…</string>
     <string name="text_loading">加载中…</string>
+    <string name="text_no_data">没有更多数据</string>
     <string name="text_theme_switcher">选择主题</string>
     <string name="text_cancel">取消</string>
     <string name="text_save">保存</string>

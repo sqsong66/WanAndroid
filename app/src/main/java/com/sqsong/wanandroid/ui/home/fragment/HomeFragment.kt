@@ -1,40 +1,80 @@
 package com.sqsong.wanandroid.ui.home.fragment
 
-import android.view.View
+import android.annotation.SuppressLint
+import android.content.Context
+import android.util.TypedValue
+import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.sqsong.wanandroid.R
-import com.sqsong.wanandroid.data.HomeBannerData
 import com.sqsong.wanandroid.ui.base.BaseFragment
+import com.sqsong.wanandroid.ui.home.adapter.HomeItemAdapter
 import com.sqsong.wanandroid.ui.home.mvp.HomeContract
 import com.sqsong.wanandroid.ui.home.mvp.HomePresenter
-import kotlinx.android.synthetic.main.fragment_home.*
-import kotlinx.android.synthetic.main.item_home_news.*
+import com.sqsong.wanandroid.view.DefaultPageLayout
+import kotlinx.android.synthetic.main.fragment_home_backup.*
 import javax.inject.Inject
 
-class HomeFragment @Inject constructor() : BaseFragment<HomePresenter>(), HomeContract.HomeView, View.OnClickListener {
+class HomeFragment @Inject constructor() : BaseFragment<HomePresenter>(), HomeContract.HomeView, SwipeRefreshLayout.OnRefreshListener {
 
-    override fun getLayoutResId(): Int {
-        return R.layout.fragment_home
+    private val mPageLayout: DefaultPageLayout by lazy {
+        DefaultPageLayout.Builder(context!!)
+                .setTargetPage(recycler)
+                .setOnRetryClickListener(object : DefaultPageLayout.OnRetryClickListener {
+                    override fun onRetry() {
+
+                    }
+
+                }).build()
     }
 
-    override fun initView(view: View) {
-        starIv.setOnClickListener(this)
+    override fun getLayoutResId(): Int {
+        return R.layout.fragment_home_backup
     }
 
     override fun initEvent() {
+        setupSwipeLayout()
+        setupRecyclerView()
         mPresenter.onAttach(this)
     }
 
-    override fun setUserVisibleHint(isVisibleToUser: Boolean) {
-        super.setUserVisibleHint(isVisibleToUser)
-        if (isVisibleToUser) bannerView?.startLoop() else bannerView?.stopLoop()
+    @SuppressLint("ResourceType")
+    private fun setupSwipeLayout() {
+        val ta = context?.obtainStyledAttributes(TypedValue().data,
+                intArrayOf(R.attr.colorPrimaryLight, R.attr.colorPrimary, R.attr.colorPrimaryDark))
+        val lightColor = ta?.getColor(0, ContextCompat.getColor(context!!, R.color.colorPrimaryLight))
+        val primaryColor = ta?.getColor(1, ContextCompat.getColor(context!!, R.color.colorPrimary))
+        val primaryDarkColor = ta?.getColor(2, ContextCompat.getColor(context!!, R.color.colorPrimaryDark))
+        swipeLayout.setColorSchemeColors(lightColor!!, primaryColor!!, primaryDarkColor!!)
+        swipeLayout.setOnRefreshListener(this)
     }
 
-    override fun onClick(v: View?) {
-        // SnackbarUtil.showSnackText(v!!, "Star")
+    private fun setupRecyclerView() {
+        recycler.layoutManager = LinearLayoutManager(context)
     }
 
-    override fun showHomeBanner(bannerData: MutableList<HomeBannerData>) {
-        bannerView.setBannerData(bannerData)
+    override fun onRefresh() {
+
     }
 
+    override fun setAdapter(adapter: HomeItemAdapter) {
+        recycler.adapter = adapter
+        adapter.setHomeItemActionListener(mPresenter)
+    }
+
+    override fun showEmptyPage() {
+        mPageLayout.showEmptyLayout()
+    }
+
+    override fun showLoadingPage() {
+        mPageLayout.showLoadingLayout()
+    }
+
+    override fun showContentPage() {
+        mPageLayout.showContentLayout()
+    }
+
+    override fun getAppContext(): Context {
+        return context!!
+    }
 }

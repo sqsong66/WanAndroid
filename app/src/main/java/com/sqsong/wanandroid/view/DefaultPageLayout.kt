@@ -9,12 +9,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.FrameLayout
+import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.annotation.IdRes
 import androidx.annotation.IntDef
 import androidx.annotation.LayoutRes
 import androidx.fragment.app.Fragment
 import com.sqsong.wanandroid.R
+import com.sqsong.wanandroid.util.CommonUtil
 
 class DefaultPageLayout @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0) :
         FrameLayout(context, attrs, defStyleAttr) {
@@ -142,12 +144,12 @@ class DefaultPageLayout @JvmOverloads constructor(context: Context, attrs: Attri
         fun build(): DefaultPageLayout {
             pageLayout = buildPageLayout()
             buildLayoutPage()
-            pageLayout?.showContentLayout()
+            // pageLayout?.showContentLayout()
             return pageLayout!!
         }
 
         private fun buildLayoutPage() {
-            inflateLoadingLayout(loadingResId ?: R.layout.layout_default_loading)
+            inflateLoadingLayout(loadingResId ?: R.layout.layout_default_loading, R.id.progress)
             if (emptyResId != null) {
                 inflateEmptyLayout(emptyResId!!, emptyDescTvId, emptyDesc!!)
             } else {
@@ -160,10 +162,14 @@ class DefaultPageLayout @JvmOverloads constructor(context: Context, attrs: Attri
             }
         }
 
-        private fun inflateLoadingLayout(@LayoutRes resId: Int) {
+        private fun inflateLoadingLayout(@LayoutRes resId: Int, @IdRes progressbarId: Int?) {
             inflater.inflate(resId, pageLayout, false).apply {
                 pageLayout?.mLoadingLayout = this
                 pageLayout?.addView(this)
+                if (progressbarId != null) {
+                    val progressBar = findViewById<ProgressBar>(progressbarId)
+                    CommonUtil.setProgressbarColor(progressBar)
+                }
             }
         }
 

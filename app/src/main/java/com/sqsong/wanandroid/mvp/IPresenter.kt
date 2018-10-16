@@ -1,6 +1,6 @@
 package com.sqsong.wanandroid.mvp
 
-interface IPresenter<V: IView> {
+interface IPresenter<V : IView> {
 
     fun onAttach(view: V)
 

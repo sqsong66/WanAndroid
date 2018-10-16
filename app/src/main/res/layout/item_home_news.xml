@@ -4,7 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="16dp"
+    android:layout_marginLeft="16dp"
+    android:layout_marginRight="16dp"
+    android:layout_marginBottom="16dp"
     app:cardBackgroundColor="@color/colorWhite"
     app:cardCornerRadius="5dp"
     app:cardElevation="8dp"
@@ -114,7 +116,7 @@
 
 
         <com.google.android.material.chip.Chip
-            android:id="@+id/chapterChip"
+            android:id="@+id/superChapterChip"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -134,7 +136,7 @@
             tools:text="热门专题" />
 
         <com.google.android.material.chip.Chip
-            android:id="@+id/subChapterChip"
+            android:id="@+id/chapterChip"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -147,7 +149,7 @@
             android:textAppearance="@style/ChipAppearance"
             android:textColor="@color/colorTextInActive"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toRightOf="@id/chapterChip"
+            app:layout_constraintLeft_toRightOf="@id/superChapterChip"
             app:layout_constraintTop_toBottomOf="@id/titleTv"
             app:textEndPadding="15dp"
             app:textStartPadding="15dp"
@@ -163,9 +165,9 @@
             android:padding="8dp"
             android:src="@drawable/selector_star"
             android:tint="?colorPrimary"
-            app:layout_constraintBottom_toBottomOf="@id/subChapterChip"
+            app:layout_constraintBottom_toBottomOf="@id/chapterChip"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="@id/subChapterChip" />
+            app:layout_constraintTop_toTopOf="@id/chapterChip" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.cardview.widget.CardView>

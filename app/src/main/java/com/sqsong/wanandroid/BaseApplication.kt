@@ -1,18 +1,13 @@
 package com.sqsong.wanandroid
 
 import android.app.Activity
-import android.app.Application
 import com.sqsong.wanandroid.common.ActivityLifecycleCallbacksImpl
 import com.sqsong.wanandroid.di.component.DaggerApplicationComponent
 import dagger.android.AndroidInjector
-import dagger.android.DispatchingAndroidInjector
-import dagger.android.HasActivityInjector
+import dagger.android.DaggerApplication
 import javax.inject.Inject
 
-class BaseApplication : Application(), HasActivityInjector {
-
-    @Inject
-    lateinit var mInjector: DispatchingAndroidInjector<Activity>
+class BaseApplication : DaggerApplication() {
 
     @Inject
     lateinit var mActivityLifecycleCallback: ActivityLifecycleCallbacksImpl
@@ -20,21 +15,19 @@ class BaseApplication : Application(), HasActivityInjector {
     @Inject
     lateinit var mActivityList: MutableList<Activity?>
 
+    override fun applicationInjector(): AndroidInjector<out DaggerApplication> {
+        return DaggerApplicationComponent.builder().application(this).build()
+    }
+
     override fun onCreate() {
         super.onCreate()
-        INSTANCE = this
         init()
     }
 
     private fun init() {
-        DaggerApplicationComponent.builder()
-                .application(this)
-                .build()
-                .inject(this)
+        INSTANCE = this
         registerActivityLifecycleCallbacks(mActivityLifecycleCallback)
     }
-
-    override fun activityInjector(): AndroidInjector<Activity> = mInjector
 
     fun quitApp() {
         for (activity in mActivityList) {

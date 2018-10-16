@@ -12,6 +12,7 @@
     <string name="text_confirm_password">Confirm password</string>
     <string name="text_developing">Developing…</string>
     <string name="text_loading">Loading…</string>
+    <string name="text_no_data">No more data.</string>
     <string name="text_theme_switcher">Theme Switcher</string>
     <string name="text_cancel">Cancel</string>
     <string name="text_save">Save</string>

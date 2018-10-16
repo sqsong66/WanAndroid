@@ -11,7 +11,6 @@ import android.view.View
 import android.view.animation.LinearInterpolator
 import androidx.viewpager.widget.ViewPager
 import com.sqsong.wanandroid.R
-import com.sqsong.wanandroid.util.LogUtil
 import java.util.*
 
 /**
