@@ -61,7 +61,7 @@ class HomeItemAdapter(context: Context,
     }
 
     override fun getItemCount(): Int {
-        return dataList.size// + 2
+        return dataList.size + 2
     }
 
     fun setHomeItemActionListener(listener: HomeItemActionListener) {

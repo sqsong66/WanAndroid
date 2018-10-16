@@ -27,6 +27,11 @@ class HomePresenter @Inject constructor(private val homeModel: HomeModel,
         mAdapter = HomeItemAdapter(mView.getAppContext(), homeItemList)
         mView.setAdapter(mAdapter)
         mView.showLoadingPage()
+        refreshData()
+    }
+
+    fun refreshData() {
+        mPage = 0
         requestBannerData()
         requestHomeList()
     }

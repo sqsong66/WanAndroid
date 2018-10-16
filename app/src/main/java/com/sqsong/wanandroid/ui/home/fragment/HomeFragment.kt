@@ -54,7 +54,7 @@ class HomeFragment @Inject constructor() : BaseFragment<HomePresenter>(), HomeCo
     }
 
     override fun onRefresh() {
-
+        mPresenter.refreshData()
     }
 
     override fun setAdapter(adapter: HomeItemAdapter) {
@@ -71,6 +71,7 @@ class HomeFragment @Inject constructor() : BaseFragment<HomePresenter>(), HomeCo
     }
 
     override fun showContentPage() {
+        swipeLayout.isRefreshing = false
         mPageLayout.showContentLayout()
     }
 
