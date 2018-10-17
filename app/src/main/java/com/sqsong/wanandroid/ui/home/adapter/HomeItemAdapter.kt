@@ -27,6 +27,7 @@ class HomeItemAdapter(context: Context,
 
     @LoadingState
     private var mLoadingState: Int = 0
+    private var mHeaderView: View? = null
     private var mActionListener: HomeItemActionListener? = null
     private var mBannerList: MutableList<HomeBannerData>? = null
 
@@ -38,24 +39,35 @@ class HomeItemAdapter(context: Context,
         }
     }
 
+    fun setHeaderView(headerView: View) {
+        this.mHeaderView = headerView
+        notifyItemChanged(0)
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return when (viewType) {
-            Constants.ITEM_TYPE_HEADER -> HomeBannerViewHolder(mInflater.inflate(R.layout.item_banner_header, parent, false))
+            Constants.ITEM_TYPE_HEADER -> {
+                if (mHeaderView != null) {
+                    return HomeBannerViewHolder(/*mInflater.inflate(R.layout.item_banner_header, parent, false)*/mHeaderView!!)
+                }
+                return null!!
+            }
             Constants.ITEM_TYPE_FOOTER -> LoadingFooterViewHolder(mInflater.inflate(R.layout.item_loading_footer, parent, false))
             else -> HomeItemViewHolder(mInflater.inflate(R.layout.item_home_news, parent, false))
         }
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        when (holder) {
-            is HomeBannerViewHolder -> {
-                holder.bindBannerData(mBannerList)
+        when (getItemViewType(position)) {
+            Constants.ITEM_TYPE_HEADER -> {
+//                val bannerHolder = holder as HomeBannerViewHolder
+//                bannerHolder.bindBannerData(mBannerList)
             }
-            is HomeItemViewHolder -> {
-                holder.bindItemData(dataList[position - 1], position, mActionListener)
+            Constants.ITEM_TYPE_CONTENT -> {
+                (holder as HomeItemViewHolder).bindItemData(dataList[position - 1], position, mActionListener)
             }
-            is LoadingFooterViewHolder -> {
-                holder.updateLoadingState(mLoadingState)
+            Constants.ITEM_TYPE_FOOTER -> {
+                (holder as LoadingFooterViewHolder).updateLoadingState(mLoadingState)
             }
         }
     }

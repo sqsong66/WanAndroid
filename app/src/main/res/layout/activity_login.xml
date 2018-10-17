@@ -67,6 +67,7 @@
             android:inputType="text"
             android:selectAllOnFocus="true"
             android:singleLine="true"
+            android:text="123"
             android:textColor="@color/colorWhite"
             android:textSize="18sp" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -99,6 +100,7 @@
             android:inputType="textPassword"
             android:selectAllOnFocus="true"
             android:singleLine="true"
+            android:text="123456789"
             android:textColor="@color/colorWhite"
             android:textSize="18sp" />
     </com.google.android.material.textfield.TextInputLayout>

@@ -33,10 +33,11 @@ class BannerView @JvmOverloads constructor(context: Context, attrs: AttributeSet
     private var pagerScrollDuration: Int = 0
     private var showIndicator: Boolean = false
 
-    private val mHandler = Handler()
     private var viewPager: ViewPager? = null
     private var defaultImage: ImageView? = null
     private var indicator: CirclePagerIndicator? = null
+
+    private val mHandler = Handler()
     private var mBannerList = mutableListOf<HomeBannerData>()
     private val mBannerAdapter by lazy {
         BannerPagerAdapter(context, viewPager!!, mBannerList)
@@ -115,11 +116,14 @@ class BannerView @JvmOverloads constructor(context: Context, attrs: AttributeSet
         scroller.set(viewPager, fixedSpeedScroller)
     }
 
-    fun startLoop() {
-        if (loop && !mBannerList.isEmpty()) mHandler.postDelayed(mLoopRunnable, duration.toLong())
+    private fun startLoop() {
+        if (loop && !mBannerList.isEmpty()) {
+            mHandler.removeCallbacks(mLoopRunnable)
+            mHandler.postDelayed(mLoopRunnable, duration.toLong())
+        }
     }
 
-    fun stopLoop() {
+    private fun stopLoop() {
         if (loop) mHandler.removeCallbacks(mLoopRunnable)
     }
 
@@ -131,10 +135,24 @@ class BannerView @JvmOverloads constructor(context: Context, attrs: AttributeSet
         return super.dispatchTouchEvent(event)
     }
 
+    override fun onAttachedToWindow() {
+        super.onAttachedToWindow()
+        startLoop()
+    }
+
     override fun onDetachedFromWindow() {
         super.onDetachedFromWindow()
         stopLoop()
     }
+
+    /*override fun onWindowVisibilityChanged(visibility: Int) {
+        super.onWindowVisibilityChanged(visibility)
+        if (visibility == View.VISIBLE) {
+            startLoop()
+        } else {
+            stopLoop()
+        }
+    }*/
 
     fun setBannerData(bannerList: MutableList<HomeBannerData>) {
         if (bannerList.isEmpty()) {

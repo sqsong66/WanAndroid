@@ -10,9 +10,9 @@ object Constants {
 
     const val SPLASH_TIME: Long = 2200
 
-    const val ITEM_TYPE_HEADER = 0
+    const val ITEM_TYPE_HEADER = 1
 
-    const val ITEM_TYPE_CONTENT = 1
+    const val ITEM_TYPE_CONTENT = 2
 
-    const val ITEM_TYPE_FOOTER = 2
+    const val ITEM_TYPE_FOOTER = 3
 }

@@ -36,6 +36,11 @@ class HomePresenter @Inject constructor(private val homeModel: HomeModel,
         requestHomeList()
     }
 
+    fun loadMoreData() {
+        mPage++
+        requestHomeList()
+    }
+
     private fun requestBannerData() {
         homeModel.getBannerData()
                 .compose(RxJavaHelper.compose())
@@ -43,7 +48,8 @@ class HomePresenter @Inject constructor(private val homeModel: HomeModel,
                     override fun onSuccess(bean: HomeBannerBean) {
                         if (bean.errorCode == 0) {
                             mView.showContentPage()
-                            mAdapter.setBannerList(bean.data)
+                            // mAdapter.setBannerList(bean.data)
+                            mView.showBannerData(bean.data)
                         } else {
                             mView.showMessage(bean.errorMsg!!)
                         }
@@ -82,12 +88,14 @@ class HomePresenter @Inject constructor(private val homeModel: HomeModel,
             } else {
                 mAdapter.updateLoadingState(LoadingFooterViewHolder.STATE_NO_CONTENT)
             }
+            return
         }
         if (mPage == 0) {
             homeItemList.clear()
         }
         homeItemList.addAll(dataList)
         mAdapter.notifyDataSetChanged()
+        mView.loadFinish()
     }
 
     override fun onStarClick(homeItem: HomeItem, position: Int) {

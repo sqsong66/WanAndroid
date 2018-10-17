@@ -17,6 +17,8 @@ interface HomeContract {
         fun showEmptyPage()
         fun showLoadingPage()
         fun showContentPage()
+        fun showBannerData(bannerList: MutableList<HomeBannerData>)
+        fun loadFinish()
     }
 
     interface Model : IModel {
