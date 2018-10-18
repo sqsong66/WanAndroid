@@ -83,4 +83,7 @@ dependencies {
     // ButterKnife
     implementation "com.jakewharton:butterknife:$rootProject.ext.butterknife_version"
     kapt "com.jakewharton:butterknife-compiler:$rootProject.ext.butterknife_version"
+
+    // EventBus
+    implementation "org.greenrobot:eventbus:$rootProject.ext.eventbus_version"
 }

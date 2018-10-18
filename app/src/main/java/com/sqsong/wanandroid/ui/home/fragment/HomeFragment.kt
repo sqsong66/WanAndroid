@@ -6,22 +6,33 @@ import android.util.TypedValue
 import android.view.LayoutInflater
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import butterknife.BindView
 import com.sqsong.wanandroid.R
 import com.sqsong.wanandroid.common.RecyclerScrollListener
+import com.sqsong.wanandroid.common.event.FabClickEvent
 import com.sqsong.wanandroid.data.HomeBannerData
 import com.sqsong.wanandroid.ui.base.BaseFragment
 import com.sqsong.wanandroid.ui.home.adapter.HomeItemAdapter
 import com.sqsong.wanandroid.ui.home.mvp.HomeContract
 import com.sqsong.wanandroid.ui.home.mvp.HomePresenter
 import com.sqsong.wanandroid.util.Constants
-import com.sqsong.wanandroid.view.banner.BannerView
 import com.sqsong.wanandroid.view.DefaultPageLayout
-import kotlinx.android.synthetic.main.fragment_home_backup.*
+import com.sqsong.wanandroid.view.banner.BannerView
+import org.greenrobot.eventbus.EventBus
+import org.greenrobot.eventbus.Subscribe
+import org.greenrobot.eventbus.ThreadMode
 import javax.inject.Inject
 
 class HomeFragment @Inject constructor() : BaseFragment<HomePresenter>(), HomeContract.HomeView,
         SwipeRefreshLayout.OnRefreshListener, RecyclerScrollListener.OnLoadMoreListener {
+
+    @BindView(R.id.recycler)
+    lateinit var recycler: RecyclerView
+
+    @BindView(R.id.swipeLayout)
+    lateinit var swipeLayout: SwipeRefreshLayout
 
     private var mBannerView: BannerView? = null
     private lateinit var mRecyclerScroller: RecyclerScrollListener
@@ -41,6 +52,7 @@ class HomeFragment @Inject constructor() : BaseFragment<HomePresenter>(), HomeCo
     }
 
     override fun initEvent() {
+        EventBus.getDefault().register(this)
         setupSwipeLayout()
         setupRecyclerView()
         mPresenter.onAttach(this)
@@ -64,6 +76,13 @@ class HomeFragment @Inject constructor() : BaseFragment<HomePresenter>(), HomeCo
         mRecyclerScroller = RecyclerScrollListener(layoutManager)
         recycler.addOnScrollListener(mRecyclerScroller)
         mRecyclerScroller.setOnLoadMoreListener(this)
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    fun onFabClick(event: FabClickEvent) {
+        if (event.index == 0) {
+            recycler.smoothScrollToPosition(0)
+        }
     }
 
     override fun onRefresh() {
@@ -106,5 +125,10 @@ class HomeFragment @Inject constructor() : BaseFragment<HomePresenter>(), HomeCo
 
     override fun loadFinish() {
         mRecyclerScroller.loadFinish()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        EventBus.getDefault().unregister(this)
     }
 }

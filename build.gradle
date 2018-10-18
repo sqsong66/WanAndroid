@@ -21,6 +21,7 @@ ext {
     cookie_jar_version = 'v1.0.1'
     rxbinding_version = '2.2.0'
     butterknife_version = '9.0.0-rc1'
+    eventbus_version = '3.1.1'
 }
 
 buildscript {

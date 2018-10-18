@@ -44,7 +44,9 @@ class HomeItemAdapter(context: Context,
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return when (viewType) {
             Constants.ITEM_TYPE_HEADER -> {
-                return HomeBannerViewHolder(mHeaderView)
+                val holder = HomeBannerViewHolder(mHeaderView)
+                holder.setIsRecyclable(false)
+                return holder
             }
             Constants.ITEM_TYPE_FOOTER -> LoadingFooterViewHolder(mInflater.inflate(R.layout.item_loading_footer, parent, false))
             else -> HomeItemViewHolder(mInflater.inflate(R.layout.item_home_news, parent, false))

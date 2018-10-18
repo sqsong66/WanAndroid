@@ -2,27 +2,29 @@ package com.sqsong.wanandroid.ui.home
 
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.view.GravityCompat
 import androidx.fragment.app.Fragment
 import com.google.android.material.navigation.NavigationView
 import com.sqsong.wanandroid.R
+import com.sqsong.wanandroid.common.event.FabClickEvent
 import com.sqsong.wanandroid.common.inter.ChangeThemeAnnotation
 import com.sqsong.wanandroid.common.inter.IAppCompatActivity
+import com.sqsong.wanandroid.theme.ThemeSwitcherDialog
 import com.sqsong.wanandroid.ui.home.adapter.FragmentPagerAdapter
 import com.sqsong.wanandroid.ui.home.fragment.HomeFragment
 import com.sqsong.wanandroid.ui.home.fragment.KnowledgeFragment
 import com.sqsong.wanandroid.ui.home.fragment.NavigationFragment
 import com.sqsong.wanandroid.ui.home.fragment.ProjectFragment
-import com.sqsong.wanandroid.theme.ThemeSwitcherDialog
-import com.sqsong.wanandroid.util.SnackbarUtil
 import dagger.android.support.DaggerAppCompatActivity
 import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.activity_home_new.*
+import org.greenrobot.eventbus.EventBus
 import javax.inject.Inject
 
 @ChangeThemeAnnotation
-class HomeActivity : DaggerAppCompatActivity(), IAppCompatActivity, NavigationView.OnNavigationItemSelectedListener {
+class HomeActivity : DaggerAppCompatActivity(), IAppCompatActivity, NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
 
     @Inject
     lateinit var mThemeDialog: ThemeSwitcherDialog
@@ -57,14 +59,11 @@ class HomeActivity : DaggerAppCompatActivity(), IAppCompatActivity, NavigationVi
         drawer_layout.addDrawerListener(toggle)
         toggle.syncState()
         nav_view.setNavigationItemSelectedListener(this)
-
-        fab.setOnClickListener {
-            SnackbarUtil.showSnackText(fab, "Fab clicked")
-            // SnackbarUtil.showToastText(it.context, "Fab clicked")
-        }
+        fab.setOnClickListener(this)
     }
 
     private fun setupFragments() {
+        mFragmentList.clear()
         mFragmentList.add(mHomeFragment)
         mFragmentList.add(mKnowledgeFragment)
         mFragmentList.add(mNavigationFragment)
@@ -136,6 +135,12 @@ class HomeActivity : DaggerAppCompatActivity(), IAppCompatActivity, NavigationVi
             drawer_layout.closeDrawer(GravityCompat.START)
         } else {
             super.onBackPressed()
+        }
+    }
+
+    override fun onClick(v: View?) {
+        when (v?.id) {
+            R.id.fab -> EventBus.getDefault().post(FabClickEvent(viewPager.currentItem))
         }
     }
 

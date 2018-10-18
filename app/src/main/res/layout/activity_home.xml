@@ -47,7 +47,7 @@
         app:layout_anchor="@id/bottomNavigationView"
         app:layout_anchorGravity="top|end"
         app:layout_behavior="com.sqsong.wanandroid.util.behavior.BottomNavigationFABBehavior"
-        app:srcCompat="@android:drawable/ic_dialog_email"
+        app:srcCompat="@drawable/ic_arrow_up"
         app:useCompatPadding="true" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
