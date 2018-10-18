@@ -3,10 +3,10 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <com.sqsong.wanandroid.view.BannerView
+    <com.sqsong.wanandroid.view.banner.BannerView
         android:id="@+id/bannerView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp" />
+        android:layout_marginBottom="5dp" />
 
 </FrameLayout>

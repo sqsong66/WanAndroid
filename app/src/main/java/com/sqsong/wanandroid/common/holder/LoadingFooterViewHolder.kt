@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import butterknife.BindView
 import butterknife.ButterKnife
 import com.sqsong.wanandroid.R
+import com.sqsong.wanandroid.util.CommonUtil
 
 class LoadingFooterViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
@@ -22,6 +23,7 @@ class LoadingFooterViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView
     init {
         // item_loading_footer
         ButterKnife.bind(this, itemView)
+        CommonUtil.setProgressbarColor(progressBar)
     }
 
     fun updateLoadingState(@LoadingState state: Int) {

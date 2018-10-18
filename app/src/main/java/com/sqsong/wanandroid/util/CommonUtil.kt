@@ -12,11 +12,11 @@ object CommonUtil {
         return true
     }
 
-    fun setProgressbarColor(progressBar: ProgressBar) {
-        val drawable = progressBar.indeterminateDrawable.mutate()
-        val a = progressBar.context.obtainStyledAttributes(TypedValue().data, intArrayOf(R.attr.colorPrimary))
-        val color = a.getColor(0, 0)
-        drawable.setColorFilter(color, android.graphics.PorterDuff.Mode.SRC_IN)
-        progressBar.progressDrawable = drawable
+    fun setProgressbarColor(progressBar: ProgressBar?) {
+        val drawable = progressBar?.indeterminateDrawable?.mutate()
+        val a = progressBar?.context?.obtainStyledAttributes(TypedValue().data, intArrayOf(R.attr.colorPrimary))
+        val color = a?.getColor(0, 0)
+        drawable?.setColorFilter(color!!, android.graphics.PorterDuff.Mode.SRC_IN)
+        progressBar?.progressDrawable = drawable
     }
 }

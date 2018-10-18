@@ -13,6 +13,7 @@ import io.reactivex.disposables.CompositeDisposable
 import javax.inject.Inject
 
 class HomePresenter @Inject constructor(private val homeModel: HomeModel,
+                                        /*private val homeView: HomeContract.HomeView,*/
                                         private val disposable: CompositeDisposable) :
         BasePresenter<HomeContract.HomeView, HomeContract.Model>(homeModel, disposable), HomeItemAdapter.HomeItemActionListener {
 
@@ -76,7 +77,6 @@ class HomePresenter @Inject constructor(private val homeModel: HomeModel,
                     override fun onFail(error: ApiException) {
                         mView.showMessage(error.showMessage)
                     }
-
                 })
     }
 

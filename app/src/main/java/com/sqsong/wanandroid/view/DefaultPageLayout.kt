@@ -178,6 +178,7 @@ class DefaultPageLayout @JvmOverloads constructor(context: Context, attrs: Attri
                 pageLayout?.mEmptyLayout = this
                 pageLayout?.addView(this)
                 if (emptyId != null) {
+                    CommonUtil.setProgressbarColor(findViewById(R.id.progress))
                     val descTv = findViewById<TextView>(emptyId)
                     descTv.text = emptyDesc
                 }

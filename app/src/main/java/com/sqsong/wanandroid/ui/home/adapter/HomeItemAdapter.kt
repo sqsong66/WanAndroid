@@ -12,10 +12,8 @@ import com.google.android.material.chip.Chip
 import com.sqsong.wanandroid.R
 import com.sqsong.wanandroid.common.holder.LoadingFooterViewHolder
 import com.sqsong.wanandroid.common.holder.LoadingFooterViewHolder.LoadingState
-import com.sqsong.wanandroid.data.HomeBannerData
 import com.sqsong.wanandroid.data.HomeItem
 import com.sqsong.wanandroid.util.Constants
-import com.sqsong.wanandroid.view.BannerView
 import com.sqsong.wanandroid.view.CheckableImageView
 import com.sqsong.wanandroid.view.CircleTextView
 import com.sqsong.wanandroid.view.LabelView
@@ -27,9 +25,8 @@ class HomeItemAdapter(context: Context,
 
     @LoadingState
     private var mLoadingState: Int = 0
-    private var mHeaderView: View? = null
+    private lateinit var mHeaderView: View
     private var mActionListener: HomeItemActionListener? = null
-    private var mBannerList: MutableList<HomeBannerData>? = null
 
     override fun getItemViewType(position: Int): Int {
         return when (position) {
@@ -47,10 +44,7 @@ class HomeItemAdapter(context: Context,
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return when (viewType) {
             Constants.ITEM_TYPE_HEADER -> {
-                if (mHeaderView != null) {
-                    return HomeBannerViewHolder(/*mInflater.inflate(R.layout.item_banner_header, parent, false)*/mHeaderView!!)
-                }
-                return null!!
+                return HomeBannerViewHolder(mHeaderView)
             }
             Constants.ITEM_TYPE_FOOTER -> LoadingFooterViewHolder(mInflater.inflate(R.layout.item_loading_footer, parent, false))
             else -> HomeItemViewHolder(mInflater.inflate(R.layout.item_home_news, parent, false))
@@ -60,8 +54,6 @@ class HomeItemAdapter(context: Context,
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when (getItemViewType(position)) {
             Constants.ITEM_TYPE_HEADER -> {
-//                val bannerHolder = holder as HomeBannerViewHolder
-//                bannerHolder.bindBannerData(mBannerList)
             }
             Constants.ITEM_TYPE_CONTENT -> {
                 (holder as HomeItemViewHolder).bindItemData(dataList[position - 1], position, mActionListener)
@@ -80,32 +72,13 @@ class HomeItemAdapter(context: Context,
         this.mActionListener = listener
     }
 
-    fun setBannerList(bannerList: MutableList<HomeBannerData>) {
-        this.mBannerList = bannerList
-        notifyItemChanged(0)
-    }
 
     fun updateLoadingState(@LoadingState state: Int) {
         this.mLoadingState = state
         notifyItemChanged(dataList.size + 1)
     }
 
-    class HomeBannerViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-
-        @BindView(R.id.bannerView)
-        @JvmField
-        var bannerView: BannerView? = null
-
-        init {
-            ButterKnife.bind(this, itemView)
-        }
-
-        fun bindBannerData(bannerList: MutableList<HomeBannerData>?) {
-            if (bannerList != null) {
-                bannerView?.setBannerData(bannerList)
-            }
-        }
-    }
+    class HomeBannerViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
 
     class HomeItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 

@@ -15,18 +15,13 @@ import com.sqsong.wanandroid.ui.home.adapter.HomeItemAdapter
 import com.sqsong.wanandroid.ui.home.mvp.HomeContract
 import com.sqsong.wanandroid.ui.home.mvp.HomePresenter
 import com.sqsong.wanandroid.util.Constants
-import com.sqsong.wanandroid.util.LogUtil
-import com.sqsong.wanandroid.view.BannerView
+import com.sqsong.wanandroid.view.banner.BannerView
 import com.sqsong.wanandroid.view.DefaultPageLayout
 import kotlinx.android.synthetic.main.fragment_home_backup.*
 import javax.inject.Inject
 
-class HomeFragment @Inject constructor() : BaseFragment<HomePresenter>(), HomeContract.HomeView, SwipeRefreshLayout.OnRefreshListener, RecyclerScrollListener.OnLoadMoreListener {
-
-    override fun showBannerData(bannerList: MutableList<HomeBannerData>) {
-        // bannerView.setBannerData(bannerList)
-        mBannerView?.setBannerData(bannerList)
-    }
+class HomeFragment @Inject constructor() : BaseFragment<HomePresenter>(), HomeContract.HomeView,
+        SwipeRefreshLayout.OnRefreshListener, RecyclerScrollListener.OnLoadMoreListener {
 
     private var mBannerView: BannerView? = null
     private lateinit var mRecyclerScroller: RecyclerScrollListener
@@ -76,7 +71,6 @@ class HomeFragment @Inject constructor() : BaseFragment<HomePresenter>(), HomeCo
     }
 
     override fun onLoadMore() {
-        LogUtil.e("songmao", "On load more...................................")
         mPresenter.loadMoreData()
     }
 
@@ -87,6 +81,10 @@ class HomeFragment @Inject constructor() : BaseFragment<HomePresenter>(), HomeCo
         mBannerView = headerView.findViewById(R.id.bannerView)
         adapter.setHeaderView(headerView)
         adapter.setHomeItemActionListener(mPresenter)
+    }
+
+    override fun showBannerData(bannerList: MutableList<HomeBannerData>) {
+        mBannerView?.setBannerData(bannerList)
     }
 
     override fun showEmptyPage() {

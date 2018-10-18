@@ -1,9 +1,9 @@
 package com.sqsong.wanandroid.ui.home.di
 
-import android.content.Context
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.sqsong.wanandroid.di.scope.FragmentScope
 import com.sqsong.wanandroid.network.ApiService
+import com.sqsong.wanandroid.ui.home.fragment.HomeFragment
+import com.sqsong.wanandroid.ui.home.mvp.HomeContract
 import com.sqsong.wanandroid.ui.home.mvp.HomeModel
 import dagger.Module
 import dagger.Provides
@@ -13,14 +13,14 @@ class HomeModule {
 
     @FragmentScope
     @Provides
-    fun provideHomeModel(apiService: ApiService): HomeModel {
-        return HomeModel(apiService)
+    fun provideHomeView(homeFragment: HomeFragment): HomeContract.HomeView {
+        return homeFragment
     }
 
     @FragmentScope
     @Provides
-    fun provideLayoutManager(context: Context): LinearLayoutManager {
-        return LinearLayoutManager(context)
+    fun provideHomeModel(apiService: ApiService): HomeModel {
+        return HomeModel(apiService)
     }
 
 }
