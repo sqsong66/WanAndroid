@@ -1,8 +1,10 @@
 package com.sqsong.wanandroid.util
 
+import android.graphics.Typeface
 import android.text.TextUtils
 import android.util.TypedValue
 import android.widget.ProgressBar
+import android.widget.TextView
 import com.sqsong.wanandroid.R
 
 object CommonUtil {
@@ -18,5 +20,13 @@ object CommonUtil {
         val color = a?.getColor(0, 0)
         drawable?.setColorFilter(color!!, android.graphics.PorterDuff.Mode.SRC_IN)
         progressBar?.progressDrawable = drawable
+    }
+
+    fun setAssetsTextFont(textView: TextView, assetsFont: String) {
+        try {
+            textView.typeface = Typeface.createFromAsset(textView.context.assets, assetsFont)
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
     }
 }

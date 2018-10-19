@@ -13,6 +13,7 @@ import com.sqsong.wanandroid.common.inter.ChangeThemeAnnotation
 import com.sqsong.wanandroid.common.inter.IAppCompatActivity
 import com.sqsong.wanandroid.network.ApiService
 import com.sqsong.wanandroid.ui.home.HomeActivity
+import com.sqsong.wanandroid.util.CommonUtil
 import com.sqsong.wanandroid.util.setupUi
 import dagger.android.support.DaggerAppCompatActivity
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -40,6 +41,7 @@ class LoginActivity : DaggerAppCompatActivity(), IAppCompatActivity {
     }
 
     private fun registerEvents() {
+        CommonUtil.setAssetsTextFont(loginTv, "font/Pacifico-Regular.ttf")
         registerClickEvent(closeIv) { finish() }
         registerClickEvent(registerTipsTv) { startActivity(Intent(this, RegisterActivity::class.java)) }
         registerClickEvent(forgetPasswordTv) { v -> Snackbar.make(v, R.string.text_developing, Snackbar.LENGTH_SHORT).show() }

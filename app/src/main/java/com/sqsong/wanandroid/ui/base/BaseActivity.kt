@@ -1,10 +1,26 @@
 package com.sqsong.wanandroid.ui.base
 
+import android.annotation.SuppressLint
 import com.sqsong.wanandroid.mvp.IPresenter
+import com.sqsong.wanandroid.mvp.IView
 import dagger.android.support.DaggerAppCompatActivity
+import javax.inject.Inject
 
-class BaseActivity<P : IPresenter<*>> : DaggerAppCompatActivity() {
+@SuppressLint("Registered")
+open class BaseActivity<P : IPresenter<*>> : DaggerAppCompatActivity(), IView {
 
-    var mPresenter: P? = null
+    @Inject
+    lateinit var mPresenter: P
 
+    override fun showLoading() {
+
+    }
+
+    override fun hideLoading() {
+
+    }
+
+    override fun showMessage(message: String) {
+
+    }
 }

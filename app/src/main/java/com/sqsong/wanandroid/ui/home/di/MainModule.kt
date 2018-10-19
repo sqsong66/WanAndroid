@@ -6,7 +6,9 @@ import com.sqsong.wanandroid.ui.home.fragment.HomeFragment
 import com.sqsong.wanandroid.ui.home.fragment.KnowledgeFragment
 import com.sqsong.wanandroid.ui.home.fragment.NavigationFragment
 import com.sqsong.wanandroid.ui.home.fragment.ProjectFragment
+import com.sqsong.wanandroid.ui.home.mvp.HomeContract
 import dagger.Module
+import dagger.Provides
 import dagger.android.ContributesAndroidInjector
 
 @Module

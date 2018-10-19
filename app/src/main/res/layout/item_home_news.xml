@@ -98,7 +98,7 @@
             tools:text="3 hours ago" />
 
         <TextView
-            android:id="@+id/titleTv"
+            android:id="@+id/loginTv"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
@@ -115,7 +115,6 @@
             app:layout_constraintTop_toBottomOf="@id/nameCircleTv"
             tools:text="XMVP：一个通过泛型实现的MVP框架2年的演化路" />
 
-
         <com.google.android.material.chip.Chip
             android:id="@+id/superChapterChip"
             android:layout_width="wrap_content"
@@ -131,7 +130,7 @@
             android:textColor="@color/colorTextInActive"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/titleTv"
+            app:layout_constraintTop_toBottomOf="@id/loginTv"
             app:textEndPadding="15dp"
             app:textStartPadding="15dp"
             tools:text="热门专题" />
@@ -151,7 +150,7 @@
             android:textColor="@color/colorTextInActive"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toRightOf="@id/superChapterChip"
-            app:layout_constraintTop_toBottomOf="@id/titleTv"
+            app:layout_constraintTop_toBottomOf="@id/loginTv"
             app:textEndPadding="15dp"
             app:textStartPadding="15dp"
             tools:text="项目架构" />

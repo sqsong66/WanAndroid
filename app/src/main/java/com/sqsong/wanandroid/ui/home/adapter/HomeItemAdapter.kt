@@ -100,7 +100,7 @@ class HomeItemAdapter(context: Context,
         @JvmField
         var timeTv: TextView? = null
 
-        @BindView(R.id.titleTv)
+        @BindView(R.id.loginTv)
         @JvmField
         var titleTv: TextView? = null
 

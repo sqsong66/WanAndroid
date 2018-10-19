@@ -8,17 +8,11 @@ import javax.inject.Inject
 
 class HomeModel @Inject constructor(private val apiService: ApiService) : HomeContract.Model {
 
-    override fun getHomeDataList(page: Int): Observable<HomeItemBean> {
-        return apiService.getHomeDataList(page)
-    }
+    override fun getHomeDataList(page: Int): Observable<HomeItemBean> = apiService.getHomeDataList(page)
 
-    override fun getBannerData(): Observable<HomeBannerBean> {
-        return apiService.getHomeBanner()
-    }
-
-
+    override fun getBannerData(): Observable<HomeBannerBean> = apiService.getHomeBanner()
 
     override fun onDestroy() {
-
     }
+
 }

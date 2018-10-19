@@ -9,7 +9,7 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
     <ImageView
-        android:id="@+id/back_iv"
+        android:id="@+id/backIv"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_marginLeft="24dp"
@@ -24,19 +24,17 @@
     <!--?selectableItemBackgroundBorderless-->
 
     <TextView
-        android:id="@+id/register_tv"
+        android:id="@+id/registerTv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:text="@string/text_register"
-        android:textAllCaps="true"
         android:textColor="@color/colorWhite"
         android:textSize="50sp"
         android:textStyle="bold"
-        app:fontFamily="@font/pacifico"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/back_iv" />
+        app:layout_constraintTop_toBottomOf="@id/backIv" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/userNameInputLayout"
@@ -44,8 +42,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="32dp"
-        android:layout_marginTop="32dp"
         android:layout_marginRight="32dp"
+        android:layout_marginTop="32dp"
         android:hint="@string/text_user_name"
         android:textColorHint="@color/colorWhiteHint"
         app:boxStrokeWidth="2px"
@@ -55,10 +53,10 @@
         app:errorEnabled="true"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/register_tv">
+        app:layout_constraintTop_toBottomOf="@id/registerTv">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/user_name_edit"
+            android:id="@+id/userNameEdit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="text"
@@ -74,8 +72,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="32dp"
-        android:layout_marginTop="10dp"
         android:layout_marginRight="32dp"
+        android:layout_marginTop="10dp"
         android:hint="@string/text_user_password"
         android:textColorHint="@color/colorWhiteHint"
         app:counterEnabled="true"
@@ -89,6 +87,7 @@
         app:passwordToggleTint="@color/colorWhite">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/passwordEdit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
@@ -100,13 +99,13 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/confirm_password_input_layout"
+        android:id="@+id/confirmPassInputLayout"
         style="@style/Widget.Design.TextInputLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="32dp"
-        android:layout_marginTop="10dp"
         android:layout_marginRight="32dp"
+        android:layout_marginTop="10dp"
         android:hint="@string/text_confirm_password"
         android:textColorHint="@color/colorWhiteHint"
         app:counterEnabled="true"
@@ -120,6 +119,7 @@
         app:passwordToggleTint="@color/colorWhite">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/confirmPassEdit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
@@ -131,14 +131,14 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/register_btn"
+        android:id="@+id/registerBtn"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginLeft="32dp"
-        android:layout_marginTop="50dp"
         android:layout_marginEnd="32dp"
+        android:layout_marginLeft="32dp"
         android:layout_marginRight="32dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="50dp"
         android:background="@drawable/bg_login_btn"
         android:padding="12dp"
         android:text="@string/text_register"
@@ -146,6 +146,6 @@
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/confirm_password_input_layout" />
+        app:layout_constraintTop_toBottomOf="@+id/confirmPassInputLayout" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

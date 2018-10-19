@@ -21,12 +21,18 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
+import android.widget.TextView
 import androidx.annotation.IdRes
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
+import com.google.android.material.textfield.TextInputLayout
+import com.jakewharton.rxbinding2.view.RxView
+import com.jakewharton.rxbinding2.widget.RxTextView
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.Disposable
 
 fun AppCompatActivity.getStatusBarHeight(): Int {
     val identifier = resources.getIdentifier("status_bar_height", "dimen", "android")
@@ -87,4 +93,20 @@ fun AppCompatActivity.setupUi(rootView: View) {
             setupUi(rootView.getChildAt(i))
         }
     }
+}
+
+fun AppCompatActivity.registerClickEvent(view: View, action: (view: View) -> Unit): Disposable {
+    return RxView.clicks(view)
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe { action(view) }
+}
+
+fun AppCompatActivity.registerTextChangeEvent(textView: TextView, inputLayout: TextInputLayout): Disposable {
+    return RxTextView.textChanges(textView)
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe {
+                if (it.toString().isNotEmpty() && inputLayout.isErrorEnabled) {
+                    inputLayout.isErrorEnabled = false
+                }
+            }
 }
