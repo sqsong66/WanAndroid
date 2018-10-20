@@ -1,5 +1,8 @@
 package com.sqsong.wanandroid.ui.login.di
 
+import android.content.Context
+import com.sqsong.wanandroid.R
+import com.sqsong.wanandroid.common.LoadingProgressDialog
 import com.sqsong.wanandroid.di.scope.ActivityScope
 import com.sqsong.wanandroid.network.ApiService
 import com.sqsong.wanandroid.ui.login.RegisterActivity
@@ -21,6 +24,12 @@ class RegisterModule {
     @Provides
     fun provideRegisterModel(apiService: ApiService): RegisterModel {
         return RegisterModel(apiService)
+    }
+
+    @ActivityScope
+    @Provides
+    fun provideLoadingDialog(context: Context): LoadingProgressDialog {
+        return LoadingProgressDialog.newInstance(context.getString(R.string.text_process))
     }
 
 }

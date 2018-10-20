@@ -12,8 +12,9 @@ import android.widget.TextView
 import androidx.fragment.app.DialogFragment
 import com.sqsong.wanandroid.R
 import com.sqsong.wanandroid.util.DensityUtil
+import javax.inject.Inject
 
-class LoadingProgressDialog : DialogFragment() {
+class LoadingProgressDialog @Inject constructor() : DialogFragment() {
 
     private lateinit var loadingTv: TextView
 

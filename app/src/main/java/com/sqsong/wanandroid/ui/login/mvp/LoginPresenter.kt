@@ -1,62 +1,67 @@
 package com.sqsong.wanandroid.ui.login.mvp
 
 import android.content.Context
+import android.content.SharedPreferences
 import com.sqsong.wanandroid.R
-import com.sqsong.wanandroid.data.BaseData
+import com.sqsong.wanandroid.data.LoginBean
 import com.sqsong.wanandroid.mvp.BasePresenter
 import com.sqsong.wanandroid.network.ApiException
 import com.sqsong.wanandroid.network.ObserverImpl
 import com.sqsong.wanandroid.util.CommonUtil
+import com.sqsong.wanandroid.util.Constants
 import com.sqsong.wanandroid.util.LogUtil
+import com.sqsong.wanandroid.util.PreferenceHelper.set
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
-class RegisterPresenter @Inject constructor(private val registerView: RegisterContract.View,
-                                            private val registerModel: RegisterModel,
-                                            private val disposable: CompositeDisposable) :
-        BasePresenter<RegisterContract.View, RegisterContract.Model>(registerModel, disposable) {
+class LoginPresenter @Inject constructor(private val loginView: LoginContract.View,
+                                         private val loginModel: LoginModel,
+                                         private val disposable: CompositeDisposable) :
+        BasePresenter<LoginContract.View, LoginModel>(loginModel, disposable) {
 
     @Inject
     lateinit var mContext: Context
 
-    override fun onAttach(view: RegisterContract.View) {
-        mView = registerView
+    @Inject
+    lateinit var mPreferences: SharedPreferences
+
+    override fun onAttach(view: LoginContract.View) {
+        mView = loginView
         registerEvents()
     }
 
     private fun registerEvents() {
         // Set title font.
         CommonUtil.setAssetsTextFont(mView.getTitleText(), "font/Pacifico-Regular.ttf")
-        disposable.add(mView.backDisposable())
+        disposable.add(mView.closeDisposable())
         disposable.add(mView.userNameDisposable())
         disposable.add(mView.passwordDisposable())
-        disposable.add(mView.confirmPasswordDisposable())
         registerCommitEvent()
     }
 
     private fun registerCommitEvent() {
         mView.commitObservable()
                 .filter {
-                    return@filter validParams(mView.userNameText(),
-                            mView.passwordText(), mView.confirmPasswordText())
+                    return@filter validParams(mView.userNameText(), mView.passwordText())
                 }
                 .doOnNext { mView.showProcessDialog() }
                 .debounce(800, TimeUnit.MILLISECONDS)
                 .observeOn(Schedulers.io())
                 .switchMap {
-                    return@switchMap registerModel.register(mView.userNameText(),
-                            mView.passwordText(), mView.confirmPasswordText())
+                    return@switchMap loginModel.login(mView.userNameText(), mView.passwordText())
                 }
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnNext { mView.hideProcessDialog() }
-                .subscribe(object : ObserverImpl<BaseData>(disposable) {
-                    override fun onSuccess(bean: BaseData) {
+                .subscribe(object : ObserverImpl<LoginBean>(disposable) {
+                    override fun onSuccess(bean: LoginBean) {
                         if (bean.errorCode == 0) {
-                            mView.showMessage(mContext.getString(R.string.text_register_success))
-                            mView.finishActivity()
+                            if (bean.data != null) {
+                                mPreferences[Constants.LOGIN_USER_NAME] = bean.data.username
+                            }
+                            mView.startHomeActivity()
                         } else {
                             mView.showMessage(bean.errorMsg)
                         }
@@ -69,8 +74,7 @@ class RegisterPresenter @Inject constructor(private val registerView: RegisterCo
                 })
     }
 
-    private fun validParams(userNameText: String, passwordText: String,
-                            confirmPasswordText: String): Boolean {
+    private fun validParams(userNameText: String, passwordText: String): Boolean {
         return when {
             userNameText.isEmpty() -> {
                 mView.showInputLayoutError(0, mContext.getString(R.string.text_user_name_empty))
@@ -82,10 +86,6 @@ class RegisterPresenter @Inject constructor(private val registerView: RegisterCo
             }
             passwordText.length < 6 -> {
                 mView.showInputLayoutError(2, mContext.getString(R.string.text_password_too_short))
-                return false
-            }
-            (confirmPasswordText.isEmpty() || confirmPasswordText != passwordText) -> {
-                mView.showInputLayoutError(3, mContext.getString(R.string.text_confirm_password_must_same))
                 return false
             }
             else -> true

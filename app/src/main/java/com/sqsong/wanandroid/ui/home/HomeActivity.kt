@@ -7,6 +7,7 @@ import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.view.GravityCompat
 import androidx.fragment.app.Fragment
 import com.google.android.material.navigation.NavigationView
+import com.sqsong.wanandroid.BaseApplication
 import com.sqsong.wanandroid.R
 import com.sqsong.wanandroid.common.event.FabClickEvent
 import com.sqsong.wanandroid.common.inter.ChangeThemeAnnotation
@@ -17,6 +18,8 @@ import com.sqsong.wanandroid.ui.home.fragment.HomeFragment
 import com.sqsong.wanandroid.ui.home.fragment.KnowledgeFragment
 import com.sqsong.wanandroid.ui.home.fragment.NavigationFragment
 import com.sqsong.wanandroid.ui.home.fragment.ProjectFragment
+import com.sqsong.wanandroid.util.Constants
+import com.sqsong.wanandroid.util.SnackbarUtil
 import dagger.android.support.DaggerAppCompatActivity
 import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.activity_home_new.*
@@ -40,6 +43,8 @@ class HomeActivity : DaggerAppCompatActivity(), IAppCompatActivity, NavigationVi
 
     @Inject
     lateinit var mProjectFragment: ProjectFragment
+
+    private var lastClickTime: Long = 0
 
     private val mFragmentList = mutableListOf<Fragment>()
 
@@ -134,7 +139,18 @@ class HomeActivity : DaggerAppCompatActivity(), IAppCompatActivity, NavigationVi
         if (drawer_layout.isDrawerOpen(GravityCompat.START)) {
             drawer_layout.closeDrawer(GravityCompat.START)
         } else {
-            super.onBackPressed()
+            quitApp()
+        }
+    }
+
+    private fun quitApp() {
+        val curMillis = System.currentTimeMillis()
+        if (curMillis - lastClickTime > Constants.APP_QUIT_TIME) {
+            // SnackbarUtil.showNormalToast(this, getString(R.string.text_double_click_quit))
+            SnackbarUtil.showSnackText(bottomNavigationView, getString(R.string.text_double_click_quit))
+            lastClickTime = curMillis
+        } else {
+            BaseApplication.INSTANCE.quitApp()
         }
     }
 

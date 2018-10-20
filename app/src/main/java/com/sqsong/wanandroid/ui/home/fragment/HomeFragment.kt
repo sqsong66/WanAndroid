@@ -36,7 +36,6 @@ class HomeFragment @Inject constructor() : BaseFragment<HomePresenter>(), HomeCo
                 .setOnRetryClickListener(object : DefaultPageLayout.OnRetryClickListener {
                     override fun onRetry() {
                     }
-
                 }).build()
     }
 
@@ -122,6 +121,7 @@ class HomeFragment @Inject constructor() : BaseFragment<HomePresenter>(), HomeCo
 
     override fun onDestroy() {
         super.onDestroy()
+        mPresenter.onDestroy()
         EventBus.getDefault().unregister(this)
     }
 }

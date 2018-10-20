@@ -1,10 +1,21 @@
 package com.sqsong.wanandroid.data
 
-abstract class BaseBean<T> {
+abstract class BaseBean<T : Any> {
     val errorCode: Int = 0
     val errorMsg: String? = null
     abstract var data: T
 }
+
+data class BaseData(override var data: Any) : BaseBean<Any>()
+
+/********************* Begin: Login Data ***********************/
+
+data class LoginBean(override var data: LoginData) : BaseBean<LoginData>()
+
+data class LoginData(val id: Int,
+                     val username: String)
+
+/********************* End: Login Data *************************/
 
 /********************* Begin: Home banner bean ***********************/
 data class HomeBannerBean(override var data: MutableList<HomeBannerData>) : BaseBean<MutableList<HomeBannerData>>()

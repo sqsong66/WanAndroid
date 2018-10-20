@@ -46,7 +46,7 @@ abstract class BaseFragment<P : IPresenter<*>> : DaggerFragment(), IView {
 
     }
 
-    override fun showMessage(message: String) {
+    override fun showMessage(message: String?) {
         Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
     }
 

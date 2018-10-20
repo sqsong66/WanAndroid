@@ -35,6 +35,15 @@ object DensityUtil {
         return displayMetrics.heightPixels / displayMetrics.density
     }
 
+    fun getStatusBarHeight(context: Context): Int {
+        val identifier = context.resources.getIdentifier("status_bar_height", "dimen", "android")
+        var height = 0
+        if (identifier > 0) {
+            height = context.resources.getDimensionPixelSize(identifier)
+        }
+        return height
+    }
+
     fun getNavigationBarHeight(context: Context): Int {
         val resources = context.resources
         val resourceId = resources.getIdentifier("navigation_bar_height", "dimen", "android")

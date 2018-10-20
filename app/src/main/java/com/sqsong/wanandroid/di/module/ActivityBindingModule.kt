@@ -5,7 +5,10 @@ import com.sqsong.wanandroid.ui.home.HomeActivity
 import com.sqsong.wanandroid.ui.home.di.MainModule
 import com.sqsong.wanandroid.ui.login.LoginActivity
 import com.sqsong.wanandroid.ui.login.RegisterActivity
+import com.sqsong.wanandroid.ui.login.di.LoginModule
 import com.sqsong.wanandroid.ui.login.di.RegisterModule
+import com.sqsong.wanandroid.ui.splash.SplashActivity
+import com.sqsong.wanandroid.ui.splash.di.SplashModule
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
@@ -13,15 +16,19 @@ import dagger.android.ContributesAndroidInjector
 abstract class ActivityBindingModule {
 
     @ActivityScope
-    @ContributesAndroidInjector(modules = [MainModule::class])
-    abstract fun contributeHomeActivity(): HomeActivity
+    @ContributesAndroidInjector(modules = [SplashModule::class])
+    abstract fun contributeSplashActiivity(): SplashActivity
 
     @ActivityScope
-    @ContributesAndroidInjector()
+    @ContributesAndroidInjector(modules = [LoginModule::class])
     abstract fun contributeLoginActivity(): LoginActivity
 
     @ActivityScope
     @ContributesAndroidInjector(modules = [RegisterModule::class])
     abstract fun contributeRegisterActivity(): RegisterActivity
+
+    @ActivityScope
+    @ContributesAndroidInjector(modules = [MainModule::class])
+    abstract fun contributeHomeActivity(): HomeActivity
 
 }

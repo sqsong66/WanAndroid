@@ -1,13 +1,11 @@
 package com.sqsong.wanandroid.network
 
-import com.sqsong.wanandroid.data.BaseBean
+import com.sqsong.wanandroid.data.BaseData
 import com.sqsong.wanandroid.data.HomeBannerBean
 import com.sqsong.wanandroid.data.HomeItemBean
+import com.sqsong.wanandroid.data.LoginBean
 import io.reactivex.Observable
-import retrofit2.http.Field
-import retrofit2.http.GET
-import retrofit2.http.POST
-import retrofit2.http.Path
+import retrofit2.http.*
 
 interface ApiService {
 
@@ -20,8 +18,14 @@ interface ApiService {
     fun getHomeDataList(@Path("page") page: Int): Observable<HomeItemBean>
 
     // 注册
+    @FormUrlEncoded
     @POST("user/register")
     fun register(@Field("username") userName: String, @Field("password") password: String,
-                 @Field("repassword") rePassword: String): Observable<BaseBean<*>>
+                 @Field("repassword") rePassword: String): Observable<BaseData>
 
+    // 登录
+    @FormUrlEncoded
+    @POST("user/login")
+    fun login(@Field("username") userName: String, @Field("password") password: String)
+            : Observable<LoginBean>
 }

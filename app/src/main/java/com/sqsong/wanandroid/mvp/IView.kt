@@ -6,6 +6,6 @@ interface IView {
 
     fun hideLoading()
 
-    fun showMessage(message: String)
+    fun showMessage(message: String?)
 
 }

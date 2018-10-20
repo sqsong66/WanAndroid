@@ -45,6 +45,7 @@
     <string name="text_user_name_empty">用户名不可以为空</string>
     <string name="text_password_empty">密码不可以为空</string>
     <string name="text_password_too_short">密码长度必须大于6</string>
+    <string name="text_confirm_password_must_same">两次输入的密码必须一致</string>
 
     <string name="text_theme">主题</string>
     <string name="text_empty_tips">哎呀，什么也没有！</string>
@@ -52,4 +53,8 @@
     <string name="text_retry">重试</string>
     <string name="navigation_drawer_open">打开导航菜单</string>
     <string name="navigation_drawer_close">关闭导航菜单</string>
+    <string name="text_process">处理中…</string>
+    <string name="text_register_success">注册成功</string>
+    <string name="text_on_login">Login…</string>
+    <string name="text_double_click_quit">再按一次退出应用</string>
 </resources>
