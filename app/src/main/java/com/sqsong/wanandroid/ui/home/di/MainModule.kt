@@ -1,14 +1,16 @@
 package com.sqsong.wanandroid.ui.home.di
 
+import com.sqsong.wanandroid.di.scope.ActivityScope
 import com.sqsong.wanandroid.di.scope.FragmentScope
 import com.sqsong.wanandroid.theme.ThemeSwitcherDialog
+import com.sqsong.wanandroid.ui.home.MainActivity
 import com.sqsong.wanandroid.ui.home.fragment.HomeFragment
 import com.sqsong.wanandroid.ui.home.fragment.KnowledgeFragment
 import com.sqsong.wanandroid.ui.home.fragment.NavigationFragment
 import com.sqsong.wanandroid.ui.home.fragment.ProjectFragment
-import com.sqsong.wanandroid.ui.home.mvp.HomeContract
+import com.sqsong.wanandroid.ui.home.mvp.MainContract
+import dagger.Binds
 import dagger.Module
-import dagger.Provides
 import dagger.android.ContributesAndroidInjector
 
 @Module
@@ -31,5 +33,9 @@ abstract class MainModule {
     @FragmentScope
     @ContributesAndroidInjector
     abstract fun contributeThemeSwitcherDialog(): ThemeSwitcherDialog
+
+    @ActivityScope
+    @Binds
+    abstract fun provideMainView(activity: MainActivity): MainContract.View
 
 }

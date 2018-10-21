@@ -8,7 +8,7 @@ import com.jakewharton.rxbinding2.view.RxView
 import com.sqsong.wanandroid.R
 import com.sqsong.wanandroid.mvp.BasePresenter
 import com.sqsong.wanandroid.mvp.IModel
-import com.sqsong.wanandroid.ui.home.HomeActivity
+import com.sqsong.wanandroid.ui.home.MainActivity
 import com.sqsong.wanandroid.ui.login.LoginActivity
 import com.sqsong.wanandroid.util.Constants
 import com.sqsong.wanandroid.util.DensityUtil
@@ -50,7 +50,7 @@ class SplashPresenter @Inject constructor(private val splashView: SplashContract
         return Observable.intervalRange(0, Constants.SPLASH_TIME, 0, 1, TimeUnit.SECONDS)
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnNext {
-                    mView.getTimerTextView().text = String.format(mContext.getString(R.string.text_second), Constants.SPLASH_TIME - it)
+                    mView.showTime(String.format(mContext.getString(R.string.text_second), Constants.SPLASH_TIME - it))
                 }
                 .doOnComplete {
                     startNewActivity()
@@ -77,7 +77,7 @@ class SplashPresenter @Inject constructor(private val splashView: SplashContract
         clazz = if (TextUtils.isEmpty(userName)) {
             LoginActivity::class.java
         } else {
-            HomeActivity::class.java
+            MainActivity::class.java
         }
         mView.startNewActivity(clazz)
     }

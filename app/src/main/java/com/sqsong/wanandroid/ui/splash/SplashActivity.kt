@@ -24,6 +24,10 @@ class SplashActivity : BaseActivity<SplashPresenter>(), SplashContract.View, IAp
         return timerTv
     }
 
+    override fun showTime(time: String) {
+        timerTv.text = time
+    }
+
     override fun showBackgroundImage(resId: Int) {
         splashIv.showImage(this, resId, -1)
     }

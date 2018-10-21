@@ -1,53 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawerLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.home.HomeActivity">
+    android:fitsSystemWindows="true"
+    tools:openDrawer="start">
 
-    <com.google.android.material.appbar.AppBarLayout
+    <include
+        layout="@layout/content_home"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:theme="@style/AppTheme.AppBarOverlay">
+        android:layout_height="match_parent" />
 
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
-            app:layout_scrollFlags="scroll|enterAlways|snap"
-            app:popupTheme="@style/AppTheme.PopupOverlay" />
-        <!--app:layout_scrollFlags="scroll|enterAlways|snap"-->
-
-    </com.google.android.material.appbar.AppBarLayout>
-
-    <!--<include layout="@layout/content_home" />-->
-
-    <com.sqsong.wanandroid.view.NoScrollViewPager
-        android:id="@+id/viewPager"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
-
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottomNavigationView"
-        style="@style/Widget.MaterialComponents.BottomNavigationView.Colored"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        app:layout_behavior="com.sqsong.wanandroid.util.behavior.BottomNavigationBehavior"
-        app:menu="@menu/menu_bottom_nav" />
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab"
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/navView"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="top"
-        app:layout_anchor="@id/bottomNavigationView"
-        app:layout_anchorGravity="top|end"
-        app:layout_behavior="com.sqsong.wanandroid.util.behavior.BottomNavigationFABBehavior"
-        app:srcCompat="@drawable/ic_arrow_up"
-        app:useCompatPadding="true" />
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        app:headerLayout="@layout/nav_header_home"
+        app:menu="@menu/menu_home_drawer" />
 
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+</androidx.drawerlayout.widget.DrawerLayout>

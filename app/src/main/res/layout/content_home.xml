@@ -1,40 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
-    tools:context=".ui.home.HomeActivity"
-    tools:showIn="@layout/activity_home">
+    tools:context=".ui.home.MainActivity">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:layout_scrollFlags="scroll|enterAlways|snap"
+            app:popupTheme="@style/AppTheme.PopupOverlay" />
+        <!--app:layout_scrollFlags="scroll|enterAlways|snap"-->
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <!--<include layout="@layout/content_home" />-->
 
     <com.sqsong.wanandroid.view.NoScrollViewPager
         android:id="@+id/viewPager"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        app:layout_constraintBottom_toTopOf="@id/bottomNavigationView"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigationView"
         style="@style/Widget.MaterialComponents.BottomNavigationView.Colored"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
+        android:layout_gravity="bottom"
+        app:layout_behavior="com.sqsong.wanandroid.util.behavior.BottomNavigationBehavior"
         app:menu="@menu/menu_bottom_nav" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/fab_margin"
-        android:layout_marginBottom="@dimen/fab_margin"
-        app:layout_constraintBottom_toTopOf="@id/bottomNavigationView"
-        app:layout_constraintRight_toRightOf="parent"
-        app:srcCompat="@android:drawable/ic_dialog_email"
-        app:useCompatPadding="true" />
+        android:layout_gravity="top"
+        app:layout_anchor="@id/bottomNavigationView"
+        app:layout_anchorGravity="top|end"
+        app:layout_behavior="com.sqsong.wanandroid.util.behavior.BottomNavigationFABBehavior"
+        app:srcCompat="@drawable/ic_arrow_up"
+        app:useCompatPadding="true"
+        tools:ignore="VectorDrawableCompat" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

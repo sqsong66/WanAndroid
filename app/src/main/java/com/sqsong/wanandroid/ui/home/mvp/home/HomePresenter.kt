@@ -1,4 +1,4 @@
-package com.sqsong.wanandroid.ui.home.mvp
+package com.sqsong.wanandroid.ui.home.mvp.home
 
 import com.sqsong.wanandroid.common.holder.LoadingFooterViewHolder
 import com.sqsong.wanandroid.data.HomeBannerBean
@@ -13,22 +13,28 @@ import io.reactivex.disposables.CompositeDisposable
 import javax.inject.Inject
 
 class HomePresenter @Inject constructor(private val homeModel: HomeModel,
-                                        /*private val homeView: HomeContract.HomeView,*/
+        /*private val homeView: HomeContract.HomeView,*/
                                         private val disposable: CompositeDisposable) :
         BasePresenter<HomeContract.HomeView, HomeContract.Model>(homeModel, disposable), HomeItemAdapter.HomeItemActionListener {
 
     private var homeItemList = mutableListOf<HomeItem>()
 
-    lateinit var mAdapter: HomeItemAdapter
+    private lateinit var mAdapter: HomeItemAdapter
 
     private var mPage: Int = 0
 
     override fun onAttach(view: HomeContract.HomeView) {
         super.onAttach(view)
+        setupAdapter()
+        refreshData()
+    }
+
+    private fun setupAdapter() {
         mAdapter = HomeItemAdapter(mView.getAppContext(), homeItemList)
+        mAdapter.setHeaderView(mView.getBannerHeaderView())
+        mAdapter.setHomeItemActionListener(this)
         mView.setAdapter(mAdapter)
         mView.showLoadingPage()
-        refreshData()
     }
 
     fun refreshData() {
@@ -49,7 +55,6 @@ class HomePresenter @Inject constructor(private val homeModel: HomeModel,
                     override fun onSuccess(bean: HomeBannerBean) {
                         if (bean.errorCode == 0) {
                             mView.showContentPage()
-                            // mAdapter.setBannerList(bean.data)
                             mView.showBannerData(bean.data)
                         } else {
                             mView.showMessage(bean.errorMsg!!)
@@ -92,6 +97,7 @@ class HomePresenter @Inject constructor(private val homeModel: HomeModel,
         }
         if (mPage == 0) {
             homeItemList.clear()
+            mAdapter.resetAnimationPosition()
         }
         homeItemList.addAll(dataList)
         mAdapter.notifyDataSetChanged()

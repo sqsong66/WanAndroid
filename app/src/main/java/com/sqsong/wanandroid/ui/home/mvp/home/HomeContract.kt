@@ -1,6 +1,7 @@
-package com.sqsong.wanandroid.ui.home.mvp
+package com.sqsong.wanandroid.ui.home.mvp.home
 
 import android.content.Context
+import android.view.View
 import com.sqsong.wanandroid.data.HomeBannerBean
 import com.sqsong.wanandroid.data.HomeBannerData
 import com.sqsong.wanandroid.data.HomeItemBean
@@ -13,6 +14,7 @@ interface HomeContract {
 
     interface HomeView : IView {
         fun getAppContext(): Context
+        fun getBannerHeaderView(): View
         fun setAdapter(adapter: HomeItemAdapter)
         fun showEmptyPage()
         fun showLoadingPage()

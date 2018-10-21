@@ -33,7 +33,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.home.HomeActivity"
+            android:name=".ui.home.MainActivity"
             android:theme="@style/AppTheme.LoginTheme" />
         <activity
             android:name=".ui.login.LoginActivity"

@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.util.TypedValue
 import android.view.LayoutInflater
+import android.view.View
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
@@ -13,8 +14,8 @@ import com.sqsong.wanandroid.common.event.FabClickEvent
 import com.sqsong.wanandroid.data.HomeBannerData
 import com.sqsong.wanandroid.ui.base.BaseFragment
 import com.sqsong.wanandroid.ui.home.adapter.HomeItemAdapter
-import com.sqsong.wanandroid.ui.home.mvp.HomeContract
-import com.sqsong.wanandroid.ui.home.mvp.HomePresenter
+import com.sqsong.wanandroid.ui.home.mvp.home.HomeContract
+import com.sqsong.wanandroid.ui.home.mvp.home.HomePresenter
 import com.sqsong.wanandroid.util.Constants
 import com.sqsong.wanandroid.view.DefaultPageLayout
 import com.sqsong.wanandroid.view.banner.BannerView
@@ -85,13 +86,14 @@ class HomeFragment @Inject constructor() : BaseFragment<HomePresenter>(), HomeCo
         mPresenter.loadMoreData()
     }
 
-    override fun setAdapter(adapter: HomeItemAdapter) {
-        recycler.adapter = adapter
-
+    override fun getBannerHeaderView(): View {
         val headerView = LayoutInflater.from(context).inflate(R.layout.item_banner_header, null)
         mBannerView = headerView.findViewById(R.id.bannerView)
-        adapter.setHeaderView(headerView)
-        adapter.setHomeItemActionListener(mPresenter)
+        return headerView
+    }
+
+    override fun setAdapter(adapter: HomeItemAdapter) {
+        recycler.adapter = adapter
     }
 
     override fun showBannerData(bannerList: MutableList<HomeBannerData>) {

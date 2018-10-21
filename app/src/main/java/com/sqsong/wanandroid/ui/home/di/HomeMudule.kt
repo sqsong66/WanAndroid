@@ -3,8 +3,8 @@ package com.sqsong.wanandroid.ui.home.di
 import com.sqsong.wanandroid.di.scope.FragmentScope
 import com.sqsong.wanandroid.network.ApiService
 import com.sqsong.wanandroid.ui.home.fragment.HomeFragment
-import com.sqsong.wanandroid.ui.home.mvp.HomeContract
-import com.sqsong.wanandroid.ui.home.mvp.HomeModel
+import com.sqsong.wanandroid.ui.home.mvp.home.HomeContract
+import com.sqsong.wanandroid.ui.home.mvp.home.HomeModel
 import dagger.Module
 import dagger.Provides
 

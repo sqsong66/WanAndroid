@@ -1,4 +1,4 @@
-package com.sqsong.wanandroid.ui.home.mvp
+package com.sqsong.wanandroid.ui.home.mvp.home
 
 import com.sqsong.wanandroid.data.HomeBannerBean
 import com.sqsong.wanandroid.data.HomeItemBean

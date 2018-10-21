@@ -1,9 +1,12 @@
 package com.sqsong.wanandroid.ui.home.adapter
 
+import android.animation.AnimatorSet
+import android.animation.ObjectAnimator
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.LinearInterpolator
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import butterknife.BindView
@@ -14,6 +17,7 @@ import com.sqsong.wanandroid.common.holder.LoadingFooterViewHolder
 import com.sqsong.wanandroid.common.holder.LoadingFooterViewHolder.LoadingState
 import com.sqsong.wanandroid.data.HomeItem
 import com.sqsong.wanandroid.util.Constants
+import com.sqsong.wanandroid.util.animator.ViewHelper
 import com.sqsong.wanandroid.view.CheckableImageView
 import com.sqsong.wanandroid.view.CircleTextView
 import com.sqsong.wanandroid.view.LabelView
@@ -22,6 +26,10 @@ class HomeItemAdapter(context: Context,
                       private val dataList: List<HomeItem>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private val mInflater = LayoutInflater.from(context)
+
+    var isFirstOnly = true
+    var mLastPosition: Int = 0
+    val mInterpolator = LinearInterpolator()
 
     @LoadingState
     private var mLoadingState: Int = 0
@@ -80,9 +88,13 @@ class HomeItemAdapter(context: Context,
         notifyItemChanged(dataList.size + 1)
     }
 
+    fun resetAnimationPosition() {
+        mLastPosition = 0
+    }
+
     class HomeBannerViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
 
-    class HomeItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    inner class HomeItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         @BindView(R.id.nameCircleTv)
         @JvmField
@@ -136,6 +148,19 @@ class HomeItemAdapter(context: Context,
 
             itemView.setOnClickListener {
                 listener?.onListItemClick(homeItem, position)
+            }
+
+            if (!isFirstOnly || position - 1 > mLastPosition) {
+                mLastPosition = position - 1
+                val scaleX = ObjectAnimator.ofFloat(itemView, "scaleX", 0.5f, 1f)
+                val scaleY = ObjectAnimator.ofFloat(itemView, "scaleY", 0.5f, 1f)
+                val animatorSet = AnimatorSet()
+                animatorSet.interpolator = mInterpolator
+                animatorSet.duration = 300
+                animatorSet.playTogether(scaleX, scaleY)
+                animatorSet.start()
+            } else {
+                ViewHelper.clear(itemView)
             }
         }
     }
