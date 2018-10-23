@@ -9,6 +9,7 @@
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:elevation="5dp"
         android:theme="@style/AppTheme.AppBarOverlay">
 
         <androidx.appcompat.widget.Toolbar
@@ -44,6 +45,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="top"
+        android:background="?colorPrimary"
         app:layout_anchor="@id/bottomNavigationView"
         app:layout_anchorGravity="top|end"
         app:layout_behavior="com.sqsong.wanandroid.util.behavior.BottomNavigationFABBehavior"

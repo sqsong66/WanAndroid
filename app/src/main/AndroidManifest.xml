@@ -34,6 +34,7 @@
         </activity>
         <activity
             android:name=".ui.home.MainActivity"
+            android:launchMode="singleTask"
             android:theme="@style/AppTheme.LoginTheme" />
         <activity
             android:name=".ui.login.LoginActivity"

@@ -1,18 +1,20 @@
 package com.sqsong.wanandroid.ui.splash.mvp
 
+import android.animation.AnimatorSet
+import android.animation.ObjectAnimator
 import android.content.Context
 import android.content.SharedPreferences
-import android.text.TextUtils
+import android.view.animation.OvershootInterpolator
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.jakewharton.rxbinding2.view.RxView
 import com.sqsong.wanandroid.R
 import com.sqsong.wanandroid.mvp.BasePresenter
 import com.sqsong.wanandroid.mvp.IModel
 import com.sqsong.wanandroid.ui.home.MainActivity
-import com.sqsong.wanandroid.ui.login.LoginActivity
+import com.sqsong.wanandroid.util.CommonUtil
 import com.sqsong.wanandroid.util.Constants
 import com.sqsong.wanandroid.util.DensityUtil
-import com.sqsong.wanandroid.util.PreferenceHelper.get
+import com.sqsong.wanandroid.util.LogUtil
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
@@ -40,10 +42,37 @@ class SplashPresenter @Inject constructor(private val splashView: SplashContract
     }
 
     private fun registerEvents() {
+        setTextAnimation()
         setTimeTvParams()
         mView.showBackgroundImage(mImageList[Random().nextInt(mImageList.size)])
         disposable.add(intervalDisposable())
         disposable.add(timerDisposable())
+    }
+
+    private fun setTextAnimation() {
+        LogUtil.e("-----------------------> ${Locale.getDefault().language}")
+
+        val font = if ("zh" == Locale.getDefault().language) "font/Kaiti.otf" else "font/Boogaloo-Regular.ttf"
+        CommonUtil.setAssetsTextFont(mView.getAndroidText(), font)
+        CommonUtil.setAssetsTextFont(mView.getPlayText(), font)
+
+        val halfScreenWidth = DensityUtil.getScreenWidth() * 1.0f / 2
+        val textPaint = mView.getPlayText().paint
+        val playTextWidth = textPaint.measureText(mView.getPlayText().text.toString())
+        val androidTextWidth = textPaint.measureText(mView.getAndroidText().text.toString())
+        val playDistance = halfScreenWidth + playTextWidth / 2
+        val androidDistance = halfScreenWidth + androidTextWidth / 2
+        val playTranslationX = ObjectAnimator.ofFloat(mView.getPlayText(), "translationX", 0f, playDistance)
+        val androidTranslationX = ObjectAnimator.ofFloat(mView.getAndroidText(), "translationX", 0f, -androidDistance)
+        val playScaleX = ObjectAnimator.ofFloat(mView.getPlayText(), "scaleX", .5f, 1.0f)
+        val playScaleY = ObjectAnimator.ofFloat(mView.getPlayText(), "scaleY", .5f, 1.0f)
+        val androidScaleX = ObjectAnimator.ofFloat(mView.getAndroidText(), "scaleX", .5f, 1.0f)
+        val androidSlayScaleY = ObjectAnimator.ofFloat(mView.getAndroidText(), "scaleY", .5f, 1.0f)
+        val set = AnimatorSet()
+        set.playTogether(playTranslationX, androidTranslationX, playScaleX, playScaleY, androidScaleX, androidSlayScaleY)
+        set.duration = 1200
+        set.interpolator = OvershootInterpolator()
+        mView.getAndroidText().postDelayed({ set.start() }, 500)
     }
 
     private fun intervalDisposable(): Disposable {
@@ -72,13 +101,13 @@ class SplashPresenter @Inject constructor(private val splashView: SplashContract
 
     private fun startNewActivity() {
         disposable.clear()
-        val userName: String = mPreferences[Constants.LOGIN_USER_NAME] ?: ""
+        /*val userName: String = mPreferences[Constants.LOGIN_USER_NAME] ?: ""
         val clazz: Class<*>
         clazz = if (TextUtils.isEmpty(userName)) {
             LoginActivity::class.java
         } else {
             MainActivity::class.java
-        }
-        mView.startNewActivity(clazz)
+        }*/
+        mView.startNewActivity(MainActivity::class.java)
     }
 }

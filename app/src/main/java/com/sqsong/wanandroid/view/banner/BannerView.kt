@@ -22,6 +22,7 @@ import com.sqsong.wanandroid.common.GlideApp
 import com.sqsong.wanandroid.data.HomeBannerData
 import com.sqsong.wanandroid.ui.home.adapter.BannerPagerAdapter
 import com.sqsong.wanandroid.util.DensityUtil
+import com.sqsong.wanandroid.util.LogUtil
 import com.sqsong.wanandroid.util.transformer.ZoomPageTransformer
 import com.sqsong.wanandroid.view.CirclePagerIndicator
 import com.sqsong.wanandroid.view.FixedSpeedScroller
@@ -56,7 +57,7 @@ class BannerView @JvmOverloads constructor(context: Context, attrs: AttributeSet
         loop = typedArray.getBoolean(R.styleable.BannerView_loop, true)
         duration = typedArray.getInteger(R.styleable.BannerView_duration, 5000)
         showIndicator = typedArray.getBoolean(R.styleable.BannerView_showIndicator, true)
-        pagerScrollDuration = typedArray.getInteger(R.styleable.BannerView_pagerScrollDuration, 500)
+        pagerScrollDuration = typedArray.getInteger(R.styleable.BannerView_pagerScrollDuration, 600)
         typedArray.recycle()
 
         mLoopHandler = LoopHandler(this)

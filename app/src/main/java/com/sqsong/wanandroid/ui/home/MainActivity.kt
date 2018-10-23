@@ -59,6 +59,7 @@ class MainActivity : BaseActivity<MainPresenter>(), MainContract.View,
                 R.string.navigation_drawer_open, R.string.navigation_drawer_close)
         drawerLayout.addDrawerListener(toggle)
         toggle.syncState()
+        navView.setCheckedItem(R.id.nav_camera)
         navView.setNavigationItemSelectedListener(this)
         bottomNavigationView.setOnNavigationItemSelectedListener(this)
     }
@@ -69,6 +70,7 @@ class MainActivity : BaseActivity<MainPresenter>(), MainContract.View,
 
     override fun setPagerAdapter(adapter: FragmentStatePagerAdapter) {
         viewPager.adapter = adapter
+        viewPager.offscreenPageLimit = 4
     }
 
     override fun startLoginActivity() {

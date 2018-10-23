@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="AppTheme.TransparentTheme"  parent="AppTheme">
+    <style name="AppTheme.TransparentTheme"  parent="AppTheme.LoginTheme">
         <item name="windowNoTitle">true</item>
         <item name="windowActionBar">false</item>
         <item name="android:windowTranslucentStatus">true</item>
@@ -15,7 +15,6 @@
         <item name="colorControlNormal">@color/colorWhite</item>
         <item name="colorControlActivated">@color/colorWhite</item>
         <item name="colorControlHighlight">@color/colorWhite</item>
-
         <item name="android:windowTranslucentStatus">true</item>
     </style>
 

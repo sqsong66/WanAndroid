@@ -61,4 +61,10 @@
     <string name="text_login_out">退出登录</string>
     <string name="text_login_out_title">登出提示</string>
     <string name="text_login_out_tips">确定要退出登录吗？</string>
+    <string name="text_login_tips_title">登录提示</string>
+    <string name="text_login_tips_message">该功能需要登录，您确定要登录吗？</string>
+    <string name="text_collect_success">收藏成功</string>
+    <string name="text_cancel_collect_success">取消收藏成功</string>
+    <string name="text_play">玩</string>
+    <string name="text_android">安卓</string>
 </resources>

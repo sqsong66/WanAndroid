@@ -54,6 +54,10 @@ class LoginActivity : BaseActivity<LoginPresenter>(), LoginContract.View, IAppCo
         return RxView.clicks(loginBtn)
     }
 
+    override fun infalteUserName(userName: String) {
+        userNameEdit.setText(userName)
+    }
+
     override fun userNameText(): String {
         return userNameEdit.text.toString().trim()
     }

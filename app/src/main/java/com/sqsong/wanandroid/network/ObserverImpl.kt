@@ -2,10 +2,11 @@ package com.sqsong.wanandroid.network
 
 import android.content.Intent
 import android.widget.Toast
-import com.sqsong.wanandroid.R
 import com.sqsong.wanandroid.BaseApplication
+import com.sqsong.wanandroid.R
 import com.sqsong.wanandroid.data.BaseBean
 import com.sqsong.wanandroid.ui.login.LoginActivity
+import com.sqsong.wanandroid.util.LogUtil
 import com.sqsong.wanandroid.util.NetworkUtil
 import io.reactivex.Observer
 import io.reactivex.disposables.CompositeDisposable
@@ -23,6 +24,10 @@ abstract class ObserverImpl<T : BaseBean<*>>(private val disposable: CompositeDi
 
     abstract fun onFail(error: ApiException)
 
+    override fun onSubscribe(d: Disposable) {
+        disposable?.add(d)
+    }
+
     override fun onNext(t: T) {
         if (t.errorCode == -1001) {
             onError(ApiException(ApiException.ERROR_TOKEN_EXPIRED,
@@ -32,11 +37,8 @@ abstract class ObserverImpl<T : BaseBean<*>>(private val disposable: CompositeDi
         onSuccess(t)
     }
 
-    override fun onComplete() {
-
-    }
-
     override fun onError(e: Throwable) {
+        LogUtil.e("onError", e.message ?: "onError")
         val apiException = ApiException.parseException(e)
         if (apiException.errorCode == ApiException.ERROR_TOKEN_EXPIRED) {
             quitAndStartLogin(apiException.showMessage)
@@ -45,8 +47,8 @@ abstract class ObserverImpl<T : BaseBean<*>>(private val disposable: CompositeDi
         onFail(apiException)
     }
 
-    override fun onSubscribe(d: Disposable) {
-        disposable?.add(d)
+    override fun onComplete() {
+        LogUtil.e("onComplete")
     }
 
     private fun quitAndStartLogin(showMessage: String) {
@@ -89,7 +91,7 @@ class ApiException(val errorCode: Int, override val message: String?, val showMe
                 showMessage = context.getString(R.string.text_network_timeout)
             } else {
                 code = ERROR_UNKONWN
-                showMessage = context.getString(R.string.text_unknown_error)
+                showMessage = error.message ?: context.getString(R.string.text_unknown_error)
             }
             return ApiException(code, error.message, showMessage)
         }

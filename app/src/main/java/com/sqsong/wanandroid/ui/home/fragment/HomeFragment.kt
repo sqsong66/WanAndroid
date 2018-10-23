@@ -2,9 +2,11 @@ package com.sqsong.wanandroid.ui.home.fragment
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.Intent
 import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
+import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
@@ -16,7 +18,7 @@ import com.sqsong.wanandroid.ui.base.BaseFragment
 import com.sqsong.wanandroid.ui.home.adapter.HomeItemAdapter
 import com.sqsong.wanandroid.ui.home.mvp.home.HomeContract
 import com.sqsong.wanandroid.ui.home.mvp.home.HomePresenter
-import com.sqsong.wanandroid.util.Constants
+import com.sqsong.wanandroid.ui.login.LoginActivity
 import com.sqsong.wanandroid.view.DefaultPageLayout
 import com.sqsong.wanandroid.view.banner.BannerView
 import kotlinx.android.synthetic.main.fragment_home_backup.*
@@ -36,6 +38,7 @@ class HomeFragment @Inject constructor() : BaseFragment<HomePresenter>(), HomeCo
                 .setTargetPage(recycler)
                 .setOnRetryClickListener(object : DefaultPageLayout.OnRetryClickListener {
                     override fun onRetry() {
+                        onRefresh()
                     }
                 }).build()
     }
@@ -63,7 +66,6 @@ class HomeFragment @Inject constructor() : BaseFragment<HomePresenter>(), HomeCo
     }
 
     private fun setupRecyclerView() {
-        recycler.recycledViewPool.setMaxRecycledViews(Constants.ITEM_TYPE_HEADER, 3)
         val layoutManager = LinearLayoutManager(context)
         recycler.layoutManager = layoutManager
         mRecyclerScroller = RecyclerScrollListener(layoutManager)
@@ -79,6 +81,8 @@ class HomeFragment @Inject constructor() : BaseFragment<HomePresenter>(), HomeCo
     }
 
     override fun onRefresh() {
+        showContentPage()
+        swipeLayout.isRefreshing = true
         mPresenter.refreshData()
     }
 
@@ -101,10 +105,12 @@ class HomeFragment @Inject constructor() : BaseFragment<HomePresenter>(), HomeCo
     }
 
     override fun showEmptyPage() {
+        swipeLayout.isRefreshing = false
         mPageLayout.showEmptyLayout()
     }
 
     override fun showLoadingPage() {
+        swipeLayout.isRefreshing = false
         mPageLayout.showLoadingLayout()
     }
 
@@ -113,12 +119,34 @@ class HomeFragment @Inject constructor() : BaseFragment<HomePresenter>(), HomeCo
         mPageLayout.showContentLayout()
     }
 
+    override fun showErrorPage() {
+        swipeLayout.isRefreshing = false
+        mPageLayout.showErrorLayout()
+    }
+
     override fun getAppContext(): Context {
         return context!!
     }
 
     override fun loadFinish() {
         mRecyclerScroller.loadFinish()
+    }
+
+    override fun showLoginDialog() {
+        AlertDialog.Builder(activity!!)
+                .setTitle(R.string.text_login_tips_title)
+                .setMessage(R.string.text_login_tips_message)
+                .setCancelable(false)
+                .setNegativeButton(R.string.text_cancel) { dialog, _ -> dialog.dismiss() }
+                .setPositiveButton(R.string.text_sure) { dialog, _ ->
+                    run {
+                        dialog.dismiss()
+                        startActivity(Intent(context, LoginActivity::class.java))
+                        activity?.finish()
+                    }
+                }
+                .create()
+                .show()
     }
 
     override fun onDestroy() {

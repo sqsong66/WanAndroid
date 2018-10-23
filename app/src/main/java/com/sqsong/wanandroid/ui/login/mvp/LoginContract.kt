@@ -15,6 +15,7 @@ interface LoginContract {
         fun userNameDisposable(): Disposable
         fun passwordDisposable(): Disposable
         fun commitObservable(): Observable<Any>
+        fun infalteUserName(userName: String)
         fun userNameText(): String
         fun passwordText(): String
         /**

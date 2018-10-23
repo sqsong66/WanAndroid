@@ -1,7 +1,9 @@
 package com.sqsong.wanandroid.common
 
+import android.annotation.TargetApi
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.os.Build
 import android.os.Bundle
 import android.text.TextUtils
 import android.view.LayoutInflater
@@ -26,9 +28,10 @@ class LoadingProgressDialog @Inject constructor() : DialogFragment() {
         mLoadingText = bundle?.getString(LOADING_TEXT)
     }
 
+    @TargetApi(Build.VERSION_CODES.KITKAT)
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
-        dialog.window.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         dialog.setCanceledOnTouchOutside(false)
         return inflater.inflate(R.layout.dialog_loading_progress, container, false)
     }
@@ -45,8 +48,8 @@ class LoadingProgressDialog @Inject constructor() : DialogFragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        val params = dialog.window.attributes
-        params.width = DensityUtil.getScreenWidth() - DensityUtil.dip2px(30) * 2
+        val params = dialog.window?.attributes
+        params?.width = DensityUtil.getScreenWidth() - DensityUtil.dip2px(30) * 2
     }
 
     companion object {
@@ -55,8 +58,8 @@ class LoadingProgressDialog @Inject constructor() : DialogFragment() {
 
         @JvmStatic
         fun newInstance(loadingText: String): LoadingProgressDialog {
-            var dialog = LoadingProgressDialog()
-            var bundle = Bundle()
+            val dialog = LoadingProgressDialog()
+            val bundle = Bundle()
             bundle.putString(LOADING_TEXT, loadingText)
             dialog.arguments = bundle
             return dialog

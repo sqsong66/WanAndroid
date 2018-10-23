@@ -45,7 +45,7 @@ data class HomeItem(val apkLink: String,
                     val author: String,
                     val chapterId: Int,
                     val chapterName: String,
-                    val collect: Boolean,
+                    var collect: Boolean,
                     val courseId: Int,
                     val desc: String,
                     val envelopePic: String,
@@ -61,5 +61,5 @@ data class HomeItem(val apkLink: String,
                     val title: String,
                     val userId: Int,
                     val visible: Int,
-                    val zan: Int)
+                    var zan: Int)
 /********************* End: Home list bean **********************/

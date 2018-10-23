@@ -1,12 +1,11 @@
 package com.sqsong.wanandroid.ui.home.adapter
 
-import android.animation.AnimatorSet
-import android.animation.ObjectAnimator
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.LinearInterpolator
+import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import butterknife.BindView
@@ -17,7 +16,7 @@ import com.sqsong.wanandroid.common.holder.LoadingFooterViewHolder
 import com.sqsong.wanandroid.common.holder.LoadingFooterViewHolder.LoadingState
 import com.sqsong.wanandroid.data.HomeItem
 import com.sqsong.wanandroid.util.Constants
-import com.sqsong.wanandroid.util.animator.ViewHelper
+import com.sqsong.wanandroid.util.LogUtil
 import com.sqsong.wanandroid.view.CheckableImageView
 import com.sqsong.wanandroid.view.CircleTextView
 import com.sqsong.wanandroid.view.LabelView
@@ -39,8 +38,9 @@ class HomeItemAdapter(context: Context,
     override fun getItemViewType(position: Int): Int {
         return when (position) {
             0 -> return Constants.ITEM_TYPE_HEADER
+            in 1..dataList.size -> Constants.ITEM_TYPE_CONTENT
             dataList.size + 1 -> Constants.ITEM_TYPE_FOOTER
-            else -> return Constants.ITEM_TYPE_CONTENT
+            else -> return Constants.ITEM_TYPE_NONE
         }
     }
 
@@ -51,28 +51,23 @@ class HomeItemAdapter(context: Context,
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return when (viewType) {
-            Constants.ITEM_TYPE_HEADER -> {
-                val holder = HomeBannerViewHolder(mHeaderView)
-                holder.setIsRecyclable(false)
-                return holder
-            }
+            Constants.ITEM_TYPE_HEADER -> HomeBannerViewHolder(mHeaderView)
             Constants.ITEM_TYPE_FOOTER -> LoadingFooterViewHolder(mInflater.inflate(R.layout.item_loading_footer, parent, false))
-            else -> HomeItemViewHolder(mInflater.inflate(R.layout.item_home_news, parent, false))
+            Constants.ITEM_TYPE_CONTENT -> HomeItemViewHolder(mInflater.inflate(R.layout.item_home_news, parent, false))
+            else -> null!!
         }
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        when (getItemViewType(position)) {
-            Constants.ITEM_TYPE_HEADER -> {
-            }
-            Constants.ITEM_TYPE_CONTENT -> {
-                (holder as HomeItemViewHolder).bindItemData(dataList[position - 1], position, mActionListener)
-            }
-            Constants.ITEM_TYPE_FOOTER -> {
-                (holder as LoadingFooterViewHolder).updateLoadingState(mLoadingState)
-            }
+        when (holder) {
+            is HomeItemViewHolder -> holder.bindItemData(dataList[position - 1], position)
+            is LoadingFooterViewHolder -> holder.updateLoadingState(mLoadingState)
         }
     }
+
+//    override fun getItemId(position: Int): Long {
+//        return position.toLong()
+//    }
 
     override fun getItemCount(): Int {
         return dataList.size + 2
@@ -112,7 +107,7 @@ class HomeItemAdapter(context: Context,
         @JvmField
         var timeTv: TextView? = null
 
-        @BindView(R.id.loginTv)
+        @BindView(R.id.titleTv)
         @JvmField
         var titleTv: TextView? = null
 
@@ -128,40 +123,46 @@ class HomeItemAdapter(context: Context,
         @JvmField
         var starIv: CheckableImageView? = null
 
+        @BindView(R.id.starRl)
+        @JvmField
+        var starRl: RelativeLayout? = null
+
         init {
             ButterKnife.bind(this@HomeItemViewHolder, itemView)
         }
 
-        fun bindItemData(homeItem: HomeItem, position: Int, listener: HomeItemActionListener?) {
-            nameCircleTv?.setText(homeItem.author.substring(0, 1))
+        fun bindItemData(homeItem: HomeItem, position: Int) {
+            nameCircleTv?.setText(homeItem.author.trim().substring(0, 1))
             labelView?.visibility = if (homeItem.fresh) View.VISIBLE else View.INVISIBLE
             authorTv?.text = homeItem.author
             timeTv?.text = homeItem.niceDate
             titleTv?.text = homeItem.title
             superChapterChip?.text = homeItem.superChapterName
             chapterChip?.text = homeItem.chapterName
-            starIv?.isChecked = homeItem.zan != 0
+            // starIv?.isChecked = false
+            starIv?.isChecked = homeItem.collect
 
-            starIv?.setOnClickListener {
-                listener?.onStarClick(homeItem, position)
+            starRl?.setOnClickListener {
+                mActionListener?.onStarClick(homeItem, position)
             }
 
             itemView.setOnClickListener {
-                listener?.onListItemClick(homeItem, position)
+                mActionListener?.onListItemClick(homeItem, position)
             }
 
-            if (!isFirstOnly || position - 1 > mLastPosition) {
-                mLastPosition = position - 1
+            LogUtil.e("Current position: $position, Last position: $mLastPosition")
+            /*if (!isFirstOnly || position >= mLastPosition) {
+                mLastPosition = position
                 val scaleX = ObjectAnimator.ofFloat(itemView, "scaleX", 0.5f, 1f)
                 val scaleY = ObjectAnimator.ofFloat(itemView, "scaleY", 0.5f, 1f)
                 val animatorSet = AnimatorSet()
                 animatorSet.interpolator = mInterpolator
-                animatorSet.duration = 300
+                animatorSet.duration = 400
                 animatorSet.playTogether(scaleX, scaleY)
                 animatorSet.start()
             } else {
                 ViewHelper.clear(itemView)
-            }
+            }*/
         }
     }
 

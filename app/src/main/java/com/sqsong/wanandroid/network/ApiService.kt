@@ -28,4 +28,12 @@ interface ApiService {
     @POST("user/login")
     fun login(@Field("username") userName: String, @Field("password") password: String)
             : Observable<LoginBean>
+
+    // 收藏文章
+    @POST("lg/collect/{id}/json")
+    fun collectArticle(@Path("id") articleId: Int): Observable<BaseData>
+
+    // 收藏文章
+    @POST("lg/uncollect_originId/{id}/json")
+    fun unCollectArticle(@Path("id") articleId: Int): Observable<BaseData>
 }

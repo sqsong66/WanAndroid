@@ -7,7 +7,6 @@ import com.sqsong.wanandroid.mvp.BasePresenter
 import com.sqsong.wanandroid.network.ApiException
 import com.sqsong.wanandroid.network.ObserverImpl
 import com.sqsong.wanandroid.util.CommonUtil
-import com.sqsong.wanandroid.util.LogUtil
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
@@ -51,7 +50,7 @@ class RegisterPresenter @Inject constructor(private val registerView: RegisterCo
                             mView.passwordText(), mView.confirmPasswordText())
                 }
                 .observeOn(AndroidSchedulers.mainThread())
-                .doOnNext { mView.hideProcessDialog() }
+                .doOnEach { mView.hideProcessDialog() }
                 .subscribe(object : ObserverImpl<BaseData>(disposable) {
                     override fun onSuccess(bean: BaseData) {
                         if (bean.errorCode == 0) {
@@ -63,7 +62,7 @@ class RegisterPresenter @Inject constructor(private val registerView: RegisterCo
                     }
 
                     override fun onFail(error: ApiException) {
-                        LogUtil.e(error.message.toString())
+                        registerCommitEvent()
                         mView.showMessage(error.showMessage)
                     }
                 })

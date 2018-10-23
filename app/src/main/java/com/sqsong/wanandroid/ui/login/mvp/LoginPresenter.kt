@@ -2,6 +2,7 @@ package com.sqsong.wanandroid.ui.login.mvp
 
 import android.content.Context
 import android.content.SharedPreferences
+import android.text.TextUtils
 import com.sqsong.wanandroid.R
 import com.sqsong.wanandroid.data.LoginBean
 import com.sqsong.wanandroid.mvp.BasePresenter
@@ -9,7 +10,7 @@ import com.sqsong.wanandroid.network.ApiException
 import com.sqsong.wanandroid.network.ObserverImpl
 import com.sqsong.wanandroid.util.CommonUtil
 import com.sqsong.wanandroid.util.Constants
-import com.sqsong.wanandroid.util.LogUtil
+import com.sqsong.wanandroid.util.PreferenceHelper.get
 import com.sqsong.wanandroid.util.PreferenceHelper.set
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
@@ -34,12 +35,20 @@ class LoginPresenter @Inject constructor(private val loginView: LoginContract.Vi
     }
 
     private fun registerEvents() {
-        // Set title font.
-        CommonUtil.setAssetsTextFont(mView.getTitleText(), "font/Pacifico-Regular.ttf")
+        setupUserName()
+        CommonUtil.setAssetsTextFont(mView.getTitleText(), "font/Pacifico-Regular.ttf") // Set title font.
         disposable.add(mView.closeDisposable())
         disposable.add(mView.userNameDisposable())
         disposable.add(mView.passwordDisposable())
         registerCommitEvent()
+    }
+
+    private fun setupUserName() {
+        mPreferences[Constants.LOGIN_USER_NAME] = "" // Clear login user name.
+        val userName = mPreferences[Constants.LOGIN_LATEST_USER] ?: ""
+        if (!TextUtils.isEmpty(userName)) {
+            mView.infalteUserName(userName)
+        }
     }
 
     private fun registerCommitEvent() {
@@ -54,13 +63,17 @@ class LoginPresenter @Inject constructor(private val loginView: LoginContract.Vi
                     return@switchMap loginModel.login(mView.userNameText(), mView.passwordText())
                 }
                 .observeOn(AndroidSchedulers.mainThread())
-                .doOnNext { mView.hideProcessDialog() }
+                // need add retry. if not, while meet an error, the observable will dispose, and while no longer get the view click event.
+                // retry operator will not go to observer's onError method(we cannot process the exceptions).
+                // .retry()
+                .doOnEach {
+                    mView.hideProcessDialog()
+                }
                 .subscribe(object : ObserverImpl<LoginBean>(disposable) {
                     override fun onSuccess(bean: LoginBean) {
                         if (bean.errorCode == 0) {
-                            if (bean.data != null) {
-                                mPreferences[Constants.LOGIN_USER_NAME] = bean.data.username
-                            }
+                            mPreferences[Constants.LOGIN_USER_NAME] = bean.data.username
+                            mPreferences[Constants.LOGIN_LATEST_USER] = bean.data.username
                             mView.startHomeActivity()
                         } else {
                             mView.showMessage(bean.errorMsg)
@@ -68,7 +81,7 @@ class LoginPresenter @Inject constructor(private val loginView: LoginContract.Vi
                     }
 
                     override fun onFail(error: ApiException) {
-                        LogUtil.e(error.message.toString())
+                        registerCommitEvent() // Register button's click event again, or it's listener = null.
                         mView.showMessage(error.showMessage)
                     }
                 })

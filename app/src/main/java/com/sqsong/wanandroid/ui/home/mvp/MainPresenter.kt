@@ -8,6 +8,7 @@ import com.sqsong.wanandroid.BaseApplication
 import com.sqsong.wanandroid.common.event.FabClickEvent
 import com.sqsong.wanandroid.mvp.BasePresenter
 import com.sqsong.wanandroid.mvp.IModel
+import com.sqsong.wanandroid.network.CookieManager
 import com.sqsong.wanandroid.ui.home.adapter.FragmentPagerAdapter
 import com.sqsong.wanandroid.ui.home.fragment.HomeFragment
 import com.sqsong.wanandroid.ui.home.fragment.KnowledgeFragment
@@ -24,6 +25,9 @@ import javax.inject.Inject
 class MainPresenter @Inject constructor(private val mainView: MainContract.View,
                                         private val disposable: CompositeDisposable) :
         BasePresenter<MainContract.View, IModel>(null, disposable) {
+
+    @Inject
+    lateinit var mContext: Context
 
     @Inject
     lateinit var mPreferences: SharedPreferences
@@ -72,8 +76,8 @@ class MainPresenter @Inject constructor(private val mainView: MainContract.View,
     }
 
     fun loginOut() {
-        mPreferences[Constants.LOGIN_USER_NAME] = ""
         BaseApplication.INSTANCE.quitApp()
+        CookieManager.getInstance(mContext).clearCookieInfo()
         mView.startLoginActivity()
     }
 

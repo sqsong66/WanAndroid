@@ -1,6 +1,11 @@
 package com.sqsong.wanandroid.ui.home.mvp.home
 
+import android.content.Context
+import android.content.SharedPreferences
+import android.text.TextUtils
+import com.sqsong.wanandroid.R
 import com.sqsong.wanandroid.common.holder.LoadingFooterViewHolder
+import com.sqsong.wanandroid.data.BaseData
 import com.sqsong.wanandroid.data.HomeBannerBean
 import com.sqsong.wanandroid.data.HomeItem
 import com.sqsong.wanandroid.data.HomeItemBean
@@ -8,6 +13,8 @@ import com.sqsong.wanandroid.mvp.BasePresenter
 import com.sqsong.wanandroid.network.ApiException
 import com.sqsong.wanandroid.network.ObserverImpl
 import com.sqsong.wanandroid.ui.home.adapter.HomeItemAdapter
+import com.sqsong.wanandroid.util.Constants
+import com.sqsong.wanandroid.util.PreferenceHelper.get
 import com.sqsong.wanandroid.util.RxJavaHelper
 import io.reactivex.disposables.CompositeDisposable
 import javax.inject.Inject
@@ -17,11 +24,17 @@ class HomePresenter @Inject constructor(private val homeModel: HomeModel,
                                         private val disposable: CompositeDisposable) :
         BasePresenter<HomeContract.HomeView, HomeContract.Model>(homeModel, disposable), HomeItemAdapter.HomeItemActionListener {
 
-    private var homeItemList = mutableListOf<HomeItem>()
+    private var mPage: Int = 0
 
     private lateinit var mAdapter: HomeItemAdapter
 
-    private var mPage: Int = 0
+    private var homeItemList = mutableListOf<HomeItem>()
+
+    @Inject
+    lateinit var mContext: Context
+
+    @Inject
+    lateinit var mPreferences: SharedPreferences
 
     override fun onAttach(view: HomeContract.HomeView) {
         super.onAttach(view)
@@ -62,7 +75,8 @@ class HomePresenter @Inject constructor(private val homeModel: HomeModel,
                     }
 
                     override fun onFail(error: ApiException) {
-
+                        mView.showMessage(error.showMessage)
+                        if (mPage == 0) mView.showErrorPage()
                     }
                 })
     }
@@ -105,7 +119,35 @@ class HomePresenter @Inject constructor(private val homeModel: HomeModel,
     }
 
     override fun onStarClick(homeItem: HomeItem, position: Int) {
+        val userName: String = mPreferences[Constants.LOGIN_USER_NAME] ?: ""
+        if (TextUtils.isEmpty(userName)) {
+            mView.showLoginDialog()
+            return
+        }
 
+        val collectState = homeItem.collect
+        val requestObservable = if (collectState) homeModel.unCollectArticle(homeItem.id) else homeModel.collectArticle(homeItem.id)
+        requestObservable.compose(RxJavaHelper.compose())
+                .subscribe(object : ObserverImpl<BaseData>(disposable) {
+                    override fun onSuccess(bean: BaseData) {
+                        if (bean.errorCode == 0) {
+                            if (collectState) {
+                                homeItem.collect = false
+                                mView.showMessage(mContext.getString(R.string.text_cancel_collect_success))
+                            } else {
+                                homeItem.collect = true
+                                mView.showMessage(mContext.getString(R.string.text_collect_success))
+                            }
+                            mAdapter.notifyItemChanged(position)
+                        } else {
+                            mView.showMessage(bean.errorMsg)
+                        }
+                    }
+
+                    override fun onFail(error: ApiException) {
+                        mView.showMessage(error.showMessage)
+                    }
+                })
     }
 
     override fun onListItemClick(homeItem: HomeItem, position: Int) {

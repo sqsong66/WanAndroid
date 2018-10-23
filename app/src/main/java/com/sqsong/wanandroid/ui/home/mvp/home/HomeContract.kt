@@ -2,6 +2,7 @@ package com.sqsong.wanandroid.ui.home.mvp.home
 
 import android.content.Context
 import android.view.View
+import com.sqsong.wanandroid.data.BaseData
 import com.sqsong.wanandroid.data.HomeBannerBean
 import com.sqsong.wanandroid.data.HomeBannerData
 import com.sqsong.wanandroid.data.HomeItemBean
@@ -19,14 +20,20 @@ interface HomeContract {
         fun showEmptyPage()
         fun showLoadingPage()
         fun showContentPage()
+        fun showErrorPage()
         fun showBannerData(bannerList: MutableList<HomeBannerData>)
         fun loadFinish()
+        fun showLoginDialog()
     }
 
     interface Model : IModel {
         fun getBannerData(): Observable<HomeBannerBean>
 
         fun getHomeDataList(page: Int): Observable<HomeItemBean>
+
+        fun collectArticle(articleId: Int): Observable<BaseData>
+
+        fun unCollectArticle(articleId: Int): Observable<BaseData>
     }
 
 }

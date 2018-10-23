@@ -9,7 +9,7 @@
         <item name="colorSecondary">@color/colorAccent</item>
     </style>
 
-    <style name="AppTheme.TransparentTheme" parent="AppTheme">
+    <style name="AppTheme.TransparentTheme" parent="AppTheme.LoginTheme">
         <item name="windowNoTitle">true</item>
         <item name="windowActionBar">false</item>
     </style>
