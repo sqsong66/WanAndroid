@@ -1,20 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <attr name="colorNormalText" format="reference|color" />
     <attr name="colorPrimaryLight" format="reference|color" />
+    <attr name="colorCardBackground" format="reference|color" />
     <attr name="colorDefaultBackground" format="reference|color" />
     <attr name="colorTextActive" format="reference|color" />
+    <attr name="colorTextInActive" format="reference|color" />
+    <attr name="colorTextDisable" format="reference|color" />
 
     <declare-styleable name="CircleView">
         <attr name="bgColor" format="color" />
     </declare-styleable>
 
     <declare-styleable name="CirclePagerIndicator">
-        <attr name="normalDotColor" format="color"></attr>
-        <attr name="focusedDotColor" format="color"></attr>
-        <attr name="normalDotRadius" format="dimension"></attr>
-        <attr name="focusedDotRadius" format="dimension"></attr>
-        <attr name="dotSpace" format="dimension"></attr>
+        <attr name="normalDotColor" format="color" />
+        <attr name="focusedDotColor" format="color" />
+        <attr name="normalDotRadius" format="dimension" />
+        <attr name="focusedDotRadius" format="dimension" />
+        <attr name="dotSpace" format="dimension" />
     </declare-styleable>
 
     <declare-styleable name="BannerView">

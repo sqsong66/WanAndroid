@@ -7,6 +7,12 @@
         <item name="colorPrimaryLight">@color/colorPrimaryLight</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="colorError">@color/colorRed</item>
+
+        <item name="colorTextActive">@color/colorTextActive</item>
+        <item name="colorTextInActive">@color/colorTextInActive</item>
+        <item name="colorTextDisable">@color/colorTextDisable</item>
+        <item name="colorCardBackground">@color/colorWhite</item>
+        <item name="colorDefaultBackground">?android:colorBackground</item>
     </style>
 
     <style name="ThemeOverlay.Palette.Black" parent="AppTheme.LoginTheme">
@@ -15,6 +21,12 @@
         <item name="colorPrimaryLight">@color/colorBlackPrimaryLight</item>
         <item name="colorAccent">@color/colorBlackPrimaryLight</item>
         <item name="colorError">@color/colorRed</item>
+
+        <item name="colorTextActive">@color/colorWhite</item>
+        <item name="colorTextInActive">@color/colorWhite</item>
+        <item name="colorTextDisable">@color/colorWhite</item>
+        <item name="colorCardBackground">@color/colorBlackCard</item>
+        <item name="colorDefaultBackground">@color/colorBlackPrimaryLight</item>
     </style>
 
     <style name="ThemeOverlay.Palette.Red" parent="AppTheme.LoginTheme">
@@ -23,6 +35,12 @@
         <item name="colorPrimaryLight">@color/colorRedPrimaryLight</item>
         <item name="colorAccent">@color/colorRedPrimaryLight</item>
         <item name="colorError">@color/colorWhite</item>
+
+        <item name="colorTextActive">@color/colorTextActive</item>
+        <item name="colorTextInActive">@color/colorTextInActive</item>
+        <item name="colorTextDisable">@color/colorTextDisable</item>
+        <item name="colorCardBackground">@color/colorWhite</item>
+        <item name="colorDefaultBackground">?android:colorBackground</item>
     </style>
 
     <style name="ThemeOverlay.Palette.Purple" parent="AppTheme.LoginTheme">
@@ -31,6 +49,12 @@
         <item name="colorPrimaryLight">@color/colorPurplePrimaryLight</item>
         <item name="colorAccent">@color/colorPurplePrimaryLight</item>
         <item name="colorError">@color/colorRed</item>
+
+        <item name="colorTextActive">@color/colorTextActive</item>
+        <item name="colorTextInActive">@color/colorTextInActive</item>
+        <item name="colorTextDisable">@color/colorTextDisable</item>
+        <item name="colorCardBackground">@color/colorWhite</item>
+        <item name="colorDefaultBackground">?android:colorBackground</item>
     </style>
 
     <style name="ThemeOverlay.Palette.Indigo" parent="AppTheme.LoginTheme">
@@ -39,6 +63,12 @@
         <item name="colorPrimaryLight">@color/colorIndigoPrimaryLight</item>
         <item name="colorAccent">@color/colorIndigoPrimaryLight</item>
         <item name="colorError">@color/colorRed</item>
+
+        <item name="colorTextActive">@color/colorTextActive</item>
+        <item name="colorTextInActive">@color/colorTextInActive</item>
+        <item name="colorTextDisable">@color/colorTextDisable</item>
+        <item name="colorCardBackground">@color/colorWhite</item>
+        <item name="colorDefaultBackground">?android:colorBackground</item>
     </style>
 
     <style name="ThemeOverlay.Palette.Green" parent="AppTheme.LoginTheme">
@@ -47,6 +77,12 @@
         <item name="colorPrimaryLight">@color/colorGreenPrimaryLight</item>
         <item name="colorAccent">@color/colorGreenPrimaryLight</item>
         <item name="colorError">@color/colorRed</item>
+
+        <item name="colorTextActive">@color/colorTextActive</item>
+        <item name="colorTextInActive">@color/colorTextInActive</item>
+        <item name="colorTextDisable">@color/colorTextDisable</item>
+        <item name="colorCardBackground">@color/colorWhite</item>
+        <item name="colorDefaultBackground">?android:colorBackground</item>
     </style>
 
     <style name="ThemeOverlay.Palette.Orange" parent="AppTheme.LoginTheme">
@@ -55,6 +91,12 @@
         <item name="colorPrimaryLight">@color/colorOrangePrimaryLight</item>
         <item name="colorAccent">@color/colorOrangePrimaryLight</item>
         <item name="colorError">@color/colorRed</item>
+
+        <item name="colorTextActive">@color/colorTextActive</item>
+        <item name="colorTextInActive">@color/colorTextInActive</item>
+        <item name="colorTextDisable">@color/colorTextDisable</item>
+        <item name="colorCardBackground">@color/colorWhite</item>
+        <item name="colorDefaultBackground">?android:colorBackground</item>
     </style>
 
     <style name="ThemeOverlay.Palette.BlueGrey" parent="AppTheme.LoginTheme">
@@ -63,6 +105,12 @@
         <item name="colorPrimaryLight">@color/colorBlueGreyPrimaryLight</item>
         <item name="colorAccent">@color/colorBlueGreyPrimaryLight</item>
         <item name="colorError">@color/colorRed</item>
+
+        <item name="colorTextActive">@color/colorTextActive</item>
+        <item name="colorTextInActive">@color/colorTextInActive</item>
+        <item name="colorTextDisable">@color/colorTextDisable</item>
+        <item name="colorCardBackground">@color/colorWhite</item>
+        <item name="colorDefaultBackground">?android:colorBackground</item>
     </style>
 
     <style name="ThemeOverlay.Palette.Yellow" parent="AppTheme.LoginTheme">
@@ -71,6 +119,12 @@
         <item name="colorPrimaryLight">@color/colorYellowPrimaryLight</item>
         <item name="colorAccent">@color/colorYellowPrimaryLight</item>
         <item name="colorError">@color/colorRed</item>
+
+        <item name="colorTextActive">@color/colorTextActive</item>
+        <item name="colorTextInActive">@color/colorTextInActive</item>
+        <item name="colorTextDisable">@color/colorTextDisable</item>
+        <item name="colorCardBackground">@color/colorWhite</item>
+        <item name="colorDefaultBackground">?android:colorBackground</item>
     </style>
 
     <style name="ThemeOverlay.Palette.Brown" parent="AppTheme.LoginTheme">
@@ -79,6 +133,12 @@
         <item name="colorPrimaryLight">@color/colorBrownPrimaryLight</item>
         <item name="colorAccent">@color/colorBrownPrimaryLight</item>
         <item name="colorError">@color/colorRed</item>
+
+        <item name="colorTextActive">@color/colorTextActive</item>
+        <item name="colorTextInActive">@color/colorTextInActive</item>
+        <item name="colorTextDisable">@color/colorTextDisable</item>
+        <item name="colorCardBackground">@color/colorWhite</item>
+        <item name="colorDefaultBackground">?android:colorBackground</item>
     </style>
 
     <style name="ThemeOverlay.Palette.Pink" parent="AppTheme.LoginTheme">
@@ -87,6 +147,12 @@
         <item name="colorPrimaryLight">@color/colorPinkPrimaryLight</item>
         <item name="colorAccent">@color/colorPinkPrimaryLight</item>
         <item name="colorError">@color/colorRed</item>
+
+        <item name="colorTextActive">@color/colorTextActive</item>
+        <item name="colorTextInActive">@color/colorTextInActive</item>
+        <item name="colorTextDisable">@color/colorTextDisable</item>
+        <item name="colorCardBackground">@color/colorWhite</item>
+        <item name="colorDefaultBackground">?android:colorBackground</item>
     </style>
 
     <style name="ThemeOverlay.Palette.Blue" parent="AppTheme.LoginTheme">
@@ -95,6 +161,12 @@
         <item name="colorPrimaryLight">@color/colorBluePrimaryLight</item>
         <item name="colorAccent">@color/colorBluePrimaryLight</item>
         <item name="colorError">@color/colorRed</item>
+
+        <item name="colorTextActive">@color/colorTextActive</item>
+        <item name="colorTextInActive">@color/colorTextInActive</item>
+        <item name="colorTextDisable">@color/colorTextDisable</item>
+        <item name="colorCardBackground">@color/colorWhite</item>
+        <item name="colorDefaultBackground">?android:colorBackground</item>
     </style>
 
 </resources>
