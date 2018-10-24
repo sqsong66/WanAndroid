@@ -24,7 +24,7 @@ import org.greenrobot.eventbus.ThreadMode
 import javax.inject.Inject
 
 class HomePresenter @Inject constructor(private val homeModel: HomeModel,
-        /*private val homeView: HomeContract.HomeView,*/
+                                        /*private val homeView: HomeContract.HomeView,*/
                                         private val disposable: CompositeDisposable) :
         BasePresenter<HomeContract.HomeView, HomeContract.Model>(homeModel, disposable), HomeItemAdapter.HomeItemActionListener {
 
@@ -126,7 +126,6 @@ class HomePresenter @Inject constructor(private val homeModel: HomeModel,
         }
         if (mPage == 0) {
             homeItemList.clear()
-            mAdapter.resetAnimationPosition()
         }
         homeItemList.addAll(dataList)
         mAdapter.notifyDataSetChanged()

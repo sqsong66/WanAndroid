@@ -16,7 +16,6 @@ import com.sqsong.wanandroid.common.holder.LoadingFooterViewHolder
 import com.sqsong.wanandroid.common.holder.LoadingFooterViewHolder.LoadingState
 import com.sqsong.wanandroid.data.HomeItem
 import com.sqsong.wanandroid.util.Constants
-import com.sqsong.wanandroid.util.LogUtil
 import com.sqsong.wanandroid.view.CheckableImageView
 import com.sqsong.wanandroid.view.CircleTextView
 import com.sqsong.wanandroid.view.LabelView
@@ -65,10 +64,6 @@ class HomeItemAdapter(context: Context,
         }
     }
 
-//    override fun getItemId(position: Int): Long {
-//        return position.toLong()
-//    }
-
     override fun getItemCount(): Int {
         return dataList.size + 2
     }
@@ -77,14 +72,9 @@ class HomeItemAdapter(context: Context,
         this.mActionListener = listener
     }
 
-
     fun updateLoadingState(@LoadingState state: Int) {
         this.mLoadingState = state
         notifyItemChanged(dataList.size + 1)
-    }
-
-    fun resetAnimationPosition() {
-        mLastPosition = 0
     }
 
     class HomeBannerViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
@@ -139,7 +129,6 @@ class HomeItemAdapter(context: Context,
             titleTv?.text = homeItem.title
             superChapterChip?.text = homeItem.superChapterName
             chapterChip?.text = homeItem.chapterName
-            // starIv?.isChecked = false
             starIv?.isChecked = homeItem.collect
 
             starRl?.setOnClickListener {
@@ -149,20 +138,6 @@ class HomeItemAdapter(context: Context,
             itemView.setOnClickListener {
                 mActionListener?.onListItemClick(homeItem, position)
             }
-
-            LogUtil.e("Current position: $position, Last position: $mLastPosition")
-            /*if (!isFirstOnly || position >= mLastPosition) {
-                mLastPosition = position
-                val scaleX = ObjectAnimator.ofFloat(itemView, "scaleX", 0.5f, 1f)
-                val scaleY = ObjectAnimator.ofFloat(itemView, "scaleY", 0.5f, 1f)
-                val animatorSet = AnimatorSet()
-                animatorSet.interpolator = mInterpolator
-                animatorSet.duration = 400
-                animatorSet.playTogether(scaleX, scaleY)
-                animatorSet.start()
-            } else {
-                ViewHelper.clear(itemView)
-            }*/
         }
     }
 

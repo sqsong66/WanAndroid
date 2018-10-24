@@ -12,10 +12,12 @@ interface LoginContract {
     interface View : IView {
         fun getTitleText(): TextView
         fun closeDisposable(): Disposable
+        fun forgetPasswordDisposable(): Disposable
+        fun registerDisposable(): Disposable
         fun userNameDisposable(): Disposable
         fun passwordDisposable(): Disposable
         fun commitObservable(): Observable<Any>
-        fun infalteUserName(userName: String)
+        fun inflateUserName(userName: String)
         fun userNameText(): String
         fun passwordText(): String
         /**

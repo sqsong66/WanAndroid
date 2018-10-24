@@ -21,13 +21,13 @@ abstract class MainModule {
     abstract fun contributeHomeFragment(): HomeFragment
 
     @FragmentScope
-    @ContributesAndroidInjector(modules = [KnowledgeModule::class])
+    @ContributesAndroidInjector/*(modules = [KnowledgeModule::class])*/
     abstract fun contributeKnowledgeFragment(): KnowledgeFragment
 
-    @ContributesAndroidInjector(modules = [NavigationModule::class])
+    @ContributesAndroidInjector/*(modules = [NavigationModule::class])*/
     abstract fun contributeNavigationFragment(): NavigationFragment
 
-    @ContributesAndroidInjector(modules = [ProjectModule::class])
+    @ContributesAndroidInjector/*(modules = [ProjectModule::class])*/
     abstract fun contributeProjectFragment(): ProjectFragment
 
     @FragmentScope

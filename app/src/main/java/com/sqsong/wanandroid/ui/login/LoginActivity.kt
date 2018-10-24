@@ -42,6 +42,14 @@ class LoginActivity : BaseActivity<LoginPresenter>(), LoginContract.View, IAppCo
         return registerClickEvent(closeIv) { finish() }
     }
 
+    override fun forgetPasswordDisposable(): Disposable {
+        return registerClickEvent(forgetPasswordTv) { showMessage(getString(R.string.text_developing)) }
+    }
+
+    override fun registerDisposable(): Disposable {
+        return registerClickEvent(registerTipsTv) { startActivity(Intent(this, RegisterActivity::class.java)) }
+    }
+
     override fun userNameDisposable(): Disposable {
         return registerTextChangeEvent(userNameEdit, userNameInputLayout)
     }
@@ -54,7 +62,7 @@ class LoginActivity : BaseActivity<LoginPresenter>(), LoginContract.View, IAppCo
         return RxView.clicks(loginBtn)
     }
 
-    override fun infalteUserName(userName: String) {
+    override fun inflateUserName(userName: String) {
         userNameEdit.setText(userName)
     }
 

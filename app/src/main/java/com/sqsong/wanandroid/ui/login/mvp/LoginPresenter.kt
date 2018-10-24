@@ -38,6 +38,8 @@ class LoginPresenter @Inject constructor(private val loginView: LoginContract.Vi
         setupUserName()
         CommonUtil.setAssetsTextFont(mView.getTitleText(), "font/Pacifico-Regular.ttf") // Set title font.
         disposable.add(mView.closeDisposable())
+        disposable.add(mView.forgetPasswordDisposable())
+        disposable.add(mView.registerDisposable())
         disposable.add(mView.userNameDisposable())
         disposable.add(mView.passwordDisposable())
         registerCommitEvent()
@@ -47,7 +49,7 @@ class LoginPresenter @Inject constructor(private val loginView: LoginContract.Vi
         mPreferences[Constants.LOGIN_USER_NAME] = "" // Clear login user name.
         val userName = mPreferences[Constants.LOGIN_LATEST_USER] ?: ""
         if (!TextUtils.isEmpty(userName)) {
-            mView.infalteUserName(userName)
+            mView.inflateUserName(userName)
         }
     }
 

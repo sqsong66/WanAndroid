@@ -48,7 +48,8 @@
         app:layout_anchor="@id/bottomNavigationView"
         app:layout_anchorGravity="top|end"
         app:layout_behavior="com.sqsong.wanandroid.util.behavior.BottomNavigationFABBehavior"
-        app:srcCompat="@drawable/ic_arrow_up_white"
-        app:useCompatPadding="true" />
+        app:srcCompat="@drawable/ic_arrow_up"
+        app:useCompatPadding="true"
+        tools:ignore="VectorDrawableCompat" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
