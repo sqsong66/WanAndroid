@@ -13,6 +13,7 @@
         <item name="colorTextDisable">@color/colorTextDisable</item>
         <item name="colorCardBackground">@color/colorWhite</item>
         <item name="colorDefaultBackground">?android:colorBackground</item>
+        <item name="colorProgress">@color/colorPrimary</item>
     </style>
 
     <style name="ThemeOverlay.Palette.Black" parent="AppTheme.LoginTheme">
@@ -27,6 +28,7 @@
         <item name="colorTextDisable">@color/colorWhite</item>
         <item name="colorCardBackground">@color/colorBlackCard</item>
         <item name="colorDefaultBackground">@color/colorBlackPrimaryLight</item>
+        <item name="colorProgress">@color/colorWhite</item>
     </style>
 
     <style name="ThemeOverlay.Palette.Red" parent="AppTheme.LoginTheme">
@@ -41,6 +43,7 @@
         <item name="colorTextDisable">@color/colorTextDisable</item>
         <item name="colorCardBackground">@color/colorWhite</item>
         <item name="colorDefaultBackground">?android:colorBackground</item>
+        <item name="colorProgress">@color/colorRedPrimary</item>
     </style>
 
     <style name="ThemeOverlay.Palette.Purple" parent="AppTheme.LoginTheme">
@@ -55,6 +58,7 @@
         <item name="colorTextDisable">@color/colorTextDisable</item>
         <item name="colorCardBackground">@color/colorWhite</item>
         <item name="colorDefaultBackground">?android:colorBackground</item>
+        <item name="colorProgress">@color/colorPurplePrimary</item>
     </style>
 
     <style name="ThemeOverlay.Palette.Indigo" parent="AppTheme.LoginTheme">
@@ -69,6 +73,7 @@
         <item name="colorTextDisable">@color/colorTextDisable</item>
         <item name="colorCardBackground">@color/colorWhite</item>
         <item name="colorDefaultBackground">?android:colorBackground</item>
+        <item name="colorProgress">@color/colorIndigoPrimary</item>
     </style>
 
     <style name="ThemeOverlay.Palette.Green" parent="AppTheme.LoginTheme">
@@ -83,6 +88,7 @@
         <item name="colorTextDisable">@color/colorTextDisable</item>
         <item name="colorCardBackground">@color/colorWhite</item>
         <item name="colorDefaultBackground">?android:colorBackground</item>
+        <item name="colorProgress">@color/colorGreenPrimary</item>
     </style>
 
     <style name="ThemeOverlay.Palette.Orange" parent="AppTheme.LoginTheme">
@@ -97,6 +103,7 @@
         <item name="colorTextDisable">@color/colorTextDisable</item>
         <item name="colorCardBackground">@color/colorWhite</item>
         <item name="colorDefaultBackground">?android:colorBackground</item>
+        <item name="colorProgress">@color/colorOrangePrimary</item>
     </style>
 
     <style name="ThemeOverlay.Palette.BlueGrey" parent="AppTheme.LoginTheme">
@@ -111,6 +118,7 @@
         <item name="colorTextDisable">@color/colorTextDisable</item>
         <item name="colorCardBackground">@color/colorWhite</item>
         <item name="colorDefaultBackground">?android:colorBackground</item>
+        <item name="colorProgress">@color/colorBlueGreyPrimary</item>
     </style>
 
     <style name="ThemeOverlay.Palette.Yellow" parent="AppTheme.LoginTheme">
@@ -125,6 +133,7 @@
         <item name="colorTextDisable">@color/colorTextDisable</item>
         <item name="colorCardBackground">@color/colorWhite</item>
         <item name="colorDefaultBackground">?android:colorBackground</item>
+        <item name="colorProgress">@color/colorYellowPrimary</item>
     </style>
 
     <style name="ThemeOverlay.Palette.Brown" parent="AppTheme.LoginTheme">
@@ -139,6 +148,7 @@
         <item name="colorTextDisable">@color/colorTextDisable</item>
         <item name="colorCardBackground">@color/colorWhite</item>
         <item name="colorDefaultBackground">?android:colorBackground</item>
+        <item name="colorProgress">@color/colorBrownPrimary</item>
     </style>
 
     <style name="ThemeOverlay.Palette.Pink" parent="AppTheme.LoginTheme">
@@ -153,6 +163,7 @@
         <item name="colorTextDisable">@color/colorTextDisable</item>
         <item name="colorCardBackground">@color/colorWhite</item>
         <item name="colorDefaultBackground">?android:colorBackground</item>
+        <item name="colorProgress">@color/colorPinkPrimary</item>
     </style>
 
     <style name="ThemeOverlay.Palette.Blue" parent="AppTheme.LoginTheme">
@@ -167,6 +178,7 @@
         <item name="colorTextDisable">@color/colorTextDisable</item>
         <item name="colorCardBackground">@color/colorWhite</item>
         <item name="colorDefaultBackground">?android:colorBackground</item>
+        <item name="colorProgress">@color/colorBluePrimary</item>
     </style>
 
 </resources>

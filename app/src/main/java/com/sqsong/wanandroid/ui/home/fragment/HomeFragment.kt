@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.sqsong.wanandroid.R
 import com.sqsong.wanandroid.common.RecyclerScrollListener
-import com.sqsong.wanandroid.common.event.FabClickEvent
 import com.sqsong.wanandroid.data.HomeBannerData
 import com.sqsong.wanandroid.ui.base.BaseFragment
 import com.sqsong.wanandroid.ui.home.adapter.HomeItemAdapter
@@ -22,9 +21,6 @@ import com.sqsong.wanandroid.ui.login.LoginActivity
 import com.sqsong.wanandroid.view.DefaultPageLayout
 import com.sqsong.wanandroid.view.banner.BannerView
 import kotlinx.android.synthetic.main.fragment_home_backup.*
-import org.greenrobot.eventbus.EventBus
-import org.greenrobot.eventbus.Subscribe
-import org.greenrobot.eventbus.ThreadMode
 import javax.inject.Inject
 
 class HomeFragment @Inject constructor() : BaseFragment<HomePresenter>(), HomeContract.HomeView,
@@ -48,7 +44,6 @@ class HomeFragment @Inject constructor() : BaseFragment<HomePresenter>(), HomeCo
     }
 
     override fun initEvent() {
-        EventBus.getDefault().register(this)
         setupSwipeLayout()
         setupRecyclerView()
         mPresenter.onAttach(this)
@@ -71,13 +66,6 @@ class HomeFragment @Inject constructor() : BaseFragment<HomePresenter>(), HomeCo
         mRecyclerScroller = RecyclerScrollListener(layoutManager)
         recycler.addOnScrollListener(mRecyclerScroller)
         mRecyclerScroller.setOnLoadMoreListener(this)
-    }
-
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    fun onFabClick(event: FabClickEvent) {
-        if (event.index == 0) {
-            recycler.smoothScrollToPosition(0)
-        }
     }
 
     override fun onRefresh() {
@@ -132,6 +120,10 @@ class HomeFragment @Inject constructor() : BaseFragment<HomePresenter>(), HomeCo
         mRecyclerScroller.loadFinish()
     }
 
+    override fun scrollRecycler(position: Int) {
+        recycler.smoothScrollToPosition(position)
+    }
+
     override fun showLoginDialog() {
         AlertDialog.Builder(activity!!)
                 .setTitle(R.string.text_login_tips_title)
@@ -152,6 +144,5 @@ class HomeFragment @Inject constructor() : BaseFragment<HomePresenter>(), HomeCo
     override fun onDestroy() {
         super.onDestroy()
         mPresenter.onDestroy()
-        EventBus.getDefault().unregister(this)
     }
 }

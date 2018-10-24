@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.SharedPreferences
 import android.text.TextUtils
 import com.sqsong.wanandroid.R
+import com.sqsong.wanandroid.common.event.FabClickEvent
 import com.sqsong.wanandroid.common.holder.LoadingFooterViewHolder
 import com.sqsong.wanandroid.data.BaseData
 import com.sqsong.wanandroid.data.HomeBannerBean
@@ -17,6 +18,9 @@ import com.sqsong.wanandroid.util.Constants
 import com.sqsong.wanandroid.util.PreferenceHelper.get
 import com.sqsong.wanandroid.util.RxJavaHelper
 import io.reactivex.disposables.CompositeDisposable
+import org.greenrobot.eventbus.EventBus
+import org.greenrobot.eventbus.Subscribe
+import org.greenrobot.eventbus.ThreadMode
 import javax.inject.Inject
 
 class HomePresenter @Inject constructor(private val homeModel: HomeModel,
@@ -43,6 +47,8 @@ class HomePresenter @Inject constructor(private val homeModel: HomeModel,
     }
 
     private fun setupAdapter() {
+        EventBus.getDefault().register(this)
+
         mAdapter = HomeItemAdapter(mView.getAppContext(), homeItemList)
         mAdapter.setHeaderView(mView.getBannerHeaderView())
         mAdapter.setHomeItemActionListener(this)
@@ -70,15 +76,24 @@ class HomePresenter @Inject constructor(private val homeModel: HomeModel,
                             mView.showContentPage()
                             mView.showBannerData(bean.data)
                         } else {
-                            mView.showMessage(bean.errorMsg!!)
+                            showErrors(bean.errorMsg!!)
                         }
                     }
 
                     override fun onFail(error: ApiException) {
-                        mView.showMessage(error.showMessage)
-                        if (mPage == 0) mView.showErrorPage()
+                        showErrors(error.showMessage)
                     }
                 })
+    }
+
+    private fun showErrors(message: String) {
+        mView.showMessage(message)
+        if (mPage == 0) {
+            mView.showErrorPage()
+        } else {
+            mPage--
+            mView.loadFinish()
+        }
     }
 
     private fun requestHomeList() {
@@ -154,4 +169,15 @@ class HomePresenter @Inject constructor(private val homeModel: HomeModel,
 
     }
 
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    fun onFabClick(event: FabClickEvent) {
+        if (event.index == 0) {
+            mView.scrollRecycler(0)
+        }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        EventBus.getDefault().unregister(this)
+    }
 }

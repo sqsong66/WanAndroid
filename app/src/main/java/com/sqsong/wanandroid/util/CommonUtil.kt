@@ -16,8 +16,9 @@ object CommonUtil {
 
     fun setProgressbarColor(progressBar: ProgressBar?) {
         val drawable = progressBar?.indeterminateDrawable?.mutate()
-        val a = progressBar?.context?.obtainStyledAttributes(TypedValue().data, intArrayOf(R.attr.colorPrimary))
+        val a = progressBar?.context?.obtainStyledAttributes(TypedValue().data, intArrayOf(R.attr.colorProgress))
         val color = a?.getColor(0, 0)
+        a?.recycle()
         drawable?.setColorFilter(color!!, android.graphics.PorterDuff.Mode.SRC_IN)
         progressBar?.progressDrawable = drawable
     }

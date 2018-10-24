@@ -19,7 +19,7 @@
     <color name="colorTextInActive">#666666</color>
     <color name="colorTextDisable">#9E9E9E</color>
     <color name="colorIconTint">#737373</color>
-    <color name="colorBlackCard">#262626</color>
+    <color name="colorBlackCard">#303030</color>
 
     <!-- Theme Color -->
     <color name="colorBlackPrimary">#212121</color>
@@ -50,9 +50,9 @@
     <color name="colorBlueGreyPrimaryDark">#29434e</color>
     <color name="colorBlueGreyPrimaryLight">#819ca9</color>
 
-    <color name="colorYellowPrimary">#ffde03</color>
-    <color name="colorYellowPrimaryDark">#c7ad00</color>
-    <color name="colorYellowPrimaryLight">#ffff54</color>
+    <color name="colorYellowPrimary">#ef9a9a</color>
+    <color name="colorYellowPrimaryDark">#ba6b6c</color>
+    <color name="colorYellowPrimaryLight">#ffcccb</color>
 
     <color name="colorBrownPrimary">#6d4c41</color>
     <color name="colorBrownPrimaryDark">#40241a</color>
