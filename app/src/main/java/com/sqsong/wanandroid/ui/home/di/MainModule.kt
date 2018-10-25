@@ -3,7 +3,7 @@ package com.sqsong.wanandroid.ui.home.di
 import com.sqsong.wanandroid.di.scope.ActivityScope
 import com.sqsong.wanandroid.di.scope.FragmentScope
 import com.sqsong.wanandroid.theme.ThemeSwitcherDialog
-import com.sqsong.wanandroid.ui.home.MainActivity
+import com.sqsong.wanandroid.ui.home.activity.MainActivity
 import com.sqsong.wanandroid.ui.home.fragment.HomeFragment
 import com.sqsong.wanandroid.ui.home.fragment.KnowledgeFragment
 import com.sqsong.wanandroid.ui.home.fragment.NavigationFragment

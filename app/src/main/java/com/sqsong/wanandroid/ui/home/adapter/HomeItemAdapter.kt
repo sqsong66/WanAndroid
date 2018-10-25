@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.view.animation.LinearInterpolator
 import android.widget.RelativeLayout
 import android.widget.TextView
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import butterknife.BindView
 import butterknife.ButterKnife
@@ -24,10 +25,6 @@ class HomeItemAdapter(context: Context,
                       private val dataList: List<HomeItem>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private val mInflater = LayoutInflater.from(context)
-
-    var isFirstOnly = true
-    var mLastPosition: Int = 0
-    val mInterpolator = LinearInterpolator()
 
     @LoadingState
     private var mLoadingState: Int = 0
@@ -117,6 +114,10 @@ class HomeItemAdapter(context: Context,
         @JvmField
         var starRl: RelativeLayout? = null
 
+        @BindView(R.id.constraintLayout)
+        @JvmField
+        var constraintLayout: ConstraintLayout? = null
+
         init {
             ButterKnife.bind(this@HomeItemViewHolder, itemView)
         }
@@ -135,7 +136,7 @@ class HomeItemAdapter(context: Context,
                 mActionListener?.onStarClick(homeItem, position)
             }
 
-            itemView.setOnClickListener {
+            constraintLayout?.setOnClickListener {
                 mActionListener?.onListItemClick(homeItem, position)
             }
         }

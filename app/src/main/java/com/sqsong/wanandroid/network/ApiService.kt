@@ -1,9 +1,6 @@
 package com.sqsong.wanandroid.network
 
-import com.sqsong.wanandroid.data.BaseData
-import com.sqsong.wanandroid.data.HomeBannerBean
-import com.sqsong.wanandroid.data.HomeItemBean
-import com.sqsong.wanandroid.data.LoginBean
+import com.sqsong.wanandroid.data.*
 import io.reactivex.Observable
 import retrofit2.http.*
 
@@ -36,4 +33,8 @@ interface ApiService {
     // 收藏文章
     @POST("lg/uncollect_originId/{id}/json")
     fun unCollectArticle(@Path("id") articleId: Int): Observable<BaseData>
+
+    // 体系列表
+    @GET("tree/json")
+    fun getKnowledgeList(): Observable<KnowledgeBean>
 }

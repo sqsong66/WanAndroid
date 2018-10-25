@@ -7,6 +7,7 @@
     <attr name="colorTextInActive" format="reference|color" />
     <attr name="colorTextDisable" format="reference|color" />
     <attr name="colorProgress" format="reference|color" />
+    <attr name="colorChipBackground" format="reference|color" />
 
     <declare-styleable name="CircleView">
         <attr name="bgColor" format="color" />

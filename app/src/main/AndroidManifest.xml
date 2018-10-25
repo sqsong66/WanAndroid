@@ -33,7 +33,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.home.MainActivity"
+            android:name=".ui.home.activity.MainActivity"
             android:launchMode="singleTask"
             android:theme="@style/AppTheme.LoginTheme" />
         <activity
@@ -43,6 +43,9 @@
         <activity
             android:name=".ui.login.RegisterActivity"
             android:theme="@style/AppTheme.LoginTheme" />
+        <activity
+            android:name=".ui.home.activity.KnowledgeActivity"
+            android:label="@string/title_activity_knowledge"></activity>
     </application>
 
 </manifest>

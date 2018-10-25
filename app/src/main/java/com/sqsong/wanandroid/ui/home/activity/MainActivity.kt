@@ -1,4 +1,4 @@
-package com.sqsong.wanandroid.ui.home
+package com.sqsong.wanandroid.ui.home.activity
 
 import android.content.Intent
 import android.view.Menu

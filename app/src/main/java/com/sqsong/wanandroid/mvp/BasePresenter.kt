@@ -2,8 +2,8 @@ package com.sqsong.wanandroid.mvp
 
 import io.reactivex.disposables.CompositeDisposable
 
-open class BasePresenter<V : IView, M : IModel> constructor(var mModel: M? = null,
-                                                            var mCompositeDisposable: CompositeDisposable? = null) : IPresenter<V> {
+open class BasePresenter<V : IView, M : IModel> constructor(private var mModel: M? = null,
+                                                            private var mCompositeDisposable: CompositeDisposable? = null) : IPresenter<V> {
     lateinit var mView: V
 
     override fun onAttach(view: V) {

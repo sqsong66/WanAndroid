@@ -10,7 +10,7 @@ import com.jakewharton.rxbinding2.view.RxView
 import com.sqsong.wanandroid.R
 import com.sqsong.wanandroid.mvp.BasePresenter
 import com.sqsong.wanandroid.mvp.IModel
-import com.sqsong.wanandroid.ui.home.MainActivity
+import com.sqsong.wanandroid.ui.home.activity.MainActivity
 import com.sqsong.wanandroid.util.CommonUtil
 import com.sqsong.wanandroid.util.Constants
 import com.sqsong.wanandroid.util.DensityUtil

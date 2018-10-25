@@ -26,7 +26,6 @@ class ActivityLifecycleCallbacksImpl : Application.ActivityLifecycleCallbacks {
 
         // 设置主题
         if ((activity?.javaClass?.isAnnotationPresent(ChangeThemeAnnotation::class.java))!!)
-//            ThemeOverlayUtil.applyThemeOverlay(activity)
             mThemeManager.applyThemeOverlay(activity)
 
         // 处理Activity事件

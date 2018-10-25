@@ -1,5 +1,8 @@
 package com.sqsong.wanandroid.data
 
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
+
 abstract class BaseBean<T : Any> {
     val errorCode: Int = 0
     val errorMsg: String? = null
@@ -63,3 +66,17 @@ data class HomeItem(val apkLink: String,
                     val visible: Int,
                     var zan: Int)
 /********************* End: Home list bean **********************/
+
+/********************* Start: Knowledge bean **********************/
+data class KnowledgeBean(override var data: List<KnowledgeData>) : BaseBean<List<KnowledgeData>>()
+
+@Parcelize
+data class KnowledgeData(val children: List<KnowledgeData>,
+                         val courseId: Int,
+                         val id: Int,
+                         val name: String,
+                         val order: Int,
+                         val parentChapterId: Int,
+                         val userControlSetTop: Boolean,
+                         val visible: Int) : Parcelable
+/********************* End: Knowledge bean **********************/

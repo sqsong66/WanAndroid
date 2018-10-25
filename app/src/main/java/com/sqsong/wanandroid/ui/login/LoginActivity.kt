@@ -8,7 +8,7 @@ import com.sqsong.wanandroid.common.LoadingProgressDialog
 import com.sqsong.wanandroid.common.inter.ChangeThemeAnnotation
 import com.sqsong.wanandroid.common.inter.IAppCompatActivity
 import com.sqsong.wanandroid.ui.base.BaseActivity
-import com.sqsong.wanandroid.ui.home.MainActivity
+import com.sqsong.wanandroid.ui.home.activity.MainActivity
 import com.sqsong.wanandroid.ui.login.mvp.LoginContract
 import com.sqsong.wanandroid.ui.login.mvp.LoginPresenter
 import com.sqsong.wanandroid.util.registerClickEvent
