@@ -30,6 +30,7 @@ class ActivityLifecycleCallbacksImpl : Application.ActivityLifecycleCallbacks {
 
         // 处理Activity事件
         if (activity is IAppCompatActivity) {
+            activity.beforeInflateView()
             activity.setContentView(activity.getLayoutResId())
             activity.initEvent()
         }

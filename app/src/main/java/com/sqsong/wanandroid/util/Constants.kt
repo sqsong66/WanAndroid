@@ -10,6 +10,8 @@ object Constants {
 
     const val LOGIN_LATEST_USER = "login_latest_user"
 
+    const val KNOWLEDGE_DATA = "knowledge_data"
+
     const val DEFAULT_TIME_OUT: Long = 10000
 
     const val SPLASH_TIME: Long = 3 // second

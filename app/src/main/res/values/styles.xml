@@ -9,14 +9,12 @@
         <item name="colorSecondary">@color/colorAccent</item>
     </style>
 
-    <style name="AppTheme.TransparentTheme" parent="AppTheme.LoginTheme">
-        <item name="windowNoTitle">true</item>
-        <item name="windowActionBar">false</item>
-    </style>
+    <style name="AppTheme.TransparentTheme" parent="AppTheme.LoginTheme" />
 
     <style name="AppTheme.LoginTheme" parent="AppTheme">
         <item name="windowNoTitle">true</item>
         <item name="windowActionBar">false</item>
+        <item name="android:windowBackground">@null</item>
         <item name="colorControlNormal">@color/colorWhite</item>
         <item name="colorControlActivated">@color/colorWhite</item>
         <item name="colorControlHighlight">@color/colorWhite</item>

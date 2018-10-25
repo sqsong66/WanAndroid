@@ -25,6 +25,7 @@ import android.widget.TextView
 import androidx.annotation.IdRes
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
@@ -34,14 +35,6 @@ import com.jakewharton.rxbinding2.widget.RxTextView
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 
-fun AppCompatActivity.getStatusBarHeight(): Int {
-    val identifier = resources.getIdentifier("status_bar_height", "dimen", "android")
-    var height = 0
-    if (identifier > 0) {
-        height = resources.getDimensionPixelSize(identifier)
-    }
-    return height
-}
 
 /**
  * The `fragment` is added to the container view with id `frameId`. The operation is
@@ -68,6 +61,12 @@ fun AppCompatActivity.setupActionBar(@IdRes toolbarId: Int, action: ActionBar.()
     supportActionBar?.run {
         action()
     }
+}
+
+fun AppCompatActivity.setupToolbar(toolbar: Toolbar) {
+    setSupportActionBar(toolbar)
+    supportActionBar?.setDisplayShowHomeEnabled(true)
+    supportActionBar?.setDisplayShowHomeEnabled(true)
 }
 
 /**
