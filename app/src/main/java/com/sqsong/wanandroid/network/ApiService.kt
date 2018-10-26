@@ -39,6 +39,6 @@ interface ApiService {
     fun getKnowledgeList(): Observable<KnowledgeBean>
 
     // 体系文章列表
-    @GET("article/list/{page}/json?cid={cid}")
-    fun getKnowledgeChildList(@Path("page") page: Int, @Path("cid") cid: Int): Observable<HomeItemBean>
+    @GET("article/list/{page}/json")
+    fun getKnowledgeChildList(@Path("page") page: Int, @Query("cid") cid: Int): Observable<HomeItemBean>
 }

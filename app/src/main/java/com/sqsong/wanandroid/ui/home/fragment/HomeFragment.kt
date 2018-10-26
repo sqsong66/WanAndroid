@@ -70,7 +70,6 @@ class HomeFragment @Inject constructor() : BaseFragment<HomePresenter>(), HomeCo
 
     override fun onRefresh() {
         showContentPage()
-        swipeLayout.isRefreshing = true
         mPresenter.refreshData()
     }
 

@@ -1,5 +1,7 @@
 package com.sqsong.wanandroid.mvp
 
+import android.os.Message
+
 interface IView {
 
     fun showLoading()
@@ -7,5 +9,7 @@ interface IView {
     fun hideLoading()
 
     fun showMessage(message: String?)
+
+    fun handleMessage(message: Message)
 
 }

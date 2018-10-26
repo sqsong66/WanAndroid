@@ -68,7 +68,7 @@ class KnowledgeAdapter(val context: Context, val dataList: MutableList<Knowledge
 
             val layoutParams = chipGroup?.layoutParams as ConstraintLayout.LayoutParams
             if (position == dataList.size - 1) {
-                layoutParams.bottomMargin = DensityUtil.dip2px(10)
+                layoutParams.bottomMargin = DensityUtil.dip2px(20)
             } else {
                 layoutParams.bottomMargin = 0
             }

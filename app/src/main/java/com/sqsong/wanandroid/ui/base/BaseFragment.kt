@@ -1,6 +1,7 @@
 package com.sqsong.wanandroid.ui.base
 
 import android.os.Bundle
+import android.os.Message
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -48,6 +49,10 @@ abstract class BaseFragment<P : IPresenter<*>> : DaggerFragment(), IView {
 
     override fun showMessage(message: String?) {
         Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
+    }
+
+    override fun handleMessage(message: Message) {
+
     }
 
     override fun onDestroy() {

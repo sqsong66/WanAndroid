@@ -122,7 +122,7 @@ class ThemeColorAdapter(context: Context?, themeOverlayList: MutableList<ColorPa
         }
     }
 
-    open fun setOnItemClickListener(listener: OnItemClickListener<ColorPalette>) {
+    fun setOnItemClickListener(listener: OnItemClickListener<ColorPalette>) {
         this.mListener = listener
     }
 

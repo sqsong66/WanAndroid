@@ -17,4 +17,5 @@ interface IAppCompatActivity {
      * Start init something
      */
     fun initEvent()
+
 }

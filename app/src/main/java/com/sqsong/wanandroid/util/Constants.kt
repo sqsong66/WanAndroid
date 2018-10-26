@@ -25,4 +25,6 @@ object Constants {
     const val ITEM_TYPE_NONE = 4
 
     const val APP_QUIT_TIME = 2000
+
+    const val PAGE_SIZE = 20
 }

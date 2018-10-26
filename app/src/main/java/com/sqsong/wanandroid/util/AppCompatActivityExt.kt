@@ -66,7 +66,7 @@ fun AppCompatActivity.setupActionBar(@IdRes toolbarId: Int, action: ActionBar.()
 fun AppCompatActivity.setupToolbar(toolbar: Toolbar) {
     setSupportActionBar(toolbar)
     supportActionBar?.setDisplayShowHomeEnabled(true)
-    supportActionBar?.setDisplayShowHomeEnabled(true)
+    supportActionBar?.setDisplayHomeAsUpEnabled(true)
 }
 
 /**

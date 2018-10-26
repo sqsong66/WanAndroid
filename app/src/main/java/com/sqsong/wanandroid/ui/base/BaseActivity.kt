@@ -1,6 +1,7 @@
 package com.sqsong.wanandroid.ui.base
 
 import android.annotation.SuppressLint
+import android.os.Message
 import com.sqsong.wanandroid.common.inter.IAppCompatActivity
 import com.sqsong.wanandroid.mvp.IPresenter
 import com.sqsong.wanandroid.mvp.IView
@@ -28,5 +29,9 @@ open abstract class BaseActivity<P : IPresenter<*>> : DaggerAppCompatActivity(),
 
     override fun showMessage(message: String?) {
         SnackbarUtil.showNormalToast(this, message!!)
+    }
+
+    override fun handleMessage(message: Message) {
+
     }
 }
