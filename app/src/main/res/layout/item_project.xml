@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="16dp"
+    android:layout_marginTop="16dp"
+    android:layout_marginRight="16dp"
+    android:background="@drawable/bg_round_corner"
+    app:cardBackgroundColor="?colorCardBackground"
+    app:cardCornerRadius="5dp"
+    app:cardElevation="8dp">
+    <!--android:background="?android:attr/selectableItemBackground"-->
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_round_corner">
+        <!--android:background="@drawable/bg_round_corner"-->
+
+        <com.sqsong.wanandroid.view.LabelView
+            android:id="@+id/labelView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:lv_background_color="?colorPrimaryLight"
+            app:lv_fill_triangle="true"
+            app:lv_gravity="TOP_RIGHT"
+            app:lv_padding="15dp"
+            app:lv_text="new"
+            app:lv_text_all_caps="false"
+            app:lv_text_bold="true"
+            app:lv_text_size="10sp" />
+
+        <ImageView
+            android:id="@+id/previewIv"
+            android:layout_width="100dp"
+            android:layout_height="180dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/splash_image01" />
+
+        <TextView
+            android:id="@+id/titleTv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginRight="16dp"
+            android:ellipsize="end"
+            android:gravity="start"
+            android:maxLines="2"
+            android:text="Hongyang"
+            android:textColor="?colorTextActive"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintLeft_toRightOf="@id/previewIv"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/descTv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginRight="16dp"
+            android:ellipsize="end"
+            android:gravity="start"
+            android:maxLines="3"
+            android:text="Hongyang"
+            android:textColor="?colorTextActive"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toTopOf="@id/heartRl"
+            app:layout_constraintLeft_toRightOf="@id/previewIv"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/titleTv" />
+
+        <ImageView
+            android:id="@+id/authorIv"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginLeft="16dp"
+            android:src="@drawable/ic_author"
+            android:tint="?colorChipBackground"
+            app:layout_constraintBottom_toBottomOf="@id/heartRl"
+            app:layout_constraintLeft_toRightOf="@id/previewIv"
+            app:layout_constraintTop_toTopOf="@id/heartRl" />
+
+        <TextView
+            android:id="@+id/authorTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginBottom="2dp"
+            android:ellipsize="end"
+            android:gravity="start"
+            android:maxLines="1"
+            android:text="Hongyang"
+            android:textColor="?colorTextActive"
+            android:textSize="15sp"
+            app:layout_constraintBottom_toBottomOf="@id/authorIv"
+            app:layout_constraintLeft_toRightOf="@id/authorIv"
+            app:layout_constraintTop_toTopOf="@id/authorIv" />
+
+        <ImageView
+            android:id="@+id/timeIv"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginRight="5dp"
+            android:src="@drawable/ic_time"
+            android:tint="?colorChipBackground"
+            app:layout_constraintBottom_toBottomOf="@id/authorIv"
+            app:layout_constraintLeft_toRightOf="@id/authorTv"
+            app:layout_constraintTop_toTopOf="@id/authorIv" />
+
+        <TextView
+            android:id="@+id/timeTv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="2dp"
+            android:ellipsize="end"
+            android:gravity="start"
+            android:maxLines="1"
+            android:text="2018-10-25"
+            android:textColor="?colorTextActive"
+            android:textSize="15sp"
+            app:layout_constraintBottom_toBottomOf="@id/authorIv"
+            app:layout_constraintLeft_toRightOf="@id/timeIv"
+            app:layout_constraintRight_toLeftOf="@id/heartRl"
+            app:layout_constraintTop_toTopOf="@id/authorIv" />
+
+        <RelativeLayout
+            android:id="@+id/heartRl"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="3dp"
+            android:layout_marginRight="3dp"
+            android:layout_marginBottom="3dp"
+            android:background="@drawable/bg_home_item_circle"
+            android:padding="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toRightOf="parent">
+
+            <com.sqsong.wanandroid.view.CheckableImageView
+                android:id="@+id/heartIv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:clickable="false"
+                android:src="@drawable/selector_heart"
+                android:tint="?colorChipBackground" />
+
+        </RelativeLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>
