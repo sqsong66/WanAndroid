@@ -45,4 +45,12 @@ interface ApiService {
     // 导航数据
     @GET("navi/json")
     fun getNavigationList(): Observable<NavigationBean>
+
+    // 项目分类
+    @GET("project/tree/json")
+    fun getProjectClassify(): Observable<KnowledgeBean>
+
+    // 项目列表
+    @GET("project/list/{page}/json")
+    fun getProjectList(@Path("page") page: Int, @Query("cid") cid: Int): Observable<HomeItemBean>
 }

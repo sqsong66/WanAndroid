@@ -18,6 +18,7 @@ import com.sqsong.wanandroid.ui.home.activity.KnowledgeActivity
 import com.sqsong.wanandroid.ui.home.adapter.KnowledgeAdapter
 import com.sqsong.wanandroid.ui.home.mvp.knowledge.KnowledgeContract
 import com.sqsong.wanandroid.ui.home.mvp.knowledge.KnowledgePresenter
+import com.sqsong.wanandroid.util.CommonUtil
 import com.sqsong.wanandroid.util.Constants
 import com.sqsong.wanandroid.util.DensityUtil
 import com.sqsong.wanandroid.util.ext.setupSwipeLayoutColor
@@ -78,7 +79,7 @@ class KnowledgeFragment @Inject constructor() : LazyLoadFragment<KnowledgePresen
             mSwitchPopupWindow?.height = ViewGroup.LayoutParams.WRAP_CONTENT
             mSwitchPopupWindow?.isOutsideTouchable = true
             mSwitchPopupWindow?.elevation = DensityUtil.dip2px(10).toFloat()
-            mSwitchPopupWindow?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+            mSwitchPopupWindow?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT)) // CommonUtil.getThemeColor(context!!, R.attr.colorPrimary)
         }
         if (mSwitchPopupWindow?.isShowing!!) {
             mSwitchPopupWindow?.dismiss()

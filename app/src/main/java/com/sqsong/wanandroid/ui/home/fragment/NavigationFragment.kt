@@ -58,7 +58,7 @@ class NavigationFragment @Inject constructor() : LazyLoadFragment<NavigationPres
 
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
         menu?.clear()
-        inflater?.inflate(R.menu.menu_knowledge_navigation, menu)
+        // inflater?.inflate(R.menu.menu_knowledge_navigation, menu)
         super.onCreateOptionsMenu(menu, inflater)
     }
 

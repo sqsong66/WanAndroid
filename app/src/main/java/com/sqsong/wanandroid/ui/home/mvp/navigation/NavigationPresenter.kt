@@ -40,7 +40,7 @@ class NavigationPresenter @Inject constructor(private val navigationModel: Navig
                 .setBackgroundColor(bgColor)
                 .setTextColor(textColor)
                 .setPadding(padding, padding, padding, padding)
-                .setTextSize(14)
+                .setTextSize(16)
                 .setRecyclerView(mView.getRecycler())
                 .setTitleMap(mTitleMap)
                 .build()
