@@ -16,7 +16,7 @@
         android:id="@+id/constraintLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/bg_home_item">
+        android:background="@drawable/bg_round_corner">
 
         <com.sqsong.wanandroid.view.CircleTextView
             android:id="@+id/nameCircleTv"

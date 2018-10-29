@@ -24,7 +24,7 @@
         android:id="@+id/action_knowledge"
         android:enabled="true"
         android:icon="@drawable/ic_knowledge_system"
-        android:title="@string/text_knowledge_syste_short" />
+        android:title="@string/text_knowledge_short" />
     <item
         android:id="@+id/action_navigation"
         android:enabled="true"

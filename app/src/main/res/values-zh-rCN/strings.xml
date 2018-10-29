@@ -36,8 +36,8 @@
     <string name="text_desc_blue">蓝色</string>
 
     <string name="text_home">首页</string>
-    <string name="text_knowledge_syste">知识体系</string>
-    <string name="text_knowledge_syste_short">知识体系</string>
+    <string name="text_knowledge">知识体系</string>
+    <string name="text_knowledge_short">知识体系</string>
     <string name="text_navigation">导航</string>
     <string name="text_project">项目</string>
 
@@ -66,4 +66,5 @@
     <string name="text_cancel_collect_success">取消收藏成功</string>
     <string name="text_play">玩</string>
     <string name="text_android">安卓</string>
+    <string name="text_knowledge_data_cannot_null">体系数据不可以为空</string>
 </resources>

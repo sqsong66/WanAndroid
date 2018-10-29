@@ -35,8 +35,8 @@
     <string name="text_desc_blue">Blue</string>
 
     <string name="text_home">Home</string>
-    <string name="text_knowledge_syste">Knowledge System</string>
-    <string name="text_knowledge_syste_short">Knowledge</string>
+    <string name="text_knowledge">Knowledge System</string>
+    <string name="text_knowledge_short">Knowledge</string>
     <string name="text_navigation">Navigation</string>
     <string name="text_project">Project</string>
 
@@ -66,4 +66,5 @@
     <string name="text_cancel_collect_success">Cancel collection success</string>
     <string name="text_play">Play</string>
     <string name="text_android">Android</string>
+    <string name="text_knowledge_data_cannot_null">Knowledge data cannot be null</string>
 </resources>

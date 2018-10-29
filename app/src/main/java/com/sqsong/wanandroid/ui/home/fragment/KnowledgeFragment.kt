@@ -114,7 +114,6 @@ class KnowledgeFragment @Inject constructor() : LazyLoadFragment<KnowledgePresen
     }
 
     override fun startKnowledgeActivity(data: KnowledgeData?) {
-        // SnackbarUtil.showNormalToast(context!!, data?.name!!)
         val intent = Intent(context, KnowledgeActivity::class.java)
         intent.putExtra(Constants.KNOWLEDGE_DATA, data)
         startActivity(intent)

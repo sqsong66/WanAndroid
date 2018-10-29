@@ -4,14 +4,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingLeft="16dp"
-    android:paddingTop="16dp"
-    android:paddingRight="16dp">
+    android:background="@drawable/bg_without_corner"
+    android:clickable="true"
+    android:paddingTop="20dp">
 
-    <TextView
+    <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/titleTv"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="10dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginStart="16dp"
         android:ellipsize="end"
         android:maxLines="2"
         android:text="XMVP：一个通过泛型实现的MVP框架2年的演化路"
@@ -19,8 +23,111 @@
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/heartRl"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:text="XMVP：一个通过泛型实现的MVP框架2年的演化路" />
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/authorIv"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginBottom="20dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="10dp"
+        android:src="@drawable/ic_author"
+        android:tint="?colorChipBackground"
+        app:layout_constraintBottom_toTopOf="@id/line"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/titleTv"
+        app:layout_goneMarginBottom="16dp" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/authorTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="2dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginStart="5dp"
+        android:ellipsize="end"
+        android:gravity="start"
+        android:maxLines="1"
+        android:text="Hongyang"
+        android:textColor="?colorTextActive"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toBottomOf="@id/authorIv"
+        app:layout_constraintLeft_toRightOf="@id/authorIv"
+        app:layout_constraintTop_toTopOf="@id/authorIv"
+        tools:text="Hongyang" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/timeIv"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginStart="16dp"
+        android:src="@drawable/ic_time"
+        android:tint="?colorChipBackground"
+        app:layout_constraintBottom_toBottomOf="@id/authorIv"
+        app:layout_constraintLeft_toRightOf="@id/authorTv"
+        app:layout_constraintTop_toTopOf="@id/authorIv" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/timeTv"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="2dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginStart="5dp"
+        android:ellipsize="end"
+        android:gravity="start"
+        android:maxLines="1"
+        android:text="2018-10-25"
+        android:textColor="?colorTextActive"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toBottomOf="@id/authorIv"
+        app:layout_constraintLeft_toRightOf="@id/timeIv"
+        app:layout_constraintRight_toLeftOf="@id/heartRl"
+        app:layout_constraintTop_toTopOf="@id/authorIv"
+        tools:text="2018-10-25" />
+
+    <RelativeLayout
+        android:id="@+id/heartRl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:background="@drawable/bg_home_item_circle"
+        android:clickable="true"
+        android:padding="8dp"
+        app:layout_constraintBottom_toBottomOf="@id/authorIv"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@id/titleTv">
+
+        <com.sqsong.wanandroid.view.CheckableImageView
+            android:id="@+id/heartIv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="false"
+            android:src="@drawable/selector_heart"
+            android:tint="?colorChipBackground" />
+
+    </RelativeLayout>
+
+    <View
+        android:id="@+id/line"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/colorLine"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/authorIv" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
