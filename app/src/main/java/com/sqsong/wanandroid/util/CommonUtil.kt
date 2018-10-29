@@ -1,5 +1,7 @@
 package com.sqsong.wanandroid.util
 
+import android.content.Context
+import android.graphics.Color
 import android.graphics.Typeface
 import android.text.TextUtils
 import android.util.TypedValue
@@ -21,6 +23,13 @@ object CommonUtil {
         a?.recycle()
         drawable?.setColorFilter(color!!, android.graphics.PorterDuff.Mode.SRC_IN)
         progressBar?.progressDrawable = drawable
+    }
+
+    fun getThemeColor(context: Context, attrColor: Int): Int {
+        val typedArray = context.obtainStyledAttributes(TypedValue().data, intArrayOf(attrColor))
+        val color = typedArray.getColor(0, Color.BLACK)
+        typedArray.recycle()
+        return color
     }
 
     fun setAssetsTextFont(textView: TextView, assetsFont: String) {

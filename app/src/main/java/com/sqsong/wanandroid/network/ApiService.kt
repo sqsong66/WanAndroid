@@ -41,4 +41,8 @@ interface ApiService {
     // 体系文章列表
     @GET("article/list/{page}/json")
     fun getKnowledgeChildList(@Path("page") page: Int, @Query("cid") cid: Int): Observable<HomeItemBean>
+
+    // 导航数据
+    @GET("navi/json")
+    fun getNavigationList(): Observable<NavigationBean>
 }

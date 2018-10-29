@@ -2,6 +2,7 @@ package com.sqsong.wanandroid.ui.home.mvp
 
 import android.content.Context
 import android.content.SharedPreferences
+import android.text.TextUtils
 import androidx.fragment.app.Fragment
 import com.jakewharton.rxbinding2.view.RxView
 import com.sqsong.wanandroid.BaseApplication
@@ -15,7 +16,7 @@ import com.sqsong.wanandroid.ui.home.fragment.KnowledgeFragment
 import com.sqsong.wanandroid.ui.home.fragment.NavigationFragment
 import com.sqsong.wanandroid.ui.home.fragment.ProjectFragment
 import com.sqsong.wanandroid.util.Constants
-import com.sqsong.wanandroid.util.PreferenceHelper.set
+import com.sqsong.wanandroid.util.PreferenceHelper.get
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
@@ -73,6 +74,15 @@ class MainPresenter @Inject constructor(private val mainView: MainContract.View,
         mFragmentList.add(mProjectFragment)
         val pagerAdapter = FragmentPagerAdapter(mView.supportFragmentManager(), mFragmentList)
         mView.setPagerAdapter(pagerAdapter)
+    }
+
+    fun checkLoginState() {
+        val userName: String = mPreferences[Constants.LOGIN_USER_NAME] ?: ""
+        if (TextUtils.isEmpty(userName)) {
+            loginOut()
+        } else {
+            mView.showLoginOutTipDialog()
+        }
     }
 
     fun loginOut() {

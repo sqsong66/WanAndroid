@@ -1,50 +1,127 @@
 package com.sqsong.wanandroid.ui.home.fragment
 
-import android.view.View
+import android.annotation.SuppressLint
+import android.annotation.TargetApi
+import android.content.Context
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
+import android.os.Build
+import android.view.*
+import android.widget.PopupWindow
+import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.sqsong.wanandroid.R
-import com.sqsong.wanandroid.ui.base.BaseFragment
-import com.sqsong.wanandroid.ui.home.mvp.home.HomePresenter
-import com.sqsong.wanandroid.util.SnackbarUtil
+import com.sqsong.wanandroid.ui.base.LazyLoadFragment
+import com.sqsong.wanandroid.ui.home.adapter.NavigationAdapter
+import com.sqsong.wanandroid.ui.home.mvp.navigation.NavigationContract
+import com.sqsong.wanandroid.ui.home.mvp.navigation.NavigationPresenter
+import com.sqsong.wanandroid.util.DensityUtil
+import com.sqsong.wanandroid.util.ext.setupSwipeLayoutColor
 import com.sqsong.wanandroid.view.DefaultPageLayout
-import kotlinx.android.synthetic.main.fragment_navigation_backup.*
+import kotlinx.android.synthetic.main.content_home.*
+import kotlinx.android.synthetic.main.fragment_navigation.*
 import javax.inject.Inject
 
-class NavigationFragment @Inject constructor() : BaseFragment<HomePresenter>(), View.OnClickListener {
+class NavigationFragment @Inject constructor() : LazyLoadFragment<NavigationPresenter>(), NavigationContract.View {
+    override fun getRecycler(): RecyclerView {
+        return recycler
+    }
 
+    private var mSwitchPopupWindow: PopupWindow? = null
 
     private val mPageLayout by lazy {
         DefaultPageLayout.Builder(context!!)
-                .setTargetPage(contentLl)
+                .setTargetPage(recycler)
                 .setOnRetryClickListener(object : DefaultPageLayout.OnRetryClickListener {
                     override fun onRetry() {
-                        SnackbarUtil.showSnackText(contentLl, "Retry")
+                        loadInitData()
                     }
                 })
                 .build()
     }
 
     override fun getLayoutResId(): Int {
-        return R.layout.fragment_navigation_backup
-    }
-
-    override fun initView(view: View) {
-
+        return R.layout.fragment_navigation
     }
 
     override fun initEvent() {
-        contentBtn.setOnClickListener(this)
-        loadingBtn.setOnClickListener(this)
-        emptyBtn.setOnClickListener(this)
-        errorBtn.setOnClickListener(this)
+        setHasOptionsMenu(true)
+        setupSwipeLayoutColor(swipeLayout)
+        swipeLayout.setOnRefreshListener { loadInitData() }
+        mPresenter.onAttach(this)
     }
 
-    override fun onClick(v: View?) {
-        when (v?.id) {
-            R.id.contentBtn -> mPageLayout.showContentLayout()
-            R.id.loadingBtn -> mPageLayout.showLoadingLayout()
-            R.id.emptyBtn -> mPageLayout.showEmptyLayout()
-            R.id.errorBtn -> mPageLayout.showErrorLayout()
+    override fun loadInitData() {
+        mPresenter.requestNavigationList()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
+        menu?.clear()
+        inflater?.inflate(R.menu.menu_knowledge_navigation, menu)
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        if (item?.itemId == R.id.action_switch) {
+            showSwitchPop()
         }
+        return super.onOptionsItemSelected(item)
+    }
+
+    @SuppressLint("NewApi")
+    @TargetApi(Build.VERSION_CODES.KITKAT)
+    private fun showSwitchPop() {
+        if (mSwitchPopupWindow == null) {
+            val view = layoutInflater.inflate(R.layout.layout_knowledge_pop, null)
+            mSwitchPopupWindow = PopupWindow(view)
+            mSwitchPopupWindow?.width = DensityUtil.getScreenWidth() / 2
+            mSwitchPopupWindow?.height = ViewGroup.LayoutParams.WRAP_CONTENT
+            mSwitchPopupWindow?.isOutsideTouchable = true
+            mSwitchPopupWindow?.elevation = DensityUtil.dip2px(10).toFloat()
+            mSwitchPopupWindow?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        }
+        if (mSwitchPopupWindow?.isShowing!!) {
+            mSwitchPopupWindow?.dismiss()
+        } else {
+            mSwitchPopupWindow?.showAsDropDown((activity as AppCompatActivity).toolbar, -DensityUtil.dip2px(10), 0, Gravity.END)
+        }
+    }
+
+    override fun getFragmentContext(): Context {
+        return context!!
+    }
+
+    override fun setRecyclerAdapter(adapter: NavigationAdapter, itemDecoration: RecyclerView.ItemDecoration) {
+        recycler.layoutManager = LinearLayoutManager(context)
+        recycler.addItemDecoration(itemDecoration)
+        recycler.adapter = adapter
+    }
+
+    override fun showEmptyPage() {
+        mPageLayout.showEmptyLayout()
+    }
+
+    override fun showLoadingPage() {
+        mPageLayout.showLoadingLayout()
+    }
+
+    override fun showContentPage() {
+        swipeLayout.isRefreshing = false
+        mPageLayout.showContentLayout()
+    }
+
+    override fun showErrorPage() {
+        mPageLayout.showErrorLayout()
+    }
+
+    override fun scrollRecycler(position: Int) {
+        recycler.smoothScrollToPosition(position)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        mPresenter.onDestroy()
     }
 
 }

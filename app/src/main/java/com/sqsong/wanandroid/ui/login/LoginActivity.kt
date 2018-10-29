@@ -11,9 +11,9 @@ import com.sqsong.wanandroid.ui.base.BaseActivity
 import com.sqsong.wanandroid.ui.home.activity.MainActivity
 import com.sqsong.wanandroid.ui.login.mvp.LoginContract
 import com.sqsong.wanandroid.ui.login.mvp.LoginPresenter
-import com.sqsong.wanandroid.util.registerClickEvent
-import com.sqsong.wanandroid.util.registerTextChangeEvent
-import com.sqsong.wanandroid.util.setupUi
+import com.sqsong.wanandroid.util.ext.registerClickEvent
+import com.sqsong.wanandroid.util.ext.registerTextChangeEvent
+import com.sqsong.wanandroid.util.ext.setupUi
 import io.reactivex.Observable
 import io.reactivex.disposables.Disposable
 import kotlinx.android.synthetic.main.activity_login.*

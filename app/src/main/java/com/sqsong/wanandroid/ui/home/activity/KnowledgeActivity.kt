@@ -23,7 +23,7 @@ import com.sqsong.wanandroid.ui.home.mvp.knowledge.ChildKnowledgePresenter
 import com.sqsong.wanandroid.ui.login.LoginActivity
 import com.sqsong.wanandroid.util.Constants
 import com.sqsong.wanandroid.util.SnackbarUtil
-import com.sqsong.wanandroid.util.setupToolbar
+import com.sqsong.wanandroid.util.ext.setupToolbar
 import com.sqsong.wanandroid.view.DefaultPageLayout
 import kotlinx.android.synthetic.main.activity_knowledge.*
 import kotlinx.android.synthetic.main.content_knowledge.*

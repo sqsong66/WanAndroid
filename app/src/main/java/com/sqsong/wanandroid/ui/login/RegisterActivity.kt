@@ -9,9 +9,9 @@ import com.sqsong.wanandroid.common.inter.IAppCompatActivity
 import com.sqsong.wanandroid.ui.base.BaseActivity
 import com.sqsong.wanandroid.ui.login.mvp.RegisterContract
 import com.sqsong.wanandroid.ui.login.mvp.RegisterPresenter
-import com.sqsong.wanandroid.util.registerClickEvent
-import com.sqsong.wanandroid.util.registerTextChangeEvent
-import com.sqsong.wanandroid.util.setupUi
+import com.sqsong.wanandroid.util.ext.registerClickEvent
+import com.sqsong.wanandroid.util.ext.registerTextChangeEvent
+import com.sqsong.wanandroid.util.ext.setupUi
 import io.reactivex.Observable
 import io.reactivex.disposables.Disposable
 import kotlinx.android.synthetic.main.activity_register.*

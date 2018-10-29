@@ -30,7 +30,9 @@ class HomePresenter @Inject constructor(private val homeModel: HomeModel,
 
     private var mPage: Int = 0
 
-    private lateinit var mAdapter: HomeItemAdapter
+    private val mAdapter: HomeItemAdapter by lazy {
+        HomeItemAdapter(mView.getAppContext(), homeItemList)
+    }
 
     private var homeItemList = mutableListOf<HomeItem>()
 
@@ -49,7 +51,6 @@ class HomePresenter @Inject constructor(private val homeModel: HomeModel,
     private fun setupAdapter() {
         EventBus.getDefault().register(this)
 
-        mAdapter = HomeItemAdapter(mView.getAppContext(), homeItemList)
         mAdapter.setHeaderView(mView.getBannerHeaderView())
         mAdapter.setHomeItemActionListener(this)
         mView.setAdapter(mAdapter)

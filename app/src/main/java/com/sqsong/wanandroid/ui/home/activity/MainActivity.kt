@@ -89,7 +89,7 @@ class MainActivity : BaseActivity<MainPresenter>(), MainContract.View,
                 return true
             }
             R.id.action_login_out -> {
-                showLoginOutTipDialog()
+                mPresenter.checkLoginState()
                 return true
             }
         }
@@ -144,7 +144,7 @@ class MainActivity : BaseActivity<MainPresenter>(), MainContract.View,
         }
     }
 
-    private fun showLoginOutTipDialog() {
+    override fun showLoginOutTipDialog() {
         AlertDialog.Builder(this)
                 .setTitle(R.string.text_login_out_title)
                 .setMessage(R.string.text_login_out_tips)

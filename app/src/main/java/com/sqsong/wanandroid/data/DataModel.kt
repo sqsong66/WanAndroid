@@ -80,3 +80,11 @@ data class KnowledgeData(val children: List<KnowledgeData>,
                          val userControlSetTop: Boolean,
                          val visible: Int) : Parcelable
 /********************* End: Knowledge bean **********************/
+
+/********************* Start: Navigation bean **********************/
+data class NavigationBean(override var data: List<NavigationData>) : BaseBean<List<NavigationData>>()
+
+data class NavigationData(val articles: List<HomeItem>,
+                          val cid: Int,
+                          val name: String)
+/********************* End: Navigation bean ************************/

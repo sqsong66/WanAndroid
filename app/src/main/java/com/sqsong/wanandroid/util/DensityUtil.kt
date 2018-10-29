@@ -19,7 +19,7 @@ object DensityUtil {
 
     @JvmStatic
     fun dip2px(dpValue: Int): Int {
-        var scale = Resources.getSystem().displayMetrics.density
+        val scale = Resources.getSystem().displayMetrics.density
         return (dpValue * scale + 0.5f).toInt()
     }
 

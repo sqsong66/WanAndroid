@@ -14,6 +14,7 @@ interface MainContract {
         fun supportFragmentManager(): FragmentManager
         fun setPagerAdapter(adapter: FragmentStatePagerAdapter)
         fun startLoginActivity()
+        fun showLoginOutTipDialog()
     }
 
 }

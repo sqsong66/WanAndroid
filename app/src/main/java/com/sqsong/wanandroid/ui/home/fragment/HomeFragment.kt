@@ -1,13 +1,10 @@
 package com.sqsong.wanandroid.ui.home.fragment
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
-import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import androidx.appcompat.app.AlertDialog
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.sqsong.wanandroid.R
@@ -18,6 +15,7 @@ import com.sqsong.wanandroid.ui.home.adapter.HomeItemAdapter
 import com.sqsong.wanandroid.ui.home.mvp.home.HomeContract
 import com.sqsong.wanandroid.ui.home.mvp.home.HomePresenter
 import com.sqsong.wanandroid.ui.login.LoginActivity
+import com.sqsong.wanandroid.util.ext.setupSwipeLayoutColor
 import com.sqsong.wanandroid.view.DefaultPageLayout
 import com.sqsong.wanandroid.view.banner.BannerView
 import kotlinx.android.synthetic.main.fragment_home_backup.*
@@ -49,14 +47,8 @@ class HomeFragment @Inject constructor() : BaseFragment<HomePresenter>(), HomeCo
         mPresenter.onAttach(this)
     }
 
-    @SuppressLint("ResourceType")
     private fun setupSwipeLayout() {
-        val ta = context?.obtainStyledAttributes(TypedValue().data,
-                intArrayOf(R.attr.colorPrimaryLight, R.attr.colorPrimary, R.attr.colorPrimaryDark))
-        val lightColor = ta?.getColor(0, ContextCompat.getColor(context!!, R.color.colorPrimaryLight))
-        val primaryColor = ta?.getColor(1, ContextCompat.getColor(context!!, R.color.colorPrimary))
-        val primaryDarkColor = ta?.getColor(2, ContextCompat.getColor(context!!, R.color.colorPrimaryDark))
-        swipeLayout.setColorSchemeColors(lightColor!!, primaryColor!!, primaryDarkColor!!)
+        setupSwipeLayoutColor(swipeLayout)
         swipeLayout.setOnRefreshListener(this)
     }
 

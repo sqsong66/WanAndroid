@@ -20,6 +20,7 @@ import com.sqsong.wanandroid.ui.home.mvp.knowledge.KnowledgeContract
 import com.sqsong.wanandroid.ui.home.mvp.knowledge.KnowledgePresenter
 import com.sqsong.wanandroid.util.Constants
 import com.sqsong.wanandroid.util.DensityUtil
+import com.sqsong.wanandroid.util.ext.setupSwipeLayoutColor
 import com.sqsong.wanandroid.view.DefaultPageLayout
 import kotlinx.android.synthetic.main.content_home.*
 import kotlinx.android.synthetic.main.fragment_knowledge.*
@@ -45,6 +46,8 @@ class KnowledgeFragment @Inject constructor() : LazyLoadFragment<KnowledgePresen
 
     override fun initEvent() {
         setHasOptionsMenu(true)
+        setupSwipeLayoutColor(swipeLayout)
+        swipeLayout.setOnRefreshListener { loadInitData() }
         mPresenter.onAttach(this)
     }
 
@@ -102,6 +105,7 @@ class KnowledgeFragment @Inject constructor() : LazyLoadFragment<KnowledgePresen
     }
 
     override fun showContentPage() {
+        swipeLayout.isRefreshing = false
         mPageLayout.showContentLayout()
     }
 

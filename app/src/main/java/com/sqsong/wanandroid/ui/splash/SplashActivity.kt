@@ -7,7 +7,7 @@ import com.sqsong.wanandroid.common.inter.IAppCompatActivity
 import com.sqsong.wanandroid.ui.base.BaseActivity
 import com.sqsong.wanandroid.ui.splash.mvp.SplashContract
 import com.sqsong.wanandroid.ui.splash.mvp.SplashPresenter
-import com.sqsong.wanandroid.util.showImage
+import com.sqsong.wanandroid.util.ext.showImage
 import kotlinx.android.synthetic.main.activity_splash.*
 
 class SplashActivity : BaseActivity<SplashPresenter>(), SplashContract.View, IAppCompatActivity {
