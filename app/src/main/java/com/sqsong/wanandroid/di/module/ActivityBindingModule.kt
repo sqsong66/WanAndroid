@@ -11,6 +11,7 @@ import com.sqsong.wanandroid.ui.login.di.LoginModule
 import com.sqsong.wanandroid.ui.login.di.RegisterModule
 import com.sqsong.wanandroid.ui.splash.SplashActivity
 import com.sqsong.wanandroid.ui.splash.di.SplashModule
+import com.sqsong.wanandroid.ui.web.WebViewActivity
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
@@ -37,4 +38,7 @@ abstract class ActivityBindingModule {
     @ContributesAndroidInjector(modules = [ChildKnowledgeModule::class])
     abstract fun contributeKnowledgeActivity(): KnowledgeActivity
 
+    @ActivityScope
+    @ContributesAndroidInjector
+    abstract fun contributeWebViewActivity(): WebViewActivity
 }

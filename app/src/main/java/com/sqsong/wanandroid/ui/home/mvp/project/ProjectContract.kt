@@ -1,6 +1,7 @@
 package com.sqsong.wanandroid.ui.home.mvp.project
 
 import android.content.Context
+import android.content.Intent
 import android.os.Handler
 import com.sqsong.wanandroid.data.BaseData
 import com.sqsong.wanandroid.data.HomeItemBean
@@ -27,6 +28,7 @@ interface ProjectContract {
         fun findRecyclerLastVisibleItemPosition(): Int
         fun getHandler(): Handler
         fun loadFinish()
+        fun startNewActivity(intent: Intent)
     }
 
     interface Model : IModel {

@@ -1,5 +1,6 @@
 package com.sqsong.wanandroid.ui.home.mvp.knowledge
 
+import android.content.Intent
 import android.content.SharedPreferences
 import android.text.TextUtils
 import com.sqsong.wanandroid.R
@@ -13,6 +14,7 @@ import com.sqsong.wanandroid.network.ApiException
 import com.sqsong.wanandroid.network.ObserverImpl
 import com.sqsong.wanandroid.ui.home.adapter.HomeItemAdapter
 import com.sqsong.wanandroid.ui.home.adapter.KnowledgeItemAdapter
+import com.sqsong.wanandroid.ui.web.WebViewActivity
 import com.sqsong.wanandroid.util.Constants
 import com.sqsong.wanandroid.util.PreferenceHelper.get
 import com.sqsong.wanandroid.util.RxJavaHelper
@@ -135,7 +137,10 @@ class ChildKnowledgePresenter @Inject constructor(private val knowledgeModel: Ch
     }
 
     override fun onListItemClick(homeItem: HomeItem, position: Int) {
-
+        val intent = Intent(mView.getActivityContext(), WebViewActivity::class.java)
+        intent.putExtra(Constants.KEY_WEB_URL, homeItem.link)
+        intent.putExtra(Constants.KEY_WEB_TITLE, homeItem.title)
+        mView.startNewActivity(intent)
     }
 
 }

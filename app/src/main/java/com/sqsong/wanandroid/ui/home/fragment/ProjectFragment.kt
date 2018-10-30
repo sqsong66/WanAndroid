@@ -124,6 +124,10 @@ class ProjectFragment @Inject constructor() : LazyLoadFragment<ProjectPresenter>
         mPageLayout.showErrorLayout()
     }
 
+    override fun startNewActivity(intent: Intent) {
+        startActivity(intent)
+    }
+
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     override fun preparePopupWindow(dataList: List<KnowledgeData>, forceReCreate: Boolean) {
         val recyclerView = layoutInflater.inflate(R.layout.pop_project, null) as RecyclerView

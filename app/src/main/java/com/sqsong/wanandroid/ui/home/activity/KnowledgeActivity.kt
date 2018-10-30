@@ -1,13 +1,10 @@
 package com.sqsong.wanandroid.ui.home.activity
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.os.Handler
-import android.util.TypedValue
 import android.view.MenuItem
 import androidx.appcompat.app.AlertDialog
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.sqsong.wanandroid.BaseApplication
@@ -23,6 +20,7 @@ import com.sqsong.wanandroid.ui.home.mvp.knowledge.ChildKnowledgePresenter
 import com.sqsong.wanandroid.ui.login.LoginActivity
 import com.sqsong.wanandroid.util.Constants
 import com.sqsong.wanandroid.util.SnackbarUtil
+import com.sqsong.wanandroid.util.ext.setupSwipeLayoutColor
 import com.sqsong.wanandroid.util.ext.setupToolbar
 import com.sqsong.wanandroid.view.DefaultPageLayout
 import kotlinx.android.synthetic.main.activity_knowledge.*
@@ -63,26 +61,16 @@ class KnowledgeActivity : BaseActivity<ChildKnowledgePresenter>(), ChildKnowledg
 
     override fun initEvent() {
         setupToolbar(toolbar)
-        mHandler.post { toolbar.title = mKnowledgeData.name }
-        setupSwipeLayout()
+        setupSwipeLayoutColor(swipeLayout)
+        swipeLayout.setOnRefreshListener(this)
         setupRecyclerView()
         mPresenter.onAttach(this)
+        mHandler.post { toolbar.title = mKnowledgeData.name }
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         if (item?.itemId == android.R.id.home) finish()
         return super.onOptionsItemSelected(item)
-    }
-
-    @SuppressLint("ResourceType")
-    private fun setupSwipeLayout() {
-        val ta = this.obtainStyledAttributes(TypedValue().data,
-                intArrayOf(R.attr.colorPrimaryLight, R.attr.colorPrimary, R.attr.colorPrimaryDark))
-        val lightColor = ta?.getColor(0, ContextCompat.getColor(this, R.color.colorPrimaryLight))
-        val primaryColor = ta?.getColor(1, ContextCompat.getColor(this, R.color.colorPrimary))
-        val primaryDarkColor = ta?.getColor(2, ContextCompat.getColor(this, R.color.colorPrimaryDark))
-        swipeLayout.setColorSchemeColors(lightColor!!, primaryColor!!, primaryDarkColor!!)
-        swipeLayout.setOnRefreshListener(this)
     }
 
     private fun setupRecyclerView() {
@@ -139,6 +127,10 @@ class KnowledgeActivity : BaseActivity<ChildKnowledgePresenter>(), ChildKnowledg
     }
 
     override fun findRecyclerLastVisibleItemPosition(): Int = mLayoutManager.findLastVisibleItemPosition()
+
+    override fun startNewActivity(intent: Intent) {
+        startActivity(intent)
+    }
 
     override fun showLoginDialog() {
         AlertDialog.Builder(this)

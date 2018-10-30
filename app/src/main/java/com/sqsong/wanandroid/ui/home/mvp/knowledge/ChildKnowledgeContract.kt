@@ -1,6 +1,7 @@
 package com.sqsong.wanandroid.ui.home.mvp.knowledge
 
 import android.content.Context
+import android.content.Intent
 import android.os.Handler
 import com.sqsong.wanandroid.data.BaseData
 import com.sqsong.wanandroid.data.HomeItemBean
@@ -25,6 +26,7 @@ interface ChildKnowledgeContract {
         fun setRecyclerAdapter(adapter: KnowledgeItemAdapter)
         fun findRecyclerLastVisibleItemPosition(): Int
         fun getHandler(): Handler
+        fun startNewActivity(intent: Intent)
     }
 
     interface Model : IModel {

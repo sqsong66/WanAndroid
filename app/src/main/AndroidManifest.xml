@@ -43,6 +43,9 @@
         <activity
             android:name=".ui.home.activity.KnowledgeActivity"
             android:theme="@style/AppTheme.LoginTheme" />
+        <activity
+            android:name=".ui.web.WebViewActivity"
+            android:theme="@style/AppTheme.LoginTheme" />
     </application>
 
 </manifest>

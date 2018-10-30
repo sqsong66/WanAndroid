@@ -1,5 +1,6 @@
 package com.sqsong.wanandroid.ui.home.mvp.navigation
 
+import android.content.Intent
 import com.sqsong.wanandroid.R
 import com.sqsong.wanandroid.common.inter.OnItemClickListener
 import com.sqsong.wanandroid.data.HomeItem
@@ -9,7 +10,9 @@ import com.sqsong.wanandroid.mvp.BasePresenter
 import com.sqsong.wanandroid.network.ApiException
 import com.sqsong.wanandroid.network.ObserverImpl
 import com.sqsong.wanandroid.ui.home.adapter.NavigationAdapter
+import com.sqsong.wanandroid.ui.web.WebViewActivity
 import com.sqsong.wanandroid.util.CommonUtil
+import com.sqsong.wanandroid.util.Constants
 import com.sqsong.wanandroid.util.DensityUtil
 import com.sqsong.wanandroid.util.RxJavaHelper
 import com.sqsong.wanandroid.util.recycler.FloatingTitleItemDecoration
@@ -83,8 +86,11 @@ class NavigationPresenter @Inject constructor(private val navigationModel: Navig
         mAdapter.notifyDataSetChanged()
     }
 
-    override fun onItemClick(data: HomeItem?, position: Int) {
-
+    override fun onItemClick(homeItem: HomeItem?, position: Int) {
+        val intent = Intent(mView.getFragmentContext(), WebViewActivity::class.java)
+        intent.putExtra(Constants.KEY_WEB_URL, homeItem?.link)
+        intent.putExtra(Constants.KEY_WEB_TITLE, homeItem?.title)
+        mView.startNewActivity(intent)
     }
 
 }

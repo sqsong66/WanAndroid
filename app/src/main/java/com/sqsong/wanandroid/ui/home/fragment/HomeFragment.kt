@@ -115,6 +115,10 @@ class HomeFragment @Inject constructor() : BaseFragment<HomePresenter>(), HomeCo
         recycler.smoothScrollToPosition(position)
     }
 
+    override fun startNewActivity(intent: Intent) {
+        startActivity(intent)
+    }
+
     override fun showLoginDialog() {
         AlertDialog.Builder(activity!!)
                 .setTitle(R.string.text_login_tips_title)

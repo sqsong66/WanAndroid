@@ -16,7 +16,9 @@
 package com.sqsong.wanandroid.util.ext
 
 
+import android.annotation.SuppressLint
 import android.content.Context
+import android.util.TypedValue
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
@@ -26,15 +28,17 @@ import androidx.annotation.IdRes
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.google.android.material.textfield.TextInputLayout
 import com.jakewharton.rxbinding2.view.RxView
 import com.jakewharton.rxbinding2.widget.RxTextView
+import com.sqsong.wanandroid.R
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
-
 
 /**
  * The `fragment` is added to the container view with id `frameId`. The operation is
@@ -108,4 +112,15 @@ fun AppCompatActivity.registerTextChangeEvent(textView: TextView, inputLayout: T
                     inputLayout.isErrorEnabled = false
                 }
             }
+}
+
+@SuppressLint("ResourceType")
+fun AppCompatActivity.setupSwipeLayoutColor(swipeRefreshLayout: SwipeRefreshLayout) {
+    val ta = obtainStyledAttributes(TypedValue().data,
+            intArrayOf(R.attr.colorPrimaryLight, R.attr.colorPrimary, R.attr.colorPrimaryDark))
+    val lightColor = ta?.getColor(0, ContextCompat.getColor(this, R.color.colorPrimaryLight))
+    val primaryColor = ta?.getColor(1, ContextCompat.getColor(this, R.color.colorPrimary))
+    val primaryDarkColor = ta?.getColor(2, ContextCompat.getColor(this, R.color.colorPrimaryDark))
+    swipeRefreshLayout.setColorSchemeColors(lightColor!!, primaryColor!!, primaryDarkColor!!)
+    ta.recycle()
 }

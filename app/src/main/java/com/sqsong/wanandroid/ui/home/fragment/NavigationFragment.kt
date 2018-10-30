@@ -3,6 +3,7 @@ package com.sqsong.wanandroid.ui.home.fragment
 import android.annotation.SuppressLint
 import android.annotation.TargetApi
 import android.content.Context
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Build
@@ -24,9 +25,6 @@ import kotlinx.android.synthetic.main.fragment_navigation.*
 import javax.inject.Inject
 
 class NavigationFragment @Inject constructor() : LazyLoadFragment<NavigationPresenter>(), NavigationContract.View {
-    override fun getRecycler(): RecyclerView {
-        return recycler
-    }
 
     private var mSwitchPopupWindow: PopupWindow? = null
 
@@ -117,6 +115,14 @@ class NavigationFragment @Inject constructor() : LazyLoadFragment<NavigationPres
 
     override fun scrollRecycler(position: Int) {
         recycler.smoothScrollToPosition(position)
+    }
+
+    override fun startNewActivity(intent: Intent) {
+        startActivity(intent)
+    }
+
+    override fun getRecycler(): RecyclerView {
+        return recycler
     }
 
     override fun onDestroy() {

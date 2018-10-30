@@ -1,6 +1,7 @@
 package com.sqsong.wanandroid.ui.home.mvp.navigation
 
 import android.content.Context
+import android.content.Intent
 import androidx.recyclerview.widget.RecyclerView
 import com.sqsong.wanandroid.data.NavigationBean
 import com.sqsong.wanandroid.mvp.IModel
@@ -19,6 +20,7 @@ interface NavigationContract {
         fun showContentPage()
         fun showErrorPage()
         fun scrollRecycler(position: Int)
+        fun startNewActivity(intent: Intent)
     }
 
     interface Model : IModel {

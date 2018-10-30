@@ -1,5 +1,7 @@
 package com.sqsong.wanandroid.common.inter
 
+import androidx.annotation.LayoutRes
+
 interface IAppCompatActivity {
 
     /**
@@ -11,6 +13,7 @@ interface IAppCompatActivity {
      * Get the content layout resource id.
      * @return layout resource id.
      */
+    @LayoutRes
     fun getLayoutResId(): Int
 
     /**

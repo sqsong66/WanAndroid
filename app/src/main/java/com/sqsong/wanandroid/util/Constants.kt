@@ -12,6 +12,10 @@ object Constants {
 
     const val KNOWLEDGE_DATA = "knowledge_data"
 
+    const val KEY_WEB_URL = "key_web_url"
+
+    const val KEY_WEB_TITLE = "key_web_title"
+
     const val DEFAULT_TIME_OUT: Long = 10000
 
     const val SPLASH_TIME: Long = 3 // second

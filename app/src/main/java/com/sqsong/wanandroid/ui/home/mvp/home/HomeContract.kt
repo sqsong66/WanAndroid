@@ -1,6 +1,7 @@
 package com.sqsong.wanandroid.ui.home.mvp.home
 
 import android.content.Context
+import android.content.Intent
 import android.view.View
 import com.sqsong.wanandroid.data.BaseData
 import com.sqsong.wanandroid.data.HomeBannerBean
@@ -25,6 +26,7 @@ interface HomeContract {
         fun scrollRecycler(position: Int)
         fun loadFinish()
         fun showLoginDialog()
+        fun startNewActivity(intent: Intent)
     }
 
     interface Model : IModel {

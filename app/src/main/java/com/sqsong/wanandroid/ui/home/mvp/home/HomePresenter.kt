@@ -1,6 +1,7 @@
 package com.sqsong.wanandroid.ui.home.mvp.home
 
 import android.content.Context
+import android.content.Intent
 import android.content.SharedPreferences
 import android.text.TextUtils
 import com.sqsong.wanandroid.R
@@ -14,6 +15,7 @@ import com.sqsong.wanandroid.mvp.BasePresenter
 import com.sqsong.wanandroid.network.ApiException
 import com.sqsong.wanandroid.network.ObserverImpl
 import com.sqsong.wanandroid.ui.home.adapter.HomeItemAdapter
+import com.sqsong.wanandroid.ui.web.WebViewActivity
 import com.sqsong.wanandroid.util.Constants
 import com.sqsong.wanandroid.util.PreferenceHelper.get
 import com.sqsong.wanandroid.util.RxJavaHelper
@@ -166,7 +168,10 @@ class HomePresenter @Inject constructor(private val homeModel: HomeModel,
     }
 
     override fun onListItemClick(homeItem: HomeItem, position: Int) {
-
+        val intent = Intent(mView.getAppContext(), WebViewActivity::class.java)
+        intent.putExtra(Constants.KEY_WEB_URL, homeItem.link)
+        intent.putExtra(Constants.KEY_WEB_TITLE, homeItem.title)
+        mView.startNewActivity(intent)
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
