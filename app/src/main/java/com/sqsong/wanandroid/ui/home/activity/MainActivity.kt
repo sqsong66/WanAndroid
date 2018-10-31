@@ -124,7 +124,6 @@ class MainActivity : BaseActivity<MainPresenter>(), MainContract.View,
         val currentIndex = viewPager.currentItem
         if (currentIndex == index) return
         viewPager.setCurrentItem(index, false)
-        toolbar.title = title
     }
 
     override fun switchBottomViewNavigation(@IdRes id: Int) {

@@ -5,6 +5,7 @@ import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.sqsong.wanandroid.R
@@ -18,6 +19,7 @@ import com.sqsong.wanandroid.ui.login.LoginActivity
 import com.sqsong.wanandroid.util.ext.setupSwipeLayoutColor
 import com.sqsong.wanandroid.view.DefaultPageLayout
 import com.sqsong.wanandroid.view.banner.BannerView
+import kotlinx.android.synthetic.main.content_home.*
 import kotlinx.android.synthetic.main.fragment_home_backup.*
 import javax.inject.Inject
 
@@ -58,6 +60,16 @@ class HomeFragment @Inject constructor() : BaseFragment<HomePresenter>(), HomeCo
         mRecyclerScroller = RecyclerScrollListener(layoutManager)
         recycler.addOnScrollListener(mRecyclerScroller)
         mRecyclerScroller.setOnLoadMoreListener(this)
+    }
+
+    override fun setUserVisibleHint(isVisibleToUser: Boolean) {
+        super.setUserVisibleHint(isVisibleToUser)
+        if (isVisibleToUser) {
+            mBannerView?.startAutoLoop()
+            mBannerView?.post { (activity as AppCompatActivity).toolbar.title = getString(R.string.text_home) }
+        } else {
+            mBannerView?.stopAutoLoop()
+        }
     }
 
     override fun onRefresh() {

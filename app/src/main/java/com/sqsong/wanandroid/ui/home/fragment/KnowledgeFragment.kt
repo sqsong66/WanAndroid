@@ -55,6 +55,13 @@ class KnowledgeFragment @Inject constructor() : LazyLoadFragment<KnowledgePresen
         mPresenter.requestKnowledgeData()
     }
 
+    override fun setUserVisibleHint(isVisibleToUser: Boolean) {
+        super.setUserVisibleHint(isVisibleToUser)
+        if (isVisibleToUser) {
+            (activity as AppCompatActivity).toolbar.title = getString(R.string.text_knowledge_short)
+        }
+    }
+
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
         menu?.clear()
         inflater?.inflate(R.menu.menu_knowledge_navigation, menu)

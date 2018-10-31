@@ -123,13 +123,13 @@ class BannerView @JvmOverloads constructor(context: Context, attrs: AttributeSet
         mLoopHandler?.sendEmptyMessageDelayed(0, duration.toLong())
     }
 
-    private fun startAutoLoop() {
+    public fun startAutoLoop() {
         if (!loop || mBannerList.isEmpty()) return
         removeAllMessage()
         mLoopHandler?.sendEmptyMessage(1)
     }
 
-    private fun stopAutoLoop() {
+    public fun stopAutoLoop() {
         removeAllMessage()
     }
 

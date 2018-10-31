@@ -54,6 +54,14 @@ class NavigationFragment @Inject constructor() : LazyLoadFragment<NavigationPres
         mPresenter.requestNavigationList()
     }
 
+    override fun setUserVisibleHint(isVisibleToUser: Boolean) {
+        super.setUserVisibleHint(isVisibleToUser)
+        if (isVisibleToUser) {
+            (activity as AppCompatActivity).toolbar.title = getString(R.string.text_navigation)
+        }
+    }
+
+
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
         menu?.clear()
         // inflater?.inflate(R.menu.menu_knowledge_navigation, menu)

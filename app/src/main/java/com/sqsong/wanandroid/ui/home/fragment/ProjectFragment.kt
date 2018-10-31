@@ -6,7 +6,6 @@ import android.content.Intent
 import android.graphics.drawable.ColorDrawable
 import android.os.Build
 import android.os.Handler
-import android.text.TextUtils
 import android.view.*
 import android.widget.PopupWindow
 import androidx.appcompat.app.AlertDialog
@@ -35,6 +34,7 @@ import javax.inject.Inject
 
 class ProjectFragment @Inject constructor() : LazyLoadFragment<ProjectPresenter>(), ProjectContract.View, OnItemClickListener<KnowledgeData>, RecyclerScrollListener.OnLoadMoreListener {
 
+    private var mTitle: String? = null
     private var mSwitchPopupWindow: PopupWindow? = null
     private lateinit var mRecyclerScroller: RecyclerScrollListener
 
@@ -73,6 +73,13 @@ class ProjectFragment @Inject constructor() : LazyLoadFragment<ProjectPresenter>
         mRecyclerScroller = RecyclerScrollListener(mLayoutManager)
         recycler.addOnScrollListener(mRecyclerScroller)
         mRecyclerScroller.setOnLoadMoreListener(this)
+    }
+
+    override fun setUserVisibleHint(isVisibleToUser: Boolean) {
+        super.setUserVisibleHint(isVisibleToUser)
+        if (isVisibleToUser) {
+            (activity as AppCompatActivity).toolbar.title = mTitle ?: getString(R.string.text_project)
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
@@ -130,9 +137,8 @@ class ProjectFragment @Inject constructor() : LazyLoadFragment<ProjectPresenter>
     }
 
     override fun showTitle(title: String?) {
-        if (!TextUtils.isEmpty(title)) {
-            (activity as AppCompatActivity).toolbar.title = title
-        }
+        (activity as AppCompatActivity).toolbar.title = title ?: getString(R.string.text_project)
+        mTitle = title
     }
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
