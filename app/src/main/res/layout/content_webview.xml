@@ -19,7 +19,8 @@
             style="?android:attr/progressBarStyleHorizontal"
             android:layout_width="match_parent"
             android:layout_height="2dp"
-            android:indeterminateTint="?colorPrimaryDark" />
+            android:indeterminateTint="?colorPrimaryDark"
+            android:progressDrawable="@drawable/drawable_horizontal_progressbar" />
 
         <WebView
             android:id="@+id/webView"

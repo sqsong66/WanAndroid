@@ -81,6 +81,7 @@ class ProjectPresenter @Inject constructor(private val projectModel: ProjectMode
         mClassifyList.clear()
         mClassifyList.addAll(dataList)
         mCid = mClassifyList[0].id
+        mView.showTitle(mClassifyList[0].name)
         requestProjectList()
     }
 
@@ -145,6 +146,11 @@ class ProjectPresenter @Inject constructor(private val projectModel: ProjectMode
         if (knowledgeData == null || mCid == knowledgeData.id) return
         mPage = 0
         mCid = knowledgeData.id
+        requestProjectList()
+    }
+
+    fun refreshData() {
+        mPage = 0
         requestProjectList()
     }
 

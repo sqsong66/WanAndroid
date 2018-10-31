@@ -29,6 +29,7 @@ interface ProjectContract {
         fun getHandler(): Handler
         fun loadFinish()
         fun startNewActivity(intent: Intent)
+        fun showTitle(title: String?)
     }
 
     interface Model : IModel {

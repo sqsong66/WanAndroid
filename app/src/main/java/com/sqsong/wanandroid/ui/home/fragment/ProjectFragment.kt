@@ -6,6 +6,7 @@ import android.content.Intent
 import android.graphics.drawable.ColorDrawable
 import android.os.Build
 import android.os.Handler
+import android.text.TextUtils
 import android.view.*
 import android.widget.PopupWindow
 import androidx.appcompat.app.AlertDialog
@@ -63,7 +64,7 @@ class ProjectFragment @Inject constructor() : LazyLoadFragment<ProjectPresenter>
         setHasOptionsMenu(true)
         setupRecyclerView()
         setupSwipeLayoutColor(swipeLayout)
-        swipeLayout.setOnRefreshListener { loadInitData() }
+        swipeLayout.setOnRefreshListener { mPresenter.refreshData() }
         mPresenter.onAttach(this)
     }
 
@@ -128,6 +129,12 @@ class ProjectFragment @Inject constructor() : LazyLoadFragment<ProjectPresenter>
         startActivity(intent)
     }
 
+    override fun showTitle(title: String?) {
+        if (!TextUtils.isEmpty(title)) {
+            (activity as AppCompatActivity).toolbar.title = title
+        }
+    }
+
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     override fun preparePopupWindow(dataList: List<KnowledgeData>, forceReCreate: Boolean) {
         val recyclerView = layoutInflater.inflate(R.layout.pop_project, null) as RecyclerView
@@ -155,6 +162,7 @@ class ProjectFragment @Inject constructor() : LazyLoadFragment<ProjectPresenter>
 
     override fun onItemClick(data: KnowledgeData?, position: Int) {
         mSwitchPopupWindow?.dismiss()
+        showTitle(data?.name)
         mPresenter.refreshData(data)
     }
 

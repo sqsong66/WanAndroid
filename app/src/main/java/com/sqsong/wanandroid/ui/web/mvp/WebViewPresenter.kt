@@ -25,7 +25,6 @@ class WebViewPresenter @Inject constructor() : BasePresenter<WebViewContract.Vie
     private fun setupParams() {
         mCurrentUrl = mView.getInitUrl()
         mView.showRefreshBar()
-        CommonUtil.setProgressbarColor(mView.getProgressBar())
         setWebSettings()
         setupWebClient()
     }
