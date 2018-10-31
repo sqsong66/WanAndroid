@@ -3,6 +3,7 @@ package com.sqsong.wanandroid.util
 import android.content.Context
 import android.graphics.Color
 import android.graphics.Typeface
+import android.net.Uri
 import android.text.TextUtils
 import android.util.TypedValue
 import android.widget.ProgressBar
@@ -38,5 +39,11 @@ object CommonUtil {
         } catch (e: Exception) {
             e.printStackTrace()
         }
+    }
+
+    fun parseUrlParameter(url: String?, paramName: String): String? {
+        if (TextUtils.isEmpty(url)) return null
+        val uri = Uri.parse(url)
+        return uri.getQueryParameter(paramName)
     }
 }

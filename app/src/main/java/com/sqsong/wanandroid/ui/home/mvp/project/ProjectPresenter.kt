@@ -4,6 +4,7 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.text.TextUtils
 import com.sqsong.wanandroid.R
+import com.sqsong.wanandroid.common.event.FabClickEvent
 import com.sqsong.wanandroid.common.holder.LoadingFooterViewHolder
 import com.sqsong.wanandroid.data.*
 import com.sqsong.wanandroid.mvp.BasePresenter
@@ -16,6 +17,9 @@ import com.sqsong.wanandroid.util.Constants
 import com.sqsong.wanandroid.util.PreferenceHelper.get
 import com.sqsong.wanandroid.util.RxJavaHelper
 import io.reactivex.disposables.CompositeDisposable
+import org.greenrobot.eventbus.EventBus
+import org.greenrobot.eventbus.Subscribe
+import org.greenrobot.eventbus.ThreadMode
 import javax.inject.Inject
 
 class ProjectPresenter @Inject constructor(private val projectModel: ProjectModel,
@@ -37,6 +41,7 @@ class ProjectPresenter @Inject constructor(private val projectModel: ProjectMode
     override fun onAttach(view: ProjectContract.View) {
         super.onAttach(view)
         mView.showLoadingPage()
+        EventBus.getDefault().register(this)
         mAdapter.setHomeItemActionListener(this)
         mView.setRecyclerAdapter(mAdapter)
     }
@@ -191,5 +196,17 @@ class ProjectPresenter @Inject constructor(private val projectModel: ProjectMode
         intent.putExtra(Constants.KEY_WEB_URL, homeItem?.link)
         intent.putExtra(Constants.KEY_WEB_TITLE, homeItem?.title)
         mView.startNewActivity(intent)
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    fun onFabClick(event: FabClickEvent) {
+        if (event.index == 3) {
+            mView.scrollRecycler(0)
+        }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        EventBus.getDefault().unregister(this)
     }
 }

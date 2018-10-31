@@ -2,6 +2,7 @@ package com.sqsong.wanandroid.ui.home.mvp.navigation
 
 import android.content.Intent
 import com.sqsong.wanandroid.R
+import com.sqsong.wanandroid.common.event.FabClickEvent
 import com.sqsong.wanandroid.common.inter.OnItemClickListener
 import com.sqsong.wanandroid.data.HomeItem
 import com.sqsong.wanandroid.data.NavigationBean
@@ -17,6 +18,9 @@ import com.sqsong.wanandroid.util.DensityUtil
 import com.sqsong.wanandroid.util.RxJavaHelper
 import com.sqsong.wanandroid.util.recycler.FloatingTitleItemDecoration
 import io.reactivex.disposables.CompositeDisposable
+import org.greenrobot.eventbus.EventBus
+import org.greenrobot.eventbus.Subscribe
+import org.greenrobot.eventbus.ThreadMode
 import javax.inject.Inject
 
 class NavigationPresenter @Inject constructor(private val navigationModel: NavigationModel,
@@ -36,6 +40,7 @@ class NavigationPresenter @Inject constructor(private val navigationModel: Navig
     }
 
     private fun initAdapter() {
+        EventBus.getDefault().register(this)
         val padding = DensityUtil.dip2px(16).toFloat()
         val bgColor = CommonUtil.getThemeColor(mView.getFragmentContext(), R.attr.colorDefaultBackground)
         val textColor = CommonUtil.getThemeColor(mView.getFragmentContext(), R.attr.colorTextActive)
@@ -91,6 +96,18 @@ class NavigationPresenter @Inject constructor(private val navigationModel: Navig
         intent.putExtra(Constants.KEY_WEB_URL, homeItem?.link)
         intent.putExtra(Constants.KEY_WEB_TITLE, homeItem?.title)
         mView.startNewActivity(intent)
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    fun onFabClick(event: FabClickEvent) {
+        if (event.index == 2) {
+            mView.scrollRecycler(0)
+        }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        EventBus.getDefault().unregister(this)
     }
 
 }

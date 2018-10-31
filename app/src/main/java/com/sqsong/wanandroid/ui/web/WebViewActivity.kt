@@ -80,6 +80,14 @@ class WebViewActivity : BaseActivity<WebViewPresenter>(), WebViewContract.View, 
         swipeLayout.viewTreeObserver.removeOnScrollChangedListener(onScrollListener)
     }
 
+    override fun onBackPressed() {
+        if (webView.canGoBack()) {
+            webView.goBack()
+        } else {
+            super.onBackPressed()
+        }
+    }
+
     override fun onDestroy() {
         super.onDestroy()
         mPresenter.onDestroy()

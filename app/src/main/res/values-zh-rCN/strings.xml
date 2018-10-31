@@ -66,5 +66,5 @@
     <string name="text_cancel_collect_success">取消收藏成功</string>
     <string name="text_play">玩</string>
     <string name="text_android">安卓</string>
-    <string name="text_knowledge_data_cannot_null">体系数据不可以为空</string>
+    <string name="text_knowledge_data_cannot_null">错误的数据id</string>
 </resources>

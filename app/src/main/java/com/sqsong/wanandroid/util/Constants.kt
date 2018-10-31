@@ -10,7 +10,9 @@ object Constants {
 
     const val LOGIN_LATEST_USER = "login_latest_user"
 
-    const val KNOWLEDGE_DATA = "knowledge_data"
+    const val KNOWLEDGE_CID = "knowledge_cid"
+
+    const val KNOWLEDGE_TITLE = "knowledge_data"
 
     const val KEY_WEB_URL = "key_web_url"
 

@@ -6,7 +6,9 @@ import android.text.TextUtils
 import androidx.fragment.app.Fragment
 import com.jakewharton.rxbinding2.view.RxView
 import com.sqsong.wanandroid.BaseApplication
+import com.sqsong.wanandroid.R
 import com.sqsong.wanandroid.common.event.FabClickEvent
+import com.sqsong.wanandroid.common.event.SwitchIndexEvent
 import com.sqsong.wanandroid.mvp.BasePresenter
 import com.sqsong.wanandroid.mvp.IModel
 import com.sqsong.wanandroid.network.CookieManager
@@ -21,6 +23,8 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 import org.greenrobot.eventbus.EventBus
+import org.greenrobot.eventbus.Subscribe
+import org.greenrobot.eventbus.ThreadMode
 import javax.inject.Inject
 
 class MainPresenter @Inject constructor(private val mainView: MainContract.View,
@@ -53,6 +57,7 @@ class MainPresenter @Inject constructor(private val mainView: MainContract.View,
     }
 
     private fun registerEvent() {
+        EventBus.getDefault().register(this)
         mView.setupDrawerAndToolbar()
         disposable.add(fabDisposable())
         setupFragments()
@@ -91,4 +96,22 @@ class MainPresenter @Inject constructor(private val mainView: MainContract.View,
         mView.startLoginActivity()
     }
 
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    fun onSwitchIndex(event: SwitchIndexEvent) {
+        mView.switchBottomViewNavigation(analysisSelectedItemId(event.index))
+    }
+
+    private fun analysisSelectedItemId(index: Int): Int {
+        return when (index) {
+            0 -> R.id.action_home
+            1 -> R.id.action_knowledge
+            2 -> R.id.action_navigation
+            else -> R.id.action_project
+        }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        EventBus.getDefault().unregister(this)
+    }
 }

@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.viewpager.widget.PagerAdapter
-import androidx.viewpager.widget.ViewPager
 import com.bumptech.glide.load.MultiTransformation
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
@@ -14,16 +13,17 @@ import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.bumptech.glide.request.RequestOptions
 import com.sqsong.wanandroid.R
 import com.sqsong.wanandroid.common.GlideApp
+import com.sqsong.wanandroid.common.inter.OnItemClickListener
 import com.sqsong.wanandroid.data.HomeBannerData
 import com.sqsong.wanandroid.util.DensityUtil
 
 class BannerPagerAdapter(private val context: Context,
-                         private val viewPager: ViewPager,
                          private val bannerList: MutableList<HomeBannerData>) : PagerAdapter() {
 
     private var mImageWidth: Int? = 0
     private var mImageHeight: Int? = 0
     private val mInflater: LayoutInflater = LayoutInflater.from(context)
+    private var mClickListener: OnItemClickListener<HomeBannerData>? = null
 
     fun setImageSize(imageWidth: Int, imageHeight: Int) {
         this.mImageWidth = imageWidth
@@ -46,6 +46,7 @@ class BannerPagerAdapter(private val context: Context,
                 .into(imageView)
         container.addView(view)
         view.layoutParams.height = mImageHeight!!
+        view.setOnClickListener { mClickListener?.onItemClick(bannerData, position % bannerList.size) }
         return view
     }
 
@@ -59,6 +60,10 @@ class BannerPagerAdapter(private val context: Context,
 
     override fun getCount(): Int {
         return bannerList.size * SIZE_MULTIPLE
+    }
+
+    fun setOnItemClickListener(listener: OnItemClickListener<HomeBannerData>?) {
+        this.mClickListener = listener
     }
 
     companion object {

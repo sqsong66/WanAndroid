@@ -66,5 +66,6 @@
     <string name="text_cancel_collect_success">Cancel collection success</string>
     <string name="text_play">Play</string>
     <string name="text_android">Android</string>
-    <string name="text_knowledge_data_cannot_null">Knowledge data cannot be null</string>
+    <string name="text_knowledge_data_cannot_null">Invalid knowledge cid</string>
+    <string name="text_interview_relative" translatable="false">面试相关</string>
 </resources>

@@ -72,6 +72,7 @@ class HomeFragment @Inject constructor() : BaseFragment<HomePresenter>(), HomeCo
     override fun getBannerHeaderView(): View {
         val headerView = LayoutInflater.from(context).inflate(R.layout.item_banner_header, null)
         mBannerView = headerView.findViewById(R.id.bannerView)
+        mBannerView?.setOnItemClickListener(mPresenter)
         return headerView
     }
 

@@ -30,7 +30,8 @@ import kotlinx.android.synthetic.main.content_knowledge.*
 class KnowledgeActivity : BaseActivity<ChildKnowledgePresenter>(), ChildKnowledgeContract.View,
         SwipeRefreshLayout.OnRefreshListener, RecyclerScrollListener.OnLoadMoreListener {
 
-    private lateinit var mKnowledgeData: KnowledgeData
+    private var mCid: Int = -1
+    private var mTitle: String? = null
     private lateinit var mRecyclerScroller: RecyclerScrollListener
 
     private val mHandler: NoLeakHandler<KnowledgeActivity> by lazy {
@@ -52,7 +53,8 @@ class KnowledgeActivity : BaseActivity<ChildKnowledgePresenter>(), ChildKnowledg
     }
 
     override fun beforeInflateView() {
-        mKnowledgeData = intent.getParcelableExtra(Constants.KNOWLEDGE_DATA)
+        mCid = intent.getIntExtra(Constants.KNOWLEDGE_CID, -1)
+        mTitle = intent.getStringExtra(Constants.KNOWLEDGE_TITLE)
     }
 
     override fun getLayoutResId(): Int {
@@ -65,7 +67,7 @@ class KnowledgeActivity : BaseActivity<ChildKnowledgePresenter>(), ChildKnowledg
         swipeLayout.setOnRefreshListener(this)
         setupRecyclerView()
         mPresenter.onAttach(this)
-        mHandler.post { toolbar.title = mKnowledgeData.name }
+        mHandler.post { toolbar.title = mTitle }
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
@@ -93,7 +95,7 @@ class KnowledgeActivity : BaseActivity<ChildKnowledgePresenter>(), ChildKnowledg
 
     override fun onLoadMore() = mPresenter.loadMoreData()
 
-    override fun getKnowledgeData(): KnowledgeData = mKnowledgeData
+    override fun getCid(): Int = mCid
 
     override fun showLoadingPage() = mPageLayout.showLoadingLayout()
 

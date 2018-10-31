@@ -3,6 +3,7 @@ package com.sqsong.wanandroid.ui.home.activity
 import android.content.Intent
 import android.view.Menu
 import android.view.MenuItem
+import androidx.annotation.IdRes
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AlertDialog
 import androidx.core.view.GravityCompat
@@ -124,6 +125,10 @@ class MainActivity : BaseActivity<MainPresenter>(), MainContract.View,
         if (currentIndex == index) return
         viewPager.setCurrentItem(index, false)
         toolbar.title = title
+    }
+
+    override fun switchBottomViewNavigation(@IdRes id: Int) {
+        bottomNavigationView.selectedItemId = id
     }
 
     override fun onBackPressed() {

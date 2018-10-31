@@ -18,7 +18,6 @@ import com.sqsong.wanandroid.ui.home.activity.KnowledgeActivity
 import com.sqsong.wanandroid.ui.home.adapter.KnowledgeAdapter
 import com.sqsong.wanandroid.ui.home.mvp.knowledge.KnowledgeContract
 import com.sqsong.wanandroid.ui.home.mvp.knowledge.KnowledgePresenter
-import com.sqsong.wanandroid.util.CommonUtil
 import com.sqsong.wanandroid.util.Constants
 import com.sqsong.wanandroid.util.DensityUtil
 import com.sqsong.wanandroid.util.ext.setupSwipeLayoutColor
@@ -120,7 +119,8 @@ class KnowledgeFragment @Inject constructor() : LazyLoadFragment<KnowledgePresen
 
     override fun startKnowledgeActivity(data: KnowledgeData?) {
         val intent = Intent(context, KnowledgeActivity::class.java)
-        intent.putExtra(Constants.KNOWLEDGE_DATA, data)
+        intent.putExtra(Constants.KNOWLEDGE_CID, data?.id)
+        intent.putExtra(Constants.KNOWLEDGE_TITLE, data?.name)
         startActivity(intent)
     }
 

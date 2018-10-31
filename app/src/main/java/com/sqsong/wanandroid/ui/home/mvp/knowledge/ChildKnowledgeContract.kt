@@ -18,7 +18,7 @@ interface ChildKnowledgeContract {
         fun showLoadingPage()
         fun showContentPage()
         fun showErrorPage()
-        fun getKnowledgeData(): KnowledgeData
+        fun getCid(): Int
         fun finishActivity()
         fun loadFinish()
         fun showLoginDialog()

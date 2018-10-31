@@ -6,16 +6,17 @@ import android.content.SharedPreferences
 import android.text.TextUtils
 import com.sqsong.wanandroid.R
 import com.sqsong.wanandroid.common.event.FabClickEvent
+import com.sqsong.wanandroid.common.event.SwitchIndexEvent
 import com.sqsong.wanandroid.common.holder.LoadingFooterViewHolder
-import com.sqsong.wanandroid.data.BaseData
-import com.sqsong.wanandroid.data.HomeBannerBean
-import com.sqsong.wanandroid.data.HomeItem
-import com.sqsong.wanandroid.data.HomeItemBean
+import com.sqsong.wanandroid.common.inter.OnItemClickListener
+import com.sqsong.wanandroid.data.*
 import com.sqsong.wanandroid.mvp.BasePresenter
 import com.sqsong.wanandroid.network.ApiException
 import com.sqsong.wanandroid.network.ObserverImpl
+import com.sqsong.wanandroid.ui.home.activity.KnowledgeActivity
 import com.sqsong.wanandroid.ui.home.adapter.HomeItemAdapter
 import com.sqsong.wanandroid.ui.web.WebViewActivity
+import com.sqsong.wanandroid.util.CommonUtil
 import com.sqsong.wanandroid.util.Constants
 import com.sqsong.wanandroid.util.PreferenceHelper.get
 import com.sqsong.wanandroid.util.RxJavaHelper
@@ -26,9 +27,10 @@ import org.greenrobot.eventbus.ThreadMode
 import javax.inject.Inject
 
 class HomePresenter @Inject constructor(private val homeModel: HomeModel,
-                                        /*private val homeView: HomeContract.HomeView,*/
+        /*private val homeView: HomeContract.HomeView,*/
                                         private val disposable: CompositeDisposable) :
-        BasePresenter<HomeContract.HomeView, HomeContract.Model>(homeModel, disposable), HomeItemAdapter.HomeItemActionListener {
+        BasePresenter<HomeContract.HomeView, HomeContract.Model>(homeModel, disposable),
+        HomeItemAdapter.HomeItemActionListener, OnItemClickListener<HomeBannerData> {
 
     private var mPage: Int = 0
 
@@ -172,6 +174,25 @@ class HomePresenter @Inject constructor(private val homeModel: HomeModel,
         intent.putExtra(Constants.KEY_WEB_URL, homeItem.link)
         intent.putExtra(Constants.KEY_WEB_TITLE, homeItem.title)
         mView.startNewActivity(intent)
+    }
+
+    override fun onItemClick(data: HomeBannerData?, position: Int) {
+        lateinit var intent: Intent
+        if (data?.id == 4 && !TextUtils.isEmpty(CommonUtil.parseUrlParameter(data.url, "cid"))) { // 面试相关
+            intent = Intent(mView.getAppContext(), KnowledgeActivity::class.java)
+            intent.putExtra(Constants.KNOWLEDGE_CID, CommonUtil.parseUrlParameter(data.url, "cid")?.toInt())
+            intent.putExtra(Constants.KNOWLEDGE_TITLE, mView.getAppContext().getString(R.string.text_interview_relative))
+            mView.startNewActivity(intent)
+        } else if (data?.id == 3) { // 完整项目
+            EventBus.getDefault().post(SwitchIndexEvent(3))
+        } else if (data?.id == 6) { // 专属导航
+            EventBus.getDefault().post(SwitchIndexEvent(2))
+        } else {
+            intent = Intent(mView.getAppContext(), WebViewActivity::class.java)
+            intent.putExtra(Constants.KEY_WEB_URL, data?.url)
+            intent.putExtra(Constants.KEY_WEB_TITLE, data?.title)
+            mView.startNewActivity(intent)
+        }
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)

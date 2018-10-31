@@ -19,10 +19,10 @@ import com.bumptech.glide.request.target.SimpleTarget
 import com.bumptech.glide.request.transition.Transition
 import com.sqsong.wanandroid.R
 import com.sqsong.wanandroid.common.GlideApp
+import com.sqsong.wanandroid.common.inter.OnItemClickListener
 import com.sqsong.wanandroid.data.HomeBannerData
 import com.sqsong.wanandroid.ui.home.adapter.BannerPagerAdapter
 import com.sqsong.wanandroid.util.DensityUtil
-import com.sqsong.wanandroid.util.LogUtil
 import com.sqsong.wanandroid.util.transformer.ZoomPageTransformer
 import com.sqsong.wanandroid.view.CirclePagerIndicator
 import com.sqsong.wanandroid.view.FixedSpeedScroller
@@ -44,7 +44,7 @@ class BannerView @JvmOverloads constructor(context: Context, attrs: AttributeSet
     private var mLoopHandler: LoopHandler? = null
     private var mBannerList = mutableListOf<HomeBannerData>()
     private val mBannerAdapter by lazy {
-        BannerPagerAdapter(context, viewPager, mBannerList)
+        BannerPagerAdapter(context, mBannerList)
     }
 
     init {
@@ -200,6 +200,10 @@ class BannerView @JvmOverloads constructor(context: Context, attrs: AttributeSet
             indicator.visibility = View.GONE
         }
         if (loop) startAutoLoop()
+    }
+
+    fun setOnItemClickListener(listener: OnItemClickListener<HomeBannerData>?) {
+        mBannerAdapter.setOnItemClickListener(listener)
     }
 
 }

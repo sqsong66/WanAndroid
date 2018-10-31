@@ -1,5 +1,6 @@
 package com.sqsong.wanandroid.ui.home.mvp
 
+import androidx.annotation.IdRes
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentStatePagerAdapter
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -15,6 +16,7 @@ interface MainContract {
         fun setPagerAdapter(adapter: FragmentStatePagerAdapter)
         fun startLoginActivity()
         fun showLoginOutTipDialog()
+        fun switchBottomViewNavigation(@IdRes id: Int)
     }
 
 }

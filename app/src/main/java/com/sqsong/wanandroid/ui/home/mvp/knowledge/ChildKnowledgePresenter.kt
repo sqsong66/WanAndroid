@@ -8,7 +8,6 @@ import com.sqsong.wanandroid.common.holder.LoadingFooterViewHolder
 import com.sqsong.wanandroid.data.BaseData
 import com.sqsong.wanandroid.data.HomeItem
 import com.sqsong.wanandroid.data.HomeItemBean
-import com.sqsong.wanandroid.data.KnowledgeData
 import com.sqsong.wanandroid.mvp.BasePresenter
 import com.sqsong.wanandroid.network.ApiException
 import com.sqsong.wanandroid.network.ObserverImpl
@@ -29,7 +28,7 @@ class ChildKnowledgePresenter @Inject constructor(private val knowledgeModel: Ch
     lateinit var mPreferences: SharedPreferences
 
     private var mPage: Int = 0
-    private var mKnowledgeData: KnowledgeData? = null
+    private var mCid: Int = -1
     private val mDataList = mutableListOf<HomeItem>()
     private val mAdapter: KnowledgeItemAdapter by lazy {
         KnowledgeItemAdapter(mView.getActivityContext(), mDataList)
@@ -38,8 +37,8 @@ class ChildKnowledgePresenter @Inject constructor(private val knowledgeModel: Ch
     override fun onAttach(view: ChildKnowledgeContract.View) {
         super.onAttach(view)
         mView.showLoadingPage()
-        mKnowledgeData = mView.getKnowledgeData()
-        if (mKnowledgeData == null) {
+        mCid = mView.getCid()
+        if (mCid == -1) {
             mView.showMessage(mView.getActivityContext().getString(R.string.text_knowledge_data_cannot_null))
             mView.finishActivity()
         }
@@ -59,7 +58,7 @@ class ChildKnowledgePresenter @Inject constructor(private val knowledgeModel: Ch
     }
 
     private fun requestKnowledgeData() {
-        knowledgeModel.getKnowledgeChildList(mPage, mKnowledgeData?.id!!)
+        knowledgeModel.getKnowledgeChildList(mPage, mCid)
                 .compose(RxJavaHelper.compose())
                 .subscribe(object : ObserverImpl<HomeItemBean>(disposable) {
                     override fun onSuccess(bean: HomeItemBean) {
