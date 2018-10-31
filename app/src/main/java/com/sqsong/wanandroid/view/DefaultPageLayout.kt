@@ -234,7 +234,7 @@ class DefaultPageLayout @JvmOverloads constructor(context: Context, attrs: Attri
         private fun getContainerView(): ViewGroup {
             if (targetPage == null) throw IllegalArgumentException("The target page cannot be null.")
             return when (targetPage) {
-                is Activity -> (targetPage as Activity).findViewById(R.id.content)
+                is Activity -> (targetPage as Activity).findViewById(android.R.id.content)
                 is Fragment -> (targetPage as Fragment).view?.parent as ViewGroup
                 is View -> (targetPage as View).parent as ViewGroup
                 else -> throw IllegalArgumentException("Not support this page layout: $targetPage")
