@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.RelativeLayout
 import android.widget.TextView
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import butterknife.BindView
 import butterknife.ButterKnife
@@ -113,10 +112,6 @@ class HomeItemAdapter(context: Context,
         @JvmField
         var starRl: RelativeLayout? = null
 
-        @BindView(R.id.constraintLayout)
-        @JvmField
-        var constraintLayout: ConstraintLayout? = null
-
         init {
             ButterKnife.bind(this@HomeItemViewHolder, itemView)
         }
@@ -135,7 +130,7 @@ class HomeItemAdapter(context: Context,
                 mActionListener?.onStarClick(homeItem, position)
             }
 
-            constraintLayout?.setOnClickListener {
+            itemView.setOnClickListener {
                 mActionListener?.onListItemClick(homeItem, position)
             }
         }

@@ -15,6 +15,7 @@ import com.sqsong.wanandroid.common.holder.LoadingFooterViewHolder.LoadingState
 import com.sqsong.wanandroid.data.HomeItem
 import com.sqsong.wanandroid.util.Constants
 import com.sqsong.wanandroid.view.CheckableImageView
+import com.sqsong.wanandroid.view.LabelView
 import javax.inject.Inject
 
 class KnowledgeItemAdapter @Inject constructor(context: Context, private val dataList: MutableList<HomeItem>) :
@@ -58,6 +59,10 @@ class KnowledgeItemAdapter @Inject constructor(context: Context, private val dat
 
     inner class KnowledgeViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
+        @BindView(R.id.labelView)
+        @JvmField
+        var labelView: LabelView? = null
+
         @BindView(R.id.titleTv)
         @JvmField
         var titleTv: TextView? = null
@@ -91,6 +96,7 @@ class KnowledgeItemAdapter @Inject constructor(context: Context, private val dat
             authorTv?.text = homeItem.author
             timeTv?.text = homeItem.niceDate
             heartIv?.isChecked = homeItem.collect
+            labelView?.visibility = if (homeItem.fresh) View.VISIBLE else View.INVISIBLE
 
             heartRl?.setOnClickListener {
                 mActionListener?.onStarClick(homeItem, position)

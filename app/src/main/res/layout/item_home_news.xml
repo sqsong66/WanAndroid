@@ -8,6 +8,7 @@
     android:layout_marginLeft="16dp"
     android:layout_marginRight="16dp"
     android:layout_marginTop="6dp"
+    android:foreground="@drawable/bg_round_corner"
     app:cardBackgroundColor="?colorCardBackground"
     app:cardCornerRadius="5dp"
     app:cardElevation="8dp">
@@ -15,8 +16,8 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/bg_round_corner">
+        android:layout_height="wrap_content">
+        <!--android:background="@drawable/bg_round_corner"-->
 
         <com.sqsong.wanandroid.view.CircleTextView
             android:id="@+id/nameCircleTv"
