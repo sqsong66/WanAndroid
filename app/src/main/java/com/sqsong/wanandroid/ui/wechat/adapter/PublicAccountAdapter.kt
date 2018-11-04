@@ -16,6 +16,7 @@ import com.sqsong.wanandroid.common.holder.LoadingFooterViewHolder.LoadingState
 import com.sqsong.wanandroid.data.HomeItem
 import com.sqsong.wanandroid.ui.home.adapter.HomeItemAdapter
 import com.sqsong.wanandroid.util.Constants
+import com.sqsong.wanandroid.util.DensityUtil
 import com.sqsong.wanandroid.view.CheckableImageView
 import com.sqsong.wanandroid.view.LabelView
 
@@ -34,7 +35,7 @@ class PublicAccountAdapter(private val context: Context,
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return if (viewType == Constants.ITEM_TYPE_CONTENT) {
-            PublicAccountViewHolder(mInflater.inflate(R.layout.item_project, parent, false))
+            PublicAccountViewHolder(mInflater.inflate(R.layout.item_public_account, parent, false))
         } else {
             LoadingFooterViewHolder(mInflater.inflate(R.layout.item_loading_footer, parent, false))
         }
@@ -94,6 +95,30 @@ class PublicAccountAdapter(private val context: Context,
         }
 
         fun bindData(homeItem: HomeItem, position: Int) {
+            labelView?.visibility = if (homeItem.fresh) View.VISIBLE else View.INVISIBLE
+            authorTv?.text = homeItem.author
+            timeTv?.text = homeItem.niceDate
+            titleTv?.text = homeItem.title
+            heartIv?.isChecked = homeItem.collect
+
+            heartRl?.setOnClickListener {
+                mActionListener?.onStarClick(homeItem, position)
+            }
+
+            shareIv?.setOnClickListener {
+                mActionListener?.onShareClick(homeItem, position)
+            }
+
+            itemView.setOnClickListener {
+                mActionListener?.onListItemClick(homeItem, position)
+            }
+
+            val params = itemView.layoutParams as RecyclerView.LayoutParams
+            if (position == dataList.size - 1) {
+                params.bottomMargin = DensityUtil.dip2px(16)
+            } else {
+                params.bottomMargin = 0
+            }
 
         }
 

@@ -12,7 +12,7 @@ import com.sqsong.wanandroid.common.event.SwitchIndexEvent
 import com.sqsong.wanandroid.mvp.BasePresenter
 import com.sqsong.wanandroid.mvp.IModel
 import com.sqsong.wanandroid.network.CookieManager
-import com.sqsong.wanandroid.ui.home.adapter.FragmentPagerAdapter
+import com.sqsong.wanandroid.common.FragmentPagerAdapter
 import com.sqsong.wanandroid.ui.home.fragment.HomeFragment
 import com.sqsong.wanandroid.ui.home.fragment.KnowledgeFragment
 import com.sqsong.wanandroid.ui.home.fragment.NavigationFragment

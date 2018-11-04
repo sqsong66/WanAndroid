@@ -11,7 +11,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.sqsong.wanandroid.R
 import com.sqsong.wanandroid.common.RecyclerScrollListener
 import com.sqsong.wanandroid.data.HomeBannerData
-import com.sqsong.wanandroid.ui.base.BaseFragment
+import com.sqsong.wanandroid.ui.base.BaseInjectFragment
 import com.sqsong.wanandroid.ui.home.adapter.HomeItemAdapter
 import com.sqsong.wanandroid.ui.home.mvp.home.HomeContract
 import com.sqsong.wanandroid.ui.home.mvp.home.HomePresenter
@@ -23,7 +23,7 @@ import kotlinx.android.synthetic.main.content_home.*
 import kotlinx.android.synthetic.main.fragment_home_backup.*
 import javax.inject.Inject
 
-class HomeFragment @Inject constructor() : BaseFragment<HomePresenter>(), HomeContract.HomeView,
+class HomeFragment @Inject constructor() : BaseInjectFragment<HomePresenter>(), HomeContract.HomeView,
         SwipeRefreshLayout.OnRefreshListener, RecyclerScrollListener.OnLoadMoreListener {
 
     private var mBannerView: BannerView? = null

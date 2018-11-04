@@ -8,12 +8,19 @@ import dagger.Module
 import dagger.Provides
 
 @Module
-class PublicAccountModule {
+abstract class PublicAccountModule {
 
-    @ActivityScope
-    @Provides
-    fun providePublicAccountModel(apiService: ApiService): PublicAccountContract.Model {
-        return PublicAccountModel(apiService)
+//    @FragmentScope
+//    @ContributesAndroidInjector
+//    abstract fun contributePublicAccountFragment(): PublicAccountFragment
+
+    @Module
+    companion object {
+        @ActivityScope
+        @Provides
+        fun providePublicAccountModel(apiService: ApiService): PublicAccountContract.Model {
+            return PublicAccountModel(apiService)
+        }
     }
 
 }

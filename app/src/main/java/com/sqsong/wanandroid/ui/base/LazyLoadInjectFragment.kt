@@ -1,8 +1,9 @@
 package com.sqsong.wanandroid.ui.base
 
 import android.os.Bundle
+import com.sqsong.wanandroid.mvp.IPresenter
 
-abstract class LazyLoadFragment : BaseFragment() {
+abstract class LazyLoadInjectFragment<P : IPresenter<*>> : BaseInjectFragment<P>() {
 
     private var mIsVisible = false
     private var mIsPrepared = false

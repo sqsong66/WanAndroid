@@ -1,4 +1,4 @@
-package com.sqsong.wanandroid.ui.home.adapter
+package com.sqsong.wanandroid.common
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager

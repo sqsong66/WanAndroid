@@ -13,7 +13,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.sqsong.wanandroid.R
 import com.sqsong.wanandroid.data.KnowledgeData
-import com.sqsong.wanandroid.ui.base.LazyLoadFragment
+import com.sqsong.wanandroid.ui.base.LazyLoadInjectFragment
 import com.sqsong.wanandroid.ui.home.activity.KnowledgeActivity
 import com.sqsong.wanandroid.ui.home.adapter.KnowledgeAdapter
 import com.sqsong.wanandroid.ui.home.mvp.knowledge.KnowledgeContract
@@ -26,7 +26,7 @@ import kotlinx.android.synthetic.main.content_home.*
 import kotlinx.android.synthetic.main.fragment_knowledge.*
 import javax.inject.Inject
 
-class KnowledgeFragment @Inject constructor() : LazyLoadFragment<KnowledgePresenter>(), KnowledgeContract.View {
+class KnowledgeFragment @Inject constructor() : LazyLoadInjectFragment<KnowledgePresenter>(), KnowledgeContract.View {
 
     private var mSwitchPopupWindow: PopupWindow? = null
 

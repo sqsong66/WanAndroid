@@ -18,7 +18,7 @@ import com.sqsong.wanandroid.common.NoLeakHandler
 import com.sqsong.wanandroid.common.RecyclerScrollListener
 import com.sqsong.wanandroid.common.inter.OnItemClickListener
 import com.sqsong.wanandroid.data.KnowledgeData
-import com.sqsong.wanandroid.ui.base.LazyLoadFragment
+import com.sqsong.wanandroid.ui.base.LazyLoadInjectFragment
 import com.sqsong.wanandroid.ui.home.adapter.ProjectAdapter
 import com.sqsong.wanandroid.ui.home.adapter.ProjectPopAdapter
 import com.sqsong.wanandroid.ui.home.mvp.project.ProjectContract
@@ -32,7 +32,7 @@ import kotlinx.android.synthetic.main.content_home.*
 import kotlinx.android.synthetic.main.fragment_project.*
 import javax.inject.Inject
 
-class ProjectFragment @Inject constructor() : LazyLoadFragment<ProjectPresenter>(), ProjectContract.View, OnItemClickListener<KnowledgeData>, RecyclerScrollListener.OnLoadMoreListener {
+class ProjectFragment @Inject constructor() : LazyLoadInjectFragment<ProjectPresenter>(), ProjectContract.View, OnItemClickListener<KnowledgeData>, RecyclerScrollListener.OnLoadMoreListener {
 
     private var mTitle: String? = null
     private var mSwitchPopupWindow: PopupWindow? = null

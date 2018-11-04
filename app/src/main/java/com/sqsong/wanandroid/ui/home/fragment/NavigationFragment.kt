@@ -13,7 +13,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.sqsong.wanandroid.R
-import com.sqsong.wanandroid.ui.base.LazyLoadFragment
+import com.sqsong.wanandroid.ui.base.LazyLoadInjectFragment
 import com.sqsong.wanandroid.ui.home.adapter.NavigationAdapter
 import com.sqsong.wanandroid.ui.home.mvp.navigation.NavigationContract
 import com.sqsong.wanandroid.ui.home.mvp.navigation.NavigationPresenter
@@ -24,7 +24,7 @@ import kotlinx.android.synthetic.main.content_home.*
 import kotlinx.android.synthetic.main.fragment_navigation.*
 import javax.inject.Inject
 
-class NavigationFragment @Inject constructor() : LazyLoadFragment<NavigationPresenter>(), NavigationContract.View {
+class NavigationFragment @Inject constructor() : LazyLoadInjectFragment<NavigationPresenter>(), NavigationContract.View {
 
     private var mSwitchPopupWindow: PopupWindow? = null
 

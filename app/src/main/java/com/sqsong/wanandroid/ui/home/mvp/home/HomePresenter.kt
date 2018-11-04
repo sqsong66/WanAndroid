@@ -16,6 +16,7 @@ import com.sqsong.wanandroid.network.ObserverImpl
 import com.sqsong.wanandroid.ui.home.activity.KnowledgeActivity
 import com.sqsong.wanandroid.ui.home.adapter.HomeItemAdapter
 import com.sqsong.wanandroid.ui.web.WebViewActivity
+import com.sqsong.wanandroid.ui.wechat.PublicAccountActivity
 import com.sqsong.wanandroid.util.CommonUtil
 import com.sqsong.wanandroid.util.Constants
 import com.sqsong.wanandroid.util.PreferenceHelper.get
@@ -190,6 +191,9 @@ class HomePresenter @Inject constructor(private val homeModel: HomeModel,
             EventBus.getDefault().post(SwitchIndexEvent(3))
         } else if (data?.id == 6) { // 专属导航
             EventBus.getDefault().post(SwitchIndexEvent(2))
+        } else if (data?.id == 18) {
+            intent = Intent(mView.getAppContext(), PublicAccountActivity::class.java)
+            mView.startNewActivity(intent)
         } else {
             intent = Intent(mView.getAppContext(), WebViewActivity::class.java)
             intent.putExtra(Constants.KEY_WEB_URL, data?.url)

@@ -27,6 +27,7 @@
             app:tabBackground="?colorPrimary"
             app:tabIndicatorColor="@color/colorWhite"
             app:tabMode="scrollable"
+            app:tabTextAppearance="@style/LoginErrorAppearance"
             app:tabSelectedTextColor="@color/colorWhite"
             app:tabTextColor="@color/colorWhiteInActive" />
 

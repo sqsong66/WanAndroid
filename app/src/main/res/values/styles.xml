@@ -36,6 +36,10 @@
         <item name="android:textColorHint">?colorError</item>
     </style>
 
+    <style name="TabStyle">
+        <item name="android:textSize">16sp</item>
+    </style>
+
     <style name="ChipAppearance">
         <item name="android:textSize">12sp</item>
     </style>

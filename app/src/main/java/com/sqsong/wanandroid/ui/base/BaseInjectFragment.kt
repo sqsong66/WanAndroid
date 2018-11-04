@@ -7,12 +7,17 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.annotation.LayoutRes
-import androidx.fragment.app.Fragment
 import butterknife.ButterKnife
 import butterknife.Unbinder
+import com.sqsong.wanandroid.mvp.IPresenter
 import com.sqsong.wanandroid.mvp.IView
+import dagger.android.support.DaggerFragment
+import javax.inject.Inject
 
-abstract class BaseFragment : Fragment(), IView {
+abstract class BaseInjectFragment<P : IPresenter<*>> : DaggerFragment(), IView {
+
+    @Inject
+    lateinit var mPresenter: P
 
     @LayoutRes
     abstract fun getLayoutResId(): Int
