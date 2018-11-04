@@ -23,7 +23,7 @@ import com.sqsong.wanandroid.ui.home.mvp.MainPresenter
 import com.sqsong.wanandroid.ui.login.LoginActivity
 import com.sqsong.wanandroid.util.Constants
 import com.sqsong.wanandroid.util.SnackbarUtil
-import kotlinx.android.synthetic.main.activity_home.*
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.content_home.*
 import javax.inject.Inject
 
@@ -38,7 +38,7 @@ class MainActivity : BaseActivity<MainPresenter>(), MainContract.View,
     private var lastClickTime: Long = 0
 
     override fun getLayoutResId(): Int {
-        return R.layout.activity_home
+        return R.layout.activity_main
     }
 
     override fun initEvent() {

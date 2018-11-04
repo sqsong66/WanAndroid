@@ -176,6 +176,9 @@ class HomePresenter @Inject constructor(private val homeModel: HomeModel,
         mView.startNewActivity(intent)
     }
 
+    override fun onShareClick(homeItem: HomeItem, position: Int) {
+    }
+
     override fun onItemClick(data: HomeBannerData?, position: Int) {
         lateinit var intent: Intent
         if (data?.id == 4 && !TextUtils.isEmpty(CommonUtil.parseUrlParameter(data.url, "cid"))) { // 面试相关

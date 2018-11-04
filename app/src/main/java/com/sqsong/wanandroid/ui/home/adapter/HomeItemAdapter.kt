@@ -139,6 +139,7 @@ class HomeItemAdapter(context: Context,
     interface HomeItemActionListener {
         fun onStarClick(homeItem: HomeItem, position: Int)
         fun onListItemClick(homeItem: HomeItem, position: Int)
+        fun onShareClick(homeItem: HomeItem, position: Int)
     }
 
 }

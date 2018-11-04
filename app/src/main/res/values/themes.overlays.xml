@@ -25,7 +25,7 @@
         <item name="colorError">@color/colorRed</item>
 
         <item name="colorTextActive">@color/colorWhite</item>
-        <item name="colorTextInActive">@color/colorWhite</item>
+        <item name="colorTextInActive">@color/colorWhiteInActive</item>
         <item name="colorTextDisable">@color/colorWhite</item>
         <item name="colorCardBackground">@color/colorBlackCard</item>
         <item name="colorDefaultBackground">@color/colorBlackPrimaryLight</item>

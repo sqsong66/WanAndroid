@@ -46,6 +46,9 @@
         <activity
             android:name=".ui.web.WebViewActivity"
             android:theme="@style/AppTheme.LoginTheme" />
+        <activity
+            android:name=".ui.wechat.PublicAccountActivity"
+            android:theme="@style/AppTheme.LoginTheme" />
     </application>
 
 </manifest>

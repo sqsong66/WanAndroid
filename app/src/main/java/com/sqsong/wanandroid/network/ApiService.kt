@@ -53,4 +53,12 @@ interface ApiService {
     // 项目列表
     @GET("project/list/{page}/json")
     fun getProjectList(@Path("page") page: Int, @Query("cid") cid: Int): Observable<HomeItemBean>
+
+    // 获取公众号人物列表
+    @GET("wxarticle/chapters/json")
+    fun getPublicAccountPeople(): Observable<KnowledgeBean>
+
+    // 获取公众号文章列表
+    @GET("wxarticle/list/{id}/{page}/json")
+    fun getPublicAccountArticleList(@Path("id") id: Int, @Path("page") page: Int): Observable<HomeItemBean>
 }

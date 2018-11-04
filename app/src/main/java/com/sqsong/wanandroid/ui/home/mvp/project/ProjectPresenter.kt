@@ -193,9 +193,12 @@ class ProjectPresenter @Inject constructor(private val projectModel: ProjectMode
 
     override fun onListItemClick(homeItem: HomeItem, position: Int) {
         val intent = Intent(mView.getFragmentContext(), WebViewActivity::class.java)
-        intent.putExtra(Constants.KEY_WEB_URL, homeItem?.link)
-        intent.putExtra(Constants.KEY_WEB_TITLE, homeItem?.title)
+        intent.putExtra(Constants.KEY_WEB_URL, homeItem.link)
+        intent.putExtra(Constants.KEY_WEB_TITLE, homeItem.title)
         mView.startNewActivity(intent)
+    }
+
+    override fun onShareClick(homeItem: HomeItem, position: Int) {
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)

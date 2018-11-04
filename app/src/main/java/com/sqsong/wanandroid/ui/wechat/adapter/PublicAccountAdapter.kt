@@ -1,4 +1,4 @@
-package com.sqsong.wanandroid.ui.home.adapter
+package com.sqsong.wanandroid.ui.wechat.adapter
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -14,14 +14,13 @@ import com.sqsong.wanandroid.R
 import com.sqsong.wanandroid.common.holder.LoadingFooterViewHolder
 import com.sqsong.wanandroid.common.holder.LoadingFooterViewHolder.LoadingState
 import com.sqsong.wanandroid.data.HomeItem
+import com.sqsong.wanandroid.ui.home.adapter.HomeItemAdapter
 import com.sqsong.wanandroid.util.Constants
-import com.sqsong.wanandroid.util.DensityUtil
-import com.sqsong.wanandroid.util.ext.showImage
 import com.sqsong.wanandroid.view.CheckableImageView
 import com.sqsong.wanandroid.view.LabelView
 
-class ProjectAdapter(private val context: Context,
-                     private val dataList: List<HomeItem>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class PublicAccountAdapter(private val context: Context,
+                           private val dataList: List<HomeItem>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private val mInflater = LayoutInflater.from(context)
 
@@ -35,7 +34,7 @@ class ProjectAdapter(private val context: Context,
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return if (viewType == Constants.ITEM_TYPE_CONTENT) {
-            ProjectViewHolder(mInflater.inflate(R.layout.item_project, parent, false))
+            PublicAccountViewHolder(mInflater.inflate(R.layout.item_project, parent, false))
         } else {
             LoadingFooterViewHolder(mInflater.inflate(R.layout.item_loading_footer, parent, false))
         }
@@ -44,7 +43,7 @@ class ProjectAdapter(private val context: Context,
     override fun getItemCount(): Int = dataList.size + 1
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        if (holder is ProjectViewHolder) {
+        if (holder is PublicAccountViewHolder) {
             holder.bindData(dataList[position], position)
         } else if (holder is LoadingFooterViewHolder) {
             holder.updateLoadingState(mLoadingState)
@@ -60,19 +59,7 @@ class ProjectAdapter(private val context: Context,
         this.mActionListener = listener
     }
 
-    inner class ProjectViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-
-        @BindView(R.id.previewIv)
-        @JvmField
-        var previewIv: ImageView? = null
-
-        @BindView(R.id.titleTv)
-        @JvmField
-        var titleTv: TextView? = null
-
-        @BindView(R.id.descTv)
-        @JvmField
-        var descTv: TextView? = null
+    inner class PublicAccountViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         @BindView(R.id.labelView)
         @JvmField
@@ -86,6 +73,10 @@ class ProjectAdapter(private val context: Context,
         @JvmField
         var timeTv: TextView? = null
 
+        @BindView(R.id.titleTv)
+        @JvmField
+        var titleTv: TextView? = null
+
         @BindView(R.id.heartIv)
         @JvmField
         var heartIv: CheckableImageView? = null
@@ -94,34 +85,18 @@ class ProjectAdapter(private val context: Context,
         @JvmField
         var heartRl: RelativeLayout? = null
 
+        @BindView(R.id.shareIv)
+        @JvmField
+        var shareIv: ImageView? = null
+
         init {
             ButterKnife.bind(this, itemView)
         }
 
         fun bindData(homeItem: HomeItem, position: Int) {
-            titleTv?.text = homeItem.title
-            descTv?.text = homeItem.desc
-            authorTv?.text = homeItem.author
-            timeTv?.text = homeItem.niceDate
-            heartIv?.isChecked = homeItem.collect
-            labelView?.visibility = if (homeItem.fresh) View.VISIBLE else View.INVISIBLE
-            previewIv?.showImage(context, homeItem.envelopePic, R.drawable.image_placeholder)
 
-            heartRl?.setOnClickListener {
-                mActionListener?.onStarClick(homeItem, position)
-            }
-
-            itemView.setOnClickListener {
-                mActionListener?.onListItemClick(homeItem, position)
-            }
-
-            val params = itemView.layoutParams as RecyclerView.LayoutParams
-            if (position == dataList.size - 1) {
-                params.bottomMargin = DensityUtil.dip2px(16)
-            } else {
-                params.bottomMargin = 0
-            }
         }
+
     }
 
 }

@@ -142,4 +142,7 @@ class ChildKnowledgePresenter @Inject constructor(private val knowledgeModel: Ch
         mView.startNewActivity(intent)
     }
 
+    override fun onShareClick(homeItem: HomeItem, position: Int) {
+    }
+
 }
