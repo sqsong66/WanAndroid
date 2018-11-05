@@ -11,12 +11,12 @@ interface MainContract {
     interface View : IView {
         fun getFab(): FloatingActionButton
         fun getCurrentIndex(): Int
-        fun setupDrawerAndToolbar()
         fun supportFragmentManager(): FragmentManager
         fun setPagerAdapter(adapter: FragmentStatePagerAdapter)
         fun startLoginActivity()
         fun showLoginOutTipDialog()
         fun switchBottomViewNavigation(@IdRes id: Int)
+        fun showUserName(userName: String?)
     }
 
 }

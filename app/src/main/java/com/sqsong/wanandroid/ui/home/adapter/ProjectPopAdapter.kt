@@ -36,15 +36,15 @@ class ProjectPopAdapter(context: Context, private val dataList: List<KnowledgeDa
     inner class PopViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         @JvmField
-        @BindView(R.id.titleTv)
-        var titleTv: TextView? = null
+        @BindView(R.id.projectTitleTv)
+        var projectTitleTv: TextView? = null
 
         init {
             ButterKnife.bind(this, itemView)
         }
 
         fun bindData(knowledgeData: KnowledgeData, position: Int) {
-            titleTv?.text = knowledgeData.name
+            projectTitleTv?.text = knowledgeData.name
             itemView.setOnClickListener {
                 mListener?.onItemClick(knowledgeData, position)
             }

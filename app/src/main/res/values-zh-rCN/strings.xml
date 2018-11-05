@@ -67,4 +67,6 @@
     <string name="text_play">玩</string>
     <string name="text_android">安卓</string>
     <string name="text_knowledge_data_cannot_null">错误的数据id</string>
+    <string name="text_click_login">点击头像登录</string>
+    <string name="text_public_account">公众号</string>
 </resources>

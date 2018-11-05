@@ -1,8 +1,12 @@
 package com.sqsong.wanandroid.ui.home.activity
 
 import android.content.Intent
+import android.text.TextUtils
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.annotation.IdRes
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AlertDialog
@@ -21,6 +25,7 @@ import com.sqsong.wanandroid.ui.base.BaseActivity
 import com.sqsong.wanandroid.ui.home.mvp.MainContract
 import com.sqsong.wanandroid.ui.home.mvp.MainPresenter
 import com.sqsong.wanandroid.ui.login.LoginActivity
+import com.sqsong.wanandroid.ui.wechat.PublicAccountActivity
 import com.sqsong.wanandroid.util.Constants
 import com.sqsong.wanandroid.util.SnackbarUtil
 import kotlinx.android.synthetic.main.activity_main.*
@@ -30,7 +35,7 @@ import javax.inject.Inject
 @ChangeThemeAnnotation
 class MainActivity : BaseActivity<MainPresenter>(), MainContract.View,
         IAppCompatActivity, NavigationView.OnNavigationItemSelectedListener,
-        BottomNavigationView.OnNavigationItemSelectedListener {
+        BottomNavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
 
     @Inject
     lateinit var mThemeDialog: ThemeSwitcherDialog
@@ -42,7 +47,25 @@ class MainActivity : BaseActivity<MainPresenter>(), MainContract.View,
     }
 
     override fun initEvent() {
+        setupDrawerAndToolbar()
         mPresenter.onAttach(this)
+    }
+
+    private fun setupDrawerAndToolbar() {
+        setSupportActionBar(toolbar)
+        toolbar.post { toolbar.title = getString(R.string.text_home) }
+        val toggle = ActionBarDrawerToggle(this, drawerLayout, toolbar,
+                R.string.navigation_drawer_open, R.string.navigation_drawer_close)
+        drawerLayout.addDrawerListener(toggle)
+        toggle.syncState()
+        navView.setNavigationItemSelectedListener(this)
+        bottomNavigationView.setOnNavigationItemSelectedListener(this)
+    }
+
+    override fun showUserName(userName: String?) {
+        val headerLayout = navView.getHeaderView(0)
+        (headerLayout.findViewById<TextView>(R.id.nameTv)).text = if (!TextUtils.isEmpty(userName)) userName else getString(R.string.text_click_login)
+        (headerLayout.findViewById<ImageView>(R.id.headIv)).setOnClickListener(if (TextUtils.isEmpty(userName)) this else null)
     }
 
     override fun getFab(): FloatingActionButton {
@@ -51,18 +74,6 @@ class MainActivity : BaseActivity<MainPresenter>(), MainContract.View,
 
     override fun getCurrentIndex(): Int {
         return viewPager.currentItem
-    }
-
-    override fun setupDrawerAndToolbar() {
-        setSupportActionBar(toolbar)
-        toolbar.post { toolbar.title = getString(R.string.text_home) }
-        val toggle = ActionBarDrawerToggle(this, drawerLayout, toolbar,
-                R.string.navigation_drawer_open, R.string.navigation_drawer_close)
-        drawerLayout.addDrawerListener(toggle)
-        toggle.syncState()
-        navView.setCheckedItem(R.id.nav_camera)
-        navView.setNavigationItemSelectedListener(this)
-        bottomNavigationView.setOnNavigationItemSelectedListener(this)
     }
 
     override fun supportFragmentManager(): FragmentManager {
@@ -81,6 +92,12 @@ class MainActivity : BaseActivity<MainPresenter>(), MainContract.View,
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_home, menu)
         return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onClick(v: View?) {
+        if (v?.id == R.id.headIv) {
+            mPresenter.loginOut()
+        }
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
@@ -103,14 +120,11 @@ class MainActivity : BaseActivity<MainPresenter>(), MainContract.View,
             R.id.action_knowledge -> navigateToPage(1, menuItem.title)
             R.id.action_navigation -> navigateToPage(2, menuItem.title)
             R.id.action_project -> navigateToPage(3, menuItem.title)
-            R.id.nav_camera -> {
-            }
-            R.id.nav_gallery -> {
-            }
-            R.id.nav_slideshow -> {
-            }
-            R.id.nav_manage -> {
-            }
+            R.id.nav_public_account -> startActivity(Intent(this, PublicAccountActivity::class.java)) // 公众号
+//            R.id.nav_slideshow -> {
+//            }
+//            R.id.nav_manage -> {
+//            }
             R.id.nav_share -> {
             }
             R.id.nav_send -> {

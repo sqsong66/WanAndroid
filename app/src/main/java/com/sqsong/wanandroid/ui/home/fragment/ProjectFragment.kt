@@ -148,6 +148,7 @@ class ProjectFragment @Inject constructor() : LazyLoadInjectFragment<ProjectPres
         adapter.setOnItemClickListener(this)
         recyclerView.layoutManager = LinearLayoutManager(context)
         recyclerView.adapter = adapter
+        adapter.notifyDataSetChanged()
         mSwitchPopupWindow = PopupWindow(recyclerView)
         mSwitchPopupWindow?.width = ViewGroup.LayoutParams.WRAP_CONTENT
         mSwitchPopupWindow?.height = DensityUtil.getScreenHeight() / 2
@@ -159,10 +160,12 @@ class ProjectFragment @Inject constructor() : LazyLoadInjectFragment<ProjectPres
     override fun showPopupWindow(classifyList: MutableList<KnowledgeData>) {
         if (mSwitchPopupWindow == null) preparePopupWindow(classifyList, true)
         if (mSwitchPopupWindow?.isShowing == true) mSwitchPopupWindow?.dismiss()
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            mSwitchPopupWindow?.showAsDropDown((activity as AppCompatActivity).toolbar, -DensityUtil.dip2px(5), 0, Gravity.END)
-        } else {
-            mSwitchPopupWindow?.showAtLocation((activity as AppCompatActivity).toolbar, Gravity.BOTTOM, -DensityUtil.dip2px(5), 0)
+        recycler.post {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+                mSwitchPopupWindow?.showAsDropDown((activity as AppCompatActivity).toolbar, -DensityUtil.dip2px(5), 0, Gravity.END)
+            } else {
+                mSwitchPopupWindow?.showAtLocation((activity as AppCompatActivity).toolbar, Gravity.BOTTOM, -DensityUtil.dip2px(5), 0)
+            }
         }
     }
 

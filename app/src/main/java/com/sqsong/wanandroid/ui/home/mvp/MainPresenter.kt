@@ -58,7 +58,7 @@ class MainPresenter @Inject constructor(private val mainView: MainContract.View,
 
     private fun registerEvent() {
         EventBus.getDefault().register(this)
-        mView.setupDrawerAndToolbar()
+        mView.showUserName(mPreferences[Constants.LOGIN_USER_NAME])
         disposable.add(fabDisposable())
         setupFragments()
     }
