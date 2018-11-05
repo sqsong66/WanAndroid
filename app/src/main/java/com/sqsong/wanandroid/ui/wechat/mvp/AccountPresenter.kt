@@ -25,7 +25,7 @@ class AccountPresenter(private val accountModel: PublicAccountModel,
         BasePresenter<AccountContract.View, PublicAccountModel>(accountModel, disposable), HomeItemAdapter.HomeItemActionListener {
 
 
-    private var mPage = 0
+    private var mPage = 1
     private val mDataList = mutableListOf<HomeItem>()
     private val mPreferences: SharedPreferences by lazy {
         PreferenceHelper.defaultPrefs(mView.getFragmentContext())
@@ -138,7 +138,12 @@ class AccountPresenter(private val accountModel: PublicAccountModel,
     }
 
     override fun onShareClick(homeItem: HomeItem, position: Int) {
-        mView.showMessage(mView.getFragmentContext().getString(R.string.text_developing))
+        val sharingIntent = Intent(Intent.ACTION_SEND)
+        sharingIntent.type = "text/html"
+        sharingIntent.type = "text/plain"
+        sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, homeItem.link)
+        sharingIntent.putExtra(android.content.Intent.EXTRA_TITLE, homeItem.title)
+        mView.startNewActivity(Intent.createChooser(sharingIntent, ""))
     }
 
 }

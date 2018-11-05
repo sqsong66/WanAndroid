@@ -40,7 +40,6 @@ class WebViewActivity : BaseActivity<WebViewPresenter>(), WebViewContract.View, 
         toolbar.post { toolbar.title = mWebTitle }
 
         onScrollListener = ViewTreeObserver.OnScrollChangedListener {
-            LogUtil.e("SwipeRefreshLayout y ------------> ${swipeLayout.scrollY}")
             swipeLayout.isEnabled = webView.scrollY == 0
         }
     }

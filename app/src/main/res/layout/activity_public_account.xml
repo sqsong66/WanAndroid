@@ -27,8 +27,8 @@
             app:tabBackground="?colorPrimary"
             app:tabIndicatorColor="@color/colorWhite"
             app:tabMode="scrollable"
-            app:tabTextAppearance="@style/LoginErrorAppearance"
             app:tabSelectedTextColor="@color/colorWhite"
+            app:tabTextAppearance="@style/TabStyle"
             app:tabTextColor="@color/colorWhiteInActive" />
 
     </com.google.android.material.appbar.AppBarLayout>

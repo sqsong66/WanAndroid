@@ -20,7 +20,7 @@ class BottomNavigationBehavior(context: Context, attrs: AttributeSet) : Coordina
         if (dependency is SnackbarLayout) {
             this.updateSnackBar(child, (dependency as SnackbarLayout?)!!)
         }
-        return super.layoutDependsOn(parent!!, child, dependency!!)
+        return super.layoutDependsOn(parent, child, dependency)
     }
 
 
@@ -32,12 +32,10 @@ class BottomNavigationBehavior(context: Context, attrs: AttributeSet) : Coordina
     override fun onNestedPreScroll(coordinatorLayout: CoordinatorLayout, child: BottomNavigationView,
                                    target: View, dx: Int, dy: Int, consumed: IntArray, type: Int) {
         super.onNestedPreScroll(coordinatorLayout, child, target, dx, dy, consumed, type)
-        // LogUtil.e("translationY: ${child.translationY}, dy: $dy, target: $target")
          child.translationY = Math.max(0.0f, Math.min(child.height.toFloat(), child.translationY + dy))
     }
 
     override fun onDependentViewChanged(parent: CoordinatorLayout, child: BottomNavigationView, dependency: View): Boolean {
-        LogUtil.e("dependency: $dependency")
         return super.onDependentViewChanged(parent, child, dependency)
     }
 

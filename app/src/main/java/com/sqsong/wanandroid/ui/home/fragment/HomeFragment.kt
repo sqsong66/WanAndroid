@@ -20,7 +20,7 @@ import com.sqsong.wanandroid.util.ext.setupSwipeLayoutColor
 import com.sqsong.wanandroid.view.DefaultPageLayout
 import com.sqsong.wanandroid.view.banner.BannerView
 import kotlinx.android.synthetic.main.content_home.*
-import kotlinx.android.synthetic.main.fragment_home_backup.*
+import kotlinx.android.synthetic.main.fragment_home.*
 import javax.inject.Inject
 
 class HomeFragment @Inject constructor() : BaseInjectFragment<HomePresenter>(), HomeContract.HomeView,
@@ -40,7 +40,7 @@ class HomeFragment @Inject constructor() : BaseInjectFragment<HomePresenter>(), 
     }
 
     override fun getLayoutResId(): Int {
-        return R.layout.fragment_home_backup
+        return R.layout.fragment_home
     }
 
     override fun initEvent() {

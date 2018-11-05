@@ -18,19 +18,14 @@ import com.sqsong.wanandroid.ui.wechat.mvp.AccountPresenter
 import com.sqsong.wanandroid.util.Constants
 import com.sqsong.wanandroid.util.ext.setupSwipeLayoutColor
 import com.sqsong.wanandroid.view.DefaultPageLayout
-import kotlinx.android.synthetic.main.fragment_home_backup.*
+import kotlinx.android.synthetic.main.fragment_home.*
 
-class PublicAccountFragment : LazyLoadFragment(), AccountContract.View,
-        RecyclerScrollListener.OnLoadMoreListener {
+class PublicAccountFragment : LazyLoadFragment(), AccountContract.View, RecyclerScrollListener.OnLoadMoreListener {
 
 
     private var mCid: Int = 0
     private var mPresenter: AccountPresenter? = null
     private lateinit var mRecyclerScroller: RecyclerScrollListener
-
-    private val mLayoutManager: LinearLayoutManager by lazy {
-        LinearLayoutManager(context)
-    }
 
     private val mHandler: NoLeakHandler<PublicAccountFragment> by lazy {
         NoLeakHandler(this)
@@ -52,7 +47,7 @@ class PublicAccountFragment : LazyLoadFragment(), AccountContract.View,
     }
 
     override fun getLayoutResId(): Int {
-        return R.layout.fragment_home_backup
+        return R.layout.fragment_home
     }
 
     override fun initEvent() {
@@ -64,8 +59,9 @@ class PublicAccountFragment : LazyLoadFragment(), AccountContract.View,
     }
 
     private fun setupRecyclerView() {
-        recycler.layoutManager = mLayoutManager
-        mRecyclerScroller = RecyclerScrollListener(mLayoutManager)
+        val layoutManager = LinearLayoutManager(context);
+        recycler.layoutManager = layoutManager
+        mRecyclerScroller = RecyclerScrollListener(layoutManager)
         recycler.addOnScrollListener(mRecyclerScroller)
         mRecyclerScroller.setOnLoadMoreListener(this)
     }
@@ -84,7 +80,7 @@ class PublicAccountFragment : LazyLoadFragment(), AccountContract.View,
 
     override fun getHandler(): Handler = mHandler
 
-    override fun findRecyclerLastVisibleItemPosition(): Int = mLayoutManager.findLastVisibleItemPosition()
+    override fun findRecyclerLastVisibleItemPosition(): Int = (recycler.layoutManager as LinearLayoutManager).findLastVisibleItemPosition()
 
     override fun loadFinish() = mRecyclerScroller.loadFinish()
 
