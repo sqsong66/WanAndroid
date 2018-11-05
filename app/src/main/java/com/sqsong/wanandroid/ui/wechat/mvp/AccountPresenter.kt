@@ -60,14 +60,24 @@ class AccountPresenter(private val accountModel: PublicAccountModel,
                         if (bean.errorCode == 0) {
                             setupDataList(bean.data.datas)
                         } else {
-                            mView.showMessage(bean.errorMsg!!)
+                            showErrors(bean.errorMsg!!)
                         }
                     }
 
                     override fun onFail(error: ApiException) {
-                        mView.showMessage(error.showMessage)
+                        showErrors(error.showMessage)
                     }
                 })
+    }
+
+    private fun showErrors(message: String) {
+        mView.showMessage(message)
+        if (mPage == 0) {
+            mView.showErrorPage()
+        } else {
+            mPage--
+            mView.loadFinish()
+        }
     }
 
     private fun setupDataList(dataList: MutableList<HomeItem>) {
