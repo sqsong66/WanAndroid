@@ -1,8 +1,8 @@
-package com.sqsong.wanandroid.util
+package com.sqsong.wanandroid.util.ext
 
 import android.view.View
 
 fun View.dpToPx(dp: Int): Int {
-    var scale = resources.displayMetrics.density
+    val scale = resources.displayMetrics.density
     return (dp * scale + 0.5f).toInt()
 }

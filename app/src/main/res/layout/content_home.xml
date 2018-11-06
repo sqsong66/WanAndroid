@@ -37,8 +37,8 @@
         app:layout_behavior="com.sqsong.wanandroid.util.behavior.BottomNavigationBehavior"
         app:menu="@menu/menu_bottom_nav" />
 
-    <com.miguelcatalan.materialsearchview.MaterialSearchView
-        android:id="@+id/search_view"
+    <com.sqsong.wanandroid.view.search.MaterialSearchView
+        android:id="@+id/searchView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:elevation="5dp" />

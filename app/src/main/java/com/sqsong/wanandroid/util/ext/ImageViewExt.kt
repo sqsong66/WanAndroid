@@ -10,7 +10,6 @@ import com.bumptech.glide.request.RequestOptions
 import com.bumptech.glide.request.RequestOptions.bitmapTransform
 import com.sqsong.wanandroid.R
 import com.sqsong.wanandroid.common.GlideApp
-import com.sqsong.wanandroid.util.dpToPx
 
 fun ImageView.showImage(context: Context, url: String) {
     showImage(context, url, 0, false, 0)

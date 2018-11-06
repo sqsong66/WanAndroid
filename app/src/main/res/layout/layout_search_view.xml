@@ -4,18 +4,22 @@
     android:id="@+id/search_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:visibility="invisible">
 
     <View
         android:id="@+id/bg_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/colorBackgroundMusk" />
+        android:background="@color/colorSearchMusk" />
 
     <LinearLayout
+        android:id="@+id/content_ll"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="?android:colorBackground"
+        android:clickable="true"
+        android:focusable="true"
         android:orientation="vertical">
 
         <LinearLayout
@@ -103,10 +107,10 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingBottom="5dp"
                 android:paddingLeft="16dp"
+                android:paddingTop="5dp"
                 android:paddingRight="16dp"
-                android:paddingTop="5dp">
+                android:paddingBottom="5dp">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -122,6 +126,9 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
                     android:layout_alignParentRight="true"
+                    android:background="@drawable/bg_round_corner"
+                    android:clickable="true"
+                    android:drawableStart="@drawable/ic_trash"
                     android:drawableLeft="@drawable/ic_trash"
                     android:drawablePadding="3dp"
                     android:gravity="center"

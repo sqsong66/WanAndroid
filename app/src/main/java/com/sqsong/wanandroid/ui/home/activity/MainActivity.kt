@@ -48,7 +48,7 @@ class MainActivity : BaseActivity<MainPresenter>(), MainContract.View, Navigatio
         setupDrawerAndToolbar()
         mPresenter.onAttach(this)
 
-        search_view.setSuggestions(resources.getStringArray(R.array.theme_palette_desc_array))
+//        search_view.setSuggestions(resources.getStringArray(R.array.theme_palette_desc_array))
 //        val sharedPreferences = getSharedPreferences("CookiePersistence", Context.MODE_PRIVATE)
 //        val all = sharedPreferences.all
 //        val mutableSet = all.entries
@@ -93,9 +93,8 @@ class MainActivity : BaseActivity<MainPresenter>(), MainContract.View, Navigatio
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_home, menu)
-
-        val item = menu?.findItem(R.id.action_theme)
-        search_view.setMenuItem(item)
+        val item = menu?.findItem(R.id.action_login_out)
+        searchView.setMenuItem(item)
         return super.onCreateOptionsMenu(menu)
     }
 

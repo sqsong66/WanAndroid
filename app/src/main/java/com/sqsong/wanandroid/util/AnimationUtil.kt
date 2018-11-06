@@ -30,7 +30,7 @@ object AnimationUtil {
     }
 
     @JvmOverloads
-    private fun fadeInView(view: View, duration: Int = ANIMATION_DURATION_SHORT, listener: AnimationListener? = null) {
+    fun fadeInView(view: View, duration: Int = ANIMATION_DURATION_SHORT, listener: AnimationListener? = null) {
         view.visibility = View.VISIBLE
         view.alpha = 0f
         var vpListener: ViewPropertyAnimatorListener? = null
@@ -85,7 +85,7 @@ object AnimationUtil {
     }
 
     @JvmOverloads
-    private fun fadeOutView(view: View, duration: Int = ANIMATION_DURATION_SHORT, listener: AnimationListener? = null) {
+    fun fadeOutView(view: View, duration: Int = ANIMATION_DURATION_SHORT, listener: AnimationListener? = null) {
         ViewCompat.animate(view).alpha(0f).setDuration(duration.toLong()).setListener(object : ViewPropertyAnimatorListener {
             override fun onAnimationStart(view: View) {
                 if (listener == null || !listener.onAnimationStart(view)) {

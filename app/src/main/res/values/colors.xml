@@ -25,6 +25,7 @@
     <color name="colorChipBackground">#7b7b7b</color>
     <color name="colorLine">#e0e0e0</color>
     <color name="colorBackgroundMusk">#33000000</color>
+    <color name="colorSearchMusk">#88000000</color>
 
     <!-- Theme Color -->
     <color name="colorBlackPrimary">#212121</color>
