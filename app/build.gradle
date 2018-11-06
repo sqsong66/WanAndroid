@@ -92,4 +92,6 @@ dependencies {
 
     // EventBus
     implementation "org.greenrobot:eventbus:$rootProject.ext.eventbus_version"
+
+    implementation 'com.miguelcatalan:materialsearchview:1.4.0'
 }

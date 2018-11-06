@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/action_browser"
+        android:enabled="true"
+        android:icon="@drawable/ic_menu_browser"
+        android:title="@string/text_open_browser"
+        app:showAsAction="always" />
+</menu>

@@ -61,4 +61,8 @@ interface ApiService {
     // 获取公众号文章列表
     @GET("wxarticle/list/{id}/{page}/json")
     fun getPublicAccountArticleList(@Path("id") id: Int, @Path("page") page: Int): Observable<HomeItemBean>
+
+    // 获取收藏列表
+    @GET("lg/collect/list/{page}/json")
+    fun getCollectionList(@Path("page") page: Int): Observable<HomeItemBean>
 }

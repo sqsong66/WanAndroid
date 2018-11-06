@@ -1,5 +1,7 @@
 package com.sqsong.wanandroid.ui.home.mvp
 
+import android.content.Context
+import android.content.Intent
 import androidx.annotation.IdRes
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentStatePagerAdapter
@@ -13,10 +15,11 @@ interface MainContract {
         fun getCurrentIndex(): Int
         fun supportFragmentManager(): FragmentManager
         fun setPagerAdapter(adapter: FragmentStatePagerAdapter)
-        fun startLoginActivity()
+        fun startNewActivity(intent: Intent)
         fun showLoginOutTipDialog()
         fun switchBottomViewNavigation(@IdRes id: Int)
         fun showUserName(userName: String?)
+        fun getAppContext(): Context
     }
 
 }

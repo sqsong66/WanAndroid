@@ -1,8 +1,6 @@
-package com.sqsong.wanandroid.ui.wechat.mvp
+package com.sqsong.wanandroid.ui.collection.mvp
 
 import android.content.Intent
-import android.content.SharedPreferences
-import android.text.TextUtils
 import com.sqsong.wanandroid.R
 import com.sqsong.wanandroid.common.holder.LoadingFooterViewHolder
 import com.sqsong.wanandroid.data.BaseData
@@ -11,50 +9,49 @@ import com.sqsong.wanandroid.data.HomeItemBean
 import com.sqsong.wanandroid.mvp.BasePresenter
 import com.sqsong.wanandroid.network.ApiException
 import com.sqsong.wanandroid.network.ObserverImpl
+import com.sqsong.wanandroid.ui.collection.adapter.CollectionAdapter
 import com.sqsong.wanandroid.ui.home.adapter.HomeItemAdapter
 import com.sqsong.wanandroid.ui.web.WebViewActivity
-import com.sqsong.wanandroid.ui.wechat.adapter.PublicAccountAdapter
 import com.sqsong.wanandroid.util.CommonUtil
 import com.sqsong.wanandroid.util.Constants
-import com.sqsong.wanandroid.util.PreferenceHelper
-import com.sqsong.wanandroid.util.PreferenceHelper.get
 import com.sqsong.wanandroid.util.RxJavaHelper
 import io.reactivex.disposables.CompositeDisposable
+import javax.inject.Inject
 
-class AccountPresenter(private val accountModel: PublicAccountModel,
-                       private val disposable: CompositeDisposable) :
-        BasePresenter<AccountContract.View, PublicAccountModel>(accountModel, disposable), HomeItemAdapter.HomeItemActionListener {
+class CollectionPresenter @Inject constructor(private val collectionModel: CollectionModel,
+                                              private val disposable: CompositeDisposable) :
+        BasePresenter<CollectionContract.View, CollectionContract.Model>(collectionModel, disposable), HomeItemAdapter.HomeItemActionListener {
 
-
-    private var mPage = 1
+    private var mPage: Int = 0
     private val mDataList = mutableListOf<HomeItem>()
-    private val mPreferences: SharedPreferences by lazy {
-        PreferenceHelper.defaultPrefs(mView.getFragmentContext())
+    private val mAdapter: CollectionAdapter by lazy {
+        CollectionAdapter(mView.getAppContext(), mDataList)
     }
 
-    private val mAdapter: PublicAccountAdapter by lazy {
-        PublicAccountAdapter(mView.getFragmentContext(), mDataList)
-    }
-
-    override fun onAttach(view: AccountContract.View) {
+    override fun onAttach(view: CollectionContract.View) {
         super.onAttach(view)
+        init()
+    }
+
+    private fun init() {
         mView.showLoadingPage()
         mView.setRecyclerAdapter(mAdapter)
         mAdapter.setHomeItemActionListener(this)
+        refreshData()
     }
 
     fun refreshData() {
         mPage = 0
-        requestAccountList()
+        requestCollectionList()
     }
 
-    fun loadMore() {
+    fun loadMoreData() {
         mPage++
-        requestAccountList()
+        requestCollectionList()
     }
 
-    private fun requestAccountList() {
-        accountModel.getPublicAccountArticleList(mView.getCid(), mPage)
+    private fun requestCollectionList() {
+        collectionModel.getCollectionList(mPage)
                 .compose(RxJavaHelper.compose())
                 .subscribe(object : ObserverImpl<HomeItemBean>(disposable) {
                     override fun onSuccess(bean: HomeItemBean) {
@@ -110,26 +107,19 @@ class AccountPresenter(private val accountModel: PublicAccountModel,
     }
 
     override fun onStarClick(homeItem: HomeItem, position: Int) {
-        val userName: String = mPreferences[Constants.LOGIN_USER_NAME] ?: ""
-        if (TextUtils.isEmpty(userName)) {
-            mView.showLoginDialog()
-            return
-        }
-
-        val collectState = homeItem.collect
-        val requestObservable = if (collectState) accountModel.unCollectArticle(homeItem.id) else accountModel.collectArticle(homeItem.id)
-        requestObservable.compose(RxJavaHelper.compose())
+        collectionModel.unCollectArticle(homeItem.originId)
+                .compose(RxJavaHelper.compose())
                 .subscribe(object : ObserverImpl<BaseData>(disposable) {
                     override fun onSuccess(bean: BaseData) {
                         if (bean.errorCode == 0) {
-                            if (collectState) {
-                                homeItem.collect = false
-                                mView.showMessage(mView.getFragmentContext().getString(R.string.text_cancel_collect_success))
-                            } else {
-                                homeItem.collect = true
-                                mView.showMessage(mView.getFragmentContext().getString(R.string.text_collect_success))
+                            mView.showMessage(mView.getAppContext().getString(R.string.text_cancel_collect_success))
+                            mDataList.removeAt(position)
+                            mAdapter.notifyItemRemoved(position)
+                            if (mDataList.isEmpty()) {
+                                mView.showEmptyPage()
                             }
-                            mAdapter.notifyItemChanged(position)
+                            // 防止后续item错位
+                            mView.getHandler().postDelayed({ mAdapter.notifyDataSetChanged() }, 500)
                         } else {
                             mView.showMessage(bean.errorMsg)
                         }
@@ -142,7 +132,7 @@ class AccountPresenter(private val accountModel: PublicAccountModel,
     }
 
     override fun onListItemClick(homeItem: HomeItem, position: Int) {
-        val intent = Intent(mView.getFragmentContext(), WebViewActivity::class.java)
+        val intent = Intent(mView.getAppContext(), WebViewActivity::class.java)
         intent.putExtra(Constants.KEY_WEB_URL, homeItem.link)
         intent.putExtra(Constants.KEY_WEB_TITLE, homeItem.title)
         mView.startNewActivity(intent)
@@ -150,7 +140,7 @@ class AccountPresenter(private val accountModel: PublicAccountModel,
 
     override fun onShareClick(homeItem: HomeItem, position: Int) {
         val sharingIntent = CommonUtil.buildShareIntent(homeItem.title, homeItem.link)
-        mView.startNewActivity(Intent.createChooser(sharingIntent, mView.getFragmentContext().getString(R.string.text_share_link)))
+        mView.startNewActivity(Intent.createChooser(sharingIntent, mView.getAppContext().getString(R.string.text_share_link)))
     }
 
 }

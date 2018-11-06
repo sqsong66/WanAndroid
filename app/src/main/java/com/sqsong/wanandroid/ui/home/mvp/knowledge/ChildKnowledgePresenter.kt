@@ -14,6 +14,7 @@ import com.sqsong.wanandroid.network.ObserverImpl
 import com.sqsong.wanandroid.ui.home.adapter.HomeItemAdapter
 import com.sqsong.wanandroid.ui.home.adapter.KnowledgeItemAdapter
 import com.sqsong.wanandroid.ui.web.WebViewActivity
+import com.sqsong.wanandroid.util.CommonUtil
 import com.sqsong.wanandroid.util.Constants
 import com.sqsong.wanandroid.util.PreferenceHelper.get
 import com.sqsong.wanandroid.util.RxJavaHelper
@@ -153,6 +154,8 @@ class ChildKnowledgePresenter @Inject constructor(private val knowledgeModel: Ch
     }
 
     override fun onShareClick(homeItem: HomeItem, position: Int) {
+        val sharingIntent = CommonUtil.buildShareIntent(homeItem.title, homeItem.link)
+        mView.startNewActivity(Intent.createChooser(sharingIntent, mView.getActivityContext().getString(R.string.text_share_link)))
     }
 
 }

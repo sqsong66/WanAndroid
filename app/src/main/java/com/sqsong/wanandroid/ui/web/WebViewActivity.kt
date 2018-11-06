@@ -1,5 +1,7 @@
 package com.sqsong.wanandroid.ui.web
 
+import android.content.Intent
+import android.view.Menu
 import android.view.MenuItem
 import android.view.ViewTreeObserver
 import android.webkit.WebView
@@ -12,7 +14,6 @@ import com.sqsong.wanandroid.ui.base.BaseActivity
 import com.sqsong.wanandroid.ui.web.mvp.WebViewContract
 import com.sqsong.wanandroid.ui.web.mvp.WebViewPresenter
 import com.sqsong.wanandroid.util.Constants
-import com.sqsong.wanandroid.util.LogUtil
 import com.sqsong.wanandroid.util.ext.setupSwipeLayoutColor
 import com.sqsong.wanandroid.util.ext.setupToolbar
 import kotlinx.android.synthetic.main.activity_webview.*
@@ -44,8 +45,16 @@ class WebViewActivity : BaseActivity<WebViewPresenter>(), WebViewContract.View, 
         }
     }
 
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_web, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        if (item?.itemId == android.R.id.home) finish()
+        when (item?.itemId) {
+            android.R.id.home -> finish()
+            R.id.action_browser -> mPresenter.openBrowser(mLinkUrl)
+        }
         return super.onOptionsItemSelected(item)
     }
 
@@ -60,6 +69,8 @@ class WebViewActivity : BaseActivity<WebViewPresenter>(), WebViewContract.View, 
     override fun getWebView(): WebView = webView
 
     override fun getProgressBar(): ProgressBar = progressBar
+
+    override fun startNewActivity(buildBrowserIntent: Intent) = startActivity(buildBrowserIntent)
 
     override fun showRefreshBar() {
         swipeLayout.isRefreshing = true

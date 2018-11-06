@@ -31,6 +31,7 @@ class PublicAccountActivity : BaseActivity<PublicAccountPresenter>(), PublicAcco
 
     override fun initEvent() {
         setupToolbar(toolbar)
+        toolbar.post { toolbar.title = getString(R.string.text_public_account) }
         mPresenter.onAttach(this)
     }
 

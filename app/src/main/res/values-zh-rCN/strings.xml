@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">WanAndroid</string>
+    <string name="app_name">玩安卓</string>
 
     <string name="text_user_name">用户名</string>
     <string name="text_user_password">密码</string>
@@ -69,4 +69,10 @@
     <string name="text_knowledge_data_cannot_null">错误的数据id</string>
     <string name="text_click_login">点击头像登录</string>
     <string name="text_public_account">公众号</string>
+    <string name="text_collection">收藏</string>
+    <string name="text_share_link">分享链接到</string>
+    <string name="text_open_browser">打开浏览器</string>
+    <string name="text_hot_search">热搜</string>
+    <string name="text_search_history">搜索历史</string>
+    <string name="text_clear_history">清空历史</string>
 </resources>

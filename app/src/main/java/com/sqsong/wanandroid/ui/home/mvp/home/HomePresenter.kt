@@ -178,6 +178,8 @@ class HomePresenter @Inject constructor(private val homeModel: HomeModel,
     }
 
     override fun onShareClick(homeItem: HomeItem, position: Int) {
+        val sharingIntent = CommonUtil.buildShareIntent(homeItem.title, homeItem.link)
+        mView.startNewActivity(Intent.createChooser(sharingIntent, mView.getAppContext().getString(R.string.text_share_link)))
     }
 
     override fun onItemClick(data: HomeBannerData?, position: Int) {
@@ -191,7 +193,7 @@ class HomePresenter @Inject constructor(private val homeModel: HomeModel,
             EventBus.getDefault().post(SwitchIndexEvent(3))
         } else if (data?.id == 6) { // 专属导航
             EventBus.getDefault().post(SwitchIndexEvent(2))
-        } else if (data?.id == 18) {
+        } else if (data?.id == 18) { // 公众号
             intent = Intent(mView.getAppContext(), PublicAccountActivity::class.java)
             mView.startNewActivity(intent)
         } else {

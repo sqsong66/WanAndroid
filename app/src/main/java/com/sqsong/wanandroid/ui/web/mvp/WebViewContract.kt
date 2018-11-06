@@ -1,5 +1,6 @@
 package com.sqsong.wanandroid.ui.web.mvp
 
+import android.content.Intent
 import android.webkit.WebView
 import android.widget.ProgressBar
 import androidx.appcompat.widget.Toolbar
@@ -14,6 +15,7 @@ interface WebViewContract {
         fun getInitUrl(): String
         fun hideRefreshBar()
         fun showRefreshBar()
+        fun startNewActivity(buildBrowserIntent: Intent)
     }
 
 }

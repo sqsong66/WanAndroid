@@ -67,6 +67,10 @@ class WebViewPresenter @Inject constructor() : BasePresenter<WebViewContract.Vie
         mView.getWebView()?.destroy()
     }
 
+    fun openBrowser(linkUrl: String) {
+        mView.startNewActivity(CommonUtil.buildBrowserIntent(linkUrl))
+    }
+
     inner class ProgressWebViewChromeClient : WebChromeClient() {
         override fun onProgressChanged(view: WebView?, newProgress: Int) {
             super.onProgressChanged(view, newProgress)

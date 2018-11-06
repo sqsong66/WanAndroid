@@ -1,6 +1,7 @@
 package com.sqsong.wanandroid.util
 
 import android.content.Context
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.Typeface
 import android.net.Uri
@@ -45,5 +46,18 @@ object CommonUtil {
         if (TextUtils.isEmpty(url)) return null
         val uri = Uri.parse(url)
         return uri.getQueryParameter(paramName)
+    }
+
+    fun buildShareIntent(title: String, link: String): Intent {
+        val sharingIntent = Intent(Intent.ACTION_SEND)
+        sharingIntent.type = "text/html"
+        sharingIntent.type = "text/plain"
+        sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, link)
+        sharingIntent.putExtra(android.content.Intent.EXTRA_TITLE, title)
+        return sharingIntent
+    }
+
+    fun buildBrowserIntent(link: String?): Intent {
+        return Intent(Intent.ACTION_VIEW, Uri.parse(link))
     }
 }

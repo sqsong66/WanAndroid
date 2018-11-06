@@ -28,7 +28,7 @@ object SnackbarUtil {
         snackbar.show()
     }
 
-    fun showToastText(context: Context, text: String) {
+    fun showToastText(context: Context, text: String?) {
         val view = LayoutInflater.from(context).inflate(R.layout.layout_taost, null)
         val textView: TextView = view.findViewById<View>(R.id.text) as TextView
         textView.text = text

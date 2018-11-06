@@ -1,4 +1,4 @@
-package com.sqsong.wanandroid.ui.home.adapter
+package com.sqsong.wanandroid.ui.collection.adapter
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -14,13 +14,14 @@ import com.sqsong.wanandroid.R
 import com.sqsong.wanandroid.common.holder.LoadingFooterViewHolder
 import com.sqsong.wanandroid.common.holder.LoadingFooterViewHolder.LoadingState
 import com.sqsong.wanandroid.data.HomeItem
+import com.sqsong.wanandroid.ui.home.adapter.HomeItemAdapter
 import com.sqsong.wanandroid.util.Constants
 import com.sqsong.wanandroid.util.DensityUtil
 import com.sqsong.wanandroid.view.CheckableImageView
 import com.sqsong.wanandroid.view.LabelView
 import javax.inject.Inject
 
-class KnowledgeItemAdapter @Inject constructor(context: Context, private val dataList: MutableList<HomeItem>) :
+class CollectionAdapter @Inject constructor(context: Context, private val dataList: MutableList<HomeItem>) :
         RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     @LoadingState
@@ -34,7 +35,7 @@ class KnowledgeItemAdapter @Inject constructor(context: Context, private val dat
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return if (viewType == Constants.ITEM_TYPE_CONTENT) {
-            KnowledgeViewHolder(mInflater.inflate(R.layout.item_public_account/*item_knowledge*/, parent, false))
+            KnowledgeViewHolder(mInflater.inflate(R.layout.item_knowledge, parent, false))
         } else {
             LoadingFooterViewHolder(mInflater.inflate(R.layout.item_loading_footer, parent, false))
         }
@@ -102,7 +103,7 @@ class KnowledgeItemAdapter @Inject constructor(context: Context, private val dat
             authorTv?.text = homeItem.author
             timeTv?.text = homeItem.niceDate
             titleTv?.text = homeItem.title
-            heartIv?.isChecked = homeItem.collect
+            heartIv?.isChecked = true //homeItem.collect
 
             heartRl?.setOnClickListener {
                 mActionListener?.onStarClick(homeItem, position)

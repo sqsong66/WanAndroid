@@ -1,22 +1,25 @@
 package com.sqsong.wanandroid.ui.home.mvp
 
 import android.content.Context
+import android.content.Intent
 import android.content.SharedPreferences
 import android.text.TextUtils
 import androidx.fragment.app.Fragment
 import com.jakewharton.rxbinding2.view.RxView
 import com.sqsong.wanandroid.BaseApplication
 import com.sqsong.wanandroid.R
+import com.sqsong.wanandroid.common.FragmentPagerAdapter
 import com.sqsong.wanandroid.common.event.FabClickEvent
 import com.sqsong.wanandroid.common.event.SwitchIndexEvent
 import com.sqsong.wanandroid.mvp.BasePresenter
 import com.sqsong.wanandroid.mvp.IModel
 import com.sqsong.wanandroid.network.CookieManager
-import com.sqsong.wanandroid.common.FragmentPagerAdapter
+import com.sqsong.wanandroid.ui.collection.CollectionActivity
 import com.sqsong.wanandroid.ui.home.fragment.HomeFragment
 import com.sqsong.wanandroid.ui.home.fragment.KnowledgeFragment
 import com.sqsong.wanandroid.ui.home.fragment.NavigationFragment
 import com.sqsong.wanandroid.ui.home.fragment.ProjectFragment
+import com.sqsong.wanandroid.ui.login.LoginActivity
 import com.sqsong.wanandroid.util.Constants
 import com.sqsong.wanandroid.util.PreferenceHelper.get
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -93,7 +96,16 @@ class MainPresenter @Inject constructor(private val mainView: MainContract.View,
     fun loginOut() {
         BaseApplication.INSTANCE.quitApp()
         CookieManager.getInstance(mContext).clearCookieInfo()
-        mView.startLoginActivity()
+        mView.startNewActivity(Intent(mView.getAppContext(), LoginActivity::class.java))
+    }
+
+    fun checkCollectionState() {
+        val userName: String = mPreferences[Constants.LOGIN_USER_NAME] ?: ""
+        if (TextUtils.isEmpty(userName)) {
+            mView.showLoginOutTipDialog()
+        } else {
+            mView.startNewActivity(Intent(mView.getAppContext(), CollectionActivity::class.java))
+        }
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
@@ -114,4 +126,6 @@ class MainPresenter @Inject constructor(private val mainView: MainContract.View,
         super.onDestroy()
         EventBus.getDefault().unregister(this)
     }
+
+
 }

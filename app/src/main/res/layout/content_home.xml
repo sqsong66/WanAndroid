@@ -19,11 +19,8 @@
             android:background="?attr/colorPrimary"
             app:layout_scrollFlags="scroll|enterAlways|snap"
             app:popupTheme="@style/AppTheme.PopupOverlay" />
-        <!--app:layout_scrollFlags="scroll|enterAlways|snap"-->
 
     </com.google.android.material.appbar.AppBarLayout>
-
-    <!--<include layout="@layout/content_home" />-->
 
     <com.sqsong.wanandroid.view.NoScrollViewPager
         android:id="@+id/viewPager"
@@ -39,6 +36,12 @@
         android:layout_gravity="bottom"
         app:layout_behavior="com.sqsong.wanandroid.util.behavior.BottomNavigationBehavior"
         app:menu="@menu/menu_bottom_nav" />
+
+    <com.miguelcatalan.materialsearchview.MaterialSearchView
+        android:id="@+id/search_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:elevation="5dp" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab"

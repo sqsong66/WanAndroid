@@ -1,5 +1,6 @@
 package com.sqsong.wanandroid.ui.home.activity
 
+import android.content.Context
 import android.content.Intent
 import android.text.TextUtils
 import android.view.Menu
@@ -19,12 +20,10 @@ import com.google.android.material.navigation.NavigationView
 import com.sqsong.wanandroid.BaseApplication
 import com.sqsong.wanandroid.R
 import com.sqsong.wanandroid.common.inter.ChangeThemeAnnotation
-import com.sqsong.wanandroid.common.inter.IAppCompatActivity
 import com.sqsong.wanandroid.theme.ThemeSwitcherDialog
 import com.sqsong.wanandroid.ui.base.BaseActivity
 import com.sqsong.wanandroid.ui.home.mvp.MainContract
 import com.sqsong.wanandroid.ui.home.mvp.MainPresenter
-import com.sqsong.wanandroid.ui.login.LoginActivity
 import com.sqsong.wanandroid.ui.wechat.PublicAccountActivity
 import com.sqsong.wanandroid.util.Constants
 import com.sqsong.wanandroid.util.SnackbarUtil
@@ -33,8 +32,7 @@ import kotlinx.android.synthetic.main.content_home.*
 import javax.inject.Inject
 
 @ChangeThemeAnnotation
-class MainActivity : BaseActivity<MainPresenter>(), MainContract.View,
-        IAppCompatActivity, NavigationView.OnNavigationItemSelectedListener,
+class MainActivity : BaseActivity<MainPresenter>(), MainContract.View, NavigationView.OnNavigationItemSelectedListener,
         BottomNavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
 
     @Inject
@@ -49,6 +47,14 @@ class MainActivity : BaseActivity<MainPresenter>(), MainContract.View,
     override fun initEvent() {
         setupDrawerAndToolbar()
         mPresenter.onAttach(this)
+
+        search_view.setSuggestions(resources.getStringArray(R.array.theme_palette_desc_array))
+//        val sharedPreferences = getSharedPreferences("CookiePersistence", Context.MODE_PRIVATE)
+//        val all = sharedPreferences.all
+//        val mutableSet = all.entries
+//        for (set in mutableSet) {
+//            LogUtil.e("Cookie key: ${set.key}, value: ${set.value}")
+//        }
     }
 
     private fun setupDrawerAndToolbar() {
@@ -68,29 +74,28 @@ class MainActivity : BaseActivity<MainPresenter>(), MainContract.View,
         (headerLayout.findViewById<ImageView>(R.id.headIv)).setOnClickListener(if (TextUtils.isEmpty(userName)) this else null)
     }
 
-    override fun getFab(): FloatingActionButton {
-        return fab
-    }
+    override fun getAppContext(): Context = this
 
-    override fun getCurrentIndex(): Int {
-        return viewPager.currentItem
-    }
+    override fun getFab(): FloatingActionButton = fab
 
-    override fun supportFragmentManager(): FragmentManager {
-        return supportFragmentManager
-    }
+    override fun getCurrentIndex(): Int = viewPager.currentItem
+
+    override fun supportFragmentManager(): FragmentManager = supportFragmentManager
 
     override fun setPagerAdapter(adapter: FragmentStatePagerAdapter) {
         viewPager.adapter = adapter
         viewPager.offscreenPageLimit = 4
     }
 
-    override fun startLoginActivity() {
-        startActivity(Intent(this, LoginActivity::class.java))
+    override fun startNewActivity(intent: Intent) {
+        startActivity(intent)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_home, menu)
+
+        val item = menu?.findItem(R.id.action_theme)
+        search_view.setMenuItem(item)
         return super.onCreateOptionsMenu(menu)
     }
 
@@ -116,15 +121,12 @@ class MainActivity : BaseActivity<MainPresenter>(), MainContract.View,
 
     override fun onNavigationItemSelected(menuItem: MenuItem): Boolean {
         when (menuItem.itemId) {
-            R.id.action_home -> navigateToPage(0, menuItem.title)
+            R.id.action_home, R.id.nav_home -> navigateToPage(0, menuItem.title)
             R.id.action_knowledge -> navigateToPage(1, menuItem.title)
             R.id.action_navigation -> navigateToPage(2, menuItem.title)
             R.id.action_project -> navigateToPage(3, menuItem.title)
             R.id.nav_public_account -> startActivity(Intent(this, PublicAccountActivity::class.java)) // 公众号
-//            R.id.nav_slideshow -> {
-//            }
-//            R.id.nav_manage -> {
-//            }
+            R.id.nav_collection -> mPresenter.checkCollectionState()
             R.id.nav_share -> {
             }
             R.id.nav_send -> {
@@ -167,7 +169,12 @@ class MainActivity : BaseActivity<MainPresenter>(), MainContract.View,
                 .setTitle(R.string.text_login_out_title)
                 .setMessage(R.string.text_login_out_tips)
                 .setCancelable(false)
-                .setNegativeButton(R.string.text_cancel) { dialog, _ -> dialog.dismiss() }
+                .setNegativeButton(R.string.text_cancel) { dialog, _ ->
+                    run {
+                        navView.setCheckedItem(R.id.nav_home)
+                        dialog.dismiss()
+                    }
+                }
                 .setPositiveButton(R.string.text_sure) { dialog, _ ->
                     run {
                         dialog.dismiss()
@@ -176,6 +183,11 @@ class MainActivity : BaseActivity<MainPresenter>(), MainContract.View,
                 }
                 .create()
                 .show()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        navView.setCheckedItem(R.id.nav_home)
     }
 
     override fun onDestroy() {

@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
 
-    <!--<group android:checkableBehavior="single">
+    <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_home"
             android:icon="@drawable/ic_home"
@@ -13,21 +13,17 @@
             android:icon="@drawable/ic_menu_wechat"
             android:title="@string/text_public_account" />
         <item
-            android:id="@+id/nav_slideshow"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="Slideshow" />
+            android:id="@+id/nav_collection"
+            android:icon="@drawable/ic_menu_collections"
+            android:title="@string/text_collection" />
         <item
             android:id="@+id/nav_manage"
             android:icon="@drawable/ic_menu_manage"
             android:title="Tools" />
-    </group>-->
+    </group>
 
     <item android:title="Communicate">
         <menu>
-            <item
-                android:id="@+id/nav_public_account"
-                android:icon="@drawable/ic_menu_wechat"
-                android:title="@string/text_public_account" />
             <item
                 android:id="@+id/nav_share"
                 android:icon="@drawable/ic_menu_share"

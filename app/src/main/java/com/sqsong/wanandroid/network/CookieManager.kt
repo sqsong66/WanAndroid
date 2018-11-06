@@ -5,13 +5,9 @@ import com.franmontiel.persistentcookiejar.PersistentCookieJar
 import com.franmontiel.persistentcookiejar.cache.SetCookieCache
 import com.franmontiel.persistentcookiejar.persistence.SharedPrefsCookiePersistor
 
-class CookieManager {
+class CookieManager(context: Context) {
 
-    private var cookieJar: PersistentCookieJar
-
-    constructor(context: Context) {
-        cookieJar = PersistentCookieJar(SetCookieCache(), SharedPrefsCookiePersistor(context))
-    }
+    private var cookieJar: PersistentCookieJar = PersistentCookieJar(SetCookieCache(), SharedPrefsCookiePersistor(context))
 
     fun getCookieJar(): PersistentCookieJar {
         return cookieJar

@@ -1,6 +1,8 @@
 package com.sqsong.wanandroid.di.module
 
 import com.sqsong.wanandroid.di.scope.ActivityScope
+import com.sqsong.wanandroid.ui.collection.CollectionActivity
+import com.sqsong.wanandroid.ui.collection.di.CollectionModule
 import com.sqsong.wanandroid.ui.home.activity.KnowledgeActivity
 import com.sqsong.wanandroid.ui.home.activity.MainActivity
 import com.sqsong.wanandroid.ui.home.di.ChildKnowledgeModule
@@ -47,4 +49,8 @@ abstract class ActivityBindingModule {
     @ActivityScope
     @ContributesAndroidInjector
     abstract fun contributeWebViewActivity(): WebViewActivity
+
+    @ActivityScope
+    @ContributesAndroidInjector(modules = [CollectionModule::class])
+    abstract fun contributeCollectionActivity(): CollectionActivity
 }

@@ -33,7 +33,8 @@
         <activity
             android:name=".ui.home.activity.MainActivity"
             android:launchMode="singleTask"
-            android:theme="@style/AppTheme.LoginTheme" />
+            android:theme="@style/AppTheme.LoginTheme"
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".ui.login.LoginActivity"
             android:theme="@style/AppTheme.LoginTheme" />
@@ -48,6 +49,9 @@
             android:theme="@style/AppTheme.LoginTheme" />
         <activity
             android:name=".ui.wechat.PublicAccountActivity"
+            android:theme="@style/AppTheme.LoginTheme" />
+        <activity
+            android:name=".ui.collection.CollectionActivity"
             android:theme="@style/AppTheme.LoginTheme" />
     </application>
 

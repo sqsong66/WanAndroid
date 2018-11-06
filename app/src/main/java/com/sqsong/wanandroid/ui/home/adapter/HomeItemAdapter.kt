@@ -4,6 +4,7 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
@@ -112,6 +113,10 @@ class HomeItemAdapter(context: Context,
         @JvmField
         var starRl: RelativeLayout? = null
 
+        @BindView(R.id.shareIv)
+        @JvmField
+        var shareIv: ImageView? = null
+
         init {
             ButterKnife.bind(this@HomeItemViewHolder, itemView)
         }
@@ -125,6 +130,10 @@ class HomeItemAdapter(context: Context,
             superChapterChip?.text = homeItem.superChapterName
             chapterChip?.text = homeItem.chapterName
             starIv?.isChecked = homeItem.collect
+
+            shareIv?.setOnClickListener {
+                mActionListener?.onShareClick(homeItem, position)
+            }
 
             starRl?.setOnClickListener {
                 mActionListener?.onStarClick(homeItem, position)
