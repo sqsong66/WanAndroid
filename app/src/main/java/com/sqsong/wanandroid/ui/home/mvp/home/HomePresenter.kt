@@ -108,7 +108,7 @@ class HomePresenter @Inject constructor(private val homeModel: HomeModel,
                 .subscribe(object : ObserverImpl<HomeItemBean>(disposable) {
                     override fun onSuccess(bean: HomeItemBean) {
                         if (bean.errorCode == 0) {
-                            setupDataList(bean.data.datas)
+                            setupDataList(bean.data?.datas)
                         } else {
                             mView.showMessage(bean.errorMsg!!)
                         }
@@ -120,9 +120,9 @@ class HomePresenter @Inject constructor(private val homeModel: HomeModel,
                 })
     }
 
-    private fun setupDataList(dataList: MutableList<HomeItem>) {
+    private fun setupDataList(dataList: List<HomeItem>?) {
         mView.showContentPage()
-        if (dataList.isEmpty()) {
+        if (dataList == null || dataList.isEmpty()) {
             if (mPage == 0) {
                 mView.showEmptyPage()
             } else {

@@ -18,7 +18,7 @@ import com.sqsong.wanandroid.data.HomeBannerData
 import com.sqsong.wanandroid.util.DensityUtil
 
 class BannerPagerAdapter(private val context: Context,
-                         private val bannerList: MutableList<HomeBannerData>) : PagerAdapter() {
+                         private val bannerList: List<HomeBannerData>) : PagerAdapter() {
 
     private var mImageWidth: Int? = 0
     private var mImageHeight: Int? = 0

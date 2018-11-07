@@ -6,7 +6,11 @@ import androidx.annotation.IdRes
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentStatePagerAdapter
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.sqsong.wanandroid.data.HotSearchBean
+import com.sqsong.wanandroid.data.HotSearchData
+import com.sqsong.wanandroid.mvp.IModel
 import com.sqsong.wanandroid.mvp.IView
+import io.reactivex.Observable
 
 interface MainContract {
 
@@ -20,6 +24,11 @@ interface MainContract {
         fun switchBottomViewNavigation(@IdRes id: Int)
         fun showUserName(userName: String?)
         fun getAppContext(): Context
+        fun setupHotSearchKey(keyList: List<HotSearchData>?)
+    }
+
+    interface Model : IModel {
+        fun getHotKey(): Observable<HotSearchBean>
     }
 
 }

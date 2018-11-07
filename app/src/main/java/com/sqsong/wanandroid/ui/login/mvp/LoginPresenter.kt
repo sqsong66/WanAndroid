@@ -74,8 +74,8 @@ class LoginPresenter @Inject constructor(private val loginView: LoginContract.Vi
                 .subscribe(object : ObserverImpl<LoginBean>(disposable) {
                     override fun onSuccess(bean: LoginBean) {
                         if (bean.errorCode == 0) {
-                            mPreferences[Constants.LOGIN_USER_NAME] = bean.data.username
-                            mPreferences[Constants.LOGIN_LATEST_USER] = bean.data.username
+                            mPreferences[Constants.LOGIN_USER_NAME] = bean.data?.username
+                            mPreferences[Constants.LOGIN_LATEST_USER] = bean.data?.username
                             mView.startHomeActivity()
                         } else {
                             mView.showMessage(bean.errorMsg)

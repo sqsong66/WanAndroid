@@ -76,4 +76,5 @@
     <string name="text_hot_search">Hot search</string>
     <string name="text_search_history">Search history</string>
     <string name="text_clear_history">Clear history</string>
+    <string name="text_search">Search</string>
 </resources>

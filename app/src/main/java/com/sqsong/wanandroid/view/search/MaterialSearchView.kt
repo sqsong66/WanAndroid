@@ -10,11 +10,15 @@ import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
+import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.*
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
 import com.sqsong.wanandroid.R
+import com.sqsong.wanandroid.data.HotSearchData
 import com.sqsong.wanandroid.util.AnimationUtil
 
 class MaterialSearchView @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0) :
@@ -165,9 +169,33 @@ class MaterialSearchView @JvmOverloads constructor(context: Context, attrs: Attr
     private fun showVisibleWithAnim() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             searchLayout?.visibility = View.VISIBLE
-            AnimationUtil.reveal(contentLl!!, mAnimListener)
+            AnimationUtil.revealIn(contentLl!!, mAnimListener)
         } else {
             AnimationUtil.fadeInView(contentLl!!, ANIMATION_DURATION, mAnimListener)
+        }
+    }
+
+    private fun hideViewWithAnim() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            AnimationUtil.revealOut(contentLl!!, object : AnimationUtil.AnimationListener {
+                override fun onAnimationStart(view: View): Boolean {
+                    return false
+                }
+
+                override fun onAnimationEnd(view: View): Boolean {
+                    searchLayout?.visibility = View.GONE
+                    return false
+                }
+
+                override fun onAnimationCancel(view: View): Boolean {
+                    return false
+                }
+
+            })
+        } else {
+            searchLayout?.visibility = View.GONE
+            mActionListener?.onSearchViewGone()
+            isSearchOpen = false
         }
     }
 
@@ -176,14 +204,14 @@ class MaterialSearchView @JvmOverloads constructor(context: Context, attrs: Attr
 
         searchEdit?.text = null
         clearFocus()
-
-        searchLayout?.visibility = View.GONE
-        mActionListener?.onSearchViewGone()
+        hideViewWithAnim()
         isSearchOpen = false
     }
 
     fun setMenuItem(menuItem: MenuItem?) {
         this.mMenuItem = menuItem
+        val actionView = menuItem?.actionView
+        actionView?.x
         menuItem?.setOnMenuItemClickListener {
             showSearchView()
             return@setOnMenuItemClickListener true
@@ -205,6 +233,29 @@ class MaterialSearchView @JvmOverloads constructor(context: Context, attrs: Attr
         super.clearFocus()
         searchEdit?.clearFocus()
         isClearFocus = false
+    }
+
+    fun setHotSearchData(keyList: List<HotSearchData>?) {
+        if (keyList == null || keyList.isEmpty()) {
+            hotSearchLl?.visibility = View.GONE
+            return
+        }
+        hotSearchChipGroup?.removeAllViews()
+        for (key in keyList) {
+            val chip = createChip(key.name)
+            chip.setOnClickListener { mActionListener?.onSearch(key.name) }
+            hotSearchChipGroup?.addView(chip)
+        }
+    }
+
+    private fun createChip(text: String): Chip {
+        val chip = Chip(context)
+        val layoutParams = ViewGroup.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT)
+        chip.layoutParams = layoutParams
+        chip.text = text
+        chip.setTextColor(ContextCompat.getColor(context, R.color.colorTextInActive))
+//        chip.setChipBackgroundColorResource()
+        return chip
     }
 
     interface OnSearchActionListener {

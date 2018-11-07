@@ -168,8 +168,8 @@ class BannerView @JvmOverloads constructor(context: Context, attrs: AttributeSet
         return super.onInterceptTouchEvent(ev)
     }
 
-    fun setBannerData(bannerList: MutableList<HomeBannerData>) {
-        if (bannerList.isEmpty()) {
+    fun setBannerData(bannerList: List<HomeBannerData>?) {
+        if (bannerList == null || bannerList.isEmpty()) {
             defaultImage.visibility = View.VISIBLE
             return
         }
@@ -184,7 +184,7 @@ class BannerView @JvmOverloads constructor(context: Context, attrs: AttributeSet
         })
     }
 
-    private fun setupPagerAdapter(bannerList: MutableList<HomeBannerData>, screenWidth: Int, resultHeight: Int) {
+    private fun setupPagerAdapter(bannerList: List<HomeBannerData>, screenWidth: Int, resultHeight: Int) {
         defaultImage.visibility = View.GONE
         mBannerList.clear()
         mBannerList.addAll(bannerList)

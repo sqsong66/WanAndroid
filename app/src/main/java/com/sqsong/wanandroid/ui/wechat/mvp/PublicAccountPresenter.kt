@@ -40,9 +40,12 @@ class PublicAccountPresenter @Inject constructor(private val accountModel: Publi
                 })
     }
 
-    private fun prepareTitleAndFragments(dataList: List<KnowledgeData>) {
+    private fun prepareTitleAndFragments(dataList: List<KnowledgeData>?) {
         mView.showContentPage()
-        if (dataList.isEmpty()) mView.showErrorPage()
+        if (dataList == null || dataList.isEmpty()) {
+            mView.showErrorPage()
+            return
+        }
         val titleList = mutableListOf<String>()
         val fragmentList = mutableListOf<Fragment>()
         for (data in dataList) {

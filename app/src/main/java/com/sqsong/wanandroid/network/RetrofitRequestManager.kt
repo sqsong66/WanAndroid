@@ -40,10 +40,6 @@ class RetrofitRequestManager {
         }
     }
 
-    fun getHomeBanner(): Observable<HomeBannerBean> {
-        return mApiService.getHomeBanner()
-    }
-
     companion object {
 
         private var INSTANCE: RetrofitRequestManager? = null

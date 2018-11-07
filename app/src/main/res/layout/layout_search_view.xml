@@ -71,6 +71,7 @@
             android:id="@+id/hot_search_ll"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
             android:orientation="vertical">
 
             <TextView
@@ -78,7 +79,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="16dp"
                 android:text="@string/text_hot_search"
-                android:textColor="@color/colorTextInActive"
+                android:textColor="@color/colorTextActive"
                 android:textSize="14sp" />
 
             <com.google.android.material.chip.ChipGroup
@@ -102,15 +103,14 @@
             android:id="@+id/search_history_ll"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:visibility="gone">
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingLeft="16dp"
-                android:paddingTop="5dp"
-                android:paddingRight="16dp"
-                android:paddingBottom="5dp">
+                android:paddingRight="16dp">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -128,9 +128,9 @@
                     android:layout_alignParentRight="true"
                     android:background="@drawable/bg_round_corner"
                     android:clickable="true"
-                    android:drawableStart="@drawable/ic_trash"
                     android:drawableLeft="@drawable/ic_trash"
                     android:drawablePadding="3dp"
+                    android:drawableStart="@drawable/ic_trash"
                     android:gravity="center"
                     android:padding="6dp"
                     android:text="@string/text_clear_history"
@@ -143,7 +143,8 @@
                 android:id="@+id/recycler"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp" />
+                android:layout_marginBottom="16dp"
+                android:layout_marginTop="10dp" />
 
         </LinearLayout>
 

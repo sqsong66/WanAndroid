@@ -2,6 +2,13 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
+        android:id="@+id/action_search"
+        android:enabled="true"
+        android:icon="@drawable/ic_search"
+        android:title="@string/text_search"
+        app:showAsAction="always" />
+
+    <item
         android:id="@+id/action_theme"
         android:enabled="true"
         android:icon="@drawable/ic_theme_color"
@@ -13,5 +20,5 @@
         android:enabled="true"
         android:icon="@drawable/ic_exit_app"
         android:title="@string/text_login_out"
-        app:showAsAction="ifRoom" />
+        app:showAsAction="always" />
 </menu>

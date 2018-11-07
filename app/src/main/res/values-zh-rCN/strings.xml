@@ -75,4 +75,5 @@
     <string name="text_hot_search">热搜</string>
     <string name="text_search_history">搜索历史</string>
     <string name="text_clear_history">清空历史</string>
+    <string name="text_search">搜索</string>
 </resources>

@@ -20,6 +20,7 @@ import com.google.android.material.navigation.NavigationView
 import com.sqsong.wanandroid.BaseApplication
 import com.sqsong.wanandroid.R
 import com.sqsong.wanandroid.common.inter.ChangeThemeAnnotation
+import com.sqsong.wanandroid.data.HotSearchData
 import com.sqsong.wanandroid.theme.ThemeSwitcherDialog
 import com.sqsong.wanandroid.ui.base.BaseActivity
 import com.sqsong.wanandroid.ui.home.mvp.MainContract
@@ -47,14 +48,6 @@ class MainActivity : BaseActivity<MainPresenter>(), MainContract.View, Navigatio
     override fun initEvent() {
         setupDrawerAndToolbar()
         mPresenter.onAttach(this)
-
-//        search_view.setSuggestions(resources.getStringArray(R.array.theme_palette_desc_array))
-//        val sharedPreferences = getSharedPreferences("CookiePersistence", Context.MODE_PRIVATE)
-//        val all = sharedPreferences.all
-//        val mutableSet = all.entries
-//        for (set in mutableSet) {
-//            LogUtil.e("Cookie key: ${set.key}, value: ${set.value}")
-//        }
     }
 
     private fun setupDrawerAndToolbar() {
@@ -87,13 +80,17 @@ class MainActivity : BaseActivity<MainPresenter>(), MainContract.View, Navigatio
         viewPager.offscreenPageLimit = 4
     }
 
+    override fun setupHotSearchKey(keyList: List<HotSearchData>?) {
+        searchView.setHotSearchData(keyList)
+    }
+
     override fun startNewActivity(intent: Intent) {
         startActivity(intent)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_home, menu)
-        val item = menu?.findItem(R.id.action_login_out)
+        val item = menu?.findItem(R.id.action_search)
         searchView.setMenuItem(item)
         return super.onCreateOptionsMenu(menu)
     }

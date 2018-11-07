@@ -92,7 +92,7 @@ class HomeFragment @Inject constructor() : BaseInjectFragment<HomePresenter>(), 
         recycler.adapter = adapter
     }
 
-    override fun showBannerData(bannerList: MutableList<HomeBannerData>) {
+    override fun showBannerData(bannerList: List<HomeBannerData>?) {
         mBannerView?.setBannerData(bannerList)
     }
 

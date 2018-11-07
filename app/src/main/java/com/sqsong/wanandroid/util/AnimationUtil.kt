@@ -56,10 +56,11 @@ object AnimationUtil {
     }
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-    fun reveal(view: View, listener: AnimationListener) {
+    fun revealIn(view: View, listener: AnimationListener) {
         val cx = view.width - TypedValue.applyDimension(
                 TypedValue.COMPLEX_UNIT_DIP, 24f, view.resources.displayMetrics).toInt()
-        val cy = view.height / 2
+        val cy = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 24f, view.resources.displayMetrics).toInt()
+        // view.height / 2
         val finalRadius = Math.max(view.width, view.height)
 
         val anim = ViewAnimationUtils.createCircularReveal(view, cx, cy, 0f, finalRadius.toFloat())
@@ -71,6 +72,33 @@ object AnimationUtil {
 
             override fun onAnimationEnd(animation: Animator) {
                 listener.onAnimationEnd(view)
+            }
+
+            override fun onAnimationCancel(animation: Animator) {
+                listener.onAnimationCancel(view)
+            }
+
+            override fun onAnimationRepeat(animation: Animator) {
+
+            }
+        })
+        anim.start()
+    }
+
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+    fun revealOut(view: View, listener: AnimationListener) {
+        val cx = view.width
+        val cy = 0
+        val startRadius = Math.max(view.width, view.height)
+        val anim = ViewAnimationUtils.createCircularReveal(view, cx, cy, startRadius.toFloat(), 0f)
+        anim.addListener(object : AnimatorListenerAdapter() {
+            override fun onAnimationStart(animation: Animator) {
+                listener.onAnimationStart(view)
+            }
+
+            override fun onAnimationEnd(animation: Animator) {
+                listener.onAnimationEnd(view)
+                view.visibility = View.GONE
             }
 
             override fun onAnimationCancel(animation: Animator) {

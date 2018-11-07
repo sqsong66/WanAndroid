@@ -11,9 +11,12 @@ import com.sqsong.wanandroid.R
 import com.sqsong.wanandroid.common.FragmentPagerAdapter
 import com.sqsong.wanandroid.common.event.FabClickEvent
 import com.sqsong.wanandroid.common.event.SwitchIndexEvent
+import com.sqsong.wanandroid.data.HotSearchBean
 import com.sqsong.wanandroid.mvp.BasePresenter
 import com.sqsong.wanandroid.mvp.IModel
+import com.sqsong.wanandroid.network.ApiException
 import com.sqsong.wanandroid.network.CookieManager
+import com.sqsong.wanandroid.network.ObserverImpl
 import com.sqsong.wanandroid.ui.collection.CollectionActivity
 import com.sqsong.wanandroid.ui.home.fragment.HomeFragment
 import com.sqsong.wanandroid.ui.home.fragment.KnowledgeFragment
@@ -22,6 +25,7 @@ import com.sqsong.wanandroid.ui.home.fragment.ProjectFragment
 import com.sqsong.wanandroid.ui.login.LoginActivity
 import com.sqsong.wanandroid.util.Constants
 import com.sqsong.wanandroid.util.PreferenceHelper.get
+import com.sqsong.wanandroid.util.RxJavaHelper
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
@@ -31,8 +35,9 @@ import org.greenrobot.eventbus.ThreadMode
 import javax.inject.Inject
 
 class MainPresenter @Inject constructor(private val mainView: MainContract.View,
+                                        private val mainModel: MainModel,
                                         private val disposable: CompositeDisposable) :
-        BasePresenter<MainContract.View, IModel>(null, disposable) {
+        BasePresenter<MainContract.View, IModel>(mainModel, disposable) {
 
     @Inject
     lateinit var mContext: Context
@@ -64,6 +69,7 @@ class MainPresenter @Inject constructor(private val mainView: MainContract.View,
         mView.showUserName(mPreferences[Constants.LOGIN_USER_NAME])
         disposable.add(fabDisposable())
         setupFragments()
+        requestHotKey()
     }
 
     private fun fabDisposable(): Disposable {
@@ -122,10 +128,27 @@ class MainPresenter @Inject constructor(private val mainView: MainContract.View,
         }
     }
 
+    private fun requestHotKey() {
+        mainModel.getHotKey()
+                .compose(RxJavaHelper.compose())
+                .subscribe(object : ObserverImpl<HotSearchBean>(disposable) {
+                    override fun onSuccess(bean: HotSearchBean) {
+                        if (bean.errorCode == 0) {
+                            mView.setupHotSearchKey(bean.data)
+                        } else {
+                            mView.showMessage(bean.errorMsg)
+                        }
+                    }
+
+                    override fun onFail(error: ApiException) {
+                        mView.showMessage(error.showMessage)
+                    }
+                })
+    }
+
     override fun onDestroy() {
         super.onDestroy()
         EventBus.getDefault().unregister(this)
     }
-
 
 }

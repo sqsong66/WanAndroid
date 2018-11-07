@@ -75,8 +75,8 @@ class ProjectPresenter @Inject constructor(private val projectModel: ProjectMode
         }
     }
 
-    private fun processClassify(dataList: List<KnowledgeData>) {
-        if (dataList.isEmpty()) {
+    private fun processClassify(dataList: List<KnowledgeData>?) {
+        if (dataList == null || dataList.isEmpty()) {
             mView.showEmptyPage()
             return
         }
@@ -96,7 +96,7 @@ class ProjectPresenter @Inject constructor(private val projectModel: ProjectMode
                 .subscribe(object : ObserverImpl<HomeItemBean>(disposable) {
                     override fun onSuccess(bean: HomeItemBean) {
                         if (bean.errorCode == 0) {
-                            setupDataList(bean.data.datas)
+                            setupDataList(bean.data?.datas)
                         } else {
                             showError(bean.errorMsg)
                         }
@@ -108,9 +108,9 @@ class ProjectPresenter @Inject constructor(private val projectModel: ProjectMode
                 })
     }
 
-    private fun setupDataList(dataList: MutableList<HomeItem>) {
+    private fun setupDataList(dataList: List<HomeItem>?) {
         mView.showContentPage()
-        if (dataList.isEmpty()) {
+        if (dataList == null || dataList.isEmpty()) {
             if (mPage == 0) {
                 mView.showEmptyPage()
             } else {

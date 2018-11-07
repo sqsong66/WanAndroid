@@ -76,8 +76,8 @@ class NavigationPresenter @Inject constructor(private val navigationModel: Navig
                 })
     }
 
-    private fun processNavigationData(dataList: List<NavigationData>) {
-        if (dataList.isEmpty()) {
+    private fun processNavigationData(dataList: List<NavigationData>?) {
+        if (dataList == null || dataList.isEmpty()) {
             mView.showEmptyPage()
             return
         }

@@ -22,7 +22,7 @@ interface HomeContract {
         fun showLoadingPage()
         fun showContentPage()
         fun showErrorPage()
-        fun showBannerData(bannerList: MutableList<HomeBannerData>)
+        fun showBannerData(bannerList: List<HomeBannerData>?)
         fun scrollRecycler(position: Int)
         fun loadFinish()
         fun showLoginDialog()

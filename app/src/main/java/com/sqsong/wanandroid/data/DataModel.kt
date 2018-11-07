@@ -3,17 +3,17 @@ package com.sqsong.wanandroid.data
 import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
 
-abstract class BaseBean<T : Any> {
+abstract class BaseBean<T : Any?> {
     val errorCode: Int = 0
     val errorMsg: String? = null
-    abstract var data: T
+    abstract var data: T?
 }
 
-data class BaseData(override var data: Any) : BaseBean<Any>()
+data class BaseData(override var data: Any?) : BaseBean<Any?>()
 
 /********************* Begin: Login Data ***********************/
 
-data class LoginBean(override var data: LoginData) : BaseBean<LoginData>()
+data class LoginBean(override var data: LoginData?) : BaseBean<LoginData?>()
 
 data class LoginData(val id: Int,
                      val username: String)
@@ -21,7 +21,7 @@ data class LoginData(val id: Int,
 /********************* End: Login Data *************************/
 
 /********************* Begin: Home banner bean ***********************/
-data class HomeBannerBean(override var data: MutableList<HomeBannerData>) : BaseBean<MutableList<HomeBannerData>>()
+data class HomeBannerBean(override var data: List<HomeBannerData>?) : BaseBean<List<HomeBannerData>>()
 
 data class HomeBannerData(val desc: String,
                           val id: Int,
@@ -34,7 +34,7 @@ data class HomeBannerData(val desc: String,
 /********************* End: Home banner bean ***********************/
 
 /********************* Begin: Home list bean **********************/
-data class HomeItemBean(override var data: HomeItemData) : BaseBean<HomeItemData>()
+data class HomeItemBean(override var data: HomeItemData?) : BaseBean<HomeItemData>()
 
 data class HomeItemData(val curPage: Int,
                         var datas: MutableList<HomeItem>,
@@ -69,7 +69,7 @@ data class HomeItem(val apkLink: String,
 /********************* End: Home list bean **********************/
 
 /********************* Start: Knowledge bean **********************/
-data class KnowledgeBean(override var data: List<KnowledgeData>) : BaseBean<List<KnowledgeData>>()
+data class KnowledgeBean(override var data: List<KnowledgeData>?) : BaseBean<List<KnowledgeData>>()
 
 @Parcelize
 data class KnowledgeData(val children: List<KnowledgeData>,
@@ -83,9 +83,19 @@ data class KnowledgeData(val children: List<KnowledgeData>,
 /********************* End: Knowledge bean **********************/
 
 /********************* Start: Navigation bean **********************/
-data class NavigationBean(override var data: List<NavigationData>) : BaseBean<List<NavigationData>>()
+data class NavigationBean(override var data: List<NavigationData>?) : BaseBean<List<NavigationData>>()
 
 data class NavigationData(val articles: List<HomeItem>,
                           val cid: Int,
                           val name: String)
 /********************* End: Navigation bean ************************/
+
+/********************* Start: Hot search bean **********************/
+data class HotSearchBean(override var data: List<HotSearchData>?) : BaseBean<List<HotSearchData>>()
+
+data class HotSearchData(val id: Int,
+                         val link: String,
+                         val name: String,
+                         val order: Int,
+                         val visible: Int)
+/********************* End: Hot search bean **********************/

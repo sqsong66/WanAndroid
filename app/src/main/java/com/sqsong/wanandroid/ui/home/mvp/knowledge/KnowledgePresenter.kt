@@ -57,8 +57,12 @@ class KnowledgePresenter @Inject constructor(private val knowledgeModel: Knowled
                 })
     }
 
-    private fun processKnowledgeData(dataList: List<KnowledgeData>) {
+    private fun processKnowledgeData(dataList: List<KnowledgeData>?) {
         mView.showContentPage()
+        if (dataList == null || dataList.isEmpty()) {
+            mView.showEmptyPage()
+            return
+        }
         mDataList.clear()
         mDataList.addAll(dataList)
         mAdapter.notifyDataSetChanged()
