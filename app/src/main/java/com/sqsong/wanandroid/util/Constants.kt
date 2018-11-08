@@ -18,6 +18,8 @@ object Constants {
 
     const val KEY_WEB_TITLE = "key_web_title"
 
+    const val SEARCH_HISTORY_KEY = "search_history_key"
+
     const val DEFAULT_TIME_OUT: Long = 10000
 
     const val SPLASH_TIME: Long = 3 // second

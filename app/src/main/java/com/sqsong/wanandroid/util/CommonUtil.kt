@@ -60,4 +60,21 @@ object CommonUtil {
     fun buildBrowserIntent(link: String?): Intent {
         return Intent(Intent.ACTION_VIEW, Uri.parse(link))
     }
+
+    fun convertListToString(list: MutableList<String>?): String {
+        if (list == null || list.isEmpty()) return ""
+        if (list.size > 5) {
+            var subList = list.subList(0, 5)
+            list.clear()
+            list.addAll(subList)
+        }
+        val buffer = StringBuffer()
+        for (i in 0 until list.size) {
+            buffer.append(list[i])
+            if (i != list.size - 1) {
+                buffer.append(",")
+            }
+        }
+        return buffer.toString()
+    }
 }

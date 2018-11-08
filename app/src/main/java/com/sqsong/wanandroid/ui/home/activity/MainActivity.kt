@@ -28,13 +28,14 @@ import com.sqsong.wanandroid.ui.home.mvp.MainPresenter
 import com.sqsong.wanandroid.ui.wechat.PublicAccountActivity
 import com.sqsong.wanandroid.util.Constants
 import com.sqsong.wanandroid.util.SnackbarUtil
+import com.sqsong.wanandroid.view.search.MaterialSearchView
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.content_home.*
 import javax.inject.Inject
 
 @ChangeThemeAnnotation
 class MainActivity : BaseActivity<MainPresenter>(), MainContract.View, NavigationView.OnNavigationItemSelectedListener,
-        BottomNavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
+        BottomNavigationView.OnNavigationItemSelectedListener, View.OnClickListener, MaterialSearchView.OnSearchActionListener {
 
     @Inject
     lateinit var mThemeDialog: ThemeSwitcherDialog
@@ -47,6 +48,7 @@ class MainActivity : BaseActivity<MainPresenter>(), MainContract.View, Navigatio
 
     override fun initEvent() {
         setupDrawerAndToolbar()
+        searchView.setOnSearchActionListener(this)
         mPresenter.onAttach(this)
     }
 
@@ -86,6 +88,22 @@ class MainActivity : BaseActivity<MainPresenter>(), MainContract.View, Navigatio
 
     override fun startNewActivity(intent: Intent) {
         startActivity(intent)
+    }
+
+    override fun onSearch(key: String) {
+        showMessage(key)
+    }
+
+    override fun onSearchViewVisible() {
+
+    }
+
+    override fun onSearchViewGone() {
+
+    }
+
+    override fun onTextChanged(text: String?) {
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -145,6 +163,8 @@ class MainActivity : BaseActivity<MainPresenter>(), MainContract.View, Navigatio
     override fun onBackPressed() {
         if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
             drawerLayout.closeDrawer(GravityCompat.START)
+        } else if (searchView.isSearchViewShow()) {
+            searchView.closeSearchView()
         } else {
             quitApp()
         }

@@ -1,6 +1,7 @@
 package com.sqsong.wanandroid.view.search
 
 import android.content.Context
+import android.content.SharedPreferences
 import android.graphics.Rect
 import android.os.Build
 import android.text.Editable
@@ -14,15 +15,22 @@ import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.*
 import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
 import com.sqsong.wanandroid.R
 import com.sqsong.wanandroid.data.HotSearchData
 import com.sqsong.wanandroid.util.AnimationUtil
+import com.sqsong.wanandroid.util.CommonUtil
+import com.sqsong.wanandroid.util.Constants
+import com.sqsong.wanandroid.util.PreferenceHelper
+import com.sqsong.wanandroid.util.PreferenceHelper.get
+import com.sqsong.wanandroid.util.PreferenceHelper.set
+import kotlinx.android.synthetic.main.layout_search_view.view.*
 
 class MaterialSearchView @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0) :
-        FrameLayout(context, attrs, defStyleAttr), View.OnClickListener {
+        FrameLayout(context, attrs, defStyleAttr), View.OnClickListener, SearchHistoryAdapter.OnSearchItemClickListener {
 
     private var searchLayout: FrameLayout? = null
     private var searchBar: LinearLayout? = null
@@ -40,7 +48,10 @@ class MaterialSearchView @JvmOverloads constructor(context: Context, attrs: Attr
     private var isClearFocus = false
     private var isSearchOpen = false
     private var mMenuItem: MenuItem? = null
+    private var mPreferences: SharedPreferences? = null
     private var mActionListener: OnSearchActionListener? = null
+    private lateinit var mHistoryAdapter: SearchHistoryAdapter
+    private var mHistoryList = mutableListOf<String>()
 
     private val mAnimListener: AnimationUtil.AnimationListener by lazy {
         return@lazy object : AnimationUtil.AnimationListener {
@@ -56,13 +67,11 @@ class MaterialSearchView @JvmOverloads constructor(context: Context, attrs: Attr
             override fun onAnimationCancel(view: View): Boolean {
                 return false
             }
-
         }
     }
 
     init {
         inflateView()
-        // initAttrs(context, attrs, defStyleAttr)
     }
 
     private fun inflateView() {
@@ -83,12 +92,20 @@ class MaterialSearchView @JvmOverloads constructor(context: Context, attrs: Attr
         backIv?.setOnClickListener(this)
         bgView?.setOnClickListener(this)
         clearIv?.setOnClickListener(this)
+        clearHistoryTv?.setOnClickListener(this)
+        setupRecycler()
 
         searchEdit?.setOnEditorActionListener { _, _, _ ->
             run {
                 val key = searchEdit?.text.toString()
                 if (!TextUtils.isEmpty(key)) {
+                    if (mHistoryList.contains(key)) {
+                        mHistoryList.remove(key)
+                    }
+                    mHistoryList.add(0, key)
+                    mPreferences?.set(Constants.SEARCH_HISTORY_KEY, CommonUtil.convertListToString(mHistoryList))
                     mActionListener?.onSearch(key)
+                    closeSearchView()
                 }
                 true
             }
@@ -115,11 +132,17 @@ class MaterialSearchView @JvmOverloads constructor(context: Context, attrs: Attr
                 }
             }
         }
+        mPreferences = PreferenceHelper.defaultPrefs(context)
+    }
+
+    private fun setupRecycler() {
+        mHistoryAdapter = SearchHistoryAdapter(context, mHistoryList)
+        mHistoryAdapter.setOnSearchItemClickListener(this)
+        recycler.layoutManager = LinearLayoutManager(context)
+        recycler.adapter = mHistoryAdapter
     }
 
     private fun showKeyboard(searchEdit: View?) {
-//        if (searchEdit?.hasFocus() == true) searchEdit.clearFocus()
-//        searchEdit?.requestFocus()
         val inputManager = searchEdit?.context?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         inputManager.showSoftInput(searchEdit, 0)
     }
@@ -144,6 +167,12 @@ class MaterialSearchView @JvmOverloads constructor(context: Context, attrs: Attr
             R.id.back_iv -> closeSearchView()
             R.id.bg_view -> closeSearchView()
             R.id.clear_iv -> searchEdit?.text = null
+            R.id.clear_history_tv -> {
+                mHistoryList.clear()
+                mHistoryAdapter.notifyDataSetChanged()
+                mPreferences?.set(Constants.SEARCH_HISTORY_KEY, "")
+                searchHistoryLl?.visibility = View.GONE
+            }
         }
     }
 
@@ -157,6 +186,7 @@ class MaterialSearchView @JvmOverloads constructor(context: Context, attrs: Attr
         searchEdit?.text = null
         searchEdit?.requestFocus()
 
+        querySearchHistory()
         if (animate) {
             showVisibleWithAnim()
         } else {
@@ -176,6 +206,7 @@ class MaterialSearchView @JvmOverloads constructor(context: Context, attrs: Attr
     }
 
     private fun hideViewWithAnim() {
+        hideKeyboard(searchEdit)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             AnimationUtil.revealOut(contentLl!!, object : AnimationUtil.AnimationListener {
                 override fun onAnimationStart(view: View): Boolean {
@@ -183,7 +214,9 @@ class MaterialSearchView @JvmOverloads constructor(context: Context, attrs: Attr
                 }
 
                 override fun onAnimationEnd(view: View): Boolean {
+
                     searchLayout?.visibility = View.GONE
+                    isSearchOpen = false
                     return false
                 }
 
@@ -199,14 +232,15 @@ class MaterialSearchView @JvmOverloads constructor(context: Context, attrs: Attr
         }
     }
 
-    private fun closeSearchView() {
+    fun closeSearchView() {
         if (!isSearchOpen) return
 
         searchEdit?.text = null
         clearFocus()
         hideViewWithAnim()
-        isSearchOpen = false
     }
+
+    fun isSearchViewShow(): Boolean = isSearchOpen
 
     fun setMenuItem(menuItem: MenuItem?) {
         this.mMenuItem = menuItem
@@ -242,8 +276,17 @@ class MaterialSearchView @JvmOverloads constructor(context: Context, attrs: Attr
         }
         hotSearchChipGroup?.removeAllViews()
         for (key in keyList) {
-            val chip = createChip(key.name)
-            chip.setOnClickListener { mActionListener?.onSearch(key.name) }
+            val name = key.name
+            val chip = createChip(name)
+            chip.setOnClickListener {
+                if (mHistoryList.contains(name)) {
+                    mHistoryList.remove(name)
+                }
+                mHistoryList.add(0, name)
+                mPreferences?.set(Constants.SEARCH_HISTORY_KEY, CommonUtil.convertListToString(mHistoryList))
+                mActionListener?.onSearch(key.name)
+                closeSearchView()
+            }
             hotSearchChipGroup?.addView(chip)
         }
     }
@@ -254,8 +297,43 @@ class MaterialSearchView @JvmOverloads constructor(context: Context, attrs: Attr
         chip.layoutParams = layoutParams
         chip.text = text
         chip.setTextColor(ContextCompat.getColor(context, R.color.colorTextInActive))
-//        chip.setChipBackgroundColorResource()
         return chip
+    }
+
+    private fun querySearchHistory() {
+        val keyStr: String? = mPreferences?.get(Constants.SEARCH_HISTORY_KEY)
+        if (keyStr == null || TextUtils.isEmpty(keyStr)) {
+            searchHistoryLl?.visibility = View.GONE
+            return
+        }
+        searchHistoryLl?.visibility = View.VISIBLE
+        val keyArray = keyStr.split(",")
+        mHistoryList.clear()
+        for (key in keyArray) {
+            mHistoryList.add(key)
+        }
+        mHistoryAdapter.notifyDataSetChanged()
+    }
+
+    override fun onItemClick(text: String, position: Int) {
+        mHistoryList.remove(text)
+        mHistoryList.add(0, text)
+        mPreferences?.set(Constants.SEARCH_HISTORY_KEY, CommonUtil.convertListToString(mHistoryList))
+        mActionListener?.onSearch(text)
+        closeSearchView()
+    }
+
+    override fun onDeleteClick(text: String, position: Int) {
+        mHistoryList.remove(text)
+        if (mHistoryList.size == 0) {
+            searchHistoryLl?.visibility = View.GONE
+            mHistoryAdapter.notifyDataSetChanged()
+            mPreferences?.set(Constants.SEARCH_HISTORY_KEY, "")
+        } else {
+            mHistoryAdapter.notifyItemRemoved(position)
+            mPreferences?.set(Constants.SEARCH_HISTORY_KEY, CommonUtil.convertListToString(mHistoryList))
+            postDelayed({ mHistoryAdapter.notifyDataSetChanged() }, 300)
+        }
     }
 
     interface OnSearchActionListener {

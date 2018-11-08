@@ -20,7 +20,8 @@
         android:background="?android:colorBackground"
         android:clickable="true"
         android:focusable="true"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:paddingBottom="16dp">
 
         <LinearLayout
             android:id="@+id/search_bar"
@@ -71,7 +72,6 @@
             android:id="@+id/hot_search_ll"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp"
             android:orientation="vertical">
 
             <TextView
@@ -103,6 +103,7 @@
             android:id="@+id/search_history_ll"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:orientation="vertical"
             android:visibility="gone">
 
@@ -117,7 +118,7 @@
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:text="@string/text_search_history"
-                    android:textColor="@color/colorTextInActive"
+                    android:textColor="@color/colorTextActive"
                     android:textSize="14sp" />
 
                 <TextView
@@ -128,9 +129,9 @@
                     android:layout_alignParentRight="true"
                     android:background="@drawable/bg_round_corner"
                     android:clickable="true"
+                    android:drawableStart="@drawable/ic_trash"
                     android:drawableLeft="@drawable/ic_trash"
                     android:drawablePadding="3dp"
-                    android:drawableStart="@drawable/ic_trash"
                     android:gravity="center"
                     android:padding="6dp"
                     android:text="@string/text_clear_history"
@@ -141,10 +142,8 @@
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycler"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
-                android:layout_marginTop="10dp" />
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
 
         </LinearLayout>
 
