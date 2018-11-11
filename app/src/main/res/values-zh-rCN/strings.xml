@@ -76,4 +76,6 @@
     <string name="text_search_history">搜索历史</string>
     <string name="text_clear_history">清空历史</string>
     <string name="text_search">搜索</string>
+    <string name="text_result">结果</string>
+    <string name="text_settings">设置</string>
 </resources>

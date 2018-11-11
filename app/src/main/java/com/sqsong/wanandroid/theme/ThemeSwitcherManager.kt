@@ -31,7 +31,10 @@ class ThemeSwitcherManager {
         this.mActivityList = activityList
         this.mProvider = sourceProvider
         this.mPreferences = preferences
-        mThemeColorIndex = mPreferences[Constants.THEMEOVERLAY_INDEX, 0] ?: 0
+
+        var index = mPreferences[Constants.THEMEOVERLAY_INDEX, 0]
+        if (index == null || index < 0) index = 0
+        mThemeColorIndex = index
     }
 
     @SuppressLint("ResourceType")

@@ -37,12 +37,6 @@
         app:layout_behavior="com.sqsong.wanandroid.util.behavior.BottomNavigationBehavior"
         app:menu="@menu/menu_bottom_nav" />
 
-    <com.sqsong.wanandroid.view.search.MaterialSearchView
-        android:id="@+id/searchView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:elevation="5dp" />
-
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab"
         android:layout_width="wrap_content"
@@ -54,5 +48,11 @@
         app:srcCompat="@drawable/ic_arrow_up"
         app:useCompatPadding="true"
         tools:ignore="VectorDrawableCompat" />
+
+    <com.sqsong.wanandroid.view.search.MaterialSearchView
+        android:id="@+id/searchView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:elevation="5dp" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

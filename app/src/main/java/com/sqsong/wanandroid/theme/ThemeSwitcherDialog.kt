@@ -28,8 +28,8 @@ class ThemeSwitcherDialog @Inject constructor() : DaggerAppCompatDialogFragment(
     private var mCheckedPos = 0
     private var mColorPalette: ColorPalette? = null
     private var mAdapter: ThemeColorAdapter? = null
-    private var mThemeOverlayList = mutableListOf<ColorPalette>()
 
+    private var mThemeOverlayList = mutableListOf<ColorPalette>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mCheckedPos = mThemeSwitcherManager.getThemeColorIndex()
@@ -56,11 +56,20 @@ class ThemeSwitcherDialog @Inject constructor() : DaggerAppCompatDialogFragment(
         recycler.layoutManager = GridLayoutManager(context, 4)
         recycler.addItemDecoration(decoration)
         mThemeOverlayList.clear()
-        mThemeOverlayList.addAll(mThemeSwitcherManager.getThemeOverlayList())
+        mThemeOverlayList.addAll(getPaletteList())
         mAdapter = ThemeColorAdapter(context, mThemeOverlayList)
         mAdapter?.setOnItemClickListener(this)
         recycler.adapter = mAdapter
         return recycler
+    }
+
+    fun getPaletteList(): List<ColorPalette> {
+        val overlayList = mThemeSwitcherManager.getThemeOverlayList()
+        for (i in 0 until overlayList.size) {
+            val palette = overlayList[i]
+            palette.isChecked = i == mCheckedPos
+        }
+        return overlayList
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -70,7 +79,7 @@ class ThemeSwitcherDialog @Inject constructor() : DaggerAppCompatDialogFragment(
 
     override fun onItemClick(data: ColorPalette?, position: Int) {
         if (position < 0 || position >= mThemeOverlayList.size) return
-        if (mCheckedPos == position) return
+        if (mCheckedPos < 0 || mCheckedPos == position) return
         mThemeOverlayList[mCheckedPos].isChecked = false
         mThemeOverlayList[position].isChecked = true
         mAdapter?.notifyItemChanged(mCheckedPos)

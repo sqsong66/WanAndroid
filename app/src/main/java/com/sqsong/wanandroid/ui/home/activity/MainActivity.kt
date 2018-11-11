@@ -25,6 +25,7 @@ import com.sqsong.wanandroid.theme.ThemeSwitcherDialog
 import com.sqsong.wanandroid.ui.base.BaseActivity
 import com.sqsong.wanandroid.ui.home.mvp.MainContract
 import com.sqsong.wanandroid.ui.home.mvp.MainPresenter
+import com.sqsong.wanandroid.ui.search.SearchActivity
 import com.sqsong.wanandroid.ui.wechat.PublicAccountActivity
 import com.sqsong.wanandroid.util.Constants
 import com.sqsong.wanandroid.util.SnackbarUtil
@@ -86,12 +87,12 @@ class MainActivity : BaseActivity<MainPresenter>(), MainContract.View, Navigatio
         searchView.setHotSearchData(keyList)
     }
 
-    override fun startNewActivity(intent: Intent) {
-        startActivity(intent)
-    }
+    override fun startNewActivity(intent: Intent) = startActivity(intent)
 
     override fun onSearch(key: String) {
-        showMessage(key)
+        val intent = Intent(this, SearchActivity::class.java)
+        intent.putExtra(Constants.SEARCH_KEY, key)
+        startActivity(intent)
     }
 
     override fun onSearchViewVisible() {
@@ -141,10 +142,6 @@ class MainActivity : BaseActivity<MainPresenter>(), MainContract.View, Navigatio
             R.id.action_project -> navigateToPage(3, menuItem.title)
             R.id.nav_public_account -> startActivity(Intent(this, PublicAccountActivity::class.java)) // 公众号
             R.id.nav_collection -> mPresenter.checkCollectionState()
-            R.id.nav_share -> {
-            }
-            R.id.nav_send -> {
-            }
         }
         drawerLayout.closeDrawer(GravityCompat.START)
         return true
@@ -161,12 +158,10 @@ class MainActivity : BaseActivity<MainPresenter>(), MainContract.View, Navigatio
     }
 
     override fun onBackPressed() {
-        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
-            drawerLayout.closeDrawer(GravityCompat.START)
-        } else if (searchView.isSearchViewShow()) {
-            searchView.closeSearchView()
-        } else {
-            quitApp()
+        when {
+            drawerLayout.isDrawerOpen(GravityCompat.START) -> drawerLayout.closeDrawer(GravityCompat.START)
+            searchView.isSearchViewShow() -> searchView.closeSearchView()
+            else -> quitApp()
         }
     }
 

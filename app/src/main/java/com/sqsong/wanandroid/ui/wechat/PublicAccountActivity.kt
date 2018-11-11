@@ -1,6 +1,7 @@
 package com.sqsong.wanandroid.ui.wechat
 
 import android.view.MenuItem
+import android.view.View
 import androidx.fragment.app.FragmentManager
 import com.sqsong.wanandroid.R
 import com.sqsong.wanandroid.common.FragmentPagerAdapter
@@ -41,6 +42,7 @@ class PublicAccountActivity : BaseActivity<PublicAccountPresenter>(), PublicAcco
     }
 
     override fun setViewPagerAdapter(pagerAdapter: FragmentPagerAdapter) {
+        tabLayout.visibility = View.VISIBLE
         viewPager.adapter = pagerAdapter
         viewPager.offscreenPageLimit = 4
         tabLayout.setupWithViewPager(viewPager)

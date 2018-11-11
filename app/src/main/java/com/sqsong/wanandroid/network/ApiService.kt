@@ -69,4 +69,9 @@ interface ApiService {
     // 热搜关键词
     @GET("hotkey/json")
     fun getHotKey(): Observable<HotSearchBean>
+
+    // 搜索列表
+    @FormUrlEncoded
+    @POST("article/query/{page}/json")
+    fun query(@Path("page") page: Int, @Field("k") key: String): Observable<HomeItemBean>
 }

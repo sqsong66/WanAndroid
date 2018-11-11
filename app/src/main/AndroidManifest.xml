@@ -53,6 +53,10 @@
         <activity
             android:name=".ui.collection.CollectionActivity"
             android:theme="@style/AppTheme.LoginTheme" />
+        <activity
+            android:name=".ui.search.SearchActivity"
+            android:theme="@style/AppTheme.LoginTheme"
+            android:windowSoftInputMode="adjustNothing" />
     </application>
 
 </manifest>

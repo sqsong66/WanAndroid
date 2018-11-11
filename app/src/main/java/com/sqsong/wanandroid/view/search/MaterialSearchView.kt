@@ -92,6 +92,7 @@ class MaterialSearchView @JvmOverloads constructor(context: Context, attrs: Attr
         backIv?.setOnClickListener(this)
         bgView?.setOnClickListener(this)
         clearIv?.setOnClickListener(this)
+        contentLl?.setOnClickListener(this)
         clearHistoryTv?.setOnClickListener(this)
         setupRecycler()
 
@@ -167,6 +168,7 @@ class MaterialSearchView @JvmOverloads constructor(context: Context, attrs: Attr
             R.id.back_iv -> closeSearchView()
             R.id.bg_view -> closeSearchView()
             R.id.clear_iv -> searchEdit?.text = null
+            R.id.content_ll -> hideKeyboard(searchEdit)
             R.id.clear_history_tv -> {
                 mHistoryList.clear()
                 mHistoryAdapter.notifyDataSetChanged()
@@ -214,7 +216,6 @@ class MaterialSearchView @JvmOverloads constructor(context: Context, attrs: Attr
                 }
 
                 override fun onAnimationEnd(view: View): Boolean {
-
                     searchLayout?.visibility = View.GONE
                     isSearchOpen = false
                     return false
@@ -223,7 +224,6 @@ class MaterialSearchView @JvmOverloads constructor(context: Context, attrs: Attr
                 override fun onAnimationCancel(view: View): Boolean {
                     return false
                 }
-
             })
         } else {
             searchLayout?.visibility = View.GONE

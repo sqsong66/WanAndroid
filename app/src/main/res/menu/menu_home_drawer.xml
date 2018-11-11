@@ -8,6 +8,10 @@
             android:id="@+id/nav_home"
             android:icon="@drawable/ic_home"
             android:title="@string/text_home" />
+
+    </group>
+
+    <item android:title="">
         <item
             android:id="@+id/nav_public_account"
             android:icon="@drawable/ic_menu_wechat"
@@ -18,21 +22,8 @@
             android:title="@string/text_collection" />
         <item
             android:id="@+id/nav_manage"
-            android:icon="@drawable/ic_menu_manage"
-            android:title="Tools" />
-    </group>
-
-    <item android:title="Communicate">
-        <menu>
-            <item
-                android:id="@+id/nav_share"
-                android:icon="@drawable/ic_menu_share"
-                android:title="Share" />
-            <item
-                android:id="@+id/nav_send"
-                android:icon="@drawable/ic_menu_send"
-                android:title="Send" />
-        </menu>
+            android:icon="@drawable/ic_menu_settings"
+            android:title="@string/text_settings" />
     </item>
 
 </menu>
