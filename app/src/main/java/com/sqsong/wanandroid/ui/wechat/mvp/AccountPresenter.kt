@@ -44,7 +44,7 @@ class AccountPresenter(private val accountModel: PublicAccountModel,
     }
 
     fun refreshData() {
-        mPage = 0
+        mPage = 1
         requestAccountList()
     }
 
@@ -73,7 +73,7 @@ class AccountPresenter(private val accountModel: PublicAccountModel,
 
     private fun showErrors(message: String) {
         mView.showMessage(message)
-        if (mPage == 0) {
+        if (mPage == 1) {
             mView.showErrorPage()
         } else {
             mPage--
@@ -84,21 +84,21 @@ class AccountPresenter(private val accountModel: PublicAccountModel,
     private fun setupDataList(dataList: List<HomeItem>?) {
         mView.showContentPage()
         if (dataList == null || dataList.isEmpty()) {
-            if (mPage == 0) {
+            if (mPage == 1) {
                 mView.showEmptyPage()
             } else {
                 mAdapter.updateLoadingState(LoadingFooterViewHolder.STATE_NO_CONTENT)
             }
             return
         }
-        if (mPage == 0) {
+        if (mPage == 1) {
             mDataList.clear()
         }
         mDataList.addAll(dataList)
         mAdapter.notifyDataSetChanged()
 
         mView.getHandler().post {
-            if (mPage == 0 && mView.findRecyclerLastVisibleItemPosition() == mDataList.size) {
+            if (mPage == 1 && mView.findRecyclerLastVisibleItemPosition() == mDataList.size) {
                 mAdapter.updateLoadingState(LoadingFooterViewHolder.STATE_HIDDEN)
             } else if (dataList.size < Constants.PAGE_SIZE) {
                 mAdapter.updateLoadingState(LoadingFooterViewHolder.STATE_NO_CONTENT)
