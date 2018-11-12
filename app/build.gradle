@@ -76,7 +76,7 @@ dependencies {
     // Log interceptor
     implementation "com.squareup.okhttp3:logging-interceptor:$rootProject.ext.http_log_interceptor_version"
 
-    implementation "com.github.franmontiel:PersistentCookieJar:$rootProject.ext.cookie_jar_version"
+    // implementation "com.github.franmontiel:PersistentCookieJar:$rootProject.ext.cookie_jar_version"
 
     // Dagger2
     implementation "com.google.dagger:dagger:$rootProject.ext.dagger2_version"

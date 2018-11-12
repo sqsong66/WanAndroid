@@ -1,10 +1,10 @@
 package com.sqsong.wanandroid.di.module
 
 import android.content.Context
-import com.franmontiel.persistentcookiejar.PersistentCookieJar
 import com.sqsong.wanandroid.network.ApiService
 import com.sqsong.wanandroid.network.CookieManager
 import com.sqsong.wanandroid.util.Constants
+import com.sqsong.wanandroid.util.cookie.PersistentCookieJar
 import dagger.Provides
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor

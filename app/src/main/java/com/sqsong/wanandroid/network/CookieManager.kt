@@ -1,9 +1,9 @@
 package com.sqsong.wanandroid.network
 
 import android.content.Context
-import com.franmontiel.persistentcookiejar.PersistentCookieJar
-import com.franmontiel.persistentcookiejar.cache.SetCookieCache
-import com.franmontiel.persistentcookiejar.persistence.SharedPrefsCookiePersistor
+import com.sqsong.wanandroid.util.cookie.PersistentCookieJar
+import com.sqsong.wanandroid.util.cookie.cache.SetCookieCache
+import com.sqsong.wanandroid.util.cookie.persistence.SharedPrefsCookiePersistor
 
 class CookieManager(context: Context) {
 
