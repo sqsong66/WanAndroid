@@ -26,6 +26,7 @@ import com.sqsong.wanandroid.ui.base.BaseActivity
 import com.sqsong.wanandroid.ui.home.mvp.MainContract
 import com.sqsong.wanandroid.ui.home.mvp.MainPresenter
 import com.sqsong.wanandroid.ui.search.SearchActivity
+import com.sqsong.wanandroid.ui.settings.SettingActivity
 import com.sqsong.wanandroid.ui.wechat.PublicAccountActivity
 import com.sqsong.wanandroid.util.Constants
 import com.sqsong.wanandroid.util.SnackbarUtil
@@ -142,6 +143,7 @@ class MainActivity : BaseActivity<MainPresenter>(), MainContract.View, Navigatio
             R.id.action_project -> navigateToPage(3, menuItem.title)
             R.id.nav_public_account -> startActivity(Intent(this, PublicAccountActivity::class.java)) // 公众号
             R.id.nav_collection -> mPresenter.checkCollectionState()
+            R.id.nav_setting -> startActivity(Intent(this, SettingActivity::class.java)) // 设置
         }
         drawerLayout.closeDrawer(GravityCompat.START)
         return true

@@ -31,4 +31,8 @@
         <item>@string/text_desc_blue</item>
     </array>
 
+    <string-array name="language_array">
+        <item>@string/text_english</item>
+        <item>@string/text_chinese</item>
+    </string-array>
 </resources>

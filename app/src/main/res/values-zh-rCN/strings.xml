@@ -78,4 +78,7 @@
     <string name="text_search">搜索</string>
     <string name="text_result">结果</string>
     <string name="text_settings">设置</string>
+    <string name="text_language_setting">语言设置</string>
+    <string name="text_language_setting_tips">选择显示的语言</string>
+    <string name="text_choose_language">请选择语言</string>
 </resources>

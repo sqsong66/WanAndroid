@@ -21,7 +21,7 @@
             android:icon="@drawable/ic_menu_collections"
             android:title="@string/text_collection" />
         <item
-            android:id="@+id/nav_manage"
+            android:id="@+id/nav_setting"
             android:icon="@drawable/ic_menu_settings"
             android:title="@string/text_settings" />
     </item>

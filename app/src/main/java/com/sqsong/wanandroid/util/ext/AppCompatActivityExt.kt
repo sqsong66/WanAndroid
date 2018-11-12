@@ -37,6 +37,7 @@ import com.google.android.material.textfield.TextInputLayout
 import com.jakewharton.rxbinding2.view.RxView
 import com.jakewharton.rxbinding2.widget.RxTextView
 import com.sqsong.wanandroid.R
+import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 
@@ -123,4 +124,8 @@ fun AppCompatActivity.setupSwipeLayoutColor(swipeRefreshLayout: SwipeRefreshLayo
     val primaryDarkColor = ta?.getColor(2, ContextCompat.getColor(this, R.color.colorPrimaryDark))
     swipeRefreshLayout.setColorSchemeColors(lightColor!!, primaryColor!!, primaryDarkColor!!)
     ta.recycle()
+}
+
+fun AppCompatActivity.clickObservable(@IdRes id: Int): Observable<Any> {
+    return RxView.clicks(findViewById(id))
 }

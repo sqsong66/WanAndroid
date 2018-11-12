@@ -57,6 +57,9 @@
             android:name=".ui.search.SearchActivity"
             android:theme="@style/AppTheme.LoginTheme"
             android:windowSoftInputMode="adjustNothing" />
+        <activity
+            android:name=".ui.settings.SettingActivity"
+            android:theme="@style/AppTheme.LoginTheme" />
     </application>
 
 </manifest>
