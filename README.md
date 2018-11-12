@@ -23,7 +23,7 @@
 3. [MaterialSearchView](https://github.com/MiguelCatalan/MaterialSearchView)
 4. ...
 
-在此感谢鸿洋大神提供的[API](http://wanandroid.com/)以及各位开源作者提供的优秀框架及使用。<br>
+在此感谢鸿洋大神提供的[API](http://wanandroid.com/)以及各位开源作者提供的优秀框架及参考。<br>
 由于项目还在不断的完善中，也欢迎大家提供更好的参考建议。
 
 ## 界面预览
