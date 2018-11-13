@@ -27,7 +27,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="16dp"
                 android:src="@drawable/ic_setting_translate"
-                android:tint="#757575" />
+                android:tint="?colorSettingIconTint" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -43,7 +43,7 @@
                     android:ellipsize="end"
                     android:maxLines="1"
                     android:text="@string/text_language_setting"
-                    android:textColor="@color/colorTextActive"
+                    android:textColor="?colorTextActive"
                     android:textSize="16sp" />
 
                 <TextView
@@ -51,7 +51,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="3dp"
                     android:text="@string/text_language_setting_tips"
-                    android:textColor="@color/colorTextInActive"
+                    android:textColor="?colorTextInActive"
                     android:textSize="14sp" />
 
             </LinearLayout>
@@ -71,8 +71,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="16dp"
-                android:src="@drawable/ic_setting_translate"
-                android:tint="#757575" />
+                android:src="@drawable/ic_theme_color"
+                android:tint="?colorSettingIconTint" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -85,21 +85,28 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Language Setting"
-                    android:textColor="@color/colorTextActive"
+                    android:text="@string/text_theme_setting"
+                    android:textColor="?colorTextActive"
                     android:textSize="16sp" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="3dp"
-                    android:text="Choose the display language"
-                    android:textColor="@color/colorTextInActive"
+                    android:text="@string/text_theme_setting_tips"
+                    android:textColor="?colorTextInActive"
                     android:textSize="14sp" />
 
             </LinearLayout>
 
         </LinearLayout>
+
+        <Button
+            android:id="@+id/button2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:text="Hello world" />
 
     </LinearLayout>
 

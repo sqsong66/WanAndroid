@@ -14,7 +14,7 @@
     <string name="text_no_data">No more data.</string>
     <string name="text_theme_switcher">Theme Switcher</string>
     <string name="text_cancel">Cancel</string>
-    <string name="text_sure">Sure</string>
+    <string name="text_sure">Ok</string>
     <string name="text_save">Save</string>
     <string name="text_unknown_error">Unknown error</string>
     <string name="text_network_not_available">Network not available</string>
@@ -84,4 +84,6 @@
     <string name="text_english" tools:ignore="MissingTranslation">English</string>
     <string name="text_chinese" tools:ignore="MissingTranslation">简体中文</string>
     <string name="text_choose_language">Choose Language</string>
+    <string name="text_theme_setting">Theme Setting</string>
+    <string name="text_theme_setting_tips">Choose your favorite theme</string>
 </resources>

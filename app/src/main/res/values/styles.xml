@@ -24,6 +24,13 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
+    <style name="DialogStyle" parent="ThemeOverlay.MaterialComponents.Dialog.Alert">
+        <item name="android:background">?colorDefaultBackground</item>
+        <item name="colorAccent">?colorTextActive</item>
+        <item name="android:textColor">?colorTextActive</item>
+    </style>
+
+
     <style name="LoginTextInputAppearance">
         <item name="android:textColor">@color/colorWhite</item>
         <item name="android:textSize">14sp</item>

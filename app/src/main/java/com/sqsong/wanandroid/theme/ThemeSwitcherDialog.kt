@@ -36,7 +36,7 @@ class ThemeSwitcherDialog @Inject constructor() : DaggerAppCompatDialogFragment(
     }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        val dialog = activity?.let { AlertDialog.Builder(it) }?.run {
+        val dialog = activity?.let { AlertDialog.Builder(it, R.style.DialogStyle) }?.run {
             setTitle(R.string.text_theme_switcher)
             setView(createDialogView(activity?.layoutInflater))
             setNegativeButton(R.string.text_cancel, null)

@@ -26,6 +26,7 @@
     <color name="colorLine">#e0e0e0</color>
     <color name="colorBackgroundMusk">#2A000000</color>
     <color name="colorSearchMusk">#88000000</color>
+    <color name="colorSettingIcon">#757575</color>
 
     <!-- Theme Color -->
     <color name="colorBlackPrimary">#212121</color>

@@ -81,4 +81,6 @@
     <string name="text_language_setting">语言设置</string>
     <string name="text_language_setting_tips">选择显示的语言</string>
     <string name="text_choose_language">请选择语言</string>
+    <string name="text_theme_setting">主题设置</string>
+    <string name="text_theme_setting_tips">选择您喜欢的主题</string>
 </resources>

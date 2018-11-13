@@ -15,6 +15,7 @@
         <item name="colorDefaultBackground">?android:colorBackground</item>
         <item name="colorProgress">@color/colorPrimary</item>
         <item name="colorChipBackground">@color/colorPrimaryLight</item>
+        <item name="colorSettingIconTint">@color/colorSettingIcon</item>
     </style>
 
     <style name="ThemeOverlay.Palette.Black" parent="AppTheme.LoginTheme">
@@ -31,6 +32,7 @@
         <item name="colorDefaultBackground">@color/colorBlackPrimaryLight</item>
         <item name="colorProgress">@color/colorWhite</item>
         <item name="colorChipBackground">@color/colorChipBackground</item>
+        <item name="colorSettingIconTint">@color/colorWhite</item>
     </style>
 
     <style name="ThemeOverlay.Palette.Red" parent="AppTheme.LoginTheme">
@@ -47,6 +49,7 @@
         <item name="colorDefaultBackground">?android:colorBackground</item>
         <item name="colorProgress">@color/colorRedPrimary</item>
         <item name="colorChipBackground">@color/colorRedPrimaryLight</item>
+        <item name="colorSettingIconTint">@color/colorSettingIcon</item>
     </style>
 
     <style name="ThemeOverlay.Palette.Purple" parent="AppTheme.LoginTheme">
@@ -63,6 +66,7 @@
         <item name="colorDefaultBackground">?android:colorBackground</item>
         <item name="colorProgress">@color/colorPurplePrimary</item>
         <item name="colorChipBackground">@color/colorPurplePrimaryLight</item>
+        <item name="colorSettingIconTint">@color/colorSettingIcon</item>
     </style>
 
     <style name="ThemeOverlay.Palette.Indigo" parent="AppTheme.LoginTheme">
@@ -79,6 +83,7 @@
         <item name="colorDefaultBackground">?android:colorBackground</item>
         <item name="colorProgress">@color/colorIndigoPrimary</item>
         <item name="colorChipBackground">@color/colorIndigoPrimaryLight</item>
+        <item name="colorSettingIconTint">@color/colorSettingIcon</item>
     </style>
 
     <style name="ThemeOverlay.Palette.Green" parent="AppTheme.LoginTheme">
@@ -95,6 +100,7 @@
         <item name="colorDefaultBackground">?android:colorBackground</item>
         <item name="colorProgress">@color/colorGreenPrimary</item>
         <item name="colorChipBackground">@color/colorGreenPrimaryLight</item>
+        <item name="colorSettingIconTint">@color/colorSettingIcon</item>
     </style>
 
     <style name="ThemeOverlay.Palette.Orange" parent="AppTheme.LoginTheme">
@@ -111,6 +117,7 @@
         <item name="colorDefaultBackground">?android:colorBackground</item>
         <item name="colorProgress">@color/colorOrangePrimary</item>
         <item name="colorChipBackground">@color/colorOrangePrimaryLight</item>
+        <item name="colorSettingIconTint">@color/colorSettingIcon</item>
     </style>
 
     <style name="ThemeOverlay.Palette.BlueGrey" parent="AppTheme.LoginTheme">
@@ -127,6 +134,7 @@
         <item name="colorDefaultBackground">?android:colorBackground</item>
         <item name="colorProgress">@color/colorBlueGreyPrimary</item>
         <item name="colorChipBackground">@color/colorBlueGreyPrimaryLight</item>
+        <item name="colorSettingIconTint">@color/colorSettingIcon</item>
     </style>
 
     <style name="ThemeOverlay.Palette.Yellow" parent="AppTheme.LoginTheme">
@@ -143,6 +151,7 @@
         <item name="colorDefaultBackground">?android:colorBackground</item>
         <item name="colorProgress">@color/colorYellowPrimary</item>
         <item name="colorChipBackground">@color/colorYellowPrimaryLight</item>
+        <item name="colorSettingIconTint">@color/colorSettingIcon</item>
     </style>
 
     <style name="ThemeOverlay.Palette.Brown" parent="AppTheme.LoginTheme">
@@ -159,6 +168,7 @@
         <item name="colorDefaultBackground">?android:colorBackground</item>
         <item name="colorProgress">@color/colorBrownPrimary</item>
         <item name="colorChipBackground">@color/colorBrownPrimaryLight</item>
+        <item name="colorSettingIconTint">@color/colorSettingIcon</item>
     </style>
 
     <style name="ThemeOverlay.Palette.Pink" parent="AppTheme.LoginTheme">
@@ -175,6 +185,7 @@
         <item name="colorDefaultBackground">?android:colorBackground</item>
         <item name="colorProgress">@color/colorPinkPrimary</item>
         <item name="colorChipBackground">@color/colorPinkPrimaryLight</item>
+        <item name="colorSettingIconTint">@color/colorSettingIcon</item>
     </style>
 
     <style name="ThemeOverlay.Palette.Blue" parent="AppTheme.LoginTheme">
@@ -191,6 +202,7 @@
         <item name="colorDefaultBackground">?android:colorBackground</item>
         <item name="colorProgress">@color/colorBluePrimary</item>
         <item name="colorChipBackground">@color/colorBluePrimaryLight</item>
+        <item name="colorSettingIconTint">@color/colorSettingIcon</item>
     </style>
 
 </resources>
