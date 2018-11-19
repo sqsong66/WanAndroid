@@ -2,6 +2,7 @@ package com.sqsong.wanandroid.ui.settings.dialog
 
 import android.app.Dialog
 import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,9 +12,13 @@ import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
 import com.sqsong.wanandroid.R
 import com.sqsong.wanandroid.util.Constants
+import com.sqsong.wanandroid.util.PreferenceHelper.get
 import javax.inject.Inject
 
 class LanguageSettingDialog @Inject constructor() : DialogFragment(), View.OnClickListener {
+
+    @Inject
+    lateinit var mPreferences: SharedPreferences
 
     private var englishRb: RadioButton? = null
     private var chineseRb: RadioButton? = null
@@ -21,8 +26,8 @@ class LanguageSettingDialog @Inject constructor() : DialogFragment(), View.OnCli
 
     override fun onAttach(context: Context?) {
         super.onAttach(context)
-        if (mListener is OnLanguageChangeListener) {
-            mListener = context as OnLanguageChangeListener
+        if (context is OnLanguageChangeListener) {
+            mListener = context
         }
     }
 
@@ -48,6 +53,12 @@ class LanguageSettingDialog @Inject constructor() : DialogFragment(), View.OnCli
         view?.findViewById<LinearLayout>(R.id.chinese_ll)?.setOnClickListener(this)
         englishRb = view?.findViewById(R.id.english_rb)
         chineseRb = view?.findViewById(R.id.chinese_rb)
+        val type = mPreferences[Constants.LANGUAGE_TYPE, 0]
+        if (type == Constants.LANGUAGE_TYPE_CHINESE) {
+            chineseRb?.isChecked = true
+        } else {
+            englishRb?.isChecked = true
+        }
         return view
     }
 

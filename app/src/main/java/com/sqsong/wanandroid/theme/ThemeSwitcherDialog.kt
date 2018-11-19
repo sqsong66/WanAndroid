@@ -72,11 +72,6 @@ class ThemeSwitcherDialog @Inject constructor() : DaggerAppCompatDialogFragment(
         return overlayList
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        dialog.setCanceledOnTouchOutside(false)
-    }
-
     override fun onItemClick(data: ColorPalette?, position: Int) {
         if (position < 0 || position >= mThemeOverlayList.size) return
         if (mCheckedPos < 0 || mCheckedPos == position) return

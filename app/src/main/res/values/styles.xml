@@ -26,10 +26,9 @@
 
     <style name="DialogStyle" parent="ThemeOverlay.MaterialComponents.Dialog.Alert">
         <item name="android:background">?colorDefaultBackground</item>
-        <item name="colorAccent">?colorTextActive</item>
         <item name="android:textColor">?colorTextActive</item>
+        <item name="android:textColorPrimary">?colorTextActive</item>
     </style>
-
 
     <style name="LoginTextInputAppearance">
         <item name="android:textColor">@color/colorWhite</item>

@@ -3,6 +3,7 @@ package com.sqsong.wanandroid.di.module
 import android.app.Activity
 import android.content.Context
 import android.content.SharedPreferences
+import com.sqsong.wanandroid.common.language.LanguageManager
 import com.sqsong.wanandroid.theme.ThemeResourceProvider
 import com.sqsong.wanandroid.theme.ThemeSwitcherManager
 import com.sqsong.wanandroid.util.PreferenceHelper
@@ -29,6 +30,12 @@ class CommonModule {
     @Provides
     fun providePreferences(context: Context): SharedPreferences {
         return PreferenceHelper.defaultPrefs(context)
+    }
+
+    @Singleton
+    @Provides
+    fun provideLanguageManager(preferences: SharedPreferences): LanguageManager {
+        return LanguageManager(preferences)
     }
 
     @Singleton

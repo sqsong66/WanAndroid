@@ -160,7 +160,7 @@ class MainActivity : BaseActivity<MainPresenter>(), MainContract.View, Navigatio
     }
 
     override fun showLoginOutTipDialog() {
-        AlertDialog.Builder(this)
+        AlertDialog.Builder(this, R.style.DialogStyle)
                 .setTitle(R.string.text_login_out_title)
                 .setMessage(R.string.text_login_out_tips)
                 .setCancelable(false)

@@ -19,7 +19,7 @@
             android:id="@+id/english_rb"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:buttonTint="?colorPrimary"
+            android:buttonTint="?colorDialogIcon"
             android:clickable="false"
             android:enabled="false" />
 
@@ -48,7 +48,7 @@
             android:id="@+id/chinese_rb"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:buttonTint="?colorPrimary"
+            android:buttonTint="?colorDialogIcon"
             android:clickable="false"
             android:enabled="false" />
 

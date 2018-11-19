@@ -22,6 +22,8 @@ object Constants {
 
     const val SEARCH_KEY = "search_key"
 
+    const val LANGUAGE_TYPE = "language_type"
+
     const val DEFAULT_TIME_OUT: Long = 10000
 
     const val SPLASH_TIME: Long = 3 // second

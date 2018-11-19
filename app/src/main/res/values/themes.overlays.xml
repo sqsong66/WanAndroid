@@ -7,14 +7,15 @@
         <item name="colorPrimaryLight">@color/colorPrimaryLight</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="colorError">@color/colorRed</item>
+        <item name="colorProgress">@color/colorPrimary</item>
+        <item name="colorChipBackground">@color/colorPrimaryLight</item>
+        <item name="colorDialogIcon">@color/colorPrimary</item>
 
         <item name="colorTextActive">@color/colorTextActive</item>
         <item name="colorTextInActive">@color/colorTextInActive</item>
         <item name="colorTextDisable">@color/colorTextDisable</item>
         <item name="colorCardBackground">@color/colorWhite</item>
         <item name="colorDefaultBackground">?android:colorBackground</item>
-        <item name="colorProgress">@color/colorPrimary</item>
-        <item name="colorChipBackground">@color/colorPrimaryLight</item>
         <item name="colorSettingIconTint">@color/colorSettingIcon</item>
     </style>
 
@@ -22,8 +23,7 @@
         <item name="colorPrimary">@color/colorBlackPrimary</item>
         <item name="colorPrimaryDark">@color/colorBlackPrimaryDark</item>
         <item name="colorPrimaryLight">@color/colorBlackPrimaryLight</item>
-        <item name="colorAccent">@color/colorBlackPrimaryLight</item>
-        <item name="colorError">@color/colorRed</item>
+        <item name="colorAccent">@color/colorWhite</item><!--colorBlackPrimaryLight-->
 
         <item name="colorTextActive">@color/colorWhite</item>
         <item name="colorTextInActive">@color/colorWhiteInActive</item>
@@ -33,176 +33,118 @@
         <item name="colorProgress">@color/colorWhite</item>
         <item name="colorChipBackground">@color/colorChipBackground</item>
         <item name="colorSettingIconTint">@color/colorWhite</item>
+        <item name="colorDialogIcon">@color/colorWhite</item>
     </style>
 
-    <style name="ThemeOverlay.Palette.Red" parent="AppTheme.LoginTheme">
+    <style name="ThemeOverlay.Palette.Red" parent="ThemeOverlay.Palette.Default">
         <item name="colorPrimary">@color/colorRedPrimary</item>
         <item name="colorPrimaryDark">@color/colorRedPrimaryDark</item>
         <item name="colorPrimaryLight">@color/colorRedPrimaryLight</item>
         <item name="colorAccent">@color/colorRedPrimaryLight</item>
         <item name="colorError">@color/colorWhite</item>
 
-        <item name="colorTextActive">@color/colorTextActive</item>
-        <item name="colorTextInActive">@color/colorTextInActive</item>
-        <item name="colorTextDisable">@color/colorTextDisable</item>
-        <item name="colorCardBackground">@color/colorWhite</item>
-        <item name="colorDefaultBackground">?android:colorBackground</item>
         <item name="colorProgress">@color/colorRedPrimary</item>
         <item name="colorChipBackground">@color/colorRedPrimaryLight</item>
-        <item name="colorSettingIconTint">@color/colorSettingIcon</item>
+        <item name="colorDialogIcon">@color/colorRedPrimary</item>
     </style>
 
-    <style name="ThemeOverlay.Palette.Purple" parent="AppTheme.LoginTheme">
+    <style name="ThemeOverlay.Palette.Purple" parent="ThemeOverlay.Palette.Default">
         <item name="colorPrimary">@color/colorPurplePrimary</item>
         <item name="colorPrimaryDark">@color/colorPurplePrimaryDark</item>
         <item name="colorPrimaryLight">@color/colorPurplePrimaryLight</item>
         <item name="colorAccent">@color/colorPurplePrimaryLight</item>
-        <item name="colorError">@color/colorRed</item>
 
-        <item name="colorTextActive">@color/colorTextActive</item>
-        <item name="colorTextInActive">@color/colorTextInActive</item>
-        <item name="colorTextDisable">@color/colorTextDisable</item>
-        <item name="colorCardBackground">@color/colorWhite</item>
-        <item name="colorDefaultBackground">?android:colorBackground</item>
         <item name="colorProgress">@color/colorPurplePrimary</item>
         <item name="colorChipBackground">@color/colorPurplePrimaryLight</item>
-        <item name="colorSettingIconTint">@color/colorSettingIcon</item>
+        <item name="colorDialogIcon">@color/colorPurplePrimary</item>
     </style>
 
-    <style name="ThemeOverlay.Palette.Indigo" parent="AppTheme.LoginTheme">
+    <style name="ThemeOverlay.Palette.Indigo" parent="ThemeOverlay.Palette.Default">
         <item name="colorPrimary">@color/colorIndigoPrimary</item>
         <item name="colorPrimaryDark">@color/colorIndigoPrimaryDark</item>
         <item name="colorPrimaryLight">@color/colorIndigoPrimaryLight</item>
         <item name="colorAccent">@color/colorIndigoPrimaryLight</item>
-        <item name="colorError">@color/colorRed</item>
 
-        <item name="colorTextActive">@color/colorTextActive</item>
-        <item name="colorTextInActive">@color/colorTextInActive</item>
-        <item name="colorTextDisable">@color/colorTextDisable</item>
-        <item name="colorCardBackground">@color/colorWhite</item>
-        <item name="colorDefaultBackground">?android:colorBackground</item>
         <item name="colorProgress">@color/colorIndigoPrimary</item>
         <item name="colorChipBackground">@color/colorIndigoPrimaryLight</item>
-        <item name="colorSettingIconTint">@color/colorSettingIcon</item>
+        <item name="colorDialogIcon">@color/colorIndigoPrimary</item>
     </style>
 
-    <style name="ThemeOverlay.Palette.Green" parent="AppTheme.LoginTheme">
+    <style name="ThemeOverlay.Palette.Green" parent="ThemeOverlay.Palette.Default">
         <item name="colorPrimary">@color/colorGreenPrimary</item>
         <item name="colorPrimaryDark">@color/colorGreenPrimaryDark</item>
         <item name="colorPrimaryLight">@color/colorGreenPrimaryLight</item>
         <item name="colorAccent">@color/colorGreenPrimaryLight</item>
-        <item name="colorError">@color/colorRed</item>
 
-        <item name="colorTextActive">@color/colorTextActive</item>
-        <item name="colorTextInActive">@color/colorTextInActive</item>
-        <item name="colorTextDisable">@color/colorTextDisable</item>
-        <item name="colorCardBackground">@color/colorWhite</item>
-        <item name="colorDefaultBackground">?android:colorBackground</item>
         <item name="colorProgress">@color/colorGreenPrimary</item>
         <item name="colorChipBackground">@color/colorGreenPrimaryLight</item>
-        <item name="colorSettingIconTint">@color/colorSettingIcon</item>
+        <item name="colorDialogIcon">@color/colorGreenPrimary</item>
     </style>
 
-    <style name="ThemeOverlay.Palette.Orange" parent="AppTheme.LoginTheme">
+    <style name="ThemeOverlay.Palette.Orange" parent="ThemeOverlay.Palette.Default">
         <item name="colorPrimary">@color/colorOrangePrimary</item>
         <item name="colorPrimaryDark">@color/colorOrangePrimaryDark</item>
         <item name="colorPrimaryLight">@color/colorOrangePrimaryLight</item>
         <item name="colorAccent">@color/colorOrangePrimaryLight</item>
-        <item name="colorError">@color/colorRed</item>
 
-        <item name="colorTextActive">@color/colorTextActive</item>
-        <item name="colorTextInActive">@color/colorTextInActive</item>
-        <item name="colorTextDisable">@color/colorTextDisable</item>
-        <item name="colorCardBackground">@color/colorWhite</item>
-        <item name="colorDefaultBackground">?android:colorBackground</item>
         <item name="colorProgress">@color/colorOrangePrimary</item>
         <item name="colorChipBackground">@color/colorOrangePrimaryLight</item>
-        <item name="colorSettingIconTint">@color/colorSettingIcon</item>
+        <item name="colorDialogIcon">@color/colorOrangePrimary</item>
     </style>
 
-    <style name="ThemeOverlay.Palette.BlueGrey" parent="AppTheme.LoginTheme">
+    <style name="ThemeOverlay.Palette.BlueGrey" parent="ThemeOverlay.Palette.Default">
         <item name="colorPrimary">@color/colorBlueGreyPrimary</item>
         <item name="colorPrimaryDark">@color/colorBlueGreyPrimaryDark</item>
         <item name="colorPrimaryLight">@color/colorBlueGreyPrimaryLight</item>
         <item name="colorAccent">@color/colorBlueGreyPrimaryLight</item>
-        <item name="colorError">@color/colorRed</item>
 
-        <item name="colorTextActive">@color/colorTextActive</item>
-        <item name="colorTextInActive">@color/colorTextInActive</item>
-        <item name="colorTextDisable">@color/colorTextDisable</item>
-        <item name="colorCardBackground">@color/colorWhite</item>
-        <item name="colorDefaultBackground">?android:colorBackground</item>
         <item name="colorProgress">@color/colorBlueGreyPrimary</item>
         <item name="colorChipBackground">@color/colorBlueGreyPrimaryLight</item>
-        <item name="colorSettingIconTint">@color/colorSettingIcon</item>
+        <item name="colorDialogIcon">@color/colorBlueGreyPrimary</item>
     </style>
 
-    <style name="ThemeOverlay.Palette.Yellow" parent="AppTheme.LoginTheme">
+    <style name="ThemeOverlay.Palette.Yellow" parent="ThemeOverlay.Palette.Default">
         <item name="colorPrimary">@color/colorYellowPrimary</item>
         <item name="colorPrimaryDark">@color/colorYellowPrimaryDark</item>
         <item name="colorPrimaryLight">@color/colorYellowPrimaryLight</item>
         <item name="colorAccent">@color/colorYellowPrimaryLight</item>
-        <item name="colorError">@color/colorRed</item>
 
-        <item name="colorTextActive">@color/colorTextActive</item>
-        <item name="colorTextInActive">@color/colorTextInActive</item>
-        <item name="colorTextDisable">@color/colorTextDisable</item>
-        <item name="colorCardBackground">@color/colorWhite</item>
-        <item name="colorDefaultBackground">?android:colorBackground</item>
         <item name="colorProgress">@color/colorYellowPrimary</item>
         <item name="colorChipBackground">@color/colorYellowPrimaryLight</item>
-        <item name="colorSettingIconTint">@color/colorSettingIcon</item>
+        <item name="colorDialogIcon">@color/colorYellowPrimary</item>
     </style>
 
-    <style name="ThemeOverlay.Palette.Brown" parent="AppTheme.LoginTheme">
+    <style name="ThemeOverlay.Palette.Brown" parent="ThemeOverlay.Palette.Default">
         <item name="colorPrimary">@color/colorBrownPrimary</item>
         <item name="colorPrimaryDark">@color/colorBrownPrimaryDark</item>
         <item name="colorPrimaryLight">@color/colorBrownPrimaryLight</item>
         <item name="colorAccent">@color/colorBrownPrimaryLight</item>
-        <item name="colorError">@color/colorRed</item>
 
-        <item name="colorTextActive">@color/colorTextActive</item>
-        <item name="colorTextInActive">@color/colorTextInActive</item>
-        <item name="colorTextDisable">@color/colorTextDisable</item>
-        <item name="colorCardBackground">@color/colorWhite</item>
-        <item name="colorDefaultBackground">?android:colorBackground</item>
         <item name="colorProgress">@color/colorBrownPrimary</item>
         <item name="colorChipBackground">@color/colorBrownPrimaryLight</item>
-        <item name="colorSettingIconTint">@color/colorSettingIcon</item>
+        <item name="colorDialogIcon">@color/colorBrownPrimary</item>
     </style>
 
-    <style name="ThemeOverlay.Palette.Pink" parent="AppTheme.LoginTheme">
+    <style name="ThemeOverlay.Palette.Pink" parent="ThemeOverlay.Palette.Default">
         <item name="colorPrimary">@color/colorPinkPrimary</item>
         <item name="colorPrimaryDark">@color/colorPinkPrimaryDark</item>
         <item name="colorPrimaryLight">@color/colorPinkPrimaryLight</item>
         <item name="colorAccent">@color/colorPinkPrimaryLight</item>
-        <item name="colorError">@color/colorRed</item>
 
-        <item name="colorTextActive">@color/colorTextActive</item>
-        <item name="colorTextInActive">@color/colorTextInActive</item>
-        <item name="colorTextDisable">@color/colorTextDisable</item>
-        <item name="colorCardBackground">@color/colorWhite</item>
-        <item name="colorDefaultBackground">?android:colorBackground</item>
         <item name="colorProgress">@color/colorPinkPrimary</item>
         <item name="colorChipBackground">@color/colorPinkPrimaryLight</item>
-        <item name="colorSettingIconTint">@color/colorSettingIcon</item>
+        <item name="colorDialogIcon">@color/colorPinkPrimary</item>
     </style>
 
-    <style name="ThemeOverlay.Palette.Blue" parent="AppTheme.LoginTheme">
+    <style name="ThemeOverlay.Palette.Blue" parent="ThemeOverlay.Palette.Default">
         <item name="colorPrimary">@color/colorBluePrimary</item>
         <item name="colorPrimaryDark">@color/colorBluePrimaryDark</item>
         <item name="colorPrimaryLight">@color/colorBluePrimaryLight</item>
         <item name="colorAccent">@color/colorBluePrimaryLight</item>
-        <item name="colorError">@color/colorRed</item>
 
-        <item name="colorTextActive">@color/colorTextActive</item>
-        <item name="colorTextInActive">@color/colorTextInActive</item>
-        <item name="colorTextDisable">@color/colorTextDisable</item>
-        <item name="colorCardBackground">@color/colorWhite</item>
-        <item name="colorDefaultBackground">?android:colorBackground</item>
         <item name="colorProgress">@color/colorBluePrimary</item>
         <item name="colorChipBackground">@color/colorBluePrimaryLight</item>
-        <item name="colorSettingIconTint">@color/colorSettingIcon</item>
+        <item name="colorDialogIcon">@color/colorBluePrimary</item>
     </style>
 
 </resources>

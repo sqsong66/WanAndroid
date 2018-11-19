@@ -1,6 +1,8 @@
 package com.sqsong.wanandroid.ui.settings
 
+import android.content.SharedPreferences
 import android.view.MenuItem
+import com.sqsong.wanandroid.BaseApplication
 import com.sqsong.wanandroid.R
 import com.sqsong.wanandroid.common.inter.ChangeThemeAnnotation
 import com.sqsong.wanandroid.theme.ThemeSwitcherDialog
@@ -8,6 +10,8 @@ import com.sqsong.wanandroid.ui.base.BaseActivity
 import com.sqsong.wanandroid.ui.settings.dialog.LanguageSettingDialog
 import com.sqsong.wanandroid.ui.settings.mvp.SettingContract
 import com.sqsong.wanandroid.ui.settings.mvp.SettingPresenter
+import com.sqsong.wanandroid.util.Constants
+import com.sqsong.wanandroid.util.PreferenceHelper.get
 import com.sqsong.wanandroid.util.ext.clickObservable
 import com.sqsong.wanandroid.util.ext.setupToolbar
 import io.reactivex.Observable
@@ -22,6 +26,9 @@ class SettingActivity : BaseActivity<SettingPresenter>(), SettingContract.View, 
 
     @Inject
     lateinit var mThemeDialog: ThemeSwitcherDialog
+
+    @Inject
+    lateinit var mPreferences: SharedPreferences
 
     override fun getLayoutResId(): Int = R.layout.activity_setting
 
@@ -45,7 +52,9 @@ class SettingActivity : BaseActivity<SettingPresenter>(), SettingContract.View, 
     }
 
     override fun languageChanged(languageType: Int) {
-
+        val type = mPreferences[Constants.LANGUAGE_TYPE, 0]
+        if (languageType == type) return
+        BaseApplication.INSTANCE.changeLanguage(languageType)
     }
 
     override fun showThemeDialog() {
