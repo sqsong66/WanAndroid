@@ -37,4 +37,8 @@ object Constants {
     const val APP_QUIT_TIME = 2000
 
     const val PAGE_SIZE = 20
+
+    const val LANGUAGE_TYPE_ENGLISH = 1
+
+    const val LANGUAGE_TYPE_CHINESE = 2
 }

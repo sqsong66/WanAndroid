@@ -15,6 +15,7 @@ class SettingPresenter @Inject constructor(private val disposable: CompositeDisp
         super.onAttach(view)
 
         disposable.add(languageDisposable())
+        disposable.add(themeDisposable())
     }
 
     private fun languageDisposable(): Disposable {
@@ -23,6 +24,15 @@ class SettingPresenter @Inject constructor(private val disposable: CompositeDisp
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe {
                     mView.showLanguageDialog()
+                }
+    }
+
+    private fun themeDisposable(): Disposable {
+        return mView.themeClickObservable()
+                .throttleFirst(500, TimeUnit.MILLISECONDS)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe {
+                    mView.showThemeDialog()
                 }
     }
 

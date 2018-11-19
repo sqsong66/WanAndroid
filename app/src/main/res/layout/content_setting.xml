@@ -59,6 +59,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/theme_setting_ll"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/bg_without_corner"
@@ -100,13 +101,6 @@
             </LinearLayout>
 
         </LinearLayout>
-
-        <Button
-            android:id="@+id/button2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="16dp"
-            android:text="Hello world" />
 
     </LinearLayout>
 

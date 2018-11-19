@@ -21,7 +21,6 @@ import com.sqsong.wanandroid.BaseApplication
 import com.sqsong.wanandroid.R
 import com.sqsong.wanandroid.common.inter.ChangeThemeAnnotation
 import com.sqsong.wanandroid.data.HotSearchData
-import com.sqsong.wanandroid.theme.ThemeSwitcherDialog
 import com.sqsong.wanandroid.ui.base.BaseActivity
 import com.sqsong.wanandroid.ui.home.mvp.MainContract
 import com.sqsong.wanandroid.ui.home.mvp.MainPresenter
@@ -33,14 +32,10 @@ import com.sqsong.wanandroid.util.SnackbarUtil
 import com.sqsong.wanandroid.view.search.MaterialSearchView
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.content_home.*
-import javax.inject.Inject
 
 @ChangeThemeAnnotation
 class MainActivity : BaseActivity<MainPresenter>(), MainContract.View, NavigationView.OnNavigationItemSelectedListener,
         BottomNavigationView.OnNavigationItemSelectedListener, View.OnClickListener, MaterialSearchView.OnSearchActionListener {
-
-    @Inject
-    lateinit var mThemeDialog: ThemeSwitcherDialog
 
     private var lastClickTime: Long = 0
 
@@ -121,20 +116,6 @@ class MainActivity : BaseActivity<MainPresenter>(), MainContract.View, Navigatio
         }
     }
 
-    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        when (item?.itemId) {
-            R.id.action_theme -> {
-                mThemeDialog.show(supportFragmentManager(), "")
-                return true
-            }
-            R.id.action_login_out -> {
-                mPresenter.checkLoginState()
-                return true
-            }
-        }
-        return super.onOptionsItemSelected(item)
-    }
-
     override fun onNavigationItemSelected(menuItem: MenuItem): Boolean {
         when (menuItem.itemId) {
             R.id.action_home, R.id.nav_home -> navigateToPage(0, menuItem.title)
@@ -144,6 +125,7 @@ class MainActivity : BaseActivity<MainPresenter>(), MainContract.View, Navigatio
             R.id.nav_public_account -> startActivity(Intent(this, PublicAccountActivity::class.java)) // 公众号
             R.id.nav_collection -> mPresenter.checkCollectionState()
             R.id.nav_setting -> startActivity(Intent(this, SettingActivity::class.java)) // 设置
+            R.id.action_login_out -> mPresenter.checkLoginState()
         }
         drawerLayout.closeDrawer(GravityCompat.START)
         return true

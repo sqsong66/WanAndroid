@@ -63,7 +63,7 @@ class ThemeSwitcherDialog @Inject constructor() : DaggerAppCompatDialogFragment(
         return recycler
     }
 
-    fun getPaletteList(): List<ColorPalette> {
+    private fun getPaletteList(): List<ColorPalette> {
         val overlayList = mThemeSwitcherManager.getThemeOverlayList()
         for (i in 0 until overlayList.size) {
             val palette = overlayList[i]

@@ -6,6 +6,7 @@
     android:paddingTop="16dp">
 
     <LinearLayout
+        android:id="@+id/english_ll"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/bg_without_corner"
@@ -15,9 +16,12 @@
         android:padding="16dp">
 
         <RadioButton
+            android:id="@+id/english_rb"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:buttonTint="?colorPrimary" />
+            android:buttonTint="?colorPrimary"
+            android:clickable="false"
+            android:enabled="false" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -31,6 +35,7 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/chinese_ll"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/bg_without_corner"
@@ -40,9 +45,12 @@
         android:padding="16dp">
 
         <RadioButton
+            android:id="@+id/chinese_rb"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:buttonTint="?colorPrimary" />
+            android:buttonTint="?colorPrimary"
+            android:clickable="false"
+            android:enabled="false" />
 
         <TextView
             android:layout_width="wrap_content"

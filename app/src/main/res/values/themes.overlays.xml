@@ -18,7 +18,7 @@
         <item name="colorSettingIconTint">@color/colorSettingIcon</item>
     </style>
 
-    <style name="ThemeOverlay.Palette.Black" parent="AppTheme.LoginTheme">
+    <style name="ThemeOverlay.Palette.Black" parent="ThemeOverlay.Palette.Default">
         <item name="colorPrimary">@color/colorBlackPrimary</item>
         <item name="colorPrimaryDark">@color/colorBlackPrimaryDark</item>
         <item name="colorPrimaryLight">@color/colorBlackPrimaryLight</item>

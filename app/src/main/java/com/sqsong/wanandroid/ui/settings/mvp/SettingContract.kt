@@ -7,7 +7,9 @@ interface SettingContract {
 
     interface View : IView {
         fun languageClickObservable(): Observable<Any>
+        fun themeClickObservable(): Observable<Any>
         fun showLanguageDialog()
+        fun showThemeDialog()
     }
 
 }

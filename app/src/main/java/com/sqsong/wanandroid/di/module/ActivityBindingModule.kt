@@ -14,6 +14,7 @@ import com.sqsong.wanandroid.ui.login.di.RegisterModule
 import com.sqsong.wanandroid.ui.search.SearchActivity
 import com.sqsong.wanandroid.ui.search.di.SearchModule
 import com.sqsong.wanandroid.ui.settings.SettingActivity
+import com.sqsong.wanandroid.ui.settings.di.SettingModule
 import com.sqsong.wanandroid.ui.splash.SplashActivity
 import com.sqsong.wanandroid.ui.splash.di.SplashModule
 import com.sqsong.wanandroid.ui.web.WebViewActivity
@@ -39,7 +40,7 @@ abstract class ActivityBindingModule {
 
     @ActivityScope
     @ContributesAndroidInjector(modules = [MainModule::class])
-    abstract fun contributeHomeActivity(): MainActivity
+    abstract fun contributeMainActivity(): MainActivity
 
     @ActivityScope
     @ContributesAndroidInjector(modules = [ChildKnowledgeModule::class])
@@ -62,6 +63,6 @@ abstract class ActivityBindingModule {
     abstract fun contributeSearchActivity(): SearchActivity
 
     @ActivityScope
-    @ContributesAndroidInjector
+    @ContributesAndroidInjector(modules = [SettingModule::class])
     abstract fun contributeSettingActivity(): SettingActivity
 }

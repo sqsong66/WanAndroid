@@ -24,6 +24,10 @@
             android:id="@+id/nav_setting"
             android:icon="@drawable/ic_menu_settings"
             android:title="@string/text_settings" />
+        <item
+            android:id="@+id/action_login_out"
+            android:icon="@drawable/ic_exit_app"
+            android:title="@string/text_login_out" />
     </item>
 
 </menu>
