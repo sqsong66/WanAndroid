@@ -14,7 +14,7 @@ import com.sqsong.wanandroid.ui.home.activity.MainActivity
 import com.sqsong.wanandroid.util.CommonUtil
 import com.sqsong.wanandroid.util.Constants
 import com.sqsong.wanandroid.util.DensityUtil
-import com.sqsong.wanandroid.util.LogUtil
+import com.sqsong.wanandroid.util.PreferenceHelper.get
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
@@ -50,9 +50,13 @@ class SplashPresenter @Inject constructor(private val splashView: SplashContract
     }
 
     private fun setTextAnimation() {
-        LogUtil.e("-----------------------> ${Locale.getDefault().language}")
-
-        val font = if ("zh" == Locale.getDefault().language) "font/Kaiti.otf" else "font/Boogaloo-Regular.ttf"
+        val font: String
+        val languageType = mPreferences[Constants.LANGUAGE_TYPE, 0]
+        font = if (languageType == Constants.LANGUAGE_TYPE_CHINESE || "zh" == Locale.getDefault().language) {
+            "font/Kaiti.otf"
+        } else {
+            "font/Boogaloo-Regular.ttf"
+        }
         CommonUtil.setAssetsTextFont(mView.getAndroidText(), font)
         CommonUtil.setAssetsTextFont(mView.getPlayText(), font)
 
@@ -101,13 +105,6 @@ class SplashPresenter @Inject constructor(private val splashView: SplashContract
 
     private fun startNewActivity() {
         disposable.clear()
-        /*val userName: String = mPreferences[Constants.LOGIN_USER_NAME] ?: ""
-        val clazz: Class<*>
-        clazz = if (TextUtils.isEmpty(userName)) {
-            LoginActivity::class.java
-        } else {
-            MainActivity::class.java
-        }*/
         mView.startNewActivity(MainActivity::class.java)
     }
 }

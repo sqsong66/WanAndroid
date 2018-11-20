@@ -28,6 +28,12 @@
         <item name="android:background">?colorDefaultBackground</item>
         <item name="android:textColor">?colorTextActive</item>
         <item name="android:textColorPrimary">?colorTextActive</item>
+        <item name="android:windowAnimationStyle">@style/DialogAnim</item>
+    </style>
+
+    <style name="DialogAnim">
+        <item name="android:windowEnterAnimation">@anim/anim_dialog_enter</item>
+        <item name="android:windowExitAnimation">@anim/anim_dialog_exit</item>
     </style>
 
     <style name="LoginTextInputAppearance">
