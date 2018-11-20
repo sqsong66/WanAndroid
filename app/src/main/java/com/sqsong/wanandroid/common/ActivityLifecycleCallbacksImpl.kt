@@ -7,6 +7,7 @@ import com.sqsong.wanandroid.common.inter.ChangeThemeAnnotation
 import com.sqsong.wanandroid.common.inter.IAppCompatActivity
 import com.sqsong.wanandroid.common.language.LanguageManager
 import com.sqsong.wanandroid.theme.ThemeSwitcherManager
+import me.jessyan.autosize.AutoSize
 import javax.inject.Inject
 
 class ActivityLifecycleCallbacksImpl @Inject constructor() : Application.ActivityLifecycleCallbacks {
@@ -31,6 +32,8 @@ class ActivityLifecycleCallbacksImpl @Inject constructor() : Application.Activit
 
         // 设置语言
         mLanguageManager.updateLanguageConfiguration(activity)
+        // 由于在设置语言中使用了displayMetrics属性，导致框架里面的屏幕适配出现问题，需要重新设定activity的density
+        AutoSize.autoConvertDensityOfGlobal(activity)
 
         // 处理Activity事件
         if (activity is IAppCompatActivity) {
