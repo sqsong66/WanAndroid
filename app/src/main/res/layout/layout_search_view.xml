@@ -47,7 +47,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="@null"
-                android:hint="Search"
+                android:hint="@string/text_search"
                 android:imeOptions="actionSearch"
                 android:inputType="text"
                 android:maxLines="1"

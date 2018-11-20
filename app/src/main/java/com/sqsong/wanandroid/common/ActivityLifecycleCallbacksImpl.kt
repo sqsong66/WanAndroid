@@ -32,7 +32,7 @@ class ActivityLifecycleCallbacksImpl @Inject constructor() : Application.Activit
 
         // 设置语言
         mLanguageManager.updateLanguageConfiguration(activity)
-        // 由于在设置语言中使用了displayMetrics属性，导致框架里面的屏幕适配出现问题，需要重新设定activity的density
+        // 由于在设置语言中使用了displayMetrics属性，导致框架里面的屏幕适配失效，需要重新设定activity的density
         AutoSize.autoConvertDensityOfGlobal(activity)
 
         // 处理Activity事件
