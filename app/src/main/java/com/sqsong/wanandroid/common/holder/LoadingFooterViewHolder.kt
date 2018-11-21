@@ -9,6 +9,7 @@ import butterknife.BindView
 import butterknife.ButterKnife
 import com.sqsong.wanandroid.R
 import com.sqsong.wanandroid.util.CommonUtil
+import com.sqsong.wanandroid.util.DensityUtil
 
 class LoadingFooterViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
@@ -24,6 +25,7 @@ class LoadingFooterViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView
         // item_loading_footer
         ButterKnife.bind(this, itemView)
         CommonUtil.setProgressbarColor(progressBar)
+        itemView.layoutParams.width = DensityUtil.getScreenWidth()
     }
 
     fun updateLoadingState(@LoadingState state: Int) {

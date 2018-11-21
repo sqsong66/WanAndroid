@@ -20,6 +20,8 @@ import com.sqsong.wanandroid.ui.splash.di.SplashModule
 import com.sqsong.wanandroid.ui.web.WebViewActivity
 import com.sqsong.wanandroid.ui.wechat.PublicAccountActivity
 import com.sqsong.wanandroid.ui.wechat.di.PublicAccountModule
+import com.sqsong.wanandroid.ui.welfare.WelfareActivity
+import com.sqsong.wanandroid.ui.welfare.di.WelfareModule
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
@@ -65,4 +67,8 @@ abstract class ActivityBindingModule {
     @ActivityScope
     @ContributesAndroidInjector(modules = [SettingModule::class])
     abstract fun contributeSettingActivity(): SettingActivity
+
+    @ActivityScope
+    @ContributesAndroidInjector(modules = [WelfareModule::class])
+    abstract fun contributeWelfareActivity(): WelfareActivity
 }

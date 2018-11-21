@@ -27,6 +27,7 @@ import com.sqsong.wanandroid.ui.home.mvp.MainPresenter
 import com.sqsong.wanandroid.ui.search.SearchActivity
 import com.sqsong.wanandroid.ui.settings.SettingActivity
 import com.sqsong.wanandroid.ui.wechat.PublicAccountActivity
+import com.sqsong.wanandroid.ui.welfare.WelfareActivity
 import com.sqsong.wanandroid.util.Constants
 import com.sqsong.wanandroid.util.SnackbarUtil
 import com.sqsong.wanandroid.view.search.MaterialSearchView
@@ -118,12 +119,13 @@ class MainActivity : BaseActivity<MainPresenter>(), MainContract.View, Navigatio
 
     override fun onNavigationItemSelected(menuItem: MenuItem): Boolean {
         when (menuItem.itemId) {
-            R.id.action_home, R.id.nav_home -> navigateToPage(0, menuItem.title)
-            R.id.action_knowledge -> navigateToPage(1, menuItem.title)
-            R.id.action_navigation -> navigateToPage(2, menuItem.title)
-            R.id.action_project -> navigateToPage(3, menuItem.title)
+            R.id.action_home, R.id.nav_home -> navigateToPage(0)
+            R.id.action_knowledge -> navigateToPage(1)
+            R.id.action_navigation -> navigateToPage(2)
+            R.id.action_project -> navigateToPage(3)
             R.id.nav_public_account -> startActivity(Intent(this, PublicAccountActivity::class.java)) // 公众号
             R.id.nav_collection -> mPresenter.checkCollectionState()
+            R.id.nav_welfare -> startActivity(Intent(this, WelfareActivity::class.java)) // 福利
             R.id.nav_setting -> startActivity(Intent(this, SettingActivity::class.java)) // 设置
             R.id.action_login_out -> mPresenter.checkLoginState()
         }
@@ -131,7 +133,7 @@ class MainActivity : BaseActivity<MainPresenter>(), MainContract.View, Navigatio
         return true
     }
 
-    private fun navigateToPage(index: Int, title: CharSequence) {
+    private fun navigateToPage(index: Int) {
         val currentIndex = viewPager.currentItem
         if (currentIndex == index) return
         viewPager.setCurrentItem(index, false)

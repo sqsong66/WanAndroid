@@ -28,13 +28,13 @@
 
 ## APK下载
 扫描二维码下载体验<br><br>
-![qrcode](ScreenShot/qrcode.png)
+![qrcode](screenshot/qrcode.png)
 
 ## 界面预览
 1. Gif预览:<br>
-<img src="ScreenShot/gif_preview.gif" width="270" height="480" /><br>
+<img src="screenshot/gif_preview.gif" width="270" height="480" /><br>
 
 2. 图片预览：<br>
-<img src="ScreenShot/image01.png" width="270" height="480" />  <img src="ScreenShot/image02.png" width="270" height="480" />  <img src="ScreenShot/image03.png" width="270" height="480" /><br>
-<img src="ScreenShot/image04.png" width="270" height="480" />  <img src="ScreenShot/image05.png" width="270" height="480" />  <img src="ScreenShot/image06.png" width="270" height="480" /><br>
-<img src="ScreenShot/image07.png" width="270" height="480" />  <img src="ScreenShot/image08.png" width="270" height="480" />  <img src="ScreenShot/image09.png" width="270" height="480" /><br>
+<img src="screenshot/image01.png" width="270" height="480" />  <img src="screenshot/image02.png" width="270" height="480" />  <img src="screenshot/image03.png" width="270" height="480" /><br>
+<img src="screenshot/image04.png" width="270" height="480" />  <img src="screenshot/image05.png" width="270" height="480" />  <img src="screenshot/image06.png" width="270" height="480" /><br>
+<img src="screenshot/image07.png" width="270" height="480" />  <img src="screenshot/image08.png" width="270" height="480" />  <img src="screenshot/image09.png" width="270" height="480" /><br>

@@ -9,6 +9,11 @@ abstract class BaseBean<T : Any?> {
     abstract var data: T?
 }
 
+abstract class GankBasedBean<T : Any?> {
+    val error: Boolean = false
+    abstract var results: T?
+}
+
 data class BaseData(override var data: Any?) : BaseBean<Any?>()
 
 /********************* Begin: Login Data ***********************/
@@ -99,3 +104,19 @@ data class HotSearchData(val id: Int,
                          val order: Int,
                          val visible: Int)
 /********************* End: Hot search bean **********************/
+
+/********************* Begin: Welfare Data ***********************/
+
+data class WelfareBean(override var results: List<WelfareData>?): GankBasedBean<List<WelfareData>>()
+
+data class WelfareData(val _id: String,
+                       val createAt: String,
+                       val desc: String,
+                       val publishedAt: String,
+                       val source: String,
+                       val type: String,
+                       val url: String,
+                       val used: Boolean,
+                       val who: String)
+
+/********************* Begin: Welfare Data ***********************/

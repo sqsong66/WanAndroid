@@ -74,4 +74,9 @@ interface ApiService {
     @FormUrlEncoded
     @POST("article/query/{page}/json")
     fun query(@Path("page") page: Int, @Field("k") key: String): Observable<HomeItemBean>
+
+    // 福利
+    @GET("http://gank.io/api/data/{type}/{pageCount}/{page}")
+    fun getWelfareList(@Path(value = "type", encoded = false) type: String,
+                       @Path("pageCount") pageCount: Int, @Path("page") page: Int): Observable<WelfareBean>
 }

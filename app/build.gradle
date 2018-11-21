@@ -89,4 +89,7 @@ dependencies {
 
     // EventBus
     implementation "org.greenrobot:eventbus:$rootProject.ext.eventbus_version"
+
+    // Touch image
+    implementation "it.sephiroth.android.library.imagezoom:imagezoom:$rootProject.ext.imagezoom_version"
 }

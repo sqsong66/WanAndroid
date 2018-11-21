@@ -60,6 +60,9 @@
         <activity
             android:name=".ui.settings.SettingActivity"
             android:theme="@style/AppTheme.LoginTheme" />
+        <activity
+            android:name=".ui.welfare.WelfareActivity"
+            android:theme="@style/AppTheme.LoginTheme" />
     </application>
 
 </manifest>

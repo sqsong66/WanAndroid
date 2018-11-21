@@ -3,6 +3,7 @@ package com.sqsong.wanandroid.di.module
 import android.content.Context
 import com.sqsong.wanandroid.network.ApiService
 import com.sqsong.wanandroid.network.CookieManager
+import com.sqsong.wanandroid.network.OkHttpClientFactory
 import com.sqsong.wanandroid.util.Constants
 import com.sqsong.wanandroid.util.cookie.PersistentCookieJar
 import dagger.Provides
@@ -11,7 +12,6 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
-import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
 @dagger.Module
@@ -36,16 +36,7 @@ class HttpModule {
     @Singleton
     @Provides
     fun provideOkHttpClient(interceptor: HttpLoggingInterceptor, cookieJar: PersistentCookieJar): OkHttpClient {
-        return OkHttpClient.Builder()
-                .connectTimeout(Constants.DEFAULT_TIME_OUT, TimeUnit.MILLISECONDS)
-                .readTimeout(Constants.DEFAULT_TIME_OUT, TimeUnit.MILLISECONDS)
-                .writeTimeout(Constants.DEFAULT_TIME_OUT, TimeUnit.MILLISECONDS)
-                .addInterceptor(interceptor)
-                .cookieJar(cookieJar)
-                .followRedirects(false)
-                .retryOnConnectionFailure(true)
-                .followSslRedirects(false)
-                .build()
+        return OkHttpClientFactory.createUnsafeOkHttpClient(interceptor, cookieJar)
     }
 
     @Singleton
