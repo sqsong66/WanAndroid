@@ -22,7 +22,6 @@ import kotlinx.android.synthetic.main.fragment_home.*
 
 class PublicAccountFragment : LazyLoadFragment(), AccountContract.View, RecyclerScrollListener.OnLoadMoreListener {
 
-
     private var mCid: Int = 0
     private var mPresenter: AccountPresenter? = null
     private lateinit var mRecyclerScroller: RecyclerScrollListener

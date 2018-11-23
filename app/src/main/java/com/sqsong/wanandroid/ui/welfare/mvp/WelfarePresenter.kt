@@ -1,14 +1,21 @@
 package com.sqsong.wanandroid.ui.welfare.mvp
 
+import android.app.Activity
+import android.app.ActivityOptions
+import android.content.Intent
+import android.os.Build
+import android.util.Pair
+import android.view.View
 import com.sqsong.wanandroid.R
 import com.sqsong.wanandroid.common.holder.LoadingFooterViewHolder
-import com.sqsong.wanandroid.common.inter.OnItemClickListener
+import com.sqsong.wanandroid.common.inter.OnViewItemClickListener
 import com.sqsong.wanandroid.data.WelfareBean
 import com.sqsong.wanandroid.data.WelfareData
 import com.sqsong.wanandroid.mvp.BasePresenter
 import com.sqsong.wanandroid.network.ApiException
 import com.sqsong.wanandroid.network.GankObserverImpl
-import com.sqsong.wanandroid.ui.welfare.WelfareAdapter
+import com.sqsong.wanandroid.ui.preview.ImagePreviewActivity
+import com.sqsong.wanandroid.ui.welfare.adapter.WelfareAdapter
 import com.sqsong.wanandroid.util.Constants
 import com.sqsong.wanandroid.util.RxJavaHelper
 import io.reactivex.disposables.CompositeDisposable
@@ -16,10 +23,10 @@ import javax.inject.Inject
 
 class WelfarePresenter @Inject constructor(private val welfareModel: WelfareModel,
                                            private val disposable: CompositeDisposable) :
-        BasePresenter<WelfareContract.View, WelfareContract.Model>(welfareModel, disposable), OnItemClickListener<WelfareData> {
+        BasePresenter<WelfareContract.View, WelfareContract.Model>(welfareModel, disposable), OnViewItemClickListener<WelfareData> {
 
     private var mPage = 1
-    private val mDataList = mutableListOf<WelfareData>()
+    private val mDataList = ArrayList<WelfareData>()
 
     private val mAdapter: WelfareAdapter by lazy {
         WelfareAdapter(mView.getAppContext(), mDataList)
@@ -103,8 +110,18 @@ class WelfarePresenter @Inject constructor(private val welfareModel: WelfareMode
         }
     }
 
-    override fun onItemClick(data: WelfareData?, position: Int) {
+    override fun onItemClick(view: View, data: WelfareData?, position: Int) {
+        val intent = Intent(mView.getAppContext(), ImagePreviewActivity::class.java)
+        intent.putExtra(Constants.IMAGE_POSITION, position)
+        intent.putParcelableArrayListExtra(Constants.IMAGE_LIST, mDataList)
 
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            val activityOptions = ActivityOptions.makeSceneTransitionAnimation(mView.getAppContext() as Activity,
+                    Pair.create(view, view.transitionName))
+            mView.startNewActivity(intent, activityOptions.toBundle())
+        } else {
+            mView.startNewActivity(intent)
+        }
     }
 
 }

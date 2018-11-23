@@ -4,4 +4,5 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:foreground="@drawable/bg_without_corner"
-    android:scaleType="centerCrop" />
+    android:scaleType="centerCrop"
+    android:transitionName="@string/text_transition_image" />

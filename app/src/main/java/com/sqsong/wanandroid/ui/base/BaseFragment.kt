@@ -7,8 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.annotation.LayoutRes
-import butterknife.ButterKnife
-import butterknife.Unbinder
 import com.sqsong.wanandroid.mvp.IView
 import dagger.android.support.DaggerFragment
 
@@ -16,8 +14,6 @@ abstract class BaseFragment : DaggerFragment(), IView {
 
     @LayoutRes
     abstract fun getLayoutResId(): Int
-
-    private var mUnBinder: Unbinder? = null
 
     abstract fun initEvent()
 
@@ -27,7 +23,6 @@ abstract class BaseFragment : DaggerFragment(), IView {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        mUnBinder = ButterKnife.bind(this, view)
         initView(view)
         initEvent()
     }
@@ -48,12 +43,6 @@ abstract class BaseFragment : DaggerFragment(), IView {
 
     override fun handleMessage(message: Message) {
 
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        mUnBinder?.unbind()
-        mUnBinder = null
     }
 
 }

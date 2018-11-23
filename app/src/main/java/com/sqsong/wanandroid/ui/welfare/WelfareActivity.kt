@@ -1,6 +1,8 @@
 package com.sqsong.wanandroid.ui.welfare
 
 import android.content.Context
+import android.content.Intent
+import android.os.Bundle
 import android.os.Handler
 import android.view.MenuItem
 import androidx.recyclerview.widget.GridLayoutManager
@@ -11,6 +13,7 @@ import com.sqsong.wanandroid.common.NoLeakHandler
 import com.sqsong.wanandroid.common.RecyclerScrollListener
 import com.sqsong.wanandroid.common.inter.ChangeThemeAnnotation
 import com.sqsong.wanandroid.ui.base.BaseActivity
+import com.sqsong.wanandroid.ui.welfare.adapter.WelfareAdapter
 import com.sqsong.wanandroid.ui.welfare.mvp.WelfareContract
 import com.sqsong.wanandroid.ui.welfare.mvp.WelfarePresenter
 import com.sqsong.wanandroid.util.ext.setupSwipeLayoutColor
@@ -65,7 +68,6 @@ class WelfareActivity : BaseActivity<WelfarePresenter>(), WelfareContract.View, 
         mRecyclerScroller.setOnLoadMoreListener(this)
 
         val spacing = resources.getDimensionPixelSize(R.dimen.picture_grid_spacing)
-        // recycler.setPadding(spacing, spacing, spacing, 0)
         recycler.addItemDecoration(MediaGridInset(2, spacing, true))
     }
 
@@ -100,6 +102,19 @@ class WelfareActivity : BaseActivity<WelfarePresenter>(), WelfareContract.View, 
 
     override fun setRecyclerAdapter(adapter: WelfareAdapter) {
         recycler.adapter = adapter
+    }
+
+    override fun startNewActivity(intent: Intent) {
+        startActivity(intent)
+    }
+
+    override fun startNewActivity(intent: Intent, bundle: Bundle) {
+        startActivity(intent, bundle)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        mPresenter.onDestroy()
     }
 
 }

@@ -24,6 +24,12 @@ object Constants {
 
     const val LANGUAGE_TYPE = "language_type"
 
+    const val IMAGE_LIST = "image_list"
+
+    const val IMAGE_POSITION = "image_position"
+
+    const val IMAGE_URL = "image_url"
+
     const val DEFAULT_TIME_OUT: Long = 10000
 
     const val SPLASH_TIME: Long = 3 // second

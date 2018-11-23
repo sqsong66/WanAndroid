@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="AppTheme.TransparentTheme" parent="AppTheme.LoginTheme">
+    <style name="AppTheme.TransparentTheme">
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+        <item name="android:windowActivityTransitions">true</item>
+        <item name="android:windowContentTransitions">true</item>
         <item name="android:windowTranslucentStatus">true</item>
         <item name="android:windowTranslucentNavigation">true</item>
     </style>
@@ -10,6 +14,8 @@
         <item name="windowNoTitle">true</item>
         <item name="windowActionBar">false</item>
         <item name="android:windowBackground">@null</item>
+        <item name="android:windowActivityTransitions">true</item>
+        <item name="android:windowContentTransitions">true</item>
         <item name="colorControlNormal">@color/colorWhite</item>
         <item name="colorControlActivated">@color/colorWhite</item>
         <item name="colorControlHighlight">@color/colorWhite</item>

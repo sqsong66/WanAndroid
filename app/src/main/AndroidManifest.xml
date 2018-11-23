@@ -63,6 +63,9 @@
         <activity
             android:name=".ui.welfare.WelfareActivity"
             android:theme="@style/AppTheme.LoginTheme" />
+        <activity
+            android:name=".ui.preview.ImagePreviewActivity"
+            android:theme="@style/AppTheme.TransparentTheme" />
     </application>
 
 </manifest>

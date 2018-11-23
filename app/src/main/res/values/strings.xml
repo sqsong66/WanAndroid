@@ -87,4 +87,8 @@
     <string name="text_theme_setting">Theme Setting</string>
     <string name="text_theme_setting_tips">Choose your favorite theme</string>
     <string name="text_welfare">Welfare</string>
+    <string name="text_invalid_image_url">Invalid image url</string>
+    <string name="text_empty_image_list">Image list is empty</string>
+    <string name="text_image_index" tools:ignore="MissingTranslation">%1$d / %2$d</string>
+    <string name="text_transition_image" tools:ignore="MissingTranslation">text transition image</string>
 </resources>

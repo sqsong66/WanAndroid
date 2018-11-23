@@ -109,14 +109,15 @@ data class HotSearchData(val id: Int,
 
 data class WelfareBean(override var results: List<WelfareData>?): GankBasedBean<List<WelfareData>>()
 
+@Parcelize
 data class WelfareData(val _id: String,
-                       val createAt: String,
+                       val createAt: String?,
                        val desc: String,
                        val publishedAt: String,
                        val source: String,
                        val type: String,
                        val url: String,
                        val used: Boolean,
-                       val who: String)
+                       val who: String) : Parcelable
 
 /********************* Begin: Welfare Data ***********************/

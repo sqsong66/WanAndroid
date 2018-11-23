@@ -1,4 +1,4 @@
-package com.sqsong.wanandroid.ui.welfare
+package com.sqsong.wanandroid.ui.welfare.adapter
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -12,6 +12,7 @@ import com.sqsong.wanandroid.R
 import com.sqsong.wanandroid.common.holder.LoadingFooterViewHolder
 import com.sqsong.wanandroid.common.holder.LoadingFooterViewHolder.LoadingState
 import com.sqsong.wanandroid.common.inter.OnItemClickListener
+import com.sqsong.wanandroid.common.inter.OnViewItemClickListener
 import com.sqsong.wanandroid.data.WelfareData
 import com.sqsong.wanandroid.util.Constants
 import com.sqsong.wanandroid.util.DensityUtil
@@ -24,7 +25,7 @@ class WelfareAdapter constructor(private val context: Context, private val dataL
     private var mLoadingState: Int = 0
     private var mImageHeight: Int = 0
     private val mInflater = LayoutInflater.from(context)
-    private var mListener: OnItemClickListener<WelfareData>? = null
+    private var mListener: OnViewItemClickListener<WelfareData>? = null
 
     init {
         val spacing = context.resources.getDimensionPixelSize(R.dimen.picture_grid_spacing)
@@ -59,7 +60,7 @@ class WelfareAdapter constructor(private val context: Context, private val dataL
         notifyItemChanged(dataList.size)
     }
 
-    fun setOnItemClickListener(listener: OnItemClickListener<WelfareData>) {
+    fun setOnItemClickListener(listener: OnViewItemClickListener<WelfareData>) {
         this.mListener = listener
     }
 
@@ -78,7 +79,7 @@ class WelfareAdapter constructor(private val context: Context, private val dataL
             image?.layoutParams?.height = mImageHeight
 
             itemView.setOnClickListener {
-                mListener?.onItemClick(welfareData, position)
+                mListener?.onItemClick(it, welfareData, position)
             }
         }
 
