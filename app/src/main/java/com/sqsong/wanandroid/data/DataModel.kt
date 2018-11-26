@@ -112,12 +112,12 @@ data class WelfareBean(override var results: List<WelfareData>?): GankBasedBean<
 @Parcelize
 data class WelfareData(val _id: String,
                        val createAt: String?,
-                       val desc: String,
-                       val publishedAt: String,
-                       val source: String,
-                       val type: String,
+                       val desc: String?,
+                       val publishedAt: String?,
+                       val source: String?,
+                       val type: String?,
                        val url: String,
                        val used: Boolean,
-                       val who: String) : Parcelable
+                       val who: String?) : Parcelable
 
 /********************* Begin: Welfare Data ***********************/

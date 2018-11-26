@@ -1,11 +1,7 @@
 package com.sqsong.wanandroid.ui.preview.fragment
 
-import android.os.Build
 import android.os.Bundle
 import android.text.TextUtils
-import android.view.View
-import android.view.ViewTreeObserver
-import androidx.annotation.RequiresApi
 import com.jakewharton.rxbinding2.view.RxView
 import com.sqsong.wanandroid.R
 import com.sqsong.wanandroid.ui.base.BaseFragment
@@ -16,7 +12,7 @@ import com.sqsong.wanandroid.util.ext.showImage
 import io.reactivex.Observable
 import kotlinx.android.synthetic.main.fragment_preview.*
 
-class PreviewFragment : BaseFragment(), PreviewContract.View, ViewTreeObserver.OnPreDrawListener {
+class PreviewFragment : BaseFragment(), PreviewContract.View {
 
 
     private var mImageUrl: String? = null
@@ -29,18 +25,6 @@ class PreviewFragment : BaseFragment(), PreviewContract.View, ViewTreeObserver.O
             showMessage(getString(R.string.text_invalid_image_url))
             activity?.finish()
         }
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        imageTouch.viewTreeObserver.addOnPreDrawListener(this)
-    }
-
-    @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
-    override fun onPreDraw(): Boolean {
-        imageTouch.viewTreeObserver.removeOnPreDrawListener(this)
-        activity?.startPostponedEnterTransition()
-        return true
     }
 
     override fun getLayoutResId(): Int = R.layout.fragment_preview

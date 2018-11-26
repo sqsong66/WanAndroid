@@ -1,6 +1,5 @@
 package com.sqsong.wanandroid.ui.preview
 
-import android.os.Build
 import androidx.fragment.app.FragmentManager
 import androidx.viewpager.widget.ViewPager
 import com.sqsong.wanandroid.R
@@ -30,9 +29,6 @@ class ImagePreviewActivity : BaseActivity<ImagePreviewPresenter>(), ImagePreview
 
     override fun initEvent() {
         mPresenter.onAttach(this)
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            postponeEnterTransition()
-        }
         indexTv.text = String.format(getString(R.string.text_image_index), mCurPos + 1, mWelfareList?.size)
         viewPager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
             override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {

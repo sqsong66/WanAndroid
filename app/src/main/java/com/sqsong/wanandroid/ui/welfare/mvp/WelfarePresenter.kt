@@ -114,14 +114,15 @@ class WelfarePresenter @Inject constructor(private val welfareModel: WelfareMode
         val intent = Intent(mView.getAppContext(), ImagePreviewActivity::class.java)
         intent.putExtra(Constants.IMAGE_POSITION, position)
         intent.putParcelableArrayListExtra(Constants.IMAGE_LIST, mDataList)
+        mView.startNewActivity(intent)
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+        /*if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             val activityOptions = ActivityOptions.makeSceneTransitionAnimation(mView.getAppContext() as Activity,
                     Pair.create(view, view.transitionName))
             mView.startNewActivity(intent, activityOptions.toBundle())
         } else {
             mView.startNewActivity(intent)
-        }
+        }*/
     }
 
 }
