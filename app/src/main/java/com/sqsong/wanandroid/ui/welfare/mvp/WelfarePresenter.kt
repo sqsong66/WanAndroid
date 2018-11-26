@@ -1,10 +1,6 @@
 package com.sqsong.wanandroid.ui.welfare.mvp
 
-import android.app.Activity
-import android.app.ActivityOptions
 import android.content.Intent
-import android.os.Build
-import android.util.Pair
 import android.view.View
 import com.sqsong.wanandroid.R
 import com.sqsong.wanandroid.common.holder.LoadingFooterViewHolder

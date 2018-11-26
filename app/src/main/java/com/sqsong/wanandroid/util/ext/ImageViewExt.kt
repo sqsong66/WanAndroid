@@ -112,3 +112,8 @@ fun ImageView.showImage(context: Context, resId: Int, placeholder: Int, circle: 
     }
     glide.into(this)
 }
+
+fun ImageView.dpToPx(dp: Int): Int {
+    val scale = resources.displayMetrics.density
+    return (dp * scale + 0.5f).toInt()
+}
