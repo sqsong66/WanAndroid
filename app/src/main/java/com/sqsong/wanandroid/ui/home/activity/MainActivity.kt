@@ -126,6 +126,9 @@ class MainActivity : BaseActivity<MainPresenter>(), MainContract.View, Navigatio
             R.id.nav_public_account -> startActivity(Intent(this, PublicAccountActivity::class.java)) // 公众号
             R.id.nav_collection -> mPresenter.checkCollectionState()
             R.id.nav_welfare -> startActivity(Intent(this, WelfareActivity::class.java)) // 福利
+            R.id.nav_scan -> {
+                SnackbarUtil.showNormalToast(this, getString(R.string.text_developing))
+            } // 扫码
             R.id.nav_setting -> startActivity(Intent(this, SettingActivity::class.java)) // 设置
             R.id.action_login_out -> mPresenter.checkLoginState()
         }

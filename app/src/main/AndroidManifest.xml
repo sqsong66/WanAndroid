@@ -66,6 +66,7 @@
         <activity
             android:name=".ui.preview.ImagePreviewActivity"
             android:theme="@style/AppTheme.TransparentTheme" />
+        <activity android:name=".ui.scan.ScanningActivity" />
     </application>
 
 </manifest>

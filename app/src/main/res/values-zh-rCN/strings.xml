@@ -84,6 +84,7 @@
     <string name="text_theme_setting">主题设置</string>
     <string name="text_theme_setting_tips">选择您喜欢的主题</string>
     <string name="text_welfare">福利</string>
+    <string name="text_scan">扫码</string>
     <string name="text_invalid_image_url">非法的图片地址</string>
     <string name="text_empty_image_list">图片集合为空</string>
 </resources>

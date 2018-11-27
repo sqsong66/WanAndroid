@@ -12,7 +12,6 @@ import com.sqsong.wanandroid.R
 import com.sqsong.wanandroid.common.NoLeakHandler
 import com.sqsong.wanandroid.common.RecyclerScrollListener
 import com.sqsong.wanandroid.common.inter.ChangeThemeAnnotation
-import com.sqsong.wanandroid.data.KnowledgeData
 import com.sqsong.wanandroid.ui.base.BaseActivity
 import com.sqsong.wanandroid.ui.home.adapter.KnowledgeItemAdapter
 import com.sqsong.wanandroid.ui.home.mvp.knowledge.ChildKnowledgeContract
