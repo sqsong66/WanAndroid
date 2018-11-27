@@ -2,14 +2,16 @@ package com.sqsong.wanandroid.ui.preview.fragment
 
 import android.os.Bundle
 import android.text.TextUtils
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.jakewharton.rxbinding2.view.RxView
 import com.sqsong.wanandroid.R
+import com.sqsong.wanandroid.common.GlideApp
 import com.sqsong.wanandroid.ui.base.BaseFragment
 import com.sqsong.wanandroid.ui.preview.mvp.PreviewContract
 import com.sqsong.wanandroid.ui.preview.mvp.PreviewPresenter
 import com.sqsong.wanandroid.util.Constants
-import com.sqsong.wanandroid.util.ext.showImage
 import io.reactivex.Observable
+import it.sephiroth.android.library.imagezoom.ImageViewTouchBase
 import kotlinx.android.synthetic.main.fragment_preview.*
 
 class PreviewFragment : BaseFragment(), PreviewContract.View {
@@ -31,8 +33,15 @@ class PreviewFragment : BaseFragment(), PreviewContract.View {
 
     override fun initEvent() {
         mPresenter?.onAttach(this)
-        imageTouch.showImage(context!!, mImageUrl!!)
+        imageTouch.displayType = ImageViewTouchBase.DisplayType.FIT_TO_SCREEN
         imageTouch.setSingleTapListener { finishActivity() }
+
+        GlideApp.with(this)
+                .load(mImageUrl)
+                .fitCenter()
+                .placeholder(R.drawable.image_placeholder)
+                .transition(DrawableTransitionOptions.withCrossFade())
+                .into(imageTouch)
     }
 
     fun setPresenter(presenter: PreviewPresenter) {
