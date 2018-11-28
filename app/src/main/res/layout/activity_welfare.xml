@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
+    android:paddingTop="@dimen/status_bar_height"
     tools:context=".ui.home.activity.KnowledgeActivity">
 
     <com.google.android.material.appbar.AppBarLayout
