@@ -13,6 +13,7 @@ import com.sqsong.wanandroid.ui.login.di.LoginModule
 import com.sqsong.wanandroid.ui.login.di.RegisterModule
 import com.sqsong.wanandroid.ui.preview.ImagePreviewActivity
 import com.sqsong.wanandroid.ui.preview.di.ImagePreviewModule
+import com.sqsong.wanandroid.ui.scan.ScanningActivity
 import com.sqsong.wanandroid.ui.search.SearchActivity
 import com.sqsong.wanandroid.ui.search.di.SearchModule
 import com.sqsong.wanandroid.ui.settings.SettingActivity
@@ -77,4 +78,8 @@ abstract class ActivityBindingModule {
     @ActivityScope
     @ContributesAndroidInjector(modules = [ImagePreviewModule::class])
     abstract fun contributeImagePreviewActivity(): ImagePreviewActivity
+
+    @ActivityScope
+    @ContributesAndroidInjector
+    abstract fun contributeScanningActivity(): ScanningActivity
 }

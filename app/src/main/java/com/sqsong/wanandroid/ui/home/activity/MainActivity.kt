@@ -24,6 +24,7 @@ import com.sqsong.wanandroid.data.HotSearchData
 import com.sqsong.wanandroid.ui.base.BaseActivity
 import com.sqsong.wanandroid.ui.home.mvp.MainContract
 import com.sqsong.wanandroid.ui.home.mvp.MainPresenter
+import com.sqsong.wanandroid.ui.scan.ScanningActivity
 import com.sqsong.wanandroid.ui.search.SearchActivity
 import com.sqsong.wanandroid.ui.settings.SettingActivity
 import com.sqsong.wanandroid.ui.wechat.PublicAccountActivity
@@ -127,7 +128,8 @@ class MainActivity : BaseActivity<MainPresenter>(), MainContract.View, Navigatio
             R.id.nav_collection -> mPresenter.checkCollectionState()
             R.id.nav_welfare -> startActivity(Intent(this, WelfareActivity::class.java)) // 福利
             R.id.nav_scan -> {
-                SnackbarUtil.showNormalToast(this, getString(R.string.text_developing))
+                startActivity(Intent(this, ScanningActivity::class.java))
+                // SnackbarUtil.showNormalToast(this, getString(R.string.text_developing))
             } // 扫码
             R.id.nav_setting -> startActivity(Intent(this, SettingActivity::class.java)) // 设置
             R.id.action_login_out -> mPresenter.checkLoginState()
