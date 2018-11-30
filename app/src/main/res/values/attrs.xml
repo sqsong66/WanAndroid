@@ -74,6 +74,7 @@
         <attr name="bColor" format="color" />
         <attr name="centerLineColor" format="color" />
         <attr name="muskColor" format="color" />
+        <attr name="pointColor" format="color" />
         <attr name="bWidth" format="dimension" />
         <attr name="bHeight" format="dimension" />
         <attr name="centerLineHeight" format="dimension" />

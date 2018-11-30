@@ -18,6 +18,7 @@ class ScanningView @JvmOverloads constructor(context: Context, attrs: AttributeS
 
     private var borderGap: Int = 0
     private var muskColor: Int = 0
+    private var pointColor: Int = 0
     private var borderWidth: Int = 0
     private var borderHeight: Int = 0
     private var centerLineHeight: Int = 0
@@ -47,7 +48,8 @@ class ScanningView @JvmOverloads constructor(context: Context, attrs: AttributeS
             typedArray = context.obtainStyledAttributes(attrs, R.styleable.ScanningView)
             muskColor = typedArray.getColor(R.styleable.ScanningView_muskColor, ContextCompat.getColor(context, R.color.colorSearchMusk))
             borderColor = typedArray.getColor(R.styleable.ScanningView_bColor, Color.WHITE)
-            centerLineColor = typedArray.getColor(R.styleable.ScanningView_centerLineColor, Color.WHITE)
+            pointColor = typedArray.getColor(R.styleable.ScanningView_pointColor, Color.WHITE)
+            centerLineColor = typedArray.getColor(R.styleable.ScanningView_centerLineColor, borderColor)
             borderWidth = typedArray.getDimension(R.styleable.ScanningView_bWidth, DensityUtil.dip2px(30).toFloat()).toInt()
             borderHeight = typedArray.getDimension(R.styleable.ScanningView_bHeight, DensityUtil.dip2px(5).toFloat()).toInt()
             centerLineHeight = typedArray.getDimension(R.styleable.ScanningView_centerLineHeight, DensityUtil.dip2px(2).toFloat()).toInt()
@@ -141,6 +143,7 @@ class ScanningView @JvmOverloads constructor(context: Context, attrs: AttributeS
             mPointList = ArrayList(5)
             mLastPointList = currentPoints
             mPaint.alpha = POINT_ALPHA
+            mPaint.color = pointColor
             synchronized(currentPoints) {
                 for (point in currentPoints) {
                     canvas?.drawCircle((frameLeft + (point.x * scaleX).toInt()).toFloat(),
@@ -152,6 +155,7 @@ class ScanningView @JvmOverloads constructor(context: Context, attrs: AttributeS
 
         if (lastPoints != null) {
             mPaint.alpha = POINT_ALPHA / 2
+            mPaint.color = pointColor
             synchronized(lastPoints) {
                 val radius = mPointRadius / 2
                 for (point in lastPoints) {

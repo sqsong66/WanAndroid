@@ -64,7 +64,7 @@ class ScanningResultDialog : DialogFragment() {
         val clipboard = context?.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
         val clipData = ClipData.newPlainText(resultText, resultText)
         clipboard.primaryClip = clipData
-        SnackbarUtil.showNormalToast(context, getString(R.string.text_copy_success))
+        SnackbarUtil.showToastText(context, getString(R.string.text_copy_success))
     }
 
     private fun createDialogView(inflater: LayoutInflater?): View? {

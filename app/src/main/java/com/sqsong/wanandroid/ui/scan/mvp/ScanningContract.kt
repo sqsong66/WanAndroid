@@ -13,7 +13,7 @@ interface ScanningContract {
         fun getSurfaceView(): SurfaceView
         fun getAppContext(): Context
         fun setViewCameraManager(manager: CameraManager)
-        fun drawPossiblePoint(points: ResultPoint?)
+        fun drawPossiblePoint(point: ResultPoint?)
         fun showScanResultDialog(scanResult: ScanResult)
     }
 
