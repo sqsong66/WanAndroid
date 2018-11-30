@@ -4,13 +4,13 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.Typeface
+import android.media.RingtoneManager
 import android.net.Uri
 import android.text.TextUtils
 import android.util.TypedValue
 import android.widget.ProgressBar
 import android.widget.TextView
 import com.sqsong.wanandroid.R
-import java.sql.Timestamp
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -89,5 +89,15 @@ object CommonUtil {
             e.printStackTrace()
         }
         return ""
+    }
+
+    fun playDefaultSound(context: Context) {
+        try {
+            val uri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
+            val ringtone = RingtoneManager.getRingtone(context, uri)
+            ringtone.play()
+        } catch (e: java.lang.Exception) {
+            e.printStackTrace()
+        }
     }
 }

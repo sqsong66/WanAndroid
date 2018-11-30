@@ -1,6 +1,8 @@
 package com.sqsong.wanandroid.ui.scan.mvp
 
+import android.content.Context
 import android.graphics.Bitmap
+import android.os.Vibrator
 import android.view.SurfaceHolder
 import com.google.zxing.Result
 import com.google.zxing.ResultPoint
@@ -17,12 +19,19 @@ import io.reactivex.disposables.CompositeDisposable
 import java.io.ByteArrayOutputStream
 import javax.inject.Inject
 
-class ScanningPresenter @Inject constructor(private val disposable: CompositeDisposable) :
+class ScanningPresenter @Inject constructor(disposable: CompositeDisposable) :
         BasePresenter<ScanningContract.View, IModel>(null, disposable), ScanningResultListener, SurfaceHolder.Callback {
 
+
     private var hasSurface = false
+    private var mVibrator: Vibrator? = null
     private lateinit var mCameraManager: CameraManager
     private var mCaptureHandler: CaptureHandler? = null
+
+    override fun onAttach(view: ScanningContract.View) {
+        super.onAttach(view)
+        mVibrator = mView.getAppContext().getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
+    }
 
     fun onResume() {
         mCameraManager = CameraManager(mView.getAppContext().applicationContext)
@@ -92,6 +101,10 @@ class ScanningPresenter @Inject constructor(private val disposable: CompositeDis
             bmpBytes = stream.toByteArray()
         }
         mView.showScanResultDialog(ScanResult(resultText, formatText, typeText, timeText, bmpBytes))
+        CommonUtil.playDefaultSound(mView.getAppContext().applicationContext)
+        if (mVibrator?.hasVibrator() == true) {
+            mVibrator?.vibrate(10)
+        }
     }
 
     fun restartScanning() = mCaptureHandler?.sendEmptyMessageDelayed(R.id.restart_preview, 500)

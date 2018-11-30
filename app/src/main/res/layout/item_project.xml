@@ -165,7 +165,7 @@
                 android:layout_height="wrap_content"
                 android:clickable="false"
                 android:src="@drawable/selector_heart"
-                android:tint="?colorChipBackground" />
+                android:tint="?colorDialogIcon" />
 
         </RelativeLayout>
 

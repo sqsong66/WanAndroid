@@ -167,7 +167,7 @@
             android:background="@drawable/bg_home_item_circle"
             android:padding="8dp"
             android:src="@drawable/ic_share"
-            android:tint="?colorPrimaryLight"
+            android:tint="?colorDialogIcon"
             app:layout_constraintBottom_toBottomOf="@id/chapterChip"
             app:layout_constraintRight_toLeftOf="@id/starRl"
             app:layout_constraintTop_toTopOf="@id/chapterChip" />
@@ -191,7 +191,7 @@
                 android:layout_centerInParent="true"
                 android:clickable="false"
                 android:src="@drawable/selector_star"
-                android:tint="?colorPrimaryLight" />
+                android:tint="?colorDialogIcon" />
 
         </RelativeLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>

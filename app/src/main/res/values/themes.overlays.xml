@@ -9,7 +9,6 @@
         <item name="colorError">@color/colorRed</item>
         <item name="colorProgress">@color/colorPrimary</item>
         <item name="colorChipBackground">@color/colorPrimaryLight</item>
-        <item name="colorDialogIcon">@color/colorPrimary</item>
 
         <item name="colorTextActive">@color/colorTextActive</item>
         <item name="colorTextInActive">@color/colorTextInActive</item>
@@ -17,6 +16,7 @@
         <item name="colorCardBackground">@color/colorWhite</item>
         <item name="colorDefaultBackground">?android:colorBackground</item>
         <item name="colorSettingIconTint">@color/colorSettingIcon</item>
+        <item name="colorDialogIcon">@color/colorPrimary</item>
     </style>
 
     <style name="ThemeOverlay.Palette.Black" parent="ThemeOverlay.Palette.Default">
