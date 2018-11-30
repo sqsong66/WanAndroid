@@ -91,6 +91,7 @@ final class AutoFocusManager implements Camera.AutoFocusCallback {
     private synchronized void cancelOutstandingTask() {
         if (outstandingTask != null) {
             if (outstandingTask.getStatus() != AsyncTask.Status.FINISHED) {
+                Log.i("AutoFocusManager", "Cancel auto focus task.");
                 outstandingTask.cancel(true);
             }
             outstandingTask = null;
@@ -114,10 +115,11 @@ final class AutoFocusManager implements Camera.AutoFocusCallback {
     private final class AutoFocusTask extends AsyncTask<Object, Object, Object> {
         @Override
         protected Object doInBackground(Object... voids) {
+            if (Thread.currentThread().isInterrupted() || isCancelled()) return null;
             try {
                 Thread.sleep(AUTO_FOCUS_INTERVAL_MS);
             } catch (InterruptedException e) {
-                e.printStackTrace();
+                // e.printStackTrace();
             }
             start();
             return null;

@@ -37,12 +37,12 @@ class CaptureHandler constructor(private val cameraManager: CameraManager,
                 var barcode: Bitmap? = null
                 var scaleFactor = 1.0f
                 if (bundle != null) {
-                    val compressedBitmap = bundle!!.getByteArray(DecodeThread.BARCODE_BITMAP)
+                    val compressedBitmap = bundle.getByteArray(DecodeThread.BARCODE_BITMAP)
                     if (compressedBitmap != null) {
-                        barcode = BitmapFactory.decodeByteArray(compressedBitmap, 0, compressedBitmap!!.size, null)
-                        barcode = barcode!!.copy(Bitmap.Config.ARGB_8888, true)
+                        barcode = BitmapFactory.decodeByteArray(compressedBitmap, 0, compressedBitmap.size, null)
+                        barcode = barcode.copy(Bitmap.Config.ARGB_8888, true)
                     }
-                    scaleFactor = bundle!!.getFloat(DecodeThread.BARCODE_SCALED_FACTOR)
+                    scaleFactor = bundle.getFloat(DecodeThread.BARCODE_SCALED_FACTOR)
                 }
                 resultListener?.handleDecode(msg.obj as Result, barcode, scaleFactor)
             }
@@ -73,7 +73,7 @@ class CaptureHandler constructor(private val cameraManager: CameraManager,
             // Wait at most half a second; should be enough time, and onPause() will timeout quickly
             mDecodeThread.join(500L)
         } catch (e: InterruptedException) {
-            // continue
+            e.printStackTrace()
         }
 
         // Be absolutely sure we don't send any queued up messages

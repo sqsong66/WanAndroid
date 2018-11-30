@@ -18,7 +18,6 @@ package com.sqsong.wanandroid.util.zxing.camera
 
 import android.hardware.Camera
 import android.os.Handler
-import com.sqsong.wanandroid.util.LogUtil
 
 class PreviewCallback(private val configManager: CameraConfigurationManager) : Camera.PreviewCallback {
     private var previewHandler: Handler? = null
@@ -32,18 +31,18 @@ class PreviewCallback(private val configManager: CameraConfigurationManager) : C
     override fun onPreviewFrame(data: ByteArray, camera: Camera) {
         val cameraResolution = configManager.getCameraResolution()
         val thePreviewHandler = previewHandler
-        if (thePreviewHandler != null) {
-            val message = thePreviewHandler.obtainMessage(previewMessage, cameraResolution.x, cameraResolution.y, data)
+
+        val obtainMessage = thePreviewHandler?.obtainMessage(previewMessage, cameraResolution.y, cameraResolution.x, data)
+        obtainMessage?.sendToTarget()
+        previewHandler = null
+
+        /*if (thePreviewHandler != null) {
+            val message = thePreviewHandler.obtainMessage(previewMessage, cameraResolution.y, cameraResolution.x, data)
             message.sendToTarget()
             previewHandler = null
         } else {
             LogUtil.d(TAG, "Got preview callback, but no handler or resolution available")
-        }
-    }
-
-    companion object {
-
-        private val TAG = PreviewCallback::class.java.simpleName
+        }*/
     }
 
 }

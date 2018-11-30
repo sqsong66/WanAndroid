@@ -14,7 +14,7 @@
     <string name="text_no_data">No more data.</string>
     <string name="text_theme_switcher">Theme Switcher</string>
     <string name="text_cancel">Cancel</string>
-    <string name="text_sure">Ok</string>
+    <string name="text_sure">OK</string>
     <string name="text_save">Save</string>
     <string name="text_unknown_error">Unknown error</string>
     <string name="text_network_not_available">Network not available</string>
@@ -92,4 +92,16 @@
     <string name="text_empty_image_list">Image list is empty</string>
     <string name="text_image_index" tools:ignore="MissingTranslation">%1$d / %2$d</string>
     <string name="text_transition_image" tools:ignore="MissingTranslation">text transition image</string>
+    <string name="text_camera_permission">Please allow camera permission first</string>
+    <string name="text_open">Open</string>
+    <string name="text_camera_permission_message">You have denied camera permission, please open the permission first, then use this function.</string>
+    <string name="text_permission_tips">Permission tips</string>
+    <string name="text_package_scheme" tools:ignore="MissingTranslation">package</string>
+    <string name="text_qrcode_format">Format:</string>
+    <string name="text_qrcode_type">\u0020\u0020\u0020\u0020Type:</string>
+    <string name="text_qrcode_time">\u0020\u0020\u0020\u0020Time:</string>
+    <string name="text_scan_result">Scanning result</string>
+    <string name="text_copy">Copy</string>
+    <string name="text_website">Website</string>
+    <string name="text_copy_success">Copy success</string>
 </resources>

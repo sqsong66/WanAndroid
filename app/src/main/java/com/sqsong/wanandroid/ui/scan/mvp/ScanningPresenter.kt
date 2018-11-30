@@ -4,12 +4,17 @@ import android.graphics.Bitmap
 import android.view.SurfaceHolder
 import com.google.zxing.Result
 import com.google.zxing.ResultPoint
+import com.google.zxing.client.result.ResultParser
+import com.sqsong.wanandroid.R
+import com.sqsong.wanandroid.data.ScanResult
 import com.sqsong.wanandroid.mvp.BasePresenter
 import com.sqsong.wanandroid.mvp.IModel
+import com.sqsong.wanandroid.util.CommonUtil
 import com.sqsong.wanandroid.util.zxing.CaptureHandler
 import com.sqsong.wanandroid.util.zxing.ScanningResultListener
 import com.sqsong.wanandroid.util.zxing.camera.CameraManager
 import io.reactivex.disposables.CompositeDisposable
+import java.io.ByteArrayOutputStream
 import javax.inject.Inject
 
 class ScanningPresenter @Inject constructor(private val disposable: CompositeDisposable) :
@@ -18,10 +23,6 @@ class ScanningPresenter @Inject constructor(private val disposable: CompositeDis
     private var hasSurface = false
     private lateinit var mCameraManager: CameraManager
     private var mCaptureHandler: CaptureHandler? = null
-
-    override fun onAttach(view: ScanningContract.View) {
-        super.onAttach(view)
-    }
 
     fun onResume() {
         mCameraManager = CameraManager(mView.getAppContext().applicationContext)
@@ -75,12 +76,24 @@ class ScanningPresenter @Inject constructor(private val disposable: CompositeDis
 
     }
 
-    override fun foundPossibleResultPoint(points: ResultPoint?) {
-
+    override fun foundPossibleResultPoint(point: ResultPoint?) {
+        mView.drawPossiblePoint(point)
     }
 
     override fun handleDecode(result: Result, barcodeBitmap: Bitmap?, scaleFactor: Float) {
-
+        val resultText = result.text
+        val typeText = ResultParser.parseResult(result).type.toString()
+        val formatText = result.barcodeFormat.toString()
+        val timeText = CommonUtil.formatLongTimeToString(result.timestamp, "yyyy-MM-dd HH:mm")
+        var bmpBytes: ByteArray? = null
+        if (barcodeBitmap != null) {
+            val stream = ByteArrayOutputStream()
+            barcodeBitmap.compress(Bitmap.CompressFormat.PNG, 100, stream)
+            bmpBytes = stream.toByteArray()
+        }
+        mView.showScanResultDialog(ScanResult(resultText, formatText, typeText, timeText, bmpBytes))
     }
+
+    fun restartScanning() = mCaptureHandler?.sendEmptyMessageDelayed(R.id.restart_preview, 500)
 
 }

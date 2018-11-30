@@ -1,5 +1,6 @@
 package com.sqsong.wanandroid.ui.home.mvp
 
+import android.Manifest
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
@@ -23,9 +24,11 @@ import com.sqsong.wanandroid.ui.home.fragment.KnowledgeFragment
 import com.sqsong.wanandroid.ui.home.fragment.NavigationFragment
 import com.sqsong.wanandroid.ui.home.fragment.ProjectFragment
 import com.sqsong.wanandroid.ui.login.LoginActivity
+import com.sqsong.wanandroid.ui.scan.ScanningActivity
 import com.sqsong.wanandroid.util.Constants
 import com.sqsong.wanandroid.util.PreferenceHelper.get
 import com.sqsong.wanandroid.util.RxJavaHelper
+import com.sqsong.wanandroid.util.permission.RxPermissions
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
@@ -58,6 +61,8 @@ class MainPresenter @Inject constructor(private val mainView: MainContract.View,
     lateinit var mProjectFragment: ProjectFragment
 
     private var mFragmentList = mutableListOf<Fragment>()
+
+    private var mPermissions: RxPermissions? = null
 
     override fun onAttach(view: MainContract.View) {
         mView = mainView
@@ -102,7 +107,7 @@ class MainPresenter @Inject constructor(private val mainView: MainContract.View,
     fun loginOut() {
         BaseApplication.INSTANCE.quitApp()
         CookieManager.getInstance(mContext).clearCookieInfo()
-        mView.startNewActivity(Intent(mView.getAppContext(), LoginActivity::class.java))
+        mView.startNewActivity(Intent(mView.getActivity(), LoginActivity::class.java))
     }
 
     fun checkCollectionState() {
@@ -110,7 +115,7 @@ class MainPresenter @Inject constructor(private val mainView: MainContract.View,
         if (TextUtils.isEmpty(userName)) {
             mView.showLoginOutTipDialog()
         } else {
-            mView.startNewActivity(Intent(mView.getAppContext(), CollectionActivity::class.java))
+            mView.startNewActivity(Intent(mView.getActivity(), CollectionActivity::class.java))
         }
     }
 
@@ -142,6 +147,26 @@ class MainPresenter @Inject constructor(private val mainView: MainContract.View,
 
                     override fun onFail(error: ApiException) {
                         mView.showMessage(error.showMessage)
+                    }
+                })
+    }
+
+    fun checkCameraPermission() {
+        if (mPermissions == null) {
+            mPermissions = RxPermissions(mView.getActivity())
+        }
+        disposable.add(mPermissions!!.requestEach(Manifest.permission.CAMERA)
+                .subscribe {
+                    when {
+                        it.granted -> {
+                            mView.startNewActivity(Intent(mView.getActivity(), ScanningActivity::class.java))
+                        }
+                        it.shouldShowRequestPermissionRationale -> {
+                            mView.showMessage(mContext.getString(R.string.text_camera_permission))
+                        }
+                        else -> {
+                            mView.showCameraPermissionDialog()
+                        }
                     }
                 })
     }

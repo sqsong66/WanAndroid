@@ -11,7 +11,7 @@ import java.util.concurrent.CountDownLatch
 
 class DecodeThread(private val captureHandler: CaptureHandler,
                    private val cameraManager: CameraManager,
-                   private val resultPointCallback: ResultPointCallback) : Thread() {
+                   resultPointCallback: ResultPointCallback) : Thread() {
 
     private lateinit var mHandler: Handler
     private var hints: MutableMap<DecodeHintType, Any> = EnumMap(DecodeHintType::class.java)
@@ -34,9 +34,8 @@ class DecodeThread(private val captureHandler: CaptureHandler,
         try {
             mCountDownLatch.await()
         } catch (ie: InterruptedException) {
-            // continue?
+            ie.printStackTrace()
         }
-
         return mHandler
     }
 

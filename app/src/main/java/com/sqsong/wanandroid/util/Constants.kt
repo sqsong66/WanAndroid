@@ -18,6 +18,8 @@ object Constants {
 
     const val KEY_WEB_TITLE = "key_web_title"
 
+    const val KEY_SCAN_RESULT = "key_scan_result"
+
     const val SEARCH_HISTORY_KEY = "search_history_key"
 
     const val SEARCH_KEY = "search_key"

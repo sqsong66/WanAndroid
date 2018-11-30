@@ -1,8 +1,8 @@
 package com.sqsong.wanandroid.ui.home.mvp
 
-import android.content.Context
 import android.content.Intent
 import androidx.annotation.IdRes
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentStatePagerAdapter
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -23,8 +23,9 @@ interface MainContract {
         fun showLoginOutTipDialog()
         fun switchBottomViewNavigation(@IdRes id: Int)
         fun showUserName(userName: String?)
-        fun getAppContext(): Context
+        fun getActivity(): AppCompatActivity
         fun setupHotSearchKey(keyList: List<HotSearchData>?)
+        fun showCameraPermissionDialog()
     }
 
     interface Model : IModel {

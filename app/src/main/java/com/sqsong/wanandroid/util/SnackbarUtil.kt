@@ -15,7 +15,7 @@ object SnackbarUtil {
         Snackbar.make(view, text, Snackbar.LENGTH_SHORT).show()
     }
 
-    fun showNormalToast(context: Context, text: String) {
+    fun showNormalToast(context: Context?, text: String) {
         Toast.makeText(context, text, Toast.LENGTH_SHORT).show()
     }
 

@@ -106,8 +106,7 @@ data class HotSearchData(val id: Int,
 /********************* End: Hot search bean **********************/
 
 /********************* Begin: Welfare Data ***********************/
-
-data class WelfareBean(override var results: List<WelfareData>?): GankBasedBean<List<WelfareData>>()
+data class WelfareBean(override var results: List<WelfareData>?) : GankBasedBean<List<WelfareData>>()
 
 @Parcelize
 data class WelfareData(val _id: String,
@@ -119,5 +118,41 @@ data class WelfareData(val _id: String,
                        val url: String,
                        val used: Boolean,
                        val who: String?) : Parcelable
-
 /********************* Begin: Welfare Data ***********************/
+
+/********************* Begin: Scanning Result ***********************/
+@Parcelize
+data class ScanResult(val resultText: String?,
+                      val format: String?,
+                      val type: String?,
+                      val time: String?,
+                      val bitmapByteArray: ByteArray?) : Parcelable {
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (javaClass != other?.javaClass) return false
+
+        other as ScanResult
+
+        if (resultText != other.resultText) return false
+        if (format != other.format) return false
+        if (type != other.type) return false
+        if (time != other.time) return false
+        if (bitmapByteArray != null) {
+            if (other.bitmapByteArray == null) return false
+            if (!bitmapByteArray.contentEquals(other.bitmapByteArray)) return false
+        } else if (other.bitmapByteArray != null) return false
+
+        return true
+    }
+
+    override fun hashCode(): Int {
+        var result = resultText?.hashCode() ?: 0
+        result = 31 * result + (format?.hashCode() ?: 0)
+        result = 31 * result + (type?.hashCode() ?: 0)
+        result = 31 * result + (time?.hashCode() ?: 0)
+        result = 31 * result + (bitmapByteArray?.contentHashCode() ?: 0)
+        return result
+    }
+
+}
+/********************* Begin: Scanning Result ***********************/

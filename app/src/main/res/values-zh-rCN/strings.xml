@@ -87,4 +87,15 @@
     <string name="text_scan">扫码</string>
     <string name="text_invalid_image_url">非法的图片地址</string>
     <string name="text_empty_image_list">图片集合为空</string>
+    <string name="text_camera_permission">请允许开启相机权限</string>
+    <string name="text_open">去开启</string>
+    <string name="text_camera_permission_message">您已经拒绝了相机权限，请先开启相机权限，然后再使用该功能</string>
+    <string name="text_permission_tips">权限提示</string>
+    <string name="text_qrcode_format">格式：</string>
+    <string name="text_qrcode_type">类型：</string>
+    <string name="text_qrcode_time">时间：</string>
+    <string name="text_scan_result">扫码结果</string>
+    <string name="text_copy">复制</string>
+    <string name="text_website">网址</string>
+    <string name="text_copy_success">复制成功</string>
 </resources>

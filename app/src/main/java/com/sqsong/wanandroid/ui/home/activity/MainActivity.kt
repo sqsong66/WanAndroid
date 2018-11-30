@@ -1,7 +1,8 @@
 package com.sqsong.wanandroid.ui.home.activity
 
-import android.content.Context
 import android.content.Intent
+import android.net.Uri
+import android.provider.Settings
 import android.text.TextUtils
 import android.view.Menu
 import android.view.MenuItem
@@ -11,6 +12,7 @@ import android.widget.TextView
 import androidx.annotation.IdRes
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentStatePagerAdapter
@@ -24,7 +26,6 @@ import com.sqsong.wanandroid.data.HotSearchData
 import com.sqsong.wanandroid.ui.base.BaseActivity
 import com.sqsong.wanandroid.ui.home.mvp.MainContract
 import com.sqsong.wanandroid.ui.home.mvp.MainPresenter
-import com.sqsong.wanandroid.ui.scan.ScanningActivity
 import com.sqsong.wanandroid.ui.search.SearchActivity
 import com.sqsong.wanandroid.ui.settings.SettingActivity
 import com.sqsong.wanandroid.ui.wechat.PublicAccountActivity
@@ -60,6 +61,7 @@ class MainActivity : BaseActivity<MainPresenter>(), MainContract.View, Navigatio
         toggle.syncState()
         navView.setNavigationItemSelectedListener(this)
         bottomNavigationView.setOnNavigationItemSelectedListener(this)
+        navView.setCheckedItem(R.id.nav_home)
     }
 
     override fun showUserName(userName: String?) {
@@ -68,7 +70,7 @@ class MainActivity : BaseActivity<MainPresenter>(), MainContract.View, Navigatio
         (headerLayout.findViewById<ImageView>(R.id.headIv)).setOnClickListener(if (TextUtils.isEmpty(userName)) this else null)
     }
 
-    override fun getAppContext(): Context = this
+    override fun getActivity(): AppCompatActivity = this
 
     override fun getFab(): FloatingActionButton = fab
 
@@ -127,10 +129,7 @@ class MainActivity : BaseActivity<MainPresenter>(), MainContract.View, Navigatio
             R.id.nav_public_account -> startActivity(Intent(this, PublicAccountActivity::class.java)) // 公众号
             R.id.nav_collection -> mPresenter.checkCollectionState()
             R.id.nav_welfare -> startActivity(Intent(this, WelfareActivity::class.java)) // 福利
-            R.id.nav_scan -> {
-                startActivity(Intent(this, ScanningActivity::class.java))
-                // SnackbarUtil.showNormalToast(this, getString(R.string.text_developing))
-            } // 扫码
+            R.id.nav_scan -> searchView?.postDelayed({ mPresenter.checkCameraPermission() }, 200) // 扫码
             R.id.nav_setting -> startActivity(Intent(this, SettingActivity::class.java)) // 设置
             R.id.action_login_out -> mPresenter.checkLoginState()
         }
@@ -187,9 +186,31 @@ class MainActivity : BaseActivity<MainPresenter>(), MainContract.View, Navigatio
                 .show()
     }
 
-    override fun onResume() {
-        super.onResume()
-        navView.setCheckedItem(R.id.nav_home)
+    override fun showCameraPermissionDialog() {
+        AlertDialog.Builder(this, R.style.DialogStyle)
+                .setTitle(getString(R.string.text_permission_tips))
+                .setMessage(getString(R.string.text_camera_permission_message))
+                .setCancelable(false)
+                .setNegativeButton(R.string.text_cancel) { dialog, _ ->
+                    run {
+                        dialog.dismiss()
+                    }
+                }
+                .setPositiveButton(getString(R.string.text_open)) { dialog, _ ->
+                    run {
+                        dialog.dismiss()
+                        startPermissionActivity()
+                    }
+                }
+                .create()
+                .show()
+    }
+
+    private fun startPermissionActivity() {
+        val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
+        val uri = Uri.fromParts(getString(R.string.text_package_scheme), packageName, null)
+        intent.data = uri
+        startActivity(intent)
     }
 
     override fun onDestroy() {

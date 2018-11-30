@@ -117,13 +117,13 @@ class CameraConfigurationManager constructor(private val context: Context) {
         parameters.setPreviewSize(bestPreviewSize.x, bestPreviewSize.y)
         theCamera.parameters = parameters
         theCamera.setDisplayOrientation(cwRotationFromDisplayToCamera)
-        val afterParameters = theCamera.getParameters()
-        val afterSize = afterParameters.getPreviewSize()
-        if (afterSize != null && (bestPreviewSize.x != afterSize!!.width || bestPreviewSize.y != afterSize!!.height)) {
+        val afterParameters = theCamera.parameters
+        val afterSize = afterParameters.previewSize
+        if (afterSize != null && (bestPreviewSize.x != afterSize.width || bestPreviewSize.y != afterSize.height)) {
             LogUtil.w(TAG, "Camera said it supported preview size " + bestPreviewSize.x + 'x'.toString() + bestPreviewSize.y +
-                    ", but after setting it, preview size is " + afterSize!!.width + 'x'.toString() + afterSize!!.height)
-            bestPreviewSize.x = afterSize!!.width
-            bestPreviewSize.y = afterSize!!.height
+                    ", but after setting it, preview size is " + afterSize.width + 'x'.toString() + afterSize.height)
+            bestPreviewSize.x = afterSize.width
+            bestPreviewSize.y = afterSize.height
         }
     }
 

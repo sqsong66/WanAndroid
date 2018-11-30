@@ -286,7 +286,7 @@ object CameraConfigurationUtils {
                 continue
             }
 
-            val isCandidatePortrait = realWidth < realHeight
+            val isCandidatePortrait = screenResolution.x < screenResolution.y // realWidth < realHeight
             val maybeFlippedWidth = if (isCandidatePortrait) realHeight else realWidth
             val maybeFlippedHeight = if (isCandidatePortrait) realWidth else realHeight
             val aspectRatio = maybeFlippedWidth / maybeFlippedHeight.toDouble()

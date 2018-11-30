@@ -10,6 +10,9 @@ import android.util.TypedValue
 import android.widget.ProgressBar
 import android.widget.TextView
 import com.sqsong.wanandroid.R
+import java.sql.Timestamp
+import java.text.SimpleDateFormat
+import java.util.*
 
 object CommonUtil {
 
@@ -76,5 +79,15 @@ object CommonUtil {
             }
         }
         return buffer.toString()
+    }
+
+    fun formatLongTimeToString(timestamp: Long, format: String): String {
+        val sdf = SimpleDateFormat(format, Locale.US)
+        try {
+            return sdf.format(Date(timestamp))
+        } catch (e: java.lang.Exception) {
+            e.printStackTrace()
+        }
+        return ""
     }
 }

@@ -8,8 +8,10 @@ import android.graphics.Paint
 import android.util.AttributeSet
 import android.view.View
 import androidx.core.content.ContextCompat
+import com.google.zxing.ResultPoint
 import com.sqsong.wanandroid.R
 import com.sqsong.wanandroid.util.DensityUtil
+import com.sqsong.wanandroid.util.zxing.camera.CameraManager
 
 class ScanningView @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null,
                                              defStyleAttr: Int = 0) : View(context, attrs, defStyleAttr) {
@@ -29,6 +31,10 @@ class ScanningView @JvmOverloads constructor(context: Context, attrs: AttributeS
     private var mLineWidth: Int = 0
     private var mLineStartY: Float = .0f
     private var mGapDistance: Float = .0f
+    private var mPointRadius: Float = .0f
+    private var mCameraManager: CameraManager? = null
+    private var mPointList = ArrayList<ResultPoint>(5)
+    private var mLastPointList: ArrayList<ResultPoint>? = null
 
     init {
         initAttrs(context, attrs)
@@ -67,6 +73,7 @@ class ScanningView @JvmOverloads constructor(context: Context, attrs: AttributeS
         mLineWidth = mRectWidth
 
         mGapDistance = (borderHeight + borderGap).toFloat()
+        mPointRadius = DensityUtil.dip2px(2).toFloat()
     }
 
     override fun onDraw(canvas: Canvas?) {
@@ -74,6 +81,10 @@ class ScanningView @JvmOverloads constructor(context: Context, attrs: AttributeS
         drawMusk(canvas)
         drawBorder(canvas)
         drawCenterLine(canvas)
+        drawPossiblePoints(canvas)
+
+        postInvalidateDelayed(ANIMATE_DELAY/*, mStartX.toInt(), mStartY.toInt(),
+                (mStartX + mRectWidth).toInt(), (mStartY + mRectWidth).toInt()*/)
     }
 
     private fun drawMusk(canvas: Canvas?) {
@@ -109,12 +120,70 @@ class ScanningView @JvmOverloads constructor(context: Context, attrs: AttributeS
         if (mLineStartY > (mStartY + mRectWidth)) {
             mLineStartY = mStartY
         }
-        postInvalidateDelayed(ANIMATE_DELAY, mStartX.toInt(), mStartY.toInt(),
-                (mStartX + mRectWidth).toInt(), (mStartY + mRectWidth).toInt())
+    }
+
+    private fun drawPossiblePoints(canvas: Canvas?) {
+        if (mCameraManager == null || mPointList.isEmpty()) return
+        // LogUtil.e("Start draw points. points size ${mPointList.size}")
+        val framingRect = mCameraManager?.getFramingRect() ?: return
+        val previewRect = mCameraManager?.getFramingRectInPreview() ?: return
+        val scaleX = mRectWidth * 1.0f / previewRect.width()
+        val scaleY = mRectWidth * 1.0f / previewRect.height()
+
+        var currentPoints = mPointList
+        var lastPoints = mLastPointList
+        val frameLeft = framingRect.left
+        val frameTop = framingRect.top
+
+        if (currentPoints.isEmpty()) {
+            mLastPointList = null
+        } else {
+            mPointList = ArrayList(5)
+            mLastPointList = currentPoints
+            mPaint.alpha = POINT_ALPHA
+            synchronized(currentPoints) {
+                for (point in currentPoints) {
+                    canvas?.drawCircle((frameLeft + (point.x * scaleX).toInt()).toFloat(),
+                            (frameTop + (point.y * scaleY).toInt()).toFloat(),
+                            mPointRadius, mPaint)
+                }
+            }
+        }
+
+        if (lastPoints != null) {
+            mPaint.alpha = POINT_ALPHA / 2
+            synchronized(lastPoints) {
+                val radius = mPointRadius / 2
+                for (point in lastPoints) {
+                    canvas?.drawCircle((frameLeft + (point.x * scaleX).toInt()).toFloat(),
+                            (frameTop + (point.y * scaleY).toInt()).toFloat(),
+                            radius, mPaint)
+                }
+            }
+        }
+    }
+
+    fun setCameraManager(cameraManager: CameraManager?) {
+        this.mCameraManager = cameraManager
+    }
+
+    fun addPossibleResultPoint(point: ResultPoint?) {
+        // LogUtil.i("Found point: [${point?.x}, ${point?.y}]")
+        if (point == null) return
+        val points = mPointList
+        synchronized(points) {
+            points.add(point)
+            val size = points.size
+            if (size > MAX_RESULT_POINTS) {
+                points.subList(0, mPointList.size - MAX_RESULT_POINTS / 2).clear()
+            }
+        }
     }
 
     companion object {
-        const val LINE_STEP = 10
-        const val ANIMATE_DELAY = 20L
+        const val LINE_STEP: Int = 10
+        const val ANIMATE_DELAY: Long = 80L
+        const val MAX_RESULT_POINTS: Int = 20
+        const val POINT_ALPHA = 0xA0
     }
 }

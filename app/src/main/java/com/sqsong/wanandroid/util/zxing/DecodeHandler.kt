@@ -12,6 +12,7 @@ import com.sqsong.wanandroid.util.LogUtil
 import com.sqsong.wanandroid.util.zxing.camera.CameraManager
 import java.io.ByteArrayOutputStream
 
+
 class DecodeHandler constructor(private val captureHandler: CaptureHandler,
                                 private val cameraManager: CameraManager,
                                 hints: MutableMap<DecodeHintType, Any>) : Handler() {
@@ -31,13 +32,23 @@ class DecodeHandler constructor(private val captureHandler: CaptureHandler,
             R.id.decode -> decode(msg.obj as ByteArray, msg.arg1, msg.arg2)
             R.id.quit -> {
                 isRunning = false
-                Looper.myLooper()!!.quit()
+                Looper.myLooper()?.quit()
             }
         }
     }
 
-    private fun decode(data: ByteArray, width: Int, height: Int) {
+    private fun decode(d: ByteArray, width: Int, height: Int) {
         val start = System.currentTimeMillis()
+        var data = d
+        if (width < height) {
+            // portrait
+            val rotatedData = ByteArray(data.size)
+            for (x in 0 until width) {
+                for (y in 0 until height)
+                    rotatedData[y * width + width - x - 1] = data[y + x * height]
+            }
+            data = rotatedData
+        }
         var rawResult: Result? = null
         val source = cameraManager.buildLuminanceSource(data, width, height)
         if (source != null) {
@@ -45,7 +56,7 @@ class DecodeHandler constructor(private val captureHandler: CaptureHandler,
             try {
                 rawResult = mMultiFormatReader.decodeWithState(bitmap)
             } catch (re: ReaderException) {
-                re.printStackTrace()
+                // re.printStackTrace()
             } finally {
                 mMultiFormatReader.reset()
             }

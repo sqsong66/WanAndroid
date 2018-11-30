@@ -78,14 +78,12 @@ class CameraManager constructor(private val context: Context) {
      */
     @Synchronized
     fun closeDriver() {
-        if (camera != null) {
-            camera!!.camera.release()
-            camera = null
-            // Make sure to clear these each time we close the camera, so that any scanning rect
-            // requested by intent is forgotten.
-            framingRect = null
-            framingRectInPreview = null
-        }
+        camera?.camera?.release()
+        camera = null
+        // Make sure to clear these each time we close the camera, so that any scanning rect
+        // requested by intent is forgotten.
+        framingRect = null
+        framingRectInPreview = null
     }
 
     /**
@@ -106,19 +104,17 @@ class CameraManager constructor(private val context: Context) {
      */
     @Synchronized
     fun stopPreview() {
-        if (autoFocusManager != null) {
-            autoFocusManager!!.stop()
-            autoFocusManager = null
-        }
+        autoFocusManager?.stop()
+        autoFocusManager = null
         if (camera != null && previewing) {
-            camera!!.camera.stopPreview()
+            camera?.camera?.stopPreview()
             previewCallback.setHandler(null, 0)
             previewing = false
         }
     }
 
     /**
-     * Convenience method for [com.google.zxing.client.android.CaptureActivity]
+     * Convenience method for show light.
      *
      * @param newSetting if `true`, light should be turned on if currently off. And vice versa.
      */
@@ -170,10 +166,10 @@ class CameraManager constructor(private val context: Context) {
                 return null
             }
             val screenResolution = configManager.getScreenResolution()
-            val width = findDesiredDimensionInRange(screenResolution.x, MIN_FRAME_WIDTH, MAX_FRAME_WIDTH)
-            val height = findDesiredDimensionInRange(screenResolution.y, MIN_FRAME_HEIGHT, MAX_FRAME_HEIGHT)
+            val width = screenResolution.x * 3 / 5// findDesiredDimensionInRange(screenResolution.x, MIN_FRAME_WIDTH, MAX_FRAME_WIDTH)
+            val height = width // findDesiredDimensionInRange(screenResolution.y, MIN_FRAME_HEIGHT, MAX_FRAME_HEIGHT)
             val leftOffset = (screenResolution.x - width) / 2
-            val topOffset = (screenResolution.y - height) / 2
+            val topOffset = screenResolution.y / 5  // (screenResolution.y - height) / 2
             framingRect = Rect(leftOffset, topOffset, leftOffset + width, topOffset + height)
             Log.d(TAG, "Calculated framing rect: $framingRect")
         }
@@ -191,7 +187,7 @@ class CameraManager constructor(private val context: Context) {
     }
 
     /**
-     * Like [.getFramingRect] but coordinates are in terms of the preview frame,
+     * Like [getFramingRect] but coordinates are in terms of the preview frame,
      * not UI / screen.
      *
      * @return [Rect] expressing barcode scan area in terms of the preview size
@@ -204,10 +200,10 @@ class CameraManager constructor(private val context: Context) {
             val cameraResolution = configManager.getCameraResolution()
             val screenResolution = configManager.getScreenResolution()
 
-            rect.left = rect.left * cameraResolution.x / screenResolution.x
-            rect.right = rect.right * cameraResolution.x / screenResolution.x
-            rect.top = rect.top * cameraResolution.y / screenResolution.y
-            rect.bottom = rect.bottom * cameraResolution.y / screenResolution.y
+            rect.left = rect.left * cameraResolution.y / screenResolution.x
+            rect.right = rect.right * cameraResolution.y / screenResolution.x
+            rect.top = rect.top * cameraResolution.x / screenResolution.y
+            rect.bottom = rect.bottom * cameraResolution.x / screenResolution.y
             framingRectInPreview = rect
         }
         return framingRectInPreview
@@ -233,9 +229,9 @@ class CameraManager constructor(private val context: Context) {
      * @param height The height in pixels to scan.
      */
     @Synchronized
-    fun setManualFramingRect(width: Int, height: Int) {
-        var width = width
-        var height = height
+    fun setManualFramingRect(w: Int, h: Int) {
+        var width = w
+        var height = h
         if (initialized) {
             val screenResolution = configManager.getScreenResolution()
             if (width > screenResolution.x) {
@@ -272,9 +268,5 @@ class CameraManager constructor(private val context: Context) {
 
     companion object {
         private const val TAG = "CameraManager"
-        private const val MIN_FRAME_WIDTH = 240
-        private const val MIN_FRAME_HEIGHT = 240
-        private const val MAX_FRAME_WIDTH = 1200 // = 5/8 * 1920
-        private const val MAX_FRAME_HEIGHT = 675 // = 5/8 * 1080
     }
 }

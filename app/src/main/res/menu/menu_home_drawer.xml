@@ -8,7 +8,6 @@
             android:id="@+id/nav_home"
             android:icon="@drawable/ic_home"
             android:title="@string/text_home" />
-
     </group>
 
     <item android:title="">
