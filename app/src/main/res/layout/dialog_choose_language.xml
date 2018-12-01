@@ -63,4 +63,33 @@
 
     </LinearLayout>
 
+    <LinearLayout
+        android:id="@+id/tradition_chinese_ll"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_without_corner"
+        android:clickable="true"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="16dp">
+
+        <RadioButton
+            android:id="@+id/tradition_chinese_rb"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:buttonTint="?colorDialogIcon"
+            android:clickable="false"
+            android:enabled="false" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:background="@android:color/transparent"
+            android:text="@string/text_tradition_chinese"
+            android:textColor="?colorTextActive"
+            android:textSize="16sp" />
+
+    </LinearLayout>
+
 </LinearLayout>

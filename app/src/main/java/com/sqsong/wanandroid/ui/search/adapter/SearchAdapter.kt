@@ -1,6 +1,8 @@
 package com.sqsong.wanandroid.ui.search.adapter
 
 import android.content.Context
+import android.os.Build
+import android.text.Html
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -127,7 +129,11 @@ class SearchAdapter @Inject constructor(context: Context, private val dataList: 
             labelView?.visibility = if (homeItem.fresh) View.VISIBLE else View.INVISIBLE
             authorTv?.text = homeItem.author
             timeTv?.text = homeItem.niceDate
-            titleTv?.text = homeItem.title
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                titleTv?.text = Html.fromHtml(homeItem.title, Html.FROM_HTML_MODE_LEGACY)
+            } else {
+                titleTv?.text = Html.fromHtml(homeItem.title)
+            }
             heartIv?.isChecked = homeItem.collect
 
             heartRl?.setOnClickListener {

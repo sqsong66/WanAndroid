@@ -18,6 +18,7 @@ class LanguageManager @Inject constructor(private val preferences: SharedPrefere
         var locale: Locale = when (languageType) {
             Constants.LANGUAGE_TYPE_ENGLISH -> Locale.ENGLISH
             Constants.LANGUAGE_TYPE_CHINESE -> Locale.SIMPLIFIED_CHINESE
+            Constants.LANGUAGE_TYPE_TRADITION_CHINESE -> Locale.TRADITIONAL_CHINESE
             else -> Locale.getDefault()
         }
 

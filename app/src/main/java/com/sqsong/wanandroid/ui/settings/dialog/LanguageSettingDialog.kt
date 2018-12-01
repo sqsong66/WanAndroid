@@ -22,6 +22,7 @@ class LanguageSettingDialog @Inject constructor() : DialogFragment(), View.OnCli
 
     private var englishRb: RadioButton? = null
     private var chineseRb: RadioButton? = null
+    private var traditionChineseRb: RadioButton? = null
     private var mListener: OnLanguageChangeListener? = null
 
     override fun onAttach(context: Context?) {
@@ -38,7 +39,11 @@ class LanguageSettingDialog @Inject constructor() : DialogFragment(), View.OnCli
             setCancelable(false)
             setNegativeButton(R.string.text_cancel, null)
             setPositiveButton(R.string.text_save) { _, _ ->
-                val type = if (englishRb?.isChecked == true) Constants.LANGUAGE_TYPE_ENGLISH else Constants.LANGUAGE_TYPE_CHINESE
+                val type = when {
+                    chineseRb?.isChecked == true -> Constants.LANGUAGE_TYPE_CHINESE
+                    traditionChineseRb?.isChecked == true -> Constants.LANGUAGE_TYPE_TRADITION_CHINESE
+                    else -> Constants.LANGUAGE_TYPE_ENGLISH
+                }
                 mListener?.languageChanged(type)
                 dismiss()
             }
@@ -51,13 +56,15 @@ class LanguageSettingDialog @Inject constructor() : DialogFragment(), View.OnCli
         val view = inflater?.inflate(R.layout.dialog_choose_language, null)
         view?.findViewById<LinearLayout>(R.id.english_ll)?.setOnClickListener(this)
         view?.findViewById<LinearLayout>(R.id.chinese_ll)?.setOnClickListener(this)
+        view?.findViewById<LinearLayout>(R.id.tradition_chinese_ll)?.setOnClickListener(this)
         englishRb = view?.findViewById(R.id.english_rb)
         chineseRb = view?.findViewById(R.id.chinese_rb)
+        traditionChineseRb = view?.findViewById(R.id.tradition_chinese_rb)
         val type = mPreferences[Constants.LANGUAGE_TYPE, 0]
-        if (type == Constants.LANGUAGE_TYPE_CHINESE) {
-            chineseRb?.isChecked = true
-        } else {
-            englishRb?.isChecked = true
+        when (type) {
+            Constants.LANGUAGE_TYPE_CHINESE -> chineseRb?.isChecked = true
+            Constants.LANGUAGE_TYPE_TRADITION_CHINESE -> traditionChineseRb?.isChecked = true
+            else -> englishRb?.isChecked = true
         }
         return view
     }
@@ -68,13 +75,20 @@ class LanguageSettingDialog @Inject constructor() : DialogFragment(), View.OnCli
                 if (englishRb?.isChecked == false) {
                     englishRb?.isChecked = true
                     chineseRb?.isChecked = false
+                    traditionChineseRb?.isChecked = false
                 }
             }
             R.id.chinese_ll -> {
                 if (chineseRb?.isChecked == false) {
                     chineseRb?.isChecked = true
                     englishRb?.isChecked = false
+                    traditionChineseRb?.isChecked = false
                 }
+            }
+            R.id.tradition_chinese_ll -> {
+                chineseRb?.isChecked = false
+                englishRb?.isChecked = false
+                traditionChineseRb?.isChecked = true
             }
         }
     }

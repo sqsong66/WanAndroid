@@ -50,15 +50,9 @@ class SplashPresenter @Inject constructor(private val splashView: SplashContract
     }
 
     private fun setTextAnimation() {
-        val font: String
         val languageType = mPreferences[Constants.LANGUAGE_TYPE, 0]
-        font = if (languageType == Constants.LANGUAGE_TYPE_CHINESE || "zh" == Locale.getDefault().language) {
-            "font/Kaiti.otf"
-        } else {
-            "font/Boogaloo-Regular.ttf"
-        }
-        CommonUtil.setAssetsTextFont(mView.getAndroidText(), font)
-        CommonUtil.setAssetsTextFont(mView.getPlayText(), font)
+        CommonUtil.setAssetsTextFont(mView.getAndroidText(), languageType)
+        CommonUtil.setAssetsTextFont(mView.getPlayText(), languageType)
 
         val halfScreenWidth = DensityUtil.getScreenWidth() * 1.0f / 2
         val textPaint = mView.getPlayText().paint

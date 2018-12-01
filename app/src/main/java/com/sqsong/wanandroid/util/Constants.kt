@@ -51,4 +51,6 @@ object Constants {
     const val LANGUAGE_TYPE_ENGLISH = 1
 
     const val LANGUAGE_TYPE_CHINESE = 2
+
+    const val LANGUAGE_TYPE_TRADITION_CHINESE = 3
 }

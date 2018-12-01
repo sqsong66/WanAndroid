@@ -1,12 +1,15 @@
 package com.sqsong.wanandroid.ui.login.mvp
 
 import android.content.Context
+import android.content.SharedPreferences
 import com.sqsong.wanandroid.R
 import com.sqsong.wanandroid.data.BaseData
 import com.sqsong.wanandroid.mvp.BasePresenter
 import com.sqsong.wanandroid.network.ApiException
 import com.sqsong.wanandroid.network.ObserverImpl
 import com.sqsong.wanandroid.util.CommonUtil
+import com.sqsong.wanandroid.util.Constants
+import com.sqsong.wanandroid.util.PreferenceHelper.get
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
@@ -21,6 +24,9 @@ class RegisterPresenter @Inject constructor(private val registerView: RegisterCo
     @Inject
     lateinit var mContext: Context
 
+    @Inject
+    lateinit var mPreferences: SharedPreferences
+
     override fun onAttach(view: RegisterContract.View) {
         mView = registerView
         registerEvents()
@@ -28,7 +34,8 @@ class RegisterPresenter @Inject constructor(private val registerView: RegisterCo
 
     private fun registerEvents() {
         // Set title font.
-        CommonUtil.setAssetsTextFont(mView.getTitleText(), "font/Pacifico-Regular.ttf")
+        val languageType = mPreferences[Constants.LANGUAGE_TYPE, 0]
+        CommonUtil.setAssetsTextFont(mView.getTitleText(), languageType)
         disposable.add(mView.backDisposable())
         disposable.add(mView.userNameDisposable())
         disposable.add(mView.passwordDisposable())

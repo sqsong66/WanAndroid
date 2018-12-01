@@ -45,6 +45,20 @@ object CommonUtil {
         }
     }
 
+    fun setAssetsTextFont(textView: TextView, languageType: Int?) {
+        try {
+            val assetsFont = if (/*languageType == Constants.LANGUAGE_TYPE_CHINESE
+                    || */languageType == Constants.LANGUAGE_TYPE_TRADITION_CHINESE) {
+                "font/Kaiti.otf"
+            } else{
+                "font/Boogaloo-Regular.ttf"
+            }
+            textView.typeface = Typeface.createFromAsset(textView.context.assets, assetsFont)
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+    }
+
     fun parseUrlParameter(url: String?, paramName: String): String? {
         if (TextUtils.isEmpty(url)) return null
         val uri = Uri.parse(url)

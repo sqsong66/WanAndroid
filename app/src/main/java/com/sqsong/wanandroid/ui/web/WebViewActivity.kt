@@ -1,6 +1,8 @@
 package com.sqsong.wanandroid.ui.web
 
 import android.content.Intent
+import android.os.Build
+import android.text.Html
 import android.view.Menu
 import android.view.MenuItem
 import android.view.ViewTreeObserver
@@ -38,7 +40,13 @@ class WebViewActivity : BaseActivity<WebViewPresenter>(), WebViewContract.View, 
         setupSwipeLayoutColor(swipeLayout)
         swipeLayout.setOnRefreshListener(this)
         mPresenter.onAttach(this)
-        toolbar.post { toolbar.title = mWebTitle }
+        toolbar.post {
+            toolbar.title = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                Html.fromHtml(mWebTitle, Html.FROM_HTML_MODE_LEGACY)
+            } else {
+                Html.fromHtml(mWebTitle)
+            }
+        }
 
         onScrollListener = ViewTreeObserver.OnScrollChangedListener {
             swipeLayout.isEnabled = webView.scrollY == 0

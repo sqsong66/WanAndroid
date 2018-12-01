@@ -109,4 +109,8 @@ class ScanningPresenter @Inject constructor(disposable: CompositeDisposable) :
 
     fun restartScanning() = mCaptureHandler?.sendEmptyMessageDelayed(R.id.restart_preview, 500)
 
+    fun lighting(light: Boolean) {
+        mCameraManager?.setTorch(light)
+    }
+
 }

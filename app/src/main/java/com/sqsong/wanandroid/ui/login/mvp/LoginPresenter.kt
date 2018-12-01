@@ -36,7 +36,8 @@ class LoginPresenter @Inject constructor(private val loginView: LoginContract.Vi
 
     private fun registerEvents() {
         setupUserName()
-        CommonUtil.setAssetsTextFont(mView.getTitleText(), "font/Pacifico-Regular.ttf") // Set title font.
+        val languageType = mPreferences[Constants.LANGUAGE_TYPE, 0]
+        CommonUtil.setAssetsTextFont(mView.getTitleText(), languageType)
         disposable.add(mView.closeDisposable())
         disposable.add(mView.forgetPasswordDisposable())
         disposable.add(mView.registerDisposable())

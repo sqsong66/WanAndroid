@@ -26,6 +26,13 @@ class ScanningActivity : BaseActivity<ScanningPresenter>(), ScanningContract.Vie
     override fun initEvent() {
         setupToolbar(toolbar)
         mPresenter.onAttach(this)
+        lightImage.setOnClickListener {
+            if (lightImage.isChecked) {
+                mPresenter.lighting(true)
+            } else {
+                mPresenter.lighting(false)
+            }
+        }
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
