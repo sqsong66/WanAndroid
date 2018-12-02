@@ -5,7 +5,6 @@ import android.widget.TextView
 import com.jakewharton.rxbinding2.view.RxView
 import com.sqsong.wanandroid.R
 import com.sqsong.wanandroid.common.LoadingProgressDialog
-import com.sqsong.wanandroid.common.inter.ChangeThemeAnnotation
 import com.sqsong.wanandroid.common.inter.IAppCompatActivity
 import com.sqsong.wanandroid.ui.base.BaseActivity
 import com.sqsong.wanandroid.ui.home.activity.MainActivity
@@ -19,7 +18,6 @@ import io.reactivex.disposables.Disposable
 import kotlinx.android.synthetic.main.activity_login.*
 import javax.inject.Inject
 
-@ChangeThemeAnnotation
 class LoginActivity : BaseActivity<LoginPresenter>(), LoginContract.View, IAppCompatActivity {
 
     @Inject

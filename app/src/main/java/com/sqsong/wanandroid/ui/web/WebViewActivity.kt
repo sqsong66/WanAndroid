@@ -11,7 +11,6 @@ import android.widget.ProgressBar
 import androidx.appcompat.widget.Toolbar
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.sqsong.wanandroid.R
-import com.sqsong.wanandroid.common.inter.ChangeThemeAnnotation
 import com.sqsong.wanandroid.ui.base.BaseActivity
 import com.sqsong.wanandroid.ui.web.mvp.WebViewContract
 import com.sqsong.wanandroid.ui.web.mvp.WebViewPresenter
@@ -21,7 +20,6 @@ import com.sqsong.wanandroid.util.ext.setupToolbar
 import kotlinx.android.synthetic.main.activity_webview.*
 import kotlinx.android.synthetic.main.content_webview.*
 
-@ChangeThemeAnnotation
 class WebViewActivity : BaseActivity<WebViewPresenter>(), WebViewContract.View, SwipeRefreshLayout.OnRefreshListener {
 
     private lateinit var mLinkUrl: String

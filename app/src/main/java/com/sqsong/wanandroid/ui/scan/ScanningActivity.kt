@@ -6,7 +6,6 @@ import android.view.MenuItem
 import android.view.SurfaceView
 import com.google.zxing.ResultPoint
 import com.sqsong.wanandroid.R
-import com.sqsong.wanandroid.common.inter.ChangeThemeAnnotation
 import com.sqsong.wanandroid.data.ScanResult
 import com.sqsong.wanandroid.ui.base.BaseActivity
 import com.sqsong.wanandroid.ui.scan.fragment.ScanningResultDialog
@@ -18,7 +17,6 @@ import com.sqsong.wanandroid.util.ext.setupToolbar
 import com.sqsong.wanandroid.util.zxing.camera.CameraManager
 import kotlinx.android.synthetic.main.activity_scanning.*
 
-@ChangeThemeAnnotation
 class ScanningActivity : BaseActivity<ScanningPresenter>(), ScanningContract.View, ScanningResultDialog.ScanResultDialogActionListener {
 
     override fun getLayoutResId(): Int = R.layout.activity_scanning

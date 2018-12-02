@@ -6,7 +6,6 @@ import android.content.Context
 import android.content.SharedPreferences
 import android.graphics.Color
 import androidx.annotation.StyleRes
-import com.sqsong.wanandroid.common.inter.ChangeThemeAnnotation
 import com.sqsong.wanandroid.util.Constants
 import com.sqsong.wanandroid.util.PreferenceHelper.get
 import com.sqsong.wanandroid.util.PreferenceHelper.set
@@ -69,17 +68,16 @@ class ThemeSwitcherManager {
         if (mThemeColorIndex == themeColorIndex) return
         mPreferences[Constants.THEMEOVERLAY_INDEX] = themeColorIndex
         for (activity in mActivityList) {
-            if ((activity?.javaClass?.isAnnotationPresent(ChangeThemeAnnotation::class.java))!!)
-                activity.recreate()
+            activity?.recreate()
         }
         mThemeColorIndex = themeColorIndex
     }
 
-    fun applyThemeOverlay(activity: Activity) {
+    fun applyThemeOverlay(activity: Activity?) {
         val overlayList = getThemeOverlayList()
         if (mThemeColorIndex >= 0 && mThemeColorIndex < overlayList.size) {
             val palette = overlayList[mThemeColorIndex]
-            activity.setTheme(palette.themeOverlay)
+            activity?.setTheme(palette.themeOverlay)
         }
     }
 

@@ -11,7 +11,6 @@ import com.sqsong.wanandroid.BaseApplication
 import com.sqsong.wanandroid.R
 import com.sqsong.wanandroid.common.NoLeakHandler
 import com.sqsong.wanandroid.common.RecyclerScrollListener
-import com.sqsong.wanandroid.common.inter.ChangeThemeAnnotation
 import com.sqsong.wanandroid.ui.base.BaseActivity
 import com.sqsong.wanandroid.ui.home.adapter.KnowledgeItemAdapter
 import com.sqsong.wanandroid.ui.home.mvp.knowledge.ChildKnowledgeContract
@@ -25,7 +24,6 @@ import com.sqsong.wanandroid.view.DefaultPageLayout
 import kotlinx.android.synthetic.main.activity_knowledge.*
 import kotlinx.android.synthetic.main.content_knowledge.*
 
-@ChangeThemeAnnotation
 class KnowledgeActivity : BaseActivity<ChildKnowledgePresenter>(), ChildKnowledgeContract.View,
         SwipeRefreshLayout.OnRefreshListener, RecyclerScrollListener.OnLoadMoreListener {
 

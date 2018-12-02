@@ -57,6 +57,7 @@ class ScanningResultDialog : DialogFragment() {
             }
             create()
         }
+        dialog?.setCanceledOnTouchOutside(false)
         return dialog ?: super.onCreateDialog(savedInstanceState)
     }
 

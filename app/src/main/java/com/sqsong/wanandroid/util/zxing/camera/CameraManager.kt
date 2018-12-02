@@ -166,11 +166,10 @@ class CameraManager constructor(private val context: Context) {
                 return null
             }
             val screenResolution = configManager.getScreenResolution()
-            val width = screenResolution.x * 3 / 5// findDesiredDimensionInRange(screenResolution.x, MIN_FRAME_WIDTH, MAX_FRAME_WIDTH)
-            val height = width // findDesiredDimensionInRange(screenResolution.y, MIN_FRAME_HEIGHT, MAX_FRAME_HEIGHT)
+            val width = (screenResolution.x * WIDTH_RATIO).toInt()// findDesiredDimensionInRange(screenResolution.x, MIN_FRAME_WIDTH, MAX_FRAME_WIDTH)
             val leftOffset = (screenResolution.x - width) / 2
-            val topOffset = screenResolution.y / 5  // (screenResolution.y - height) / 2
-            framingRect = Rect(leftOffset, topOffset, leftOffset + width, topOffset + height)
+            val topOffset = (screenResolution.y * HEIGHT_RATIO).toInt()  // (screenResolution.y - height) / 2
+            framingRect = Rect(leftOffset, topOffset, leftOffset + width, topOffset + width)
             Log.d(TAG, "Calculated framing rect: $framingRect")
         }
         return framingRect
@@ -225,8 +224,8 @@ class CameraManager constructor(private val context: Context) {
      * Allows third party apps to specify the scanning rectangle dimensions, rather than determine
      * them automatically based on screen resolution.
      *
-     * @param width The width in pixels to scan.
-     * @param height The height in pixels to scan.
+     * @param w The width in pixels to scan.
+     * @param h The height in pixels to scan.
      */
     @Synchronized
     fun setManualFramingRect(w: Int, h: Int) {
@@ -266,7 +265,25 @@ class CameraManager constructor(private val context: Context) {
                 rect.width(), rect.height(), false)
     }
 
+    /**
+     * Get the width ratio(preview rect start x coordinate) relative to the screen width.
+     * @return the width ratio
+     */
+    fun getWidthRatio(): Float {
+        return WIDTH_RATIO
+    }
+
+    /**
+     * Get the preview rect y coordinate ratio(relative to the screen height).
+     * @return the height ratio
+     */
+    fun getHeightRation(): Float {
+        return HEIGHT_RATIO
+    }
+
     companion object {
         private const val TAG = "CameraManager"
+        private const val WIDTH_RATIO = 0.6f
+        private const val HEIGHT_RATIO = 0.2f
     }
 }

@@ -2,9 +2,11 @@ package com.sqsong.wanandroid.common
 
 import android.app.Activity
 import android.app.Application
+import android.os.Build
 import android.os.Bundle
-import com.sqsong.wanandroid.common.inter.ChangeThemeAnnotation
+import android.view.WindowManager
 import com.sqsong.wanandroid.common.inter.IAppCompatActivity
+import com.sqsong.wanandroid.common.inter.TranslucentNavigation
 import com.sqsong.wanandroid.common.language.LanguageManager
 import com.sqsong.wanandroid.theme.ThemeSwitcherManager
 import me.jessyan.autosize.AutoSize
@@ -27,8 +29,11 @@ class ActivityLifecycleCallbacksImpl @Inject constructor() : Application.Activit
         }
 
         // 设置主题
-        if ((activity?.javaClass?.isAnnotationPresent(ChangeThemeAnnotation::class.java))!!)
-            mThemeManager.applyThemeOverlay(activity)
+        mThemeManager.applyThemeOverlay(activity)
+        if ((activity?.javaClass?.isAnnotationPresent(TranslucentNavigation::class.java)) == true &&
+                Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            activity.window.setFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION, WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION)
+        }
 
         // 设置语言
         mLanguageManager.updateLanguageConfiguration(activity)

@@ -1,8 +1,10 @@
 package com.sqsong.wanandroid.ui.search.adapter
 
 import android.content.Context
-import android.os.Build
 import android.text.Html
+import android.text.Spannable
+import android.text.SpannableStringBuilder
+import android.text.style.ForegroundColorSpan
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,20 +16,23 @@ import butterknife.BindView
 import butterknife.ButterKnife
 import com.sqsong.wanandroid.R
 import com.sqsong.wanandroid.common.holder.LoadingFooterViewHolder
+import com.sqsong.wanandroid.common.holder.LoadingFooterViewHolder.LoadingState
 import com.sqsong.wanandroid.data.HomeItem
 import com.sqsong.wanandroid.ui.home.adapter.HomeItemAdapter
+import com.sqsong.wanandroid.util.CommonUtil
 import com.sqsong.wanandroid.util.Constants
 import com.sqsong.wanandroid.util.DensityUtil
 import com.sqsong.wanandroid.view.CheckableImageView
 import com.sqsong.wanandroid.view.LabelView
 import javax.inject.Inject
 
-class SearchAdapter @Inject constructor(context: Context, private val dataList: MutableList<HomeItem>) :
+class SearchAdapter @Inject constructor(val context: Context, private val dataList: MutableList<HomeItem>) :
         RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    @LoadingFooterViewHolder.LoadingState
+    @LoadingState
     private var mLoadingState: Int = 0
     private var mSearchResult: Int = 0
+    private var mSearchKey: String? = null
     private val mInflater = LayoutInflater.from(context)
     private var mActionListener: HomeItemAdapter.HomeItemActionListener? = null
 
@@ -62,13 +67,17 @@ class SearchAdapter @Inject constructor(context: Context, private val dataList: 
         notifyItemChanged(0)
     }
 
-    fun updateLoadingState(@LoadingFooterViewHolder.LoadingState state: Int) {
+    fun updateLoadingState(@LoadingState state: Int) {
         this.mLoadingState = state
         notifyItemChanged(dataList.size + 1)
     }
 
     fun setHomeItemActionListener(listener: HomeItemAdapter.HomeItemActionListener) {
         this.mActionListener = listener
+    }
+
+    fun setSearchKey(key: String?) {
+        this.mSearchKey = key
     }
 
     inner class SearchHeaderViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -129,12 +138,27 @@ class SearchAdapter @Inject constructor(context: Context, private val dataList: 
             labelView?.visibility = if (homeItem.fresh) View.VISIBLE else View.INVISIBLE
             authorTv?.text = homeItem.author
             timeTv?.text = homeItem.niceDate
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                titleTv?.text = Html.fromHtml(homeItem.title, Html.FROM_HTML_MODE_LEGACY)
-            } else {
-                titleTv?.text = Html.fromHtml(homeItem.title)
-            }
             heartIv?.isChecked = homeItem.collect
+
+            titleTv?.text = Html.fromHtml(homeItem.title)
+            val title = titleTv?.text.toString()
+            val keyArray = mSearchKey?.split(" ")
+            if (keyArray != null) {
+                if (keyArray.isNotEmpty()) {
+                    val spannable = SpannableStringBuilder(title)
+                    val color = CommonUtil.getThemeColor(context, R.attr.colorPrimary)
+                    for (key in keyArray) {
+                        val trimKey = key.trim()
+                        var index = title.indexOf(trimKey, 0, true)
+                        while (index >= 0) {
+                            spannable.setSpan(ForegroundColorSpan(color), index,
+                                    index + trimKey.length, Spannable.SPAN_INCLUSIVE_INCLUSIVE)
+                            index = title.indexOf(key.trim(), index + trimKey.length, true)
+                        }
+                    }
+                    titleTv?.text = spannable
+                }
+            }
 
             heartRl?.setOnClickListener {
                 mActionListener?.onStarClick(homeItem, position)
@@ -161,6 +185,8 @@ class SearchAdapter @Inject constructor(context: Context, private val dataList: 
                 line?.visibility = View.VISIBLE
             }
         }
+
+
     }
 
 }

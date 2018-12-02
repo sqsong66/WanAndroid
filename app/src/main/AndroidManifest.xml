@@ -37,50 +37,53 @@
             android:name=".ui.home.activity.MainActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.LoginTheme"
+            android:theme="@style/AppTheme.TransparentTheme"
             android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".ui.login.LoginActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.LoginTheme" />
+            android:theme="@style/AppTheme.TransparentTheme" />
         <activity
             android:name=".ui.login.RegisterActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.LoginTheme" />
+            android:theme="@style/AppTheme.TransparentTheme" />
         <activity
             android:name=".ui.home.activity.KnowledgeActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.LoginTheme" />
+            android:theme="@style/AppTheme.TransparentTheme" />
         <activity
             android:name=".ui.web.WebViewActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.LoginTheme" />
+            android:theme="@style/AppTheme.TransparentTheme" />
         <activity
             android:name=".ui.wechat.PublicAccountActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.LoginTheme" />
+            android:theme="@style/AppTheme.TransparentTheme" />
         <activity
             android:name=".ui.collection.CollectionActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.LoginTheme" />
+            android:theme="@style/AppTheme.TransparentTheme" />
         <activity
             android:name=".ui.search.SearchActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.LoginTheme"
+            android:theme="@style/AppTheme.TransparentTheme"
             android:windowSoftInputMode="adjustNothing" />
         <activity
             android:name=".ui.settings.SettingActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.LoginTheme" />
+            android:theme="@style/AppTheme.TransparentTheme" />
         <activity
             android:name=".ui.welfare.WelfareActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.LoginTheme" />
+            android:theme="@style/AppTheme.TransparentTheme" />
         <activity
             android:name=".ui.preview.ImagePreviewActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.TransparentTheme" />
-        <activity android:name=".ui.scan.ScanningActivity" />
+        <activity
+            android:name=".ui.scan.ScanningActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.TransparentTheme" />
     </application>
 
 </manifest>

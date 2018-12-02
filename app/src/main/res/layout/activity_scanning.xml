@@ -20,7 +20,7 @@
         app:bColor="?colorDialogIcon"
         app:bHeight="5dp"
         app:bWidth="25dp"
-        app:borderGap="4dp"
+        app:borderGap="6dp"
         app:centerLineColor="?colorDialogIcon"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"

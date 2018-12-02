@@ -50,7 +50,7 @@ object CommonUtil {
             val assetsFont = if (/*languageType == Constants.LANGUAGE_TYPE_CHINESE
                     || */languageType == Constants.LANGUAGE_TYPE_TRADITION_CHINESE) {
                 "font/Kaiti.otf"
-            } else{
+            } else {
                 "font/Boogaloo-Regular.ttf"
             }
             textView.typeface = Typeface.createFromAsset(textView.context.assets, assetsFont)
@@ -80,10 +80,9 @@ object CommonUtil {
 
     fun convertListToString(list: MutableList<String>?): String {
         if (list == null || list.isEmpty()) return ""
-        if (list.size > 5) {
-            var subList = list.subList(0, 5)
-            list.clear()
-            list.addAll(subList)
+        val size = list.size
+        if (size > 5) {
+            list.subList(5, size).clear()
         }
         val buffer = StringBuffer()
         for (i in 0 until list.size) {

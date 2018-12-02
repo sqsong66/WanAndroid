@@ -64,6 +64,11 @@ class SearchPresenter @Inject constructor(private val searchModel: SearchModel,
                 }
     }
 
+    fun refreshData() {
+        mPage = 0
+        startQuery(mCurrentKey)
+    }
+
     fun loadMore() {
         mPage++
         startQuery(mCurrentKey)
@@ -77,6 +82,7 @@ class SearchPresenter @Inject constructor(private val searchModel: SearchModel,
             return
         }
         mCurrentKey = key!!
+        mAdapter.setSearchKey(mCurrentKey)
         searchModel.query(mPage, key!!)
                 .compose(RxJavaHelper.compose())
                 .subscribe(object : ObserverImpl<HomeItemBean>(disposable) {

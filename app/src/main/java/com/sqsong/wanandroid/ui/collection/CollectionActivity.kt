@@ -9,7 +9,6 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.sqsong.wanandroid.R
 import com.sqsong.wanandroid.common.NoLeakHandler
 import com.sqsong.wanandroid.common.RecyclerScrollListener
-import com.sqsong.wanandroid.common.inter.ChangeThemeAnnotation
 import com.sqsong.wanandroid.ui.base.BaseActivity
 import com.sqsong.wanandroid.ui.collection.adapter.CollectionAdapter
 import com.sqsong.wanandroid.ui.collection.mvp.CollectionContract
@@ -24,7 +23,6 @@ import kotlinx.android.synthetic.main.content_knowledge.*
 /**
  * 收藏
  */
-@ChangeThemeAnnotation
 class CollectionActivity : BaseActivity<CollectionPresenter>(), CollectionContract.View, SwipeRefreshLayout.OnRefreshListener, RecyclerScrollListener.OnLoadMoreListener {
 
     private lateinit var mRecyclerScroller: RecyclerScrollListener

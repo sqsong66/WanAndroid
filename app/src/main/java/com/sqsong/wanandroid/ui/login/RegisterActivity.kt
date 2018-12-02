@@ -4,7 +4,6 @@ import android.widget.TextView
 import com.jakewharton.rxbinding2.view.RxView
 import com.sqsong.wanandroid.R
 import com.sqsong.wanandroid.common.LoadingProgressDialog
-import com.sqsong.wanandroid.common.inter.ChangeThemeAnnotation
 import com.sqsong.wanandroid.common.inter.IAppCompatActivity
 import com.sqsong.wanandroid.ui.base.BaseActivity
 import com.sqsong.wanandroid.ui.login.mvp.RegisterContract
@@ -17,7 +16,6 @@ import io.reactivex.disposables.Disposable
 import kotlinx.android.synthetic.main.activity_register.*
 import javax.inject.Inject
 
-@ChangeThemeAnnotation
 class RegisterActivity @Inject constructor() : BaseActivity<RegisterPresenter>(), RegisterContract.View, IAppCompatActivity {
 
     @Inject

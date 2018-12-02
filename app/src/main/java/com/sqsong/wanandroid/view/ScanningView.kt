@@ -28,8 +28,10 @@ class ScanningView @JvmOverloads constructor(context: Context, attrs: AttributeS
     private var mStartX: Float = .0f
     private var mStartY: Float = .0f
     private var mRectWidth: Int = 0
-    private lateinit var mPaint: Paint
     private var mLineWidth: Int = 0
+    private lateinit var mPaint: Paint
+    private var mWidthRatio: Float = .6f
+    private var mHeightRatio: Float = .2f
     private var mLineStartY: Float = .0f
     private var mGapDistance: Float = .0f
     private var mPointRadius: Float = .0f
@@ -66,16 +68,20 @@ class ScanningView @JvmOverloads constructor(context: Context, attrs: AttributeS
         mPaint.isDither = true
         mPaint.style = Paint.Style.FILL
 
-        val screenWidth = DensityUtil.getScreenWidth()
-        val screenHeight = DensityUtil.getScreenHeight()
-        mRectWidth = screenWidth * 3 / 5
-        mStartX = ((screenWidth - mRectWidth) / 2).toFloat()
-        mStartY = (screenHeight / 5).toFloat()
-        mLineStartY = mStartY
-        mLineWidth = mRectWidth
-
         mGapDistance = (borderHeight + borderGap).toFloat()
         mPointRadius = DensityUtil.dip2px(2).toFloat()
+
+        prepareStartParam()
+    }
+
+    private fun prepareStartParam() {
+        val screenWidth = DensityUtil.getScreenWidth()
+        val screenHeight = DensityUtil.getScreenHeight()
+        mRectWidth = (screenWidth * mWidthRatio).toInt()
+        mStartX = ((screenWidth - mRectWidth) / 2).toFloat()
+        mStartY = screenHeight * mHeightRatio
+        mLineStartY = mStartY
+        mLineWidth = mRectWidth
     }
 
     override fun onDraw(canvas: Canvas?) {
@@ -85,8 +91,8 @@ class ScanningView @JvmOverloads constructor(context: Context, attrs: AttributeS
         drawCenterLine(canvas)
         drawPossiblePoints(canvas)
 
-        postInvalidateDelayed(ANIMATE_DELAY/*, mStartX.toInt(), mStartY.toInt(),
-                (mStartX + mRectWidth).toInt(), (mStartY + mRectWidth).toInt()*/)
+        postInvalidateDelayed(ANIMATE_DELAY, mStartX.toInt(), mStartY.toInt(),
+                (mStartX + mRectWidth).toInt(), (mStartY + mRectWidth).toInt())
     }
 
     private fun drawMusk(canvas: Canvas?) {
@@ -132,8 +138,8 @@ class ScanningView @JvmOverloads constructor(context: Context, attrs: AttributeS
         val scaleX = mRectWidth * 1.0f / previewRect.width()
         val scaleY = mRectWidth * 1.0f / previewRect.height()
 
-        var currentPoints = mPointList
-        var lastPoints = mLastPointList
+        val currentPoints = mPointList
+        val lastPoints = mLastPointList
         val frameLeft = framingRect.left
         val frameTop = framingRect.top
 
@@ -169,6 +175,10 @@ class ScanningView @JvmOverloads constructor(context: Context, attrs: AttributeS
 
     fun setCameraManager(cameraManager: CameraManager?) {
         this.mCameraManager = cameraManager
+        mWidthRatio = cameraManager?.getWidthRatio() ?: mWidthRatio
+        mHeightRatio = cameraManager?.getHeightRation() ?: mHeightRatio
+        prepareStartParam()
+        postInvalidate()
     }
 
     fun addPossibleResultPoint(point: ResultPoint?) {

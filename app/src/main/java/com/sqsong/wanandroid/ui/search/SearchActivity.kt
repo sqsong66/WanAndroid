@@ -11,7 +11,6 @@ import com.sqsong.wanandroid.BaseApplication
 import com.sqsong.wanandroid.R
 import com.sqsong.wanandroid.common.NoLeakHandler
 import com.sqsong.wanandroid.common.RecyclerScrollListener
-import com.sqsong.wanandroid.common.inter.ChangeThemeAnnotation
 import com.sqsong.wanandroid.ui.base.BaseActivity
 import com.sqsong.wanandroid.ui.login.LoginActivity
 import com.sqsong.wanandroid.ui.search.adapter.SearchAdapter
@@ -22,7 +21,6 @@ import com.sqsong.wanandroid.view.DefaultPageLayout
 import io.reactivex.Observable
 import kotlinx.android.synthetic.main.activity_search.*
 
-@ChangeThemeAnnotation
 class SearchActivity : BaseActivity<SearchPresenter>(), SearchContract.View, RecyclerScrollListener.OnLoadMoreListener, View.OnClickListener {
 
     private var mSearchKey: String? = null
@@ -41,7 +39,7 @@ class SearchActivity : BaseActivity<SearchPresenter>(), SearchContract.View, Rec
                 .setTargetPage(recycler)
                 .setOnRetryClickListener(object : DefaultPageLayout.OnRetryClickListener {
                     override fun onRetry() {
-
+                        mPresenter.refreshData()
                     }
                 }).build()
     }

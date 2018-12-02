@@ -1,6 +1,7 @@
 package com.sqsong.wanandroid.ui.home.adapter
 
 import android.content.Context
+import android.text.Html
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -126,9 +127,9 @@ class HomeItemAdapter(context: Context,
             labelView?.visibility = if (homeItem.fresh) View.VISIBLE else View.INVISIBLE
             authorTv?.text = homeItem.author
             timeTv?.text = homeItem.niceDate
-            titleTv?.text = homeItem.title
-            superChapterChip?.text = homeItem.superChapterName
-            chapterChip?.text = homeItem.chapterName
+            titleTv?.text = Html.fromHtml(homeItem.title)
+            superChapterChip?.text = Html.fromHtml(homeItem.superChapterName)
+            chapterChip?.text = Html.fromHtml(homeItem.chapterName)
             starIv?.isChecked = homeItem.collect
 
             shareIv?.setOnClickListener {

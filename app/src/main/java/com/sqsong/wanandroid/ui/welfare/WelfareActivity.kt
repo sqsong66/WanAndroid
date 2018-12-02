@@ -11,7 +11,6 @@ import com.sqsong.wanandroid.R
 import com.sqsong.wanandroid.common.MediaGridInset
 import com.sqsong.wanandroid.common.NoLeakHandler
 import com.sqsong.wanandroid.common.RecyclerScrollListener
-import com.sqsong.wanandroid.common.inter.ChangeThemeAnnotation
 import com.sqsong.wanandroid.ui.base.BaseActivity
 import com.sqsong.wanandroid.ui.welfare.adapter.WelfareAdapter
 import com.sqsong.wanandroid.ui.welfare.mvp.WelfareContract
@@ -22,7 +21,6 @@ import com.sqsong.wanandroid.view.DefaultPageLayout
 import kotlinx.android.synthetic.main.activity_welfare.*
 import kotlinx.android.synthetic.main.content_knowledge.*
 
-@ChangeThemeAnnotation
 class WelfareActivity : BaseActivity<WelfarePresenter>(), WelfareContract.View, SwipeRefreshLayout.OnRefreshListener,
         RecyclerScrollListener.OnLoadMoreListener {
 

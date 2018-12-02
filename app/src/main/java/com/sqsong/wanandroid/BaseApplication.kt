@@ -2,7 +2,7 @@ package com.sqsong.wanandroid
 
 import android.app.Activity
 import com.sqsong.wanandroid.common.ActivityLifecycleCallbacksImpl
-import com.sqsong.wanandroid.common.inter.ChangeThemeAnnotation
+import com.sqsong.wanandroid.common.inter.TranslucentNavigation
 import com.sqsong.wanandroid.common.language.LanguageManager
 import com.sqsong.wanandroid.di.component.DaggerApplicationComponent
 import dagger.android.AndroidInjector
@@ -38,7 +38,7 @@ class BaseApplication : DaggerApplication() {
     fun changeLanguage(languageType: Int) {
         mLanguageManager.changeLanguage(applicationContext, languageType)
         for (activity in mActivityList) {
-            if ((activity?.javaClass?.isAnnotationPresent(ChangeThemeAnnotation::class.java))!!)
+            if ((activity?.javaClass?.isAnnotationPresent(TranslucentNavigation::class.java))!!)
                 activity.recreate()
         }
     }

@@ -4,12 +4,14 @@ import android.content.Intent
 import android.widget.TextView
 import com.sqsong.wanandroid.R
 import com.sqsong.wanandroid.common.inter.IAppCompatActivity
+import com.sqsong.wanandroid.common.inter.TranslucentNavigation
 import com.sqsong.wanandroid.ui.base.BaseActivity
 import com.sqsong.wanandroid.ui.splash.mvp.SplashContract
 import com.sqsong.wanandroid.ui.splash.mvp.SplashPresenter
 import com.sqsong.wanandroid.util.ext.showImage
 import kotlinx.android.synthetic.main.activity_splash.*
 
+@TranslucentNavigation
 class SplashActivity : BaseActivity<SplashPresenter>(), SplashContract.View, IAppCompatActivity {
 
     override fun getLayoutResId(): Int {

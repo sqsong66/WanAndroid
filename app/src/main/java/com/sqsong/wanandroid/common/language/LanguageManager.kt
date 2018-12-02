@@ -13,8 +13,8 @@ class LanguageManager @Inject constructor(private val preferences: SharedPrefere
     /**
      * @param languageType 0 - follow system,  1 - English,  2 - Chinese
      */
-    fun changeLanguage(context: Context, languageType: Int?) {
-        val configuration = context.resources.configuration
+    fun changeLanguage(context: Context?, languageType: Int?) {
+        val configuration = context?.resources?.configuration
         var locale: Locale = when (languageType) {
             Constants.LANGUAGE_TYPE_ENGLISH -> Locale.ENGLISH
             Constants.LANGUAGE_TYPE_CHINESE -> Locale.SIMPLIFIED_CHINESE
@@ -22,8 +22,8 @@ class LanguageManager @Inject constructor(private val preferences: SharedPrefere
             else -> Locale.getDefault()
         }
 
-        configuration.locale = locale
-        context.resources.updateConfiguration(configuration, context.resources.displayMetrics)
+        configuration?.locale = locale
+        context?.resources?.updateConfiguration(configuration, context.resources.displayMetrics)
         preferences[Constants.LANGUAGE_TYPE] = languageType
 
         /*when {
@@ -44,7 +44,7 @@ class LanguageManager @Inject constructor(private val preferences: SharedPrefere
         }*/
     }
 
-    fun updateLanguageConfiguration(context: Context) {
+    fun updateLanguageConfiguration(context: Context?) {
         val type = preferences[Constants.LANGUAGE_TYPE, 0]
         changeLanguage(context, type)
     }

@@ -4,7 +4,6 @@ import android.content.SharedPreferences
 import android.view.MenuItem
 import com.sqsong.wanandroid.BaseApplication
 import com.sqsong.wanandroid.R
-import com.sqsong.wanandroid.common.inter.ChangeThemeAnnotation
 import com.sqsong.wanandroid.theme.ThemeSwitcherDialog
 import com.sqsong.wanandroid.ui.base.BaseActivity
 import com.sqsong.wanandroid.ui.settings.dialog.LanguageSettingDialog
@@ -18,7 +17,6 @@ import io.reactivex.Observable
 import kotlinx.android.synthetic.main.activity_setting.*
 import javax.inject.Inject
 
-@ChangeThemeAnnotation
 class SettingActivity : BaseActivity<SettingPresenter>(), SettingContract.View, LanguageSettingDialog.OnLanguageChangeListener {
 
     @Inject

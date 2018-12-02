@@ -5,7 +5,7 @@ import androidx.fragment.app.FragmentManager
 import androidx.viewpager.widget.ViewPager
 import com.sqsong.wanandroid.R
 import com.sqsong.wanandroid.common.FragmentPagerAdapter
-import com.sqsong.wanandroid.common.inter.ChangeThemeAnnotation
+import com.sqsong.wanandroid.common.inter.TranslucentNavigation
 import com.sqsong.wanandroid.data.WelfareData
 import com.sqsong.wanandroid.ui.base.BaseActivity
 import com.sqsong.wanandroid.ui.preview.mvp.ImagePreviewContract
@@ -14,6 +14,7 @@ import com.sqsong.wanandroid.util.Constants
 import com.sqsong.wanandroid.util.ext.setupToolbar
 import kotlinx.android.synthetic.main.activity_image_preview.*
 
+@TranslucentNavigation
 class ImagePreviewActivity : BaseActivity<ImagePreviewPresenter>(), ImagePreviewContract.View {
 
     private var mCurPos = 0
@@ -33,7 +34,7 @@ class ImagePreviewActivity : BaseActivity<ImagePreviewPresenter>(), ImagePreview
     override fun initEvent() {
         setupToolbar(toolbar)
         mPresenter.onAttach(this)
-        toolbar.title = String.format(getString(R.string.text_image_index), mCurPos + 1, mWelfareList?.size)
+        toolbar.post { toolbar.title = String.format(getString(R.string.text_image_index), mCurPos + 1, mWelfareList?.size) }
         viewPager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
             override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
             }
