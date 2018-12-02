@@ -20,13 +20,16 @@
         app:bColor="?colorDialogIcon"
         app:bHeight="5dp"
         app:bWidth="25dp"
-        app:borderGap="6dp"
+        app:borderGap="5dp"
         app:centerLineColor="?colorDialogIcon"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:pointColor="?colorDialogIcon" />
+        app:pointColor="?colorDialogIcon"
+        app:tipText="Align the QR code within the frame to scan"
+        app:tipTextPosition="bottom"
+        app:tipTextToBorderMargin="25dp" />
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"

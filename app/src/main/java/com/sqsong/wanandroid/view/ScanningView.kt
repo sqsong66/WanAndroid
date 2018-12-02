@@ -5,6 +5,8 @@ import android.content.res.TypedArray
 import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
+import android.graphics.Rect
+import android.text.TextUtils
 import android.util.AttributeSet
 import android.view.View
 import androidx.core.content.ContextCompat
@@ -21,10 +23,15 @@ class ScanningView @JvmOverloads constructor(context: Context, attrs: AttributeS
     private var pointColor: Int = 0
     private var borderWidth: Int = 0
     private var borderHeight: Int = 0
+    private var tipText: String = ""
+    private var tipTextSize: Float = .0f
     private var centerLineHeight: Int = 0
+    private var tipTextPosition: Int = 1
     private var borderColor: Int = Color.WHITE
+    private var tipTextToBorderMargin: Float = .0f
     private var centerLineColor: Int = Color.WHITE
 
+    private var mTextRect = Rect()
     private var mStartX: Float = .0f
     private var mStartY: Float = .0f
     private var mRectWidth: Int = 0
@@ -56,6 +63,10 @@ class ScanningView @JvmOverloads constructor(context: Context, attrs: AttributeS
             borderHeight = typedArray.getDimension(R.styleable.ScanningView_bHeight, DensityUtil.dip2px(5).toFloat()).toInt()
             centerLineHeight = typedArray.getDimension(R.styleable.ScanningView_centerLineHeight, DensityUtil.dip2px(2).toFloat()).toInt()
             borderGap = typedArray.getDimension(R.styleable.ScanningView_borderGap, DensityUtil.dip2px(2).toFloat()).toInt()
+            tipText = typedArray.getString(R.styleable.ScanningView_tipText) ?: ""
+            tipTextSize = typedArray.getDimension(R.styleable.ScanningView_tipTextSize, DensityUtil.dip2px(16).toFloat())
+            tipTextPosition = typedArray.getInteger(R.styleable.ScanningView_tipTextPosition, 1)
+            tipTextToBorderMargin = typedArray.getDimension(R.styleable.ScanningView_tipTextToBorderMargin, DensityUtil.dip2px(10).toFloat())
         } catch (e: Exception) {
             e.printStackTrace()
         } finally {
@@ -89,6 +100,7 @@ class ScanningView @JvmOverloads constructor(context: Context, attrs: AttributeS
         drawMusk(canvas)
         drawBorder(canvas)
         drawCenterLine(canvas)
+        drawTipText(canvas)
         drawPossiblePoints(canvas)
 
         postInvalidateDelayed(ANIMATE_DELAY, mStartX.toInt(), mStartY.toInt(),
@@ -120,6 +132,20 @@ class ScanningView @JvmOverloads constructor(context: Context, attrs: AttributeS
         // Right bottom corner
         canvas?.drawRect(mStartX + mRectWidth + mGapDistance - borderHeight, mStartY + mRectWidth + mGapDistance - borderWidth, mStartX + mRectWidth + mGapDistance, mStartY + mRectWidth + mGapDistance, mPaint)
         canvas?.drawRect(mStartX + mRectWidth + mGapDistance - borderWidth, mStartY + mRectWidth + mGapDistance - borderHeight, mStartX + mRectWidth + mGapDistance, mStartY + mRectWidth + mGapDistance, mPaint)
+    }
+
+    private fun drawTipText(canvas: Canvas?) {
+        if (!TextUtils.isEmpty(tipText)) {
+            mPaint.textSize = tipTextSize
+            val x = (width - mPaint.measureText(tipText)) / 2
+            mPaint.getTextBounds(tipText, 0, tipText.length, mTextRect)
+            val y = if (tipTextPosition == 1) {
+                mStartY - tipTextToBorderMargin - mTextRect.top - borderGap - borderHeight - mTextRect.height()
+            } else {
+                mStartY + mRectWidth + tipTextToBorderMargin + mTextRect.top + borderGap + borderHeight + mTextRect.height()
+            }
+            canvas?.drawText(tipText, x, y, mPaint)
+        }
     }
 
     private fun drawCenterLine(canvas: Canvas?) {

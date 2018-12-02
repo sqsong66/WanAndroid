@@ -79,5 +79,12 @@
         <attr name="bHeight" format="dimension" />
         <attr name="centerLineHeight" format="dimension" />
         <attr name="borderGap" format="dimension" />
+        <attr name="tipText" format="string" />
+        <attr name="tipTextSize" format="dimension" />
+        <attr name="tipTextPosition" format="enum">
+            <enum name="top" value="1" />
+            <enum name="bottom" value="2" />
+        </attr>
+        <attr name="tipTextToBorderMargin" format="dimension" />
     </declare-styleable>
 </resources>
