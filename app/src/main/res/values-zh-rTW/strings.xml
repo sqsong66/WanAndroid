@@ -77,7 +77,7 @@
     <string name="text_clear_history">清空歷史</string>
     <string name="text_search">搜索</string>
     <string name="text_result">結果</string>
-    <string name="text_settings">設置</string>
+    <string name="text_settings">設定</string>
     <string name="text_language_setting">語言設定</string>
     <string name="text_language_setting_tips">選擇顯示的語言</string>
     <string name="text_choose_language">請選擇語言</string>
@@ -100,4 +100,5 @@
     <string name="text_copy_success">複製成功</string>
     <string name="qr_code_image">二維碼圖片</string>
     <string name="light">燈光</string>
+    <string name="text_scanning_tips">將QR Code置於取景框內，即可自動掃描</string>
 </resources>

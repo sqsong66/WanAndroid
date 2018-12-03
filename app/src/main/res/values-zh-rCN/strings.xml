@@ -55,7 +55,7 @@
     <string name="navigation_drawer_close">关闭导航菜单</string>
     <string name="text_process">处理中…</string>
     <string name="text_register_success">注册成功</string>
-    <string name="text_on_login">Login…</string>
+    <string name="text_on_login">登录中…</string>
     <string name="text_double_click_quit">再按一次退出应用</string>
     <string name="text_login_out">退出登录</string>
     <string name="text_login_out_title">登出提示</string>
@@ -100,4 +100,5 @@
     <string name="text_copy_success">复制成功</string>
     <string name="qr_code_image">二維碼圖片</string>
     <string name="light">燈光</string>
+    <string name="text_scanning_tips">将二维码/条形码放入框内，即可自动扫描</string>
 </resources>

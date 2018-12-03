@@ -64,9 +64,9 @@ class ScanningView @JvmOverloads constructor(context: Context, attrs: AttributeS
             centerLineHeight = typedArray.getDimension(R.styleable.ScanningView_centerLineHeight, DensityUtil.dip2px(2).toFloat()).toInt()
             borderGap = typedArray.getDimension(R.styleable.ScanningView_borderGap, DensityUtil.dip2px(2).toFloat()).toInt()
             tipText = typedArray.getString(R.styleable.ScanningView_tipText) ?: ""
-            tipTextSize = typedArray.getDimension(R.styleable.ScanningView_tipTextSize, DensityUtil.dip2px(16).toFloat())
+            tipTextSize = typedArray.getDimension(R.styleable.ScanningView_tipTextSize, DensityUtil.dip2px(14).toFloat())
             tipTextPosition = typedArray.getInteger(R.styleable.ScanningView_tipTextPosition, 1)
-            tipTextToBorderMargin = typedArray.getDimension(R.styleable.ScanningView_tipTextToBorderMargin, DensityUtil.dip2px(10).toFloat())
+            tipTextToBorderMargin = typedArray.getDimension(R.styleable.ScanningView_tipTextToBorderMargin, DensityUtil.dip2px(20).toFloat())
         } catch (e: Exception) {
             e.printStackTrace()
         } finally {
@@ -138,13 +138,14 @@ class ScanningView @JvmOverloads constructor(context: Context, attrs: AttributeS
         if (!TextUtils.isEmpty(tipText)) {
             mPaint.textSize = tipTextSize
             val x = (width - mPaint.measureText(tipText)) / 2
-            mPaint.getTextBounds(tipText, 0, tipText.length, mTextRect)
-            val y = if (tipTextPosition == 1) {
-                mStartY - tipTextToBorderMargin - mTextRect.top - borderGap - borderHeight - mTextRect.height()
+            val fontMetrics = mPaint.fontMetrics
+            val baseLine = if (tipTextPosition == 1) {
+                mStartY - borderGap - borderHeight - tipTextToBorderMargin - fontMetrics.bottom
             } else {
-                mStartY + mRectWidth + tipTextToBorderMargin + mTextRect.top + borderGap + borderHeight + mTextRect.height()
+                mPaint.getTextBounds(tipText, 0, tipText.length, mTextRect)
+                mStartY + borderGap + borderHeight + mRectWidth + tipTextToBorderMargin + mTextRect.height() / 2 + (fontMetrics.bottom - fontMetrics.top) / 2 - fontMetrics.bottom
             }
-            canvas?.drawText(tipText, x, y, mPaint)
+            canvas?.drawText(tipText, x, baseLine, mPaint)
         }
     }
 

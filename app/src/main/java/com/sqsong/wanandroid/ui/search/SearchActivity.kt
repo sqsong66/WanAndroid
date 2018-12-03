@@ -53,6 +53,7 @@ class SearchActivity : BaseActivity<SearchPresenter>(), SearchContract.View, Rec
     override fun initEvent() {
         setupRecycler()
         searchEdit.setText(mSearchKey)
+        searchEdit.setSelection(searchEdit.text.toString().length)
         backIv.setOnClickListener(this)
         clearIv.setOnClickListener(this)
         mPresenter.onAttach(this)

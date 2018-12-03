@@ -21,7 +21,6 @@ import com.sqsong.wanandroid.data.HomeItem
 import com.sqsong.wanandroid.ui.home.adapter.HomeItemAdapter
 import com.sqsong.wanandroid.util.CommonUtil
 import com.sqsong.wanandroid.util.Constants
-import com.sqsong.wanandroid.util.DensityUtil
 import com.sqsong.wanandroid.view.CheckableImageView
 import com.sqsong.wanandroid.view.LabelView
 import javax.inject.Inject
@@ -170,13 +169,6 @@ class SearchAdapter @Inject constructor(val context: Context, private val dataLi
 
             itemView.setOnClickListener {
                 mActionListener?.onListItemClick(homeItem, position)
-            }
-
-            val params = itemView.layoutParams as RecyclerView.LayoutParams
-            if (position == dataList.size) {
-                params.bottomMargin = DensityUtil.dip2px(16)
-            } else {
-                params.bottomMargin = 0
             }
 
             if (position == dataList.size) {
