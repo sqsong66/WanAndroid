@@ -7,6 +7,7 @@ import android.view.SurfaceHolder
 import com.google.zxing.Result
 import com.google.zxing.ResultPoint
 import com.google.zxing.client.result.ResultParser
+import com.jakewharton.rxbinding2.view.RxView
 import com.sqsong.wanandroid.R
 import com.sqsong.wanandroid.data.ScanResult
 import com.sqsong.wanandroid.mvp.BasePresenter
@@ -15,22 +16,35 @@ import com.sqsong.wanandroid.util.CommonUtil
 import com.sqsong.wanandroid.util.zxing.CaptureHandler
 import com.sqsong.wanandroid.util.zxing.ScanningResultListener
 import com.sqsong.wanandroid.util.zxing.camera.CameraManager
+import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.disposables.Disposable
 import java.io.ByteArrayOutputStream
 import javax.inject.Inject
 
-class ScanningPresenter @Inject constructor(disposable: CompositeDisposable) :
+class ScanningPresenter @Inject constructor(private val disposable: CompositeDisposable) :
         BasePresenter<ScanningContract.View, IModel>(null, disposable), ScanningResultListener, SurfaceHolder.Callback {
 
 
     private var hasSurface = false
     private var mVibrator: Vibrator? = null
-    private lateinit var mCameraManager: CameraManager
     private var mCaptureHandler: CaptureHandler? = null
+    private lateinit var mCameraManager: CameraManager/* by lazy {
+        CameraManager(mView.getAppContext().applicationContext)
+    }*/
 
     override fun onAttach(view: ScanningContract.View) {
         super.onAttach(view)
         mVibrator = mView.getAppContext().getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
+        disposable.add(lightClickDisposable())
+    }
+
+    private fun lightClickDisposable(): Disposable {
+        return RxView.clicks(mView.lightImage())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe {
+                    lighting(mView.lightImage().isChecked)
+                }
     }
 
     fun onResume() {
@@ -109,8 +123,8 @@ class ScanningPresenter @Inject constructor(disposable: CompositeDisposable) :
 
     fun restartScanning() = mCaptureHandler?.sendEmptyMessageDelayed(R.id.restart_preview, 500)
 
-    fun lighting(light: Boolean) {
-        mCameraManager?.setTorch(light)
+    private fun lighting(light: Boolean) {
+        mCameraManager.setTorch(light)
     }
 
 }

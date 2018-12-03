@@ -15,6 +15,7 @@ import com.sqsong.wanandroid.ui.web.WebViewActivity
 import com.sqsong.wanandroid.util.Constants
 import com.sqsong.wanandroid.util.ext.setupToolbar
 import com.sqsong.wanandroid.util.zxing.camera.CameraManager
+import com.sqsong.wanandroid.view.CheckableImageView
 import kotlinx.android.synthetic.main.activity_scanning.*
 
 class ScanningActivity : BaseActivity<ScanningPresenter>(), ScanningContract.View, ScanningResultDialog.ScanResultDialogActionListener {
@@ -24,13 +25,6 @@ class ScanningActivity : BaseActivity<ScanningPresenter>(), ScanningContract.Vie
     override fun initEvent() {
         setupToolbar(toolbar)
         mPresenter.onAttach(this)
-        lightImage.setOnClickListener {
-            if (lightImage.isChecked) {
-                mPresenter.lighting(true)
-            } else {
-                mPresenter.lighting(false)
-            }
-        }
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
@@ -41,6 +35,8 @@ class ScanningActivity : BaseActivity<ScanningPresenter>(), ScanningContract.Vie
     override fun getAppContext(): Context = this
 
     override fun getSurfaceView(): SurfaceView = surfaceView
+
+    override fun lightImage(): CheckableImageView = lightImage
 
     override fun setViewCameraManager(manager: CameraManager) = scanningView.setCameraManager(manager)
 
@@ -68,6 +64,11 @@ class ScanningActivity : BaseActivity<ScanningPresenter>(), ScanningContract.Vie
     override fun onPause() {
         mPresenter.onPause()
         super.onPause()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        mPresenter.onDestroy()
     }
 
 }

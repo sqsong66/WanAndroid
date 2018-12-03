@@ -47,9 +47,9 @@ object CommonUtil {
 
     fun setAssetsTextFont(textView: TextView, languageType: Int?) {
         try {
-            val assetsFont = if (/*languageType == Constants.LANGUAGE_TYPE_CHINESE
-                    || */languageType == Constants.LANGUAGE_TYPE_TRADITION_CHINESE) {
-                "font/Kaiti.otf"
+            val assetsFont = if (languageType == Constants.LANGUAGE_TYPE_CHINESE
+                    || languageType == Constants.LANGUAGE_TYPE_TRADITION_CHINESE) {
+                "font/XinKai.TTF"
             } else {
                 "font/Boogaloo-Regular.ttf"
             }
