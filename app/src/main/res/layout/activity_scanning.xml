@@ -29,7 +29,8 @@
         app:pointColor="?colorDialogIcon"
         app:tipText="@string/text_scanning_tips"
         app:tipTextPosition="bottom"
-        app:tipTextToBorderMargin="20dp" />
+        app:tipTextSize="16sp"
+        app:tipTextToBorderMargin="30dp" />
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"

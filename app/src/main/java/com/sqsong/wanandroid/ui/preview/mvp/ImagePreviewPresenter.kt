@@ -18,18 +18,19 @@ class ImagePreviewPresenter @Inject constructor(private val disposable: Composit
     }
 
     private fun init() {
-        preparePreviewFragments(mView.getWelfareList())
+        preparePreviewFragments(mView?.getWelfareList())
     }
 
-    private fun preparePreviewFragments(imageList: List<WelfareData>) {
+    private fun preparePreviewFragments(imageList: List<WelfareData>?) {
+        if (imageList == null) return
         val fragmentList = mutableListOf<Fragment>()
         for (welfareData in imageList) {
             val fragment = PreviewFragment.newInstance(welfareData.url)
             fragment.setPresenter(PreviewPresenter(disposable))
             fragmentList.add(fragment)
         }
-        val pagerAdapter = FragmentPagerAdapter(mView.fragmentManager(), fragmentList)
-        mView.setupViewPagerAdapter(pagerAdapter)
+        val pagerAdapter = FragmentPagerAdapter(mView?.fragmentManager(), fragmentList)
+        mView?.setupViewPagerAdapter(pagerAdapter)
     }
 
 }

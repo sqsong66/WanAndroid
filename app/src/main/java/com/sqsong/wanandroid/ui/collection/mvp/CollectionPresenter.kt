@@ -25,7 +25,7 @@ class CollectionPresenter @Inject constructor(private val collectionModel: Colle
     private var mPage: Int = 0
     private val mDataList = mutableListOf<HomeItem>()
     private val mAdapter: CollectionAdapter by lazy {
-        CollectionAdapter(mView.getAppContext(), mDataList)
+        CollectionAdapter(mView?.getAppContext(), mDataList)
     }
 
     override fun onAttach(view: CollectionContract.View) {
@@ -34,8 +34,8 @@ class CollectionPresenter @Inject constructor(private val collectionModel: Colle
     }
 
     private fun init() {
-        mView.showLoadingPage()
-        mView.setRecyclerAdapter(mAdapter)
+        mView?.showLoadingPage()
+        mView?.setRecyclerAdapter(mAdapter)
         mAdapter.setHomeItemActionListener(this)
         refreshData()
     }
@@ -69,20 +69,20 @@ class CollectionPresenter @Inject constructor(private val collectionModel: Colle
     }
 
     private fun showErrors(message: String) {
-        mView.showMessage(message)
+        mView?.showMessage(message)
         if (mPage == 0) {
-            mView.showErrorPage()
+            mView?.showErrorPage()
         } else {
             mPage--
-            mView.loadFinish()
+            mView?.loadFinish()
         }
     }
 
     private fun setupDataList(dataList: List<HomeItem>?) {
-        mView.showContentPage()
+        mView?.showContentPage()
         if (dataList == null || dataList.isEmpty()) {
             if (mPage == 0) {
-                mView.showEmptyPage()
+                mView?.showEmptyPage()
             } else {
                 mAdapter.updateLoadingState(LoadingFooterViewHolder.STATE_NO_CONTENT)
             }
@@ -94,14 +94,14 @@ class CollectionPresenter @Inject constructor(private val collectionModel: Colle
         mDataList.addAll(dataList)
         mAdapter.notifyDataSetChanged()
 
-        mView.getHandler().post {
-            if (mPage == 0 && mView.findRecyclerLastVisibleItemPosition() == mDataList.size) {
+        mView?.getHandler()?.post {
+            if (mPage == 0 && mView?.findRecyclerLastVisibleItemPosition() == mDataList.size) {
                 mAdapter.updateLoadingState(LoadingFooterViewHolder.STATE_HIDDEN)
             } else if (dataList.size < Constants.PAGE_SIZE) {
                 mAdapter.updateLoadingState(LoadingFooterViewHolder.STATE_NO_CONTENT)
             } else {
                 mAdapter.updateLoadingState(LoadingFooterViewHolder.STATE_LOADING)
-                mView.loadFinish()
+                mView?.loadFinish()
             }
         }
     }
@@ -112,35 +112,35 @@ class CollectionPresenter @Inject constructor(private val collectionModel: Colle
                 .subscribe(object : ObserverImpl<BaseData>(disposable) {
                     override fun onSuccess(bean: BaseData) {
                         if (bean.errorCode == 0) {
-                            mView.showMessage(mView.getAppContext().getString(R.string.text_cancel_collect_success))
+                            mView?.showMessage(mView?.getAppContext()?.getString(R.string.text_cancel_collect_success))
                             mDataList.removeAt(position)
                             mAdapter.notifyItemRemoved(position)
                             if (mDataList.isEmpty()) {
-                                mView.showEmptyPage()
+                                mView?.showEmptyPage()
                             }
                             // 防止后续item错位
-                            mView.getHandler().postDelayed({ mAdapter.notifyDataSetChanged() }, 500)
+                            mView?.getHandler()?.postDelayed({ mAdapter.notifyDataSetChanged() }, 500)
                         } else {
-                            mView.showMessage(bean.errorMsg)
+                            mView?.showMessage(bean.errorMsg)
                         }
                     }
 
                     override fun onFail(error: ApiException) {
-                        mView.showMessage(error.showMessage)
+                        mView?.showMessage(error.showMessage)
                     }
                 })
     }
 
     override fun onListItemClick(homeItem: HomeItem, position: Int) {
-        val intent = Intent(mView.getAppContext(), WebViewActivity::class.java)
+        val intent = Intent(mView?.getAppContext(), WebViewActivity::class.java)
         intent.putExtra(Constants.KEY_WEB_URL, homeItem.link)
         intent.putExtra(Constants.KEY_WEB_TITLE, homeItem.title)
-        mView.startNewActivity(intent)
+        mView?.startNewActivity(intent)
     }
 
     override fun onShareClick(homeItem: HomeItem, position: Int) {
         val sharingIntent = CommonUtil.buildShareIntent(homeItem.title, homeItem.link)
-        mView.startNewActivity(Intent.createChooser(sharingIntent, mView.getAppContext().getString(R.string.text_share_link)))
+        mView?.startNewActivity(Intent.createChooser(sharingIntent, mView?.getAppContext()?.getString(R.string.text_share_link)))
     }
 
 }

@@ -12,15 +12,22 @@ class PreviewPresenter constructor(private val disposable: CompositeDisposable) 
 
     override fun onAttach(view: PreviewContract.View) {
         super.onAttach(view)
-        disposable.add(imageClickDisposable())
+        addDisposable(imageClickDisposable())
     }
 
-    private fun imageClickDisposable(): Disposable {
-        return mView.imageClickObservable()
+    private fun addDisposable(dispos: Disposable?) {
+        if (dispos != null) {
+            disposable.add(dispos)
+        }
+    }
+
+    private fun imageClickDisposable(): Disposable? {
+        if (mView == null) return null
+        return mView!!.imageClickObservable()
                 .throttleFirst(500, TimeUnit.MILLISECONDS)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe {
-                    mView.finishActivity()
+                    mView?.finishActivity()
                 }
     }
 

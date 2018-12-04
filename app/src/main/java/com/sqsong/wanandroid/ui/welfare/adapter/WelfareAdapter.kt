@@ -11,14 +11,13 @@ import butterknife.ButterKnife
 import com.sqsong.wanandroid.R
 import com.sqsong.wanandroid.common.holder.LoadingFooterViewHolder
 import com.sqsong.wanandroid.common.holder.LoadingFooterViewHolder.LoadingState
-import com.sqsong.wanandroid.common.inter.OnItemClickListener
 import com.sqsong.wanandroid.common.inter.OnViewItemClickListener
 import com.sqsong.wanandroid.data.WelfareData
 import com.sqsong.wanandroid.util.Constants
 import com.sqsong.wanandroid.util.DensityUtil
 import com.sqsong.wanandroid.util.ext.showImage
 
-class WelfareAdapter constructor(private val context: Context, private val dataList: List<WelfareData>) :
+class WelfareAdapter constructor(private val context: Context?, private val dataList: List<WelfareData>) :
         RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     @LoadingState
@@ -28,7 +27,7 @@ class WelfareAdapter constructor(private val context: Context, private val dataL
     private var mListener: OnViewItemClickListener<WelfareData>? = null
 
     init {
-        val spacing = context.resources.getDimensionPixelSize(R.dimen.picture_grid_spacing)
+        val spacing = context?.resources?.getDimensionPixelSize(R.dimen.picture_grid_spacing) ?: 0
         val imageWidth = (DensityUtil.getScreenWidth() - spacing * 3) / 2
         mImageHeight = imageWidth * 4 / 3
     }

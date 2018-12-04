@@ -11,15 +11,15 @@ import com.bumptech.glide.request.RequestOptions.bitmapTransform
 import com.sqsong.wanandroid.R
 import com.sqsong.wanandroid.common.GlideApp
 
-fun ImageView.showImage(context: Context, url: String) {
+fun ImageView.showImage(context: Context?, url: String) {
     showImage(context, url, 0, false, 0)
 }
 
-fun ImageView.showImage(context: Context, url: String, placeholder: Int) {
+fun ImageView.showImage(context: Context?, url: String, placeholder: Int) {
     showImage(context, url, placeholder, false, 0)
 }
 
-fun ImageView.showImage(context: Context, resId: Int) {
+fun ImageView.showImage(context: Context?, resId: Int) {
     showImage(context, resId, 0, false, 0)
 }
 
@@ -27,11 +27,11 @@ fun ImageView.showImage(context: Context, resId: Int, placeholder: Int) {
     showImage(context, resId, placeholder, false, 0)
 }
 
-fun ImageView.showRoundCornerImage(context: Context, url: String) {
+fun ImageView.showRoundCornerImage(context: Context?, url: String) {
     showImage(context, url, 0, true, dpToPx(5))
 }
 
-fun ImageView.showRoundCornerImage(context: Context, url: String, radius: Int) {
+fun ImageView.showRoundCornerImage(context: Context?, url: String, radius: Int) {
     showImage(context, url, 0, true, radius)
 }
 
@@ -39,44 +39,45 @@ fun ImageView.showRoundCornerImage(context: Context, url: String, placeholder: I
     showImage(context, url, placeholder, true, radius)
 }
 
-fun ImageView.showRoundCornerImage(context: Context, resId: Int) {
+fun ImageView.showRoundCornerImage(context: Context?, resId: Int) {
     showImage(context, resId, 0, true, dpToPx(5))
 }
 
 
-fun ImageView.showRoundCornerImage(context: Context, resId: Int, radius: Int) {
+fun ImageView.showRoundCornerImage(context: Context?, resId: Int, radius: Int) {
     showImage(context, resId, 0, true, radius)
 }
 
-fun ImageView.showRoundCornerImage(context: Context, resId: Int, placeholder: Int, radius: Int) {
+fun ImageView.showRoundCornerImage(context: Context?, resId: Int, placeholder: Int, radius: Int) {
     showImage(context, resId, placeholder, true, radius)
 }
 
-fun ImageView.showCircleImage(context: Context, url: String) {
+fun ImageView.showCircleImage(context: Context?, url: String) {
     showImage(context, url, 0, true, false, 0)
 }
 
-fun ImageView.showCircleImage(context: Context, url: String, placeholder: Int) {
+fun ImageView.showCircleImage(context: Context?, url: String, placeholder: Int) {
     showImage(context, url, placeholder, true, false, 0)
 }
 
-fun ImageView.showCircleImage(context: Context, resId: Int) {
+fun ImageView.showCircleImage(context: Context?, resId: Int) {
     showImage(context, resId, 0, true, false, 0)
 }
 
-fun ImageView.showCircleImage(context: Context, resId: Int, placeholder: Int) {
+fun ImageView.showCircleImage(context: Context?, resId: Int, placeholder: Int) {
     showImage(context, resId, placeholder, true, false, 0)
 }
 
-private fun ImageView.showImage(context: Context, url: String, placeholder: Int, roundCorner: Boolean, radius: Int) {
+private fun ImageView.showImage(context: Context?, url: String, placeholder: Int, roundCorner: Boolean, radius: Int) {
     showImage(context, url, placeholder, false, roundCorner, radius)
 }
 
-private fun ImageView.showImage(context: Context, resId: Int, placeholder: Int, roundCorner: Boolean, radius: Int) {
+private fun ImageView.showImage(context: Context?, resId: Int, placeholder: Int, roundCorner: Boolean, radius: Int) {
     showImage(context, resId, placeholder, false, roundCorner, radius)
 }
 
-fun ImageView.showImage(context: Context, url: String, placeholder: Int, circle: Boolean, roundCorner: Boolean, radius: Int) {
+fun ImageView.showImage(context: Context?, url: String, placeholder: Int, circle: Boolean, roundCorner: Boolean, radius: Int) {
+    if (context == null) return
     var holder = placeholder
     if (holder == 0) {
         holder = R.drawable.image_placeholder
@@ -95,7 +96,8 @@ fun ImageView.showImage(context: Context, url: String, placeholder: Int, circle:
     glide.into(this)
 }
 
-fun ImageView.showImage(context: Context, resId: Int, placeholder: Int, circle: Boolean, roundCorner: Boolean, radius: Int) {
+fun ImageView.showImage(context: Context?, resId: Int, placeholder: Int, circle: Boolean, roundCorner: Boolean, radius: Int) {
+    if (context == null) return
     var holder = placeholder
     if (holder == 0) {
         holder = R.drawable.image_placeholder

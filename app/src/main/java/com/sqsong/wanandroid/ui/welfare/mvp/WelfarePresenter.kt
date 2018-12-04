@@ -25,7 +25,7 @@ class WelfarePresenter @Inject constructor(private val welfareModel: WelfareMode
     private val mDataList = ArrayList<WelfareData>()
 
     private val mAdapter: WelfareAdapter by lazy {
-        WelfareAdapter(mView.getAppContext(), mDataList)
+        WelfareAdapter(mView?.getAppContext(), mDataList)
     }
 
     override fun onAttach(view: WelfareContract.View) {
@@ -34,9 +34,9 @@ class WelfarePresenter @Inject constructor(private val welfareModel: WelfareMode
     }
 
     private fun init() {
-        mView.showLoadingPage()
+        mView?.showLoadingPage()
         mAdapter.setOnItemClickListener(this)
-        mView.setRecyclerAdapter(mAdapter)
+        mView?.setRecyclerAdapter(mAdapter)
         refreshWelfare()
     }
 
@@ -58,7 +58,7 @@ class WelfarePresenter @Inject constructor(private val welfareModel: WelfareMode
                         if (!bean.error) {
                             setupDataList(bean.results)
                         } else {
-                            showErrors(mView.getAppContext().getString(R.string.text_error_tips))
+                            showErrors(mView?.getStringFromResource(R.string.text_error_tips))
                         }
                     }
 
@@ -68,21 +68,21 @@ class WelfarePresenter @Inject constructor(private val welfareModel: WelfareMode
                 })
     }
 
-    private fun showErrors(message: String) {
-        mView.showMessage(message)
+    private fun showErrors(message: String?) {
+        mView?.showMessage(message)
         if (mPage == 1) {
-            mView.showErrorPage()
+            mView?.showErrorPage()
         } else {
             mPage--
-            mView.loadFinish()
+            mView?.loadFinish()
         }
     }
 
     private fun setupDataList(dataList: List<WelfareData>?) {
-        mView.showContentPage()
+        mView?.showContentPage()
         if (dataList == null || dataList.isEmpty()) {
             if (mPage == 1) {
-                mView.showEmptyPage()
+                mView?.showEmptyPage()
             } else {
                 mAdapter.updateLoadingState(LoadingFooterViewHolder.STATE_NO_CONTENT)
             }
@@ -94,31 +94,23 @@ class WelfarePresenter @Inject constructor(private val welfareModel: WelfareMode
         mDataList.addAll(dataList)
         mAdapter.notifyDataSetChanged()
 
-        mView.getHandler().post {
-            if (mPage == 1 && mView.findRecyclerLastVisibleItemPosition() == mDataList.size) {
+        mView?.getHandler()?.post {
+            if (mPage == 1 && mView?.findRecyclerLastVisibleItemPosition() == mDataList.size) {
                 mAdapter.updateLoadingState(LoadingFooterViewHolder.STATE_HIDDEN)
             } else if (dataList.size < Constants.PAGE_SIZE) {
                 mAdapter.updateLoadingState(LoadingFooterViewHolder.STATE_NO_CONTENT)
             } else {
                 mAdapter.updateLoadingState(LoadingFooterViewHolder.STATE_LOADING)
-                mView.loadFinish()
+                mView?.loadFinish()
             }
         }
     }
 
     override fun onItemClick(view: View, data: WelfareData?, position: Int) {
-        val intent = Intent(mView.getAppContext(), ImagePreviewActivity::class.java)
+        val intent = Intent(mView?.getAppContext(), ImagePreviewActivity::class.java)
         intent.putExtra(Constants.IMAGE_POSITION, position)
         intent.putParcelableArrayListExtra(Constants.IMAGE_LIST, mDataList)
-        mView.startNewActivity(intent)
-
-        /*if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            val activityOptions = ActivityOptions.makeSceneTransitionAnimation(mView.getAppContext() as Activity,
-                    Pair.create(view, view.transitionName))
-            mView.startNewActivity(intent, activityOptions.toBundle())
-        } else {
-            mView.startNewActivity(intent)
-        }*/
+        mView?.startNewActivity(intent)
     }
 
 }

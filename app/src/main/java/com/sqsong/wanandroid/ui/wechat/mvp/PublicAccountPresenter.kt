@@ -18,7 +18,7 @@ class PublicAccountPresenter @Inject constructor(private val accountModel: Publi
 
     override fun onAttach(view: PublicAccountContract.View) {
         super.onAttach(view)
-        mView.showLoadingPage()
+        mView?.showLoadingPage()
         requestAccountPeople()
     }
 
@@ -41,9 +41,9 @@ class PublicAccountPresenter @Inject constructor(private val accountModel: Publi
     }
 
     private fun prepareTitleAndFragments(dataList: List<KnowledgeData>?) {
-        mView.showContentPage()
+        mView?.showContentPage()
         if (dataList == null || dataList.isEmpty()) {
-            mView.showErrorPage()
+            mView?.showErrorPage()
             return
         }
         val titleList = mutableListOf<String>()
@@ -54,12 +54,12 @@ class PublicAccountPresenter @Inject constructor(private val accountModel: Publi
             fragment.setPresenter(AccountPresenter(accountModel, disposable))
             fragmentList.add(fragment)
         }
-        val pagerAdapter = FragmentPagerAdapter(mView.fragmentManager(), fragmentList, titleList)
-        mView.setViewPagerAdapter(pagerAdapter)
+        val pagerAdapter = FragmentPagerAdapter(mView?.fragmentManager(), fragmentList, titleList)
+        mView?.setViewPagerAdapter(pagerAdapter)
     }
 
     private fun showErrorPage(message: String?) {
-        mView.showMessage(message)
-        mView.showErrorPage()
+        mView?.showMessage(message)
+        mView?.showErrorPage()
     }
 }

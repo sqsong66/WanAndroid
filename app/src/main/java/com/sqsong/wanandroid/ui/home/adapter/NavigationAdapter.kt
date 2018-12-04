@@ -15,7 +15,7 @@ import com.sqsong.wanandroid.data.HomeItem
 import com.sqsong.wanandroid.data.NavigationData
 import com.sqsong.wanandroid.util.DensityUtil
 
-class NavigationAdapter(val context: Context, private val dataList: MutableList<NavigationData>) : RecyclerView.Adapter<NavigationAdapter.NavigationViewHolder>() {
+class NavigationAdapter(val context: Context?, private val dataList: MutableList<NavigationData>) : RecyclerView.Adapter<NavigationAdapter.NavigationViewHolder>() {
 
     private val mInflater = LayoutInflater.from(context)
     private var mListener: OnItemClickListener<HomeItem>? = null

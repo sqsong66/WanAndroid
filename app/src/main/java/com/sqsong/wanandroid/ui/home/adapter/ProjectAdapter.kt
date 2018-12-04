@@ -20,7 +20,7 @@ import com.sqsong.wanandroid.util.ext.showImage
 import com.sqsong.wanandroid.view.CheckableImageView
 import com.sqsong.wanandroid.view.LabelView
 
-class ProjectAdapter(private val context: Context,
+class ProjectAdapter(private val context: Context?,
                      private val dataList: List<HomeItem>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private val mInflater = LayoutInflater.from(context)

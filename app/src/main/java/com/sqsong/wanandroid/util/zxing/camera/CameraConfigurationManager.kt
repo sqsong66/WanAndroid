@@ -9,7 +9,7 @@ import com.sqsong.wanandroid.util.LogUtil
 import com.sqsong.wanandroid.util.zxing.camera.open.CameraFacing
 import com.sqsong.wanandroid.util.zxing.camera.open.OpenCamera
 
-class CameraConfigurationManager constructor(private val context: Context) {
+class CameraConfigurationManager constructor(private val context: Context?) {
 
     private var cwNeededRotation = 0
     private var cwRotationFromDisplayToCamera = 0
@@ -20,7 +20,7 @@ class CameraConfigurationManager constructor(private val context: Context) {
 
     fun initFromCameraParameters(camera: OpenCamera) {
         val parameters = camera.camera.parameters
-        val manager = context.getSystemService(Context.WINDOW_SERVICE) as WindowManager
+        val manager = context?.getSystemService(Context.WINDOW_SERVICE) as WindowManager
         val display = manager.defaultDisplay
 
         val orientation = display.orientation

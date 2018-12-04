@@ -30,10 +30,10 @@ object CommonUtil {
         progressBar?.progressDrawable = drawable
     }
 
-    fun getThemeColor(context: Context, attrColor: Int): Int {
-        val typedArray = context.obtainStyledAttributes(TypedValue().data, intArrayOf(attrColor))
-        val color = typedArray.getColor(0, Color.BLACK)
-        typedArray.recycle()
+    fun getThemeColor(context: Context?, attrColor: Int): Int {
+        val typedArray = context?.obtainStyledAttributes(TypedValue().data, intArrayOf(attrColor))
+        val color = typedArray?.getColor(0, Color.BLACK) ?: Color.BLACK
+        typedArray?.recycle()
         return color
     }
 
@@ -45,15 +45,15 @@ object CommonUtil {
         }
     }
 
-    fun setAssetsTextFont(textView: TextView, languageType: Int?) {
+    fun setAssetsTextFont(textView: TextView?, languageType: Int?) {
         try {
             val assetsFont = if (languageType == Constants.LANGUAGE_TYPE_CHINESE
-                    || languageType == Constants.LANGUAGE_TYPE_TRADITION_CHINESE) {
+            /*|| languageType == Constants.LANGUAGE_TYPE_TRADITION_CHINESE*/) {
                 "font/XinKai.TTF"
             } else {
                 "font/Boogaloo-Regular.ttf"
             }
-            textView.typeface = Typeface.createFromAsset(textView.context.assets, assetsFont)
+            textView?.typeface = Typeface.createFromAsset(textView?.context?.assets, assetsFont)
         } catch (e: Exception) {
             e.printStackTrace()
         }
@@ -104,7 +104,7 @@ object CommonUtil {
         return ""
     }
 
-    fun playDefaultSound(context: Context) {
+    fun playDefaultSound(context: Context?) {
         try {
             val uri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
             val ringtone = RingtoneManager.getRingtone(context, uri)

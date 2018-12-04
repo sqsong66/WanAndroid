@@ -14,25 +14,31 @@ class SettingPresenter @Inject constructor(private val disposable: CompositeDisp
     override fun onAttach(view: SettingContract.View) {
         super.onAttach(view)
 
-        disposable.add(languageDisposable())
-        disposable.add(themeDisposable())
+        addDisposable(languageDisposable())
+        addDisposable(themeDisposable())
     }
 
-    private fun languageDisposable(): Disposable {
-        return mView.languageClickObservable()
-                .throttleFirst(500, TimeUnit.MILLISECONDS)
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe {
-                    mView.showLanguageDialog()
+    private fun addDisposable(dispos: Disposable?) {
+        if (dispos != null) {
+            disposable.add(dispos)
+        }
+    }
+
+    private fun languageDisposable(): Disposable? {
+        return mView?.languageClickObservable()
+                ?.throttleFirst(500, TimeUnit.MILLISECONDS)
+                ?.observeOn(AndroidSchedulers.mainThread())
+                ?.subscribe {
+                    mView?.showLanguageDialog()
                 }
     }
 
-    private fun themeDisposable(): Disposable {
-        return mView.themeClickObservable()
-                .throttleFirst(500, TimeUnit.MILLISECONDS)
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe {
-                    mView.showThemeDialog()
+    private fun themeDisposable(): Disposable? {
+        return mView?.themeClickObservable()
+                ?.throttleFirst(500, TimeUnit.MILLISECONDS)
+                ?.observeOn(AndroidSchedulers.mainThread())
+                ?.subscribe {
+                    mView?.showThemeDialog()
                 }
     }
 

@@ -45,4 +45,6 @@ abstract class BaseFragment : DaggerFragment(), IView {
 
     }
 
+    override fun getStringFromResource(strId: Int): String = getString(strId)
+
 }

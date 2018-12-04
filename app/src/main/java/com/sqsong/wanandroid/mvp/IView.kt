@@ -12,4 +12,6 @@ interface IView {
 
     fun handleMessage(message: Message)
 
+    fun getStringFromResource(strId: Int): String
+
 }

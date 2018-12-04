@@ -11,7 +11,7 @@ import com.sqsong.wanandroid.util.zxing.camera.open.OpenCamera
 import com.sqsong.wanandroid.util.zxing.camera.open.OpenCameraInterface
 import java.io.IOException
 
-class CameraManager constructor(private val context: Context) {
+class CameraManager constructor(private val context: Context?) {
 
     private var configManager: CameraConfigurationManager = CameraConfigurationManager(context)
     private val previewCallback = PreviewCallback(configManager)
@@ -28,7 +28,7 @@ class CameraManager constructor(private val context: Context) {
 
     @Synchronized
     @Throws(IOException::class)
-    fun openDriver(holder: SurfaceHolder) {
+    fun openDriver(holder: SurfaceHolder?) {
         var theCamera: OpenCamera? = camera
         if (theCamera == null) {
             theCamera = OpenCameraInterface.open(requestedCameraId)

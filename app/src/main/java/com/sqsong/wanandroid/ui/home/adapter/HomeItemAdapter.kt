@@ -21,7 +21,7 @@ import com.sqsong.wanandroid.view.CheckableImageView
 import com.sqsong.wanandroid.view.CircleTextView
 import com.sqsong.wanandroid.view.LabelView
 
-class HomeItemAdapter(context: Context,
+class HomeItemAdapter(context: Context?,
                       private val dataList: List<HomeItem>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private val mInflater = LayoutInflater.from(context)

@@ -35,15 +35,15 @@ class ProjectPresenter @Inject constructor(private val projectModel: ProjectMode
     private val mClassifyList = mutableListOf<KnowledgeData>()
 
     private val mAdapter by lazy {
-        ProjectAdapter(mView.getFragmentContext(), mProjectList)
+        ProjectAdapter(mView?.getFragmentContext(), mProjectList)
     }
 
     override fun onAttach(view: ProjectContract.View) {
         super.onAttach(view)
-        mView.showLoadingPage()
+        mView?.showLoadingPage()
         EventBus.getDefault().register(this)
         mAdapter.setHomeItemActionListener(this)
-        mView.setRecyclerAdapter(mAdapter)
+        mView?.setRecyclerAdapter(mAdapter)
     }
 
     fun loadInitData() {
@@ -65,28 +65,28 @@ class ProjectPresenter @Inject constructor(private val projectModel: ProjectMode
     }
 
     private fun showError(errorMsg: String?) {
-        mView.showMessage(errorMsg)
+        mView?.showMessage(errorMsg)
         if (mPage == 0) {
-            mView.showErrorPage()
+            mView?.showErrorPage()
         } else {
             mPage--
             if (mPage < 0) mPage = 0
-            mView.loadFinish()
+            mView?.loadFinish()
         }
     }
 
     private fun processClassify(dataList: List<KnowledgeData>?) {
         if (dataList == null || dataList.isEmpty()) {
-            mView.showEmptyPage()
+            mView?.showEmptyPage()
             return
         }
-        mView.preparePopupWindow(dataList, true)
+        mView?.preparePopupWindow(dataList, true)
 
         mPage = 0
         mClassifyList.clear()
         mClassifyList.addAll(dataList)
         mCid = mClassifyList[0].id
-        mView.showTitle(mClassifyList[0].name)
+        mView?.showTitle(mClassifyList[0].name)
         requestProjectList()
     }
 
@@ -109,10 +109,10 @@ class ProjectPresenter @Inject constructor(private val projectModel: ProjectMode
     }
 
     private fun setupDataList(dataList: List<HomeItem>?) {
-        mView.showContentPage()
+        mView?.showContentPage()
         if (dataList == null || dataList.isEmpty()) {
             if (mPage == 0) {
-                mView.showEmptyPage()
+                mView?.showEmptyPage()
             } else {
                 mAdapter.updateLoadingState(LoadingFooterViewHolder.STATE_NO_CONTENT)
             }
@@ -124,14 +124,14 @@ class ProjectPresenter @Inject constructor(private val projectModel: ProjectMode
         mProjectList.addAll(dataList)
         mAdapter.notifyDataSetChanged()
 
-        mView.getHandler().post {
-            if (mPage == 0 && mView.findRecyclerLastVisibleItemPosition() == mProjectList.size) {
+        mView?.getHandler()?.post {
+            if (mPage == 0 && mView?.findRecyclerLastVisibleItemPosition() == mProjectList.size) {
                 mAdapter.updateLoadingState(LoadingFooterViewHolder.STATE_HIDDEN)
             } else if (dataList.size < 15/*Constants.PAGE_SIZE*/) {
                 mAdapter.updateLoadingState(LoadingFooterViewHolder.STATE_NO_CONTENT)
             } else {
                 mAdapter.updateLoadingState(LoadingFooterViewHolder.STATE_LOADING)
-                mView.loadFinish()
+                mView?.loadFinish()
             }
         }
     }
@@ -139,7 +139,7 @@ class ProjectPresenter @Inject constructor(private val projectModel: ProjectMode
 
     fun checkPopState() {
         if (mClassifyList.isEmpty()) return
-        mView.showPopupWindow(mClassifyList)
+        mView?.showPopupWindow(mClassifyList)
     }
 
     fun loadMore() {
@@ -162,7 +162,7 @@ class ProjectPresenter @Inject constructor(private val projectModel: ProjectMode
     override fun onStarClick(homeItem: HomeItem, position: Int) {
         val userName: String = mPreferences[Constants.LOGIN_USER_NAME] ?: ""
         if (TextUtils.isEmpty(userName)) {
-            mView.showLoginDialog()
+            mView?.showLoginDialog()
             return
         }
 
@@ -174,28 +174,28 @@ class ProjectPresenter @Inject constructor(private val projectModel: ProjectMode
                         if (bean.errorCode == 0) {
                             if (collectState) {
                                 homeItem.collect = false
-                                mView.showMessage(mView.getFragmentContext().getString(R.string.text_cancel_collect_success))
+                                mView?.showMessage(mView?.getFragmentContext()?.getString(R.string.text_cancel_collect_success))
                             } else {
                                 homeItem.collect = true
-                                mView.showMessage(mView.getFragmentContext().getString(R.string.text_collect_success))
+                                mView?.showMessage(mView?.getFragmentContext()?.getString(R.string.text_collect_success))
                             }
                             mAdapter.notifyItemChanged(position)
                         } else {
-                            mView.showMessage(bean.errorMsg)
+                            mView?.showMessage(bean.errorMsg)
                         }
                     }
 
                     override fun onFail(error: ApiException) {
-                        mView.showMessage(error.showMessage)
+                        mView?.showMessage(error.showMessage)
                     }
                 })
     }
 
     override fun onListItemClick(homeItem: HomeItem, position: Int) {
-        val intent = Intent(mView.getFragmentContext(), WebViewActivity::class.java)
+        val intent = Intent(mView?.getFragmentContext(), WebViewActivity::class.java)
         intent.putExtra(Constants.KEY_WEB_URL, homeItem.link)
         intent.putExtra(Constants.KEY_WEB_TITLE, homeItem.title)
-        mView.startNewActivity(intent)
+        mView?.startNewActivity(intent)
     }
 
     override fun onShareClick(homeItem: HomeItem, position: Int) {
@@ -204,7 +204,7 @@ class ProjectPresenter @Inject constructor(private val projectModel: ProjectMode
     @Subscribe(threadMode = ThreadMode.MAIN)
     fun onFabClick(event: FabClickEvent) {
         if (event.index == 3) {
-            mView.scrollRecycler(0)
+            mView?.scrollRecycler(0)
         }
     }
 

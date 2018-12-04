@@ -25,7 +25,7 @@ import com.sqsong.wanandroid.view.CheckableImageView
 import com.sqsong.wanandroid.view.LabelView
 import javax.inject.Inject
 
-class SearchAdapter @Inject constructor(val context: Context, private val dataList: MutableList<HomeItem>) :
+class SearchAdapter @Inject constructor(val context: Context?, private val dataList: MutableList<HomeItem>) :
         RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     @LoadingState

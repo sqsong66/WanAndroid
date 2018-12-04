@@ -36,7 +36,7 @@ class FloatingTitleItemDecoration(val builder: Builder) : RecyclerView.ItemDecor
 
         mShadowPaint.color = builder.backgroundColor ?: Color.WHITE
         mShadowPaint.setShadowLayer(10f, .0f, .0f, builder.backgroundColor ?: Color.WHITE)
-        builder.recyclerView.setLayerType(View.LAYER_TYPE_SOFTWARE, mShadowPaint)
+        builder.recyclerView?.setLayerType(View.LAYER_TYPE_SOFTWARE, mShadowPaint)
 
         mBgPaint.color = builder.backgroundColor ?: Color.WHITE
         mTextPaint.color = builder.textColor ?: Color.BLACK
@@ -134,7 +134,7 @@ class FloatingTitleItemDecoration(val builder: Builder) : RecyclerView.ItemDecor
         var rightPadding: Float = .0f
         var bottomPadding: Float = .0f
         var titleMap: Map<Int, String>? = null
-        lateinit var recyclerView: RecyclerView
+        var recyclerView: RecyclerView? = null
 
         fun setBackgroundColor(color: Int): Builder {
             this.backgroundColor = color
@@ -164,7 +164,7 @@ class FloatingTitleItemDecoration(val builder: Builder) : RecyclerView.ItemDecor
             return this
         }
 
-        fun setRecyclerView(recycler: RecyclerView): Builder {
+        fun setRecyclerView(recycler: RecyclerView?): Builder {
             this.recyclerView = recycler
             return this
         }

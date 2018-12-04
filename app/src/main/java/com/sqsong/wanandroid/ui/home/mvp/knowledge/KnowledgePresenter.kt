@@ -20,47 +20,47 @@ class KnowledgePresenter @Inject constructor(private val knowledgeModel: Knowled
 
     private val mDataList = mutableListOf<KnowledgeData>()
     private val mAdapter by lazy {
-        KnowledgeAdapter(mView.getFragmentContext(), mDataList)
+        KnowledgeAdapter(mView?.getFragmentContext(), mDataList)
     }
 
     override fun onAttach(view: KnowledgeContract.View) {
         super.onAttach(view)
-        mView.showLoadingPage()
+        mView?.showLoadingPage()
         initAdapter()
     }
 
     private fun initAdapter() {
         EventBus.getDefault().register(this)
-        mView.setRecyclerAdapter(mAdapter)
+        mView?.setRecyclerAdapter(mAdapter)
         mAdapter.setOnItemClickListener(this)
     }
 
     fun requestKnowledgeData() {
         knowledgeModel.getKnowledgeList()
                 .compose(RxJavaHelper.compose())
-                .doOnEach { mView.showContentPage() }
+                .doOnEach { mView?.showContentPage() }
                 .subscribe(object : ObserverImpl<KnowledgeBean>(disposable) {
                     override fun onSuccess(bean: KnowledgeBean) {
                         if (bean.errorCode == 0) {
                             processKnowledgeData(bean.data)
                         } else {
-                            mView.showMessage(bean.errorMsg)
-                            mView.showErrorPage()
+                            mView?.showMessage(bean.errorMsg)
+                            mView?.showErrorPage()
                         }
                     }
 
                     override fun onFail(error: ApiException) {
-                        mView.showMessage(error.showMessage)
-                        mView.showErrorPage()
+                        mView?.showMessage(error.showMessage)
+                        mView?.showErrorPage()
                     }
 
                 })
     }
 
     private fun processKnowledgeData(dataList: List<KnowledgeData>?) {
-        mView.showContentPage()
+        mView?.showContentPage()
         if (dataList == null || dataList.isEmpty()) {
-            mView.showEmptyPage()
+            mView?.showEmptyPage()
             return
         }
         mDataList.clear()
@@ -71,12 +71,12 @@ class KnowledgePresenter @Inject constructor(private val knowledgeModel: Knowled
     @Subscribe(threadMode = ThreadMode.MAIN)
     fun onFabClick(event: FabClickEvent) {
         if (event.index == 1) {
-            mView.scrollRecycler(0)
+            mView?.scrollRecycler(0)
         }
     }
 
     override fun onItemClick(data: KnowledgeData?, position: Int) {
-        mView.startKnowledgeActivity(data)
+        mView?.startKnowledgeActivity(data)
     }
 
     override fun onDestroy() {

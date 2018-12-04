@@ -32,4 +32,6 @@ abstract class BaseActivity<P : IPresenter<*>> : DaggerAppCompatActivity(), IApp
     override fun handleMessage(message: Message) {
 
     }
+
+    override fun getStringFromResource(strId: Int): String = getString(strId)
 }

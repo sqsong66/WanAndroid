@@ -36,7 +36,7 @@ class HomePresenter @Inject constructor(private val homeModel: HomeModel,
     private var mPage: Int = 0
 
     private val mAdapter: HomeItemAdapter by lazy {
-        HomeItemAdapter(mView.getAppContext(), homeItemList)
+        HomeItemAdapter(mView?.getAppContext(), homeItemList)
     }
 
     private var homeItemList = mutableListOf<HomeItem>()
@@ -56,10 +56,10 @@ class HomePresenter @Inject constructor(private val homeModel: HomeModel,
     private fun setupAdapter() {
         EventBus.getDefault().register(this)
 
-        mAdapter.setHeaderView(mView.getBannerHeaderView())
+        mAdapter.setHeaderView(mView?.getBannerHeaderView()!!)
         mAdapter.setHomeItemActionListener(this)
-        mView.setAdapter(mAdapter)
-        mView.showLoadingPage()
+        mView?.setAdapter(mAdapter)
+        mView?.showLoadingPage()
     }
 
     fun refreshData() {
@@ -79,8 +79,8 @@ class HomePresenter @Inject constructor(private val homeModel: HomeModel,
                 .subscribe(object : ObserverImpl<HomeBannerBean>(disposable) {
                     override fun onSuccess(bean: HomeBannerBean) {
                         if (bean.errorCode == 0) {
-                            mView.showContentPage()
-                            mView.showBannerData(bean.data)
+                            mView?.showContentPage()
+                            mView?.showBannerData(bean.data)
                         } else {
                             showErrors(bean.errorMsg!!)
                         }
@@ -93,12 +93,12 @@ class HomePresenter @Inject constructor(private val homeModel: HomeModel,
     }
 
     private fun showErrors(message: String) {
-        mView.showMessage(message)
+        mView?.showMessage(message)
         if (mPage == 0) {
-            mView.showErrorPage()
+            mView?.showErrorPage()
         } else {
             mPage--
-            mView.loadFinish()
+            mView?.loadFinish()
         }
     }
 
@@ -110,21 +110,21 @@ class HomePresenter @Inject constructor(private val homeModel: HomeModel,
                         if (bean.errorCode == 0) {
                             setupDataList(bean.data?.datas)
                         } else {
-                            mView.showMessage(bean.errorMsg!!)
+                            mView?.showMessage(bean.errorMsg!!)
                         }
                     }
 
                     override fun onFail(error: ApiException) {
-                        mView.showMessage(error.showMessage)
+                        mView?.showMessage(error.showMessage)
                     }
                 })
     }
 
     private fun setupDataList(dataList: List<HomeItem>?) {
-        mView.showContentPage()
+        mView?.showContentPage()
         if (dataList == null || dataList.isEmpty()) {
             if (mPage == 0) {
-                mView.showEmptyPage()
+                mView?.showEmptyPage()
             } else {
                 mAdapter.updateLoadingState(LoadingFooterViewHolder.STATE_NO_CONTENT)
             }
@@ -135,13 +135,13 @@ class HomePresenter @Inject constructor(private val homeModel: HomeModel,
         }
         homeItemList.addAll(dataList)
         mAdapter.notifyDataSetChanged()
-        mView.loadFinish()
+        mView?.loadFinish()
     }
 
     override fun onStarClick(homeItem: HomeItem, position: Int) {
         val userName: String = mPreferences[Constants.LOGIN_USER_NAME] ?: ""
         if (TextUtils.isEmpty(userName)) {
-            mView.showLoginDialog()
+            mView?.showLoginDialog()
             return
         }
 
@@ -153,61 +153,61 @@ class HomePresenter @Inject constructor(private val homeModel: HomeModel,
                         if (bean.errorCode == 0) {
                             if (collectState) {
                                 homeItem.collect = false
-                                mView.showMessage(mContext.getString(R.string.text_cancel_collect_success))
+                                mView?.showMessage(mContext.getString(R.string.text_cancel_collect_success))
                             } else {
                                 homeItem.collect = true
-                                mView.showMessage(mContext.getString(R.string.text_collect_success))
+                                mView?.showMessage(mContext.getString(R.string.text_collect_success))
                             }
                             mAdapter.notifyItemChanged(position)
                         } else {
-                            mView.showMessage(bean.errorMsg)
+                            mView?.showMessage(bean.errorMsg)
                         }
                     }
 
                     override fun onFail(error: ApiException) {
-                        mView.showMessage(error.showMessage)
+                        mView?.showMessage(error.showMessage)
                     }
                 })
     }
 
     override fun onListItemClick(homeItem: HomeItem, position: Int) {
-        val intent = Intent(mView.getAppContext(), WebViewActivity::class.java)
+        val intent = Intent(mView?.getAppContext(), WebViewActivity::class.java)
         intent.putExtra(Constants.KEY_WEB_URL, homeItem.link)
         intent.putExtra(Constants.KEY_WEB_TITLE, homeItem.title)
-        mView.startNewActivity(intent)
+        mView?.startNewActivity(intent)
     }
 
     override fun onShareClick(homeItem: HomeItem, position: Int) {
         val sharingIntent = CommonUtil.buildShareIntent(homeItem.title, homeItem.link)
-        mView.startNewActivity(Intent.createChooser(sharingIntent, mView.getAppContext().getString(R.string.text_share_link)))
+        mView?.startNewActivity(Intent.createChooser(sharingIntent, mView?.getStringFromResource(R.string.text_share_link)))
     }
 
     override fun onItemClick(data: HomeBannerData?, position: Int) {
         lateinit var intent: Intent
         if (data?.id == 4 && !TextUtils.isEmpty(CommonUtil.parseUrlParameter(data.url, "cid"))) { // 面试相关
-            intent = Intent(mView.getAppContext(), KnowledgeActivity::class.java)
+            intent = Intent(mView?.getAppContext(), KnowledgeActivity::class.java)
             intent.putExtra(Constants.KNOWLEDGE_CID, CommonUtil.parseUrlParameter(data.url, "cid")?.toInt())
-            intent.putExtra(Constants.KNOWLEDGE_TITLE, mView.getAppContext().getString(R.string.text_interview_relative))
-            mView.startNewActivity(intent)
+            intent.putExtra(Constants.KNOWLEDGE_TITLE, mView?.getStringFromResource(R.string.text_interview_relative))
+            mView?.startNewActivity(intent)
         } else if (data?.id == 3) { // 完整项目
             EventBus.getDefault().post(SwitchIndexEvent(3))
         } else if (data?.id == 6) { // 专属导航
             EventBus.getDefault().post(SwitchIndexEvent(2))
         } else if (data?.id == 18) { // 公众号
-            intent = Intent(mView.getAppContext(), PublicAccountActivity::class.java)
-            mView.startNewActivity(intent)
+            intent = Intent(mView?.getAppContext(), PublicAccountActivity::class.java)
+            mView?.startNewActivity(intent)
         } else {
-            intent = Intent(mView.getAppContext(), WebViewActivity::class.java)
+            intent = Intent(mView?.getAppContext(), WebViewActivity::class.java)
             intent.putExtra(Constants.KEY_WEB_URL, data?.url)
             intent.putExtra(Constants.KEY_WEB_TITLE, data?.title)
-            mView.startNewActivity(intent)
+            mView?.startNewActivity(intent)
         }
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     fun onFabClick(event: FabClickEvent) {
         if (event.index == 0) {
-            mView.scrollRecycler(0)
+            mView?.scrollRecycler(0)
         }
     }
 

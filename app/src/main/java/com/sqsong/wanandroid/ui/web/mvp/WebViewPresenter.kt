@@ -23,14 +23,14 @@ class WebViewPresenter @Inject constructor() : BasePresenter<WebViewContract.Vie
     }
 
     private fun setupParams() {
-        mCurrentUrl = mView.getInitUrl()
-        mView.showRefreshBar()
+        mCurrentUrl = mView?.getInitUrl()
+        mView?.showRefreshBar()
         setWebSettings()
         setupWebClient()
     }
 
     private fun setWebSettings() {
-        val webSettings = mView.getWebView()?.settings
+        val webSettings = mView?.getWebView()?.settings
         //如果访问的页面中要与Javascript交互，则webview必须设置支持Javascript
         webSettings?.javaScriptEnabled = true
         //设置自适应屏幕，两者合用
@@ -50,37 +50,39 @@ class WebViewPresenter @Inject constructor() : BasePresenter<WebViewContract.Vie
     }
 
     private fun setupWebClient() {
-        mView.getWebView()?.webViewClient = NewWebViewClient()
-        mView.getWebView()?.webChromeClient = ProgressWebViewChromeClient()
+        mView?.getWebView()?.webViewClient = NewWebViewClient()
+        mView?.getWebView()?.webChromeClient = ProgressWebViewChromeClient()
 
         refreshWeb()
     }
 
     fun refreshWeb() {
-        mView.getWebView()?.loadUrl(mCurrentUrl)
+        mView?.getWebView()?.loadUrl(mCurrentUrl)
     }
 
     override fun onDestroy() {
+        if ((mView?.getWebView())?.parent != null) {
+            (mView?.getWebView()?.parent as ViewGroup).removeView(mView?.getWebView())
+        }
+        mView?.getWebView()?.removeAllViews()
+        mView?.getWebView()?.destroy()
         super.onDestroy()
-        (mView.getWebView()?.parent as ViewGroup).removeView(mView.getWebView())
-        mView.getWebView()?.removeAllViews()
-        mView.getWebView()?.destroy()
     }
 
     fun openBrowser(linkUrl: String) {
-        mView.startNewActivity(CommonUtil.buildBrowserIntent(linkUrl))
+        mView?.startNewActivity(CommonUtil.buildBrowserIntent(linkUrl))
     }
 
     inner class ProgressWebViewChromeClient : WebChromeClient() {
         override fun onProgressChanged(view: WebView?, newProgress: Int) {
             super.onProgressChanged(view, newProgress)
-            mView.getProgressBar().progress = newProgress
+            mView?.getProgressBar()?.progress = newProgress
         }
 
         override fun onReceivedTitle(view: WebView?, title: String?) {
             super.onReceivedTitle(view, title)
             if (TextUtils.isEmpty(title)) {
-                mView.getToolbar().title = title
+                mView?.getToolbar()?.title = title
             }
         }
     }
@@ -99,13 +101,13 @@ class WebViewPresenter @Inject constructor() : BasePresenter<WebViewContract.Vie
         }
 
         override fun onPageStarted(view: WebView?, url: String?, favicon: Bitmap?) {
-            mView.getProgressBar().visibility = View.VISIBLE
+            mView?.getProgressBar()?.visibility = View.VISIBLE
             super.onPageStarted(view, url, favicon)
         }
 
         override fun onPageFinished(view: WebView?, url: String?) {
-            mView.getProgressBar().visibility = View.GONE
-            mView.hideRefreshBar()
+            mView?.getProgressBar()?.visibility = View.GONE
+            mView?.hideRefreshBar()
             super.onPageFinished(view, url)
         }
 

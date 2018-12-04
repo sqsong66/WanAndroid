@@ -36,7 +36,7 @@ class SearchPresenter @Inject constructor(private val searchModel: SearchModel,
     private lateinit var mCurrentKey: String
     private val mDataList = mutableListOf<HomeItem>()
     private val mAdapter: SearchAdapter by lazy {
-        SearchAdapter(mView.getAppContext(), mDataList)
+        SearchAdapter(mView?.getAppContext(), mDataList)
     }
 
     override fun onAttach(view: SearchContract.View) {
@@ -45,21 +45,28 @@ class SearchPresenter @Inject constructor(private val searchModel: SearchModel,
     }
 
     private fun init() {
-        mView.showLoadingPage()
-        mView.setRecyclerAdapter(mAdapter)
+        mView?.showLoadingPage()
+        mView?.setRecyclerAdapter(mAdapter)
         mAdapter.setHomeItemActionListener(this)
-        disposable.addAll(searchDisposable())
-        startQuery(mView.getInitKey())
+        addDisposable(searchDisposable())
+        startQuery(mView?.getInitKey())
     }
 
-    private fun searchDisposable(): Disposable {
-        return mView.searchObservable()
+    private fun addDisposable(dispos: Disposable?) {
+        if (dispos != null) {
+            disposable.add(dispos)
+        }
+    }
+
+    private fun searchDisposable(): Disposable? {
+        if (mView == null) return null
+        return mView!!.searchObservable()
                 .debounce(500, TimeUnit.MILLISECONDS)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe {
                     LogUtil.e("SearchPresenter", "Start query: $it")
                     mPage = 0
-                    mView.showClear(!it.isEmpty())
+                    mView?.showClear(!it.isEmpty())
                     startQuery(it.toString())
                 }
     }
@@ -78,7 +85,7 @@ class SearchPresenter @Inject constructor(private val searchModel: SearchModel,
         if (TextUtils.isEmpty(key)) {
             mDataList.clear()
             mAdapter.notifyDataSetChanged()
-            mView.showEmptyPage()
+            mView?.showEmptyPage()
             return
         }
         mCurrentKey = key!!
@@ -104,20 +111,20 @@ class SearchPresenter @Inject constructor(private val searchModel: SearchModel,
     }
 
     private fun showErrors(message: String) {
-        mView.showMessage(message)
+        mView?.showMessage(message)
         if (mPage == 0) {
-            mView.showErrorPage()
+            mView?.showErrorPage()
         } else {
             mPage--
-            mView.loadFinish()
+            mView?.loadFinish()
         }
     }
 
     private fun setupDataList(dataList: List<HomeItem>?) {
-        mView.showContentPage()
+        mView?.showContentPage()
         if (dataList == null || dataList.isEmpty()) {
             if (mPage == 0) {
-                mView.showEmptyPage()
+                mView?.showEmptyPage()
             } else {
                 mAdapter.updateLoadingState(LoadingFooterViewHolder.STATE_NO_CONTENT)
             }
@@ -129,14 +136,14 @@ class SearchPresenter @Inject constructor(private val searchModel: SearchModel,
         mDataList.addAll(dataList)
         mAdapter.notifyDataSetChanged()
 
-        mView.getHandler().post {
-            if (mPage == 0 && mView.findRecyclerLastVisibleItemPosition() == mDataList.size + 1) {
+        mView?.getHandler()?.post {
+            if (mPage == 0 && mView?.findRecyclerLastVisibleItemPosition() == mDataList.size + 1) {
                 mAdapter.updateLoadingState(LoadingFooterViewHolder.STATE_HIDDEN)
             } else if (dataList.size < Constants.PAGE_SIZE) {
                 mAdapter.updateLoadingState(LoadingFooterViewHolder.STATE_NO_CONTENT)
             } else {
                 mAdapter.updateLoadingState(LoadingFooterViewHolder.STATE_LOADING)
-                mView.loadFinish()
+                mView?.loadFinish()
             }
         }
     }
@@ -144,7 +151,7 @@ class SearchPresenter @Inject constructor(private val searchModel: SearchModel,
     override fun onStarClick(homeItem: HomeItem, position: Int) {
         val userName: String = mPreferences[Constants.LOGIN_USER_NAME] ?: ""
         if (TextUtils.isEmpty(userName)) {
-            mView.showLoginDialog()
+            mView?.showLoginDialog()
             return
         }
 
@@ -156,33 +163,33 @@ class SearchPresenter @Inject constructor(private val searchModel: SearchModel,
                         if (bean.errorCode == 0) {
                             if (collectState) {
                                 homeItem.collect = false
-                                mView.showMessage(mView.getAppContext().getString(R.string.text_cancel_collect_success))
+                                mView?.showMessage(mView?.getStringFromResource(R.string.text_cancel_collect_success))
                             } else {
                                 homeItem.collect = true
-                                mView.showMessage(mView.getAppContext().getString(R.string.text_collect_success))
+                                mView?.showMessage(mView?.getStringFromResource(R.string.text_collect_success))
                             }
                             mAdapter.notifyItemChanged(position)
                         } else {
-                            mView.showMessage(bean.errorMsg)
+                            mView?.showMessage(bean.errorMsg)
                         }
                     }
 
                     override fun onFail(error: ApiException) {
-                        mView.showMessage(error.showMessage)
+                        mView?.showMessage(error.showMessage)
                     }
                 })
     }
 
     override fun onListItemClick(homeItem: HomeItem, position: Int) {
-        val intent = Intent(mView.getAppContext(), WebViewActivity::class.java)
+        val intent = Intent(mView?.getAppContext(), WebViewActivity::class.java)
         intent.putExtra(Constants.KEY_WEB_URL, homeItem.link)
         intent.putExtra(Constants.KEY_WEB_TITLE, homeItem.title)
-        mView.startNewActivity(intent)
+        mView?.startNewActivity(intent)
     }
 
     override fun onShareClick(homeItem: HomeItem, position: Int) {
         val sharingIntent = CommonUtil.buildShareIntent(homeItem.title, homeItem.link)
-        mView.startNewActivity(Intent.createChooser(sharingIntent, mView.getAppContext().getString(R.string.text_share_link)))
+        mView?.startNewActivity(Intent.createChooser(sharingIntent, mView?.getStringFromResource(R.string.text_share_link)))
     }
 
 }

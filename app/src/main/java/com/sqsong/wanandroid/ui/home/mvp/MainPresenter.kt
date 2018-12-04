@@ -71,17 +71,24 @@ class MainPresenter @Inject constructor(private val mainView: MainContract.View,
 
     private fun registerEvent() {
         EventBus.getDefault().register(this)
-        mView.showUserName(mPreferences[Constants.LOGIN_USER_NAME])
-        disposable.add(fabDisposable())
+        mView?.showUserName(mPreferences[Constants.LOGIN_USER_NAME])
+        addDisposable(fabDisposable())
         setupFragments()
         requestHotKey()
     }
 
-    private fun fabDisposable(): Disposable {
-        return RxView.clicks(mView.getFab())
+    private fun addDisposable(dispos: Disposable?) {
+        if (dispos != null) {
+            disposable.add(dispos)
+        }
+    }
+
+    private fun fabDisposable(): Disposable? {
+        if (mView == null) return null
+        return RxView.clicks(mView!!.getFab())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe {
-                    EventBus.getDefault().post(FabClickEvent(mView.getCurrentIndex()))
+                    EventBus.getDefault().post(FabClickEvent(mView?.getCurrentIndex() ?: 0))
                 }
     }
 
@@ -91,8 +98,8 @@ class MainPresenter @Inject constructor(private val mainView: MainContract.View,
         mFragmentList.add(mKnowledgeFragment)
         mFragmentList.add(mNavigationFragment)
         mFragmentList.add(mProjectFragment)
-        val pagerAdapter = FragmentPagerAdapter(mView.supportFragmentManager(), mFragmentList)
-        mView.setPagerAdapter(pagerAdapter)
+        val pagerAdapter = FragmentPagerAdapter(mView?.supportFragmentManager(), mFragmentList)
+        mView?.setPagerAdapter(pagerAdapter)
     }
 
     fun checkLoginState() {
@@ -100,28 +107,28 @@ class MainPresenter @Inject constructor(private val mainView: MainContract.View,
         if (TextUtils.isEmpty(userName)) {
             loginOut()
         } else {
-            mView.showLoginOutTipDialog()
+            mView?.showLoginOutTipDialog()
         }
     }
 
     fun loginOut() {
         BaseApplication.INSTANCE.quitApp()
         CookieManager.getInstance(mContext).clearCookieInfo()
-        mView.startNewActivity(Intent(mView.getActivity(), LoginActivity::class.java))
+        mView?.startNewActivity(Intent(mView?.getActivity(), LoginActivity::class.java))
     }
 
     fun checkCollectionState() {
         val userName: String = mPreferences[Constants.LOGIN_USER_NAME] ?: ""
         if (TextUtils.isEmpty(userName)) {
-            mView.showLoginOutTipDialog()
+            mView?.showLoginOutTipDialog()
         } else {
-            mView.startNewActivity(Intent(mView.getActivity(), CollectionActivity::class.java))
+            mView?.startNewActivity(Intent(mView?.getActivity(), CollectionActivity::class.java))
         }
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     fun onSwitchIndex(event: SwitchIndexEvent) {
-        mView.switchBottomViewNavigation(analysisSelectedItemId(event.index))
+        mView?.switchBottomViewNavigation(analysisSelectedItemId(event.index))
     }
 
     private fun analysisSelectedItemId(index: Int): Int {
@@ -139,33 +146,33 @@ class MainPresenter @Inject constructor(private val mainView: MainContract.View,
                 .subscribe(object : ObserverImpl<HotSearchBean>(disposable) {
                     override fun onSuccess(bean: HotSearchBean) {
                         if (bean.errorCode == 0) {
-                            mView.setupHotSearchKey(bean.data)
+                            mView?.setupHotSearchKey(bean.data)
                         } else {
-                            mView.showMessage(bean.errorMsg)
+                            mView?.showMessage(bean.errorMsg)
                         }
                     }
 
                     override fun onFail(error: ApiException) {
-                        mView.showMessage(error.showMessage)
+                        mView?.showMessage(error.showMessage)
                     }
                 })
     }
 
     fun checkCameraPermission() {
         if (mPermissions == null) {
-            mPermissions = RxPermissions(mView.getActivity())
+            mPermissions = RxPermissions(mView?.getActivity()!!)
         }
         disposable.add(mPermissions!!.requestEach(Manifest.permission.CAMERA)
                 .subscribe {
                     when {
                         it.granted -> {
-                            mView.startNewActivity(Intent(mView.getActivity(), ScanningActivity::class.java))
+                            mView?.startNewActivity(Intent(mView?.getActivity(), ScanningActivity::class.java))
                         }
                         it.shouldShowRequestPermissionRationale -> {
-                            mView.showMessage(mContext.getString(R.string.text_camera_permission))
+                            mView?.showMessage(mContext.getString(R.string.text_camera_permission))
                         }
                         else -> {
-                            mView.showCameraPermissionDialog()
+                            mView?.showCameraPermissionDialog()
                         }
                     }
                 })

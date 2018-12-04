@@ -30,30 +30,30 @@ class NavigationPresenter @Inject constructor(private val navigationModel: Navig
     private val mTitleMap = HashMap<Int, String>()
     private val mDataList = mutableListOf<NavigationData>()
     private val mAdapter by lazy {
-        NavigationAdapter(mView.getFragmentContext(), mDataList)
+        NavigationAdapter(mView?.getFragmentContext(), mDataList)
     }
 
     override fun onAttach(view: NavigationContract.View) {
         super.onAttach(view)
-        mView.showLoadingPage()
+        mView?.showLoadingPage()
         initAdapter()
     }
 
     private fun initAdapter() {
         EventBus.getDefault().register(this)
         val padding = DensityUtil.dip2px(16).toFloat()
-        val bgColor = CommonUtil.getThemeColor(mView.getFragmentContext(), R.attr.colorDefaultBackground)
-        val textColor = CommonUtil.getThemeColor(mView.getFragmentContext(), R.attr.colorTextActive)
-        val itemDecoration = FloatingTitleItemDecoration.Builder(mView.getFragmentContext())
+        val bgColor = CommonUtil.getThemeColor(mView?.getFragmentContext(), R.attr.colorDefaultBackground)
+        val textColor = CommonUtil.getThemeColor(mView?.getFragmentContext(), R.attr.colorTextActive)
+        val itemDecoration = FloatingTitleItemDecoration.Builder(mView?.getFragmentContext())
                 .setBackgroundColor(bgColor)
                 .setTextColor(textColor)
                 .setPadding(padding, padding, padding, padding)
                 .setTextSize(16)
-                .setRecyclerView(mView.getRecycler())
+                .setRecyclerView(mView?.getRecycler())
                 .setTitleMap(mTitleMap)
                 .build()
         mAdapter.setOnItemClickListener(this)
-        mView.setRecyclerAdapter(mAdapter, itemDecoration)
+        mView?.setRecyclerAdapter(mAdapter, itemDecoration)
     }
 
     fun requestNavigationList() {
@@ -64,24 +64,24 @@ class NavigationPresenter @Inject constructor(private val navigationModel: Navig
                         if (bean.errorCode == 0) {
                             processNavigationData(bean.data)
                         } else {
-                            mView.showMessage(bean.errorMsg)
-                            mView.showErrorPage()
+                            mView?.showMessage(bean.errorMsg)
+                            mView?.showErrorPage()
                         }
                     }
 
                     override fun onFail(error: ApiException) {
-                        mView.showMessage(error.showMessage)
-                        mView.showErrorPage()
+                        mView?.showMessage(error.showMessage)
+                        mView?.showErrorPage()
                     }
                 })
     }
 
     private fun processNavigationData(dataList: List<NavigationData>?) {
         if (dataList == null || dataList.isEmpty()) {
-            mView.showEmptyPage()
+            mView?.showEmptyPage()
             return
         }
-        mView.showContentPage()
+        mView?.showContentPage()
         mTitleMap.clear()
         for (i in 0 until dataList.size) {
             mTitleMap[i] = dataList[i].name
@@ -92,16 +92,16 @@ class NavigationPresenter @Inject constructor(private val navigationModel: Navig
     }
 
     override fun onItemClick(homeItem: HomeItem?, position: Int) {
-        val intent = Intent(mView.getFragmentContext(), WebViewActivity::class.java)
+        val intent = Intent(mView?.getFragmentContext(), WebViewActivity::class.java)
         intent.putExtra(Constants.KEY_WEB_URL, homeItem?.link)
         intent.putExtra(Constants.KEY_WEB_TITLE, homeItem?.title)
-        mView.startNewActivity(intent)
+        mView?.startNewActivity(intent)
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     fun onFabClick(event: FabClickEvent) {
         if (event.index == 2) {
-            mView.scrollRecycler(0)
+            mView?.scrollRecycler(0)
         }
     }
 

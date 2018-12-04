@@ -21,7 +21,7 @@ import com.sqsong.wanandroid.view.CheckableImageView
 import com.sqsong.wanandroid.view.LabelView
 import javax.inject.Inject
 
-class CollectionAdapter @Inject constructor(context: Context, private val dataList: MutableList<HomeItem>) :
+class CollectionAdapter @Inject constructor(context: Context?, private val dataList: MutableList<HomeItem>) :
         RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     @LoadingState

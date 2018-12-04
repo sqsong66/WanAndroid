@@ -30,32 +30,39 @@ class ScanningPresenter @Inject constructor(private val disposable: CompositeDis
     private var mVibrator: Vibrator? = null
     private var mCaptureHandler: CaptureHandler? = null
     private lateinit var mCameraManager: CameraManager/* by lazy {
-        CameraManager(mView.getAppContext().applicationContext)
+        CameraManager(mView?.getAppContext().applicationContext)
     }*/
 
     override fun onAttach(view: ScanningContract.View) {
         super.onAttach(view)
-        mVibrator = mView.getAppContext().getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
-        disposable.add(lightClickDisposable())
+        mVibrator = mView?.getAppContext()?.getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
+        addDisposable(lightClickDisposable())
     }
 
-    private fun lightClickDisposable(): Disposable {
-        return RxView.clicks(mView.lightImage())
+    private fun addDisposable(dispos: Disposable?) {
+        if (dispos != null) {
+            disposable.add(dispos)
+        }
+    }
+
+    private fun lightClickDisposable(): Disposable? {
+        if (mView == null) return null
+        return RxView.clicks(mView!!.lightImage())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe {
-                    lighting(mView.lightImage().isChecked)
+                    lighting(mView?.lightImage()?.isChecked ?: false)
                 }
     }
 
     fun onResume() {
-        mCameraManager = CameraManager(mView.getAppContext().applicationContext)
-        mView.setViewCameraManager(mCameraManager)
+        mCameraManager = CameraManager(mView?.getAppContext()?.applicationContext)
+        mView?.setViewCameraManager(mCameraManager)
 
-        val surfaceHolder = mView.getSurfaceView().holder
+        val surfaceHolder = mView?.getSurfaceView()?.holder
         if (hasSurface) {
             initCamera(surfaceHolder)
         } else {
-            surfaceHolder.addCallback(this)
+            surfaceHolder?.addCallback(this)
         }
     }
 
@@ -65,7 +72,7 @@ class ScanningPresenter @Inject constructor(private val disposable: CompositeDis
 
         mCameraManager.closeDriver()
         if (!hasSurface) {
-            mView.getSurfaceView().holder.removeCallback(this)
+            mView?.getSurfaceView()?.holder?.removeCallback(this)
         }
     }
 
@@ -85,7 +92,7 @@ class ScanningPresenter @Inject constructor(private val disposable: CompositeDis
         hasSurface = false
     }
 
-    private fun initCamera(surfaceHolder: SurfaceHolder) {
+    private fun initCamera(surfaceHolder: SurfaceHolder?) {
         if (mCameraManager.isOpen()) return
 
         try {
@@ -100,7 +107,7 @@ class ScanningPresenter @Inject constructor(private val disposable: CompositeDis
     }
 
     override fun foundPossibleResultPoint(point: ResultPoint?) {
-        mView.drawPossiblePoint(point)
+        mView?.drawPossiblePoint(point)
     }
 
     override fun handleDecode(result: Result, barcodeBitmap: Bitmap?, scaleFactor: Float) {
@@ -114,8 +121,8 @@ class ScanningPresenter @Inject constructor(private val disposable: CompositeDis
             barcodeBitmap.compress(Bitmap.CompressFormat.PNG, 100, stream)
             bmpBytes = stream.toByteArray()
         }
-        mView.showScanResultDialog(ScanResult(resultText, formatText, typeText, timeText, bmpBytes))
-        CommonUtil.playDefaultSound(mView.getAppContext().applicationContext)
+        mView?.showScanResultDialog(ScanResult(resultText, formatText, typeText, timeText, bmpBytes))
+        CommonUtil.playDefaultSound(mView?.getAppContext()?.applicationContext)
         if (mVibrator?.hasVibrator() == true) {
             mVibrator?.vibrate(10)
         }

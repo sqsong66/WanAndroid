@@ -16,7 +16,7 @@ import com.sqsong.wanandroid.common.inter.OnItemClickListener
 import com.sqsong.wanandroid.data.KnowledgeData
 import com.sqsong.wanandroid.util.DensityUtil
 
-class KnowledgeAdapter(val context: Context, val dataList: MutableList<KnowledgeData>) : RecyclerView.Adapter<KnowledgeAdapter.BodyViewHolder>() {
+class KnowledgeAdapter(val context: Context?, val dataList: MutableList<KnowledgeData>) : RecyclerView.Adapter<KnowledgeAdapter.BodyViewHolder>() {
 
     private val mInflater = LayoutInflater.from(context)
     private var mListener: OnItemClickListener<KnowledgeData>? = null
