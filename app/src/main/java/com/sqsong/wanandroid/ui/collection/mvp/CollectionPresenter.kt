@@ -20,7 +20,7 @@ import javax.inject.Inject
 
 class CollectionPresenter @Inject constructor(private val collectionModel: CollectionModel,
                                               private val disposable: CompositeDisposable) :
-        BasePresenter<CollectionContract.View, CollectionContract.Model>(collectionModel, disposable), HomeItemAdapter.HomeItemActionListener {
+        BasePresenter<CollectionContract.View, CollectionContract.Model>(collectionModel), HomeItemAdapter.HomeItemActionListener {
 
     private var mPage: Int = 0
     private val mDataList = mutableListOf<HomeItem>()

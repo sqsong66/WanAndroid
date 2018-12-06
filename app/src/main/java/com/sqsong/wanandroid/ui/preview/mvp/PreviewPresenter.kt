@@ -8,7 +8,7 @@ import io.reactivex.disposables.Disposable
 import java.util.concurrent.TimeUnit
 
 class PreviewPresenter constructor(private val disposable: CompositeDisposable) :
-        BasePresenter<PreviewContract.View, IModel>(null, disposable) {
+        BasePresenter<PreviewContract.View, IModel>(null) {
 
     override fun onAttach(view: PreviewContract.View) {
         super.onAttach(view)

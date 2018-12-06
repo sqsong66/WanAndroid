@@ -20,7 +20,7 @@ import javax.inject.Inject
 class RegisterPresenter @Inject constructor(private val registerView: RegisterContract.View,
                                             private val registerModel: RegisterModel,
                                             private val disposable: CompositeDisposable) :
-        BasePresenter<RegisterContract.View, RegisterContract.Model>(registerModel, disposable) {
+        BasePresenter<RegisterContract.View, RegisterContract.Model>(registerModel) {
 
     @Inject
     lateinit var mContext: Context

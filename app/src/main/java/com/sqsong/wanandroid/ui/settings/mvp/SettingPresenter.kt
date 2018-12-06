@@ -9,7 +9,7 @@ import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 class SettingPresenter @Inject constructor(private val disposable: CompositeDisposable) :
-        BasePresenter<SettingContract.View, IModel>(null, disposable) {
+        BasePresenter<SettingContract.View, IModel>() {
 
     override fun onAttach(view: SettingContract.View) {
         super.onAttach(view)

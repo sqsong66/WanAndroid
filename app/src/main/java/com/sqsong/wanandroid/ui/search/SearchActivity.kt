@@ -17,6 +17,7 @@ import com.sqsong.wanandroid.ui.search.adapter.SearchAdapter
 import com.sqsong.wanandroid.ui.search.mvp.SearchContract
 import com.sqsong.wanandroid.ui.search.mvp.SearchPresenter
 import com.sqsong.wanandroid.util.Constants
+import com.sqsong.wanandroid.util.SnackbarUtil
 import com.sqsong.wanandroid.view.DefaultPageLayout
 import io.reactivex.Observable
 import kotlinx.android.synthetic.main.activity_search.*
@@ -110,6 +111,10 @@ class SearchActivity : BaseActivity<SearchPresenter>(), SearchContract.View, Rec
     override fun findRecyclerLastVisibleItemPosition(): Int = mLayoutManager.findLastVisibleItemPosition()
 
     override fun loadFinish() = mRecyclerScroller.loadFinish()
+
+    override fun showMessage(message: String?) {
+        SnackbarUtil.showToastText(this, message)
+    }
 
     override fun showLoginDialog() {
         AlertDialog.Builder(this)

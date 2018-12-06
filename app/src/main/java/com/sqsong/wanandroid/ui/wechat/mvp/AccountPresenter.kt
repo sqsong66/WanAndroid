@@ -23,7 +23,7 @@ import io.reactivex.disposables.CompositeDisposable
 
 class AccountPresenter(private val accountModel: PublicAccountModel,
                        private val disposable: CompositeDisposable) :
-        BasePresenter<AccountContract.View, PublicAccountModel>(accountModel, disposable), HomeItemAdapter.HomeItemActionListener {
+        BasePresenter<AccountContract.View, PublicAccountModel>(accountModel), HomeItemAdapter.HomeItemActionListener {
 
 
     private var mPage = 1

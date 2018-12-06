@@ -98,7 +98,7 @@
     <string name="text_copy">复制</string>
     <string name="text_website">网址</string>
     <string name="text_copy_success">复制成功</string>
-    <string name="qr_code_image">二維碼圖片</string>
-    <string name="light">燈光</string>
+    <string name="qr_code_image">二维码图片</string>
+    <string name="light">灯光</string>
     <string name="text_scanning_tips">将二维码/条形码放入框内，即可自动扫描</string>
 </resources>

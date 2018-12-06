@@ -10,6 +10,7 @@ import android.widget.ImageView
 import androidx.annotation.ColorInt
 import androidx.annotation.StyleRes
 import androidx.appcompat.app.AlertDialog
+import androidx.fragment.app.DialogFragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.sqsong.wanandroid.R
@@ -17,10 +18,9 @@ import com.sqsong.wanandroid.common.GridSpaceItemDecoration
 import com.sqsong.wanandroid.common.inter.OnItemClickListener
 import com.sqsong.wanandroid.util.DensityUtil
 import com.sqsong.wanandroid.view.CircleView
-import dagger.android.support.DaggerAppCompatDialogFragment
 import javax.inject.Inject
 
-class ThemeSwitcherDialog @Inject constructor() : DaggerAppCompatDialogFragment(), OnItemClickListener<ColorPalette> {
+class ThemeSwitcherDialog @Inject constructor() : DialogFragment(), OnItemClickListener<ColorPalette> {
 
     @Inject
     lateinit var mThemeSwitcherManager: ThemeSwitcherManager

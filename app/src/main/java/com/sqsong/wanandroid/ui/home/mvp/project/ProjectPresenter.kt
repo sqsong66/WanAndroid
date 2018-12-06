@@ -24,7 +24,7 @@ import javax.inject.Inject
 
 class ProjectPresenter @Inject constructor(private val projectModel: ProjectModel,
                                            private val disposable: CompositeDisposable) :
-        BasePresenter<ProjectContract.View, ProjectContract.Model>(projectModel, disposable), HomeItemAdapter.HomeItemActionListener {
+        BasePresenter<ProjectContract.View, ProjectContract.Model>(projectModel), HomeItemAdapter.HomeItemActionListener {
 
     @Inject
     lateinit var mPreferences: SharedPreferences

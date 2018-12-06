@@ -16,7 +16,7 @@ import org.greenrobot.eventbus.ThreadMode
 import javax.inject.Inject
 
 class KnowledgePresenter @Inject constructor(private val knowledgeModel: KnowledgeModel, private val disposable: CompositeDisposable) :
-        BasePresenter<KnowledgeContract.View, KnowledgeContract.Model>(knowledgeModel, disposable), OnItemClickListener<KnowledgeData> {
+        BasePresenter<KnowledgeContract.View, KnowledgeContract.Model>(knowledgeModel), OnItemClickListener<KnowledgeData> {
 
     private val mDataList = mutableListOf<KnowledgeData>()
     private val mAdapter by lazy {

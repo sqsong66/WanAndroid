@@ -25,7 +25,7 @@ import javax.inject.Inject
 
 class NavigationPresenter @Inject constructor(private val navigationModel: NavigationModel,
                                               private val disposable: CompositeDisposable) :
-        BasePresenter<NavigationContract.View, NavigationContract.Model>(navigationModel, disposable), OnItemClickListener<HomeItem> {
+        BasePresenter<NavigationContract.View, NavigationContract.Model>(navigationModel), OnItemClickListener<HomeItem> {
 
     private val mTitleMap = HashMap<Int, String>()
     private val mDataList = mutableListOf<NavigationData>()

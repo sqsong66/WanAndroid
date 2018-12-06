@@ -40,7 +40,7 @@ import javax.inject.Inject
 class MainPresenter @Inject constructor(private val mainView: MainContract.View,
                                         private val mainModel: MainModel,
                                         private val disposable: CompositeDisposable) :
-        BasePresenter<MainContract.View, IModel>(mainModel, disposable) {
+        BasePresenter<MainContract.View, IModel>(mainModel) {
 
     @Inject
     lateinit var mContext: Context

@@ -19,7 +19,7 @@ import javax.inject.Inject
 
 class WelfarePresenter @Inject constructor(private val welfareModel: WelfareModel,
                                            private val disposable: CompositeDisposable) :
-        BasePresenter<WelfareContract.View, WelfareContract.Model>(welfareModel, disposable), OnViewItemClickListener<WelfareData> {
+        BasePresenter<WelfareContract.View, WelfareContract.Model>(welfareModel), OnViewItemClickListener<WelfareData> {
 
     private var mPage = 1
     private val mDataList = ArrayList<WelfareData>()

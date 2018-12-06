@@ -27,7 +27,7 @@ import javax.inject.Inject
 
 class SearchPresenter @Inject constructor(private val searchModel: SearchModel,
                                           private val disposable: CompositeDisposable) :
-        BasePresenter<SearchContract.View, SearchContract.Model>(searchModel, disposable), HomeItemAdapter.HomeItemActionListener {
+        BasePresenter<SearchContract.View, SearchContract.Model>(searchModel), HomeItemAdapter.HomeItemActionListener {
 
     @Inject
     lateinit var mPreferences: SharedPreferences

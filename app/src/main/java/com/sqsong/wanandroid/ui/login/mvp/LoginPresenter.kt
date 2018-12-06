@@ -22,7 +22,7 @@ import javax.inject.Inject
 class LoginPresenter @Inject constructor(private val loginView: LoginContract.View,
                                          private val loginModel: LoginModel,
                                          private val disposable: CompositeDisposable) :
-        BasePresenter<LoginContract.View, LoginModel>(loginModel, disposable) {
+        BasePresenter<LoginContract.View, LoginModel>(loginModel) {
 
     @Inject
     lateinit var mContext: Context
@@ -68,7 +68,7 @@ class LoginPresenter @Inject constructor(private val loginView: LoginContract.Vi
                     return@filter validParams(mView?.userNameText(), mView?.passwordText())
                 }
                 .doOnNext { mView?.showProcessDialog() }
-                .debounce(800, TimeUnit.MILLISECONDS)
+                .throttleFirst(800, TimeUnit.MILLISECONDS)
                 .observeOn(Schedulers.io())
                 .switchMap {
                     return@switchMap loginModel.login(mView?.userNameText()!!, mView?.passwordText()!!)
@@ -77,9 +77,7 @@ class LoginPresenter @Inject constructor(private val loginView: LoginContract.Vi
                 // need add retry. if not, while meet an error, the observable will dispose, and while no longer get the view click event.
                 // retry operator will not go to observer's onError method(we cannot process the exceptions).
                 // .retry()
-                .doOnEach {
-                    mView?.hideProcessDialog()
-                }
+                .doOnEach { mView?.hideProcessDialog() }
                 .subscribe(object : ObserverImpl<LoginBean>(disposable) {
                     override fun onSuccess(bean: LoginBean) {
                         if (bean.errorCode == 0) {

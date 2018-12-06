@@ -25,7 +25,7 @@ import javax.inject.Inject
 
 class SplashPresenter @Inject constructor(private val splashView: SplashContract.View,
                                           private val disposable: CompositeDisposable) :
-        BasePresenter<SplashContract.View, IModel>(null, disposable) {
+        BasePresenter<SplashContract.View, IModel>() {
 
     @Inject
     lateinit var mContext: Context

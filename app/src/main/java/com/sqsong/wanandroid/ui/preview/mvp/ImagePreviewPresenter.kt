@@ -10,7 +10,7 @@ import io.reactivex.disposables.CompositeDisposable
 import javax.inject.Inject
 
 class ImagePreviewPresenter @Inject constructor(private val disposable: CompositeDisposable) :
-        BasePresenter<ImagePreviewContract.View, IModel>(null, disposable) {
+        BasePresenter<ImagePreviewContract.View, IModel>(null) {
 
     override fun onAttach(view: ImagePreviewContract.View) {
         super.onAttach(view)

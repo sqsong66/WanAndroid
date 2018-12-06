@@ -14,7 +14,7 @@ import javax.inject.Inject
 
 class PublicAccountPresenter @Inject constructor(private val accountModel: PublicAccountModel,
                                                  private val disposable: CompositeDisposable) :
-        BasePresenter<PublicAccountContract.View, PublicAccountContract.Model>(accountModel, disposable) {
+        BasePresenter<PublicAccountContract.View, PublicAccountContract.Model>(accountModel) {
 
     override fun onAttach(view: PublicAccountContract.View) {
         super.onAttach(view)

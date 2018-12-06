@@ -33,11 +33,11 @@ object OkHttpClientFactory {
                 override fun getAcceptedIssuers(): Array<X509Certificate> {
                     return arrayOf()
                 }
-
             }
             val trustManagerArray = arrayOf(x509TrustManager)
-            val sslContext = SSLContext.getInstance("SSL")
-            sslContext.init(null, trustManagerArray, SecureRandom())
+            val sslContext = SSLContext.getInstance("SSL").apply {
+                init(null, trustManagerArray, SecureRandom())
+            }
             return builder.sslSocketFactory(sslContext.socketFactory, trustManagerArray[0])
                     .hostnameVerifier { _, _ -> true }
                     .build()

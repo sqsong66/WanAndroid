@@ -23,7 +23,7 @@ import javax.inject.Inject
 
 class ChildKnowledgePresenter @Inject constructor(private val knowledgeModel: ChildKnowledgeModel,
                                                   private val disposable: CompositeDisposable) :
-        BasePresenter<ChildKnowledgeContract.View, ChildKnowledgeModel>(knowledgeModel, disposable), HomeItemAdapter.HomeItemActionListener {
+        BasePresenter<ChildKnowledgeContract.View, ChildKnowledgeModel>(knowledgeModel), HomeItemAdapter.HomeItemActionListener {
 
     @Inject
     lateinit var mPreferences: SharedPreferences

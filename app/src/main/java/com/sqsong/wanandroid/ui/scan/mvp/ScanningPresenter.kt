@@ -23,7 +23,7 @@ import java.io.ByteArrayOutputStream
 import javax.inject.Inject
 
 class ScanningPresenter @Inject constructor(private val disposable: CompositeDisposable) :
-        BasePresenter<ScanningContract.View, IModel>(null, disposable), ScanningResultListener, SurfaceHolder.Callback {
+        BasePresenter<ScanningContract.View, IModel>(), ScanningResultListener, SurfaceHolder.Callback {
 
 
     private var hasSurface = false
