@@ -5,7 +5,7 @@ ext {
     targetSdkVersion = 28
     compileSdkVersion = 'android-28'
     versionCode = 1
-    versionName = '1.0.0'
+    versionName = '1.0.1'
 
     appcompact_version = '1.0.2'
     constraintlayout_version = '1.1.3'

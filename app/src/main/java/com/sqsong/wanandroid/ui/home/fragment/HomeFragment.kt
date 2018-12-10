@@ -133,7 +133,7 @@ class HomeFragment @Inject constructor() : BaseInjectFragment<HomePresenter>(), 
     }
 
     override fun showLoginDialog() {
-        AlertDialog.Builder(activity!!)
+        AlertDialog.Builder(context!!, R.style.DialogStyle)
                 .setTitle(R.string.text_login_tips_title)
                 .setMessage(R.string.text_login_tips_message)
                 .setCancelable(false)
