@@ -27,9 +27,8 @@ import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
 import javax.inject.Inject
 
-class HomePresenter @Inject constructor(/*private val homeView: HomeContract.HomeView,*/
-        private val homeModel: HomeModel,
-        private val disposable: CompositeDisposable) :
+class HomePresenter @Inject constructor(private val homeModel: HomeModel,
+                                        private val disposable: CompositeDisposable) :
         BasePresenter<HomeContract.HomeView, HomeContract.Model>(homeModel),
         HomeItemAdapter.HomeItemActionListener, OnItemClickListener<HomeBannerData> {
 
