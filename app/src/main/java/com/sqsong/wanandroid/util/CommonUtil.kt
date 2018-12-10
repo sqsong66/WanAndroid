@@ -47,12 +47,13 @@ object CommonUtil {
 
     fun setAssetsTextFont(textView: TextView?, languageType: Int?) {
         try {
-            val assetsFont = if (languageType == Constants.LANGUAGE_TYPE_CHINESE
-            /*|| languageType == Constants.LANGUAGE_TYPE_TRADITION_CHINESE*/) {
+            val assetsFont =  "font/Pacifico-Regular.ttf"
+            /*if (languageType == Constants.LANGUAGE_TYPE_CHINESE
+            *//*|| languageType == Constants.LANGUAGE_TYPE_TRADITION_CHINESE*//*) {
                 "font/XinKai.TTF"
             } else {
-                "font/Boogaloo-Regular.ttf"
-            }
+                "font/Pacifico-Regular.ttf"
+            }*/
             textView?.typeface = Typeface.createFromAsset(textView?.context?.assets, assetsFont)
         } catch (e: Exception) {
             e.printStackTrace()

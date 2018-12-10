@@ -64,8 +64,6 @@
     <string name="text_login_tips_message">該功能需要登錄，您確定要登錄嗎？</string>
     <string name="text_collect_success">收藏成功</string>
     <string name="text_cancel_collect_success">取消收藏成功</string>
-    <string name="text_play">玩</string>
-    <string name="text_android">安卓</string>
     <string name="text_knowledge_data_cannot_null">錯誤的數據id</string>
     <string name="text_click_login">點擊頭像登錄</string>
     <string name="text_public_account">公衆號</string>

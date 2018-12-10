@@ -64,8 +64,8 @@
     <string name="text_login_tips_message">This function need to login, Are you want to login?</string>
     <string name="text_collect_success">Collection success</string>
     <string name="text_cancel_collect_success">Cancel collection success</string>
-    <string name="text_play">Play</string>
-    <string name="text_android">Android</string>
+    <string name="text_play" tools:ignore="MissingTranslation">Play</string>
+    <string name="text_android" tools:ignore="MissingTranslation">Android</string>
     <string name="text_knowledge_data_cannot_null">Invalid knowledge cid</string>
     <string name="text_interview_relative" translatable="false">面试相关</string>
     <string name="text_click_login">Click head to login</string>
