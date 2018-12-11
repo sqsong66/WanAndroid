@@ -74,7 +74,7 @@ class ApiException(val errorCode: Int, override val message: String?, val showMe
             val code: Int
             if (error is UnknownHostException || error is HttpException) {
                 code = ERROR_UNKONWN_HOST
-                showMessage = if (!NetworkUtil.isNetworkAvaiable(context)) {
+                showMessage = if (!NetworkUtil.isNetworkAvailable(context)) {
                     context.getString(R.string.text_network_not_available)
                 } else {
                     context.getString(R.string.text_address_not_reachable)

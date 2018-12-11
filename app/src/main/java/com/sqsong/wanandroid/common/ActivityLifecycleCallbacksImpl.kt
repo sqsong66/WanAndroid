@@ -30,8 +30,7 @@ class ActivityLifecycleCallbacksImpl @Inject constructor() : Application.Activit
 
         // 设置主题
         mThemeManager.applyThemeOverlay(activity)
-        if ((activity?.javaClass?.isAnnotationPresent(TranslucentNavigation::class.java)) == true &&
-                Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+        if ((activity?.javaClass?.isAnnotationPresent(TranslucentNavigation::class.java)) == true) {
             activity.window.setFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION, WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION)
         }
 
