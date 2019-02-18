@@ -15,6 +15,7 @@ import com.sqsong.wanandroid.ui.base.BaseActivity
 import com.sqsong.wanandroid.ui.welfare.adapter.WelfareAdapter
 import com.sqsong.wanandroid.ui.welfare.mvp.WelfareContract
 import com.sqsong.wanandroid.ui.welfare.mvp.WelfarePresenter
+import com.sqsong.wanandroid.util.DensityUtil
 import com.sqsong.wanandroid.util.ext.setupSwipeLayoutColor
 import com.sqsong.wanandroid.util.ext.setupToolbar
 import com.sqsong.wanandroid.view.DefaultPageLayout
@@ -48,6 +49,7 @@ class WelfareActivity : BaseActivity<WelfarePresenter>(), WelfareContract.View, 
 
     override fun initEvent() {
         setupToolbar(toolbar)
+        root.setPadding(0, DensityUtil.getStatusBarHeight(this), 0, 0)
         setupSwipeLayoutColor(swipeLayout)
         swipeLayout.setOnRefreshListener(this)
         setupRecyclerView()

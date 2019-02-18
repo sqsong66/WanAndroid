@@ -8,6 +8,7 @@ import com.sqsong.wanandroid.common.FragmentPagerAdapter
 import com.sqsong.wanandroid.ui.base.BaseActivity
 import com.sqsong.wanandroid.ui.wechat.mvp.PublicAccountContract
 import com.sqsong.wanandroid.ui.wechat.mvp.PublicAccountPresenter
+import com.sqsong.wanandroid.util.DensityUtil
 import com.sqsong.wanandroid.util.ext.setupToolbar
 import com.sqsong.wanandroid.view.DefaultPageLayout
 import kotlinx.android.synthetic.main.activity_public_account.*
@@ -30,6 +31,7 @@ class PublicAccountActivity : BaseActivity<PublicAccountPresenter>(), PublicAcco
 
     override fun initEvent() {
         setupToolbar(toolbar)
+        root.setPadding(0, DensityUtil.getStatusBarHeight(this), 0, 0)
         toolbar.post { toolbar.title = getString(R.string.text_public_account) }
         mPresenter.onAttach(this)
     }

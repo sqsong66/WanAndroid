@@ -17,6 +17,7 @@ import com.sqsong.wanandroid.ui.search.adapter.SearchAdapter
 import com.sqsong.wanandroid.ui.search.mvp.SearchContract
 import com.sqsong.wanandroid.ui.search.mvp.SearchPresenter
 import com.sqsong.wanandroid.util.Constants
+import com.sqsong.wanandroid.util.DensityUtil
 import com.sqsong.wanandroid.util.SnackbarUtil
 import com.sqsong.wanandroid.view.DefaultPageLayout
 import io.reactivex.Observable
@@ -52,6 +53,7 @@ class SearchActivity : BaseActivity<SearchPresenter>(), SearchContract.View, Rec
     override fun getLayoutResId(): Int = R.layout.activity_search
 
     override fun initEvent() {
+        status_view.layoutParams.height = DensityUtil.getStatusBarHeight(this)
         setupRecycler()
         searchEdit.setText(mSearchKey)
         searchEdit.setSelection(searchEdit.text.toString().length)

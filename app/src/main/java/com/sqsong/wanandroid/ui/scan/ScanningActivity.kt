@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.view.MenuItem
 import android.view.SurfaceView
+import androidx.constraintlayout.widget.ConstraintLayout
 import com.google.zxing.ResultPoint
 import com.sqsong.wanandroid.R
 import com.sqsong.wanandroid.data.ScanResult
@@ -13,6 +14,7 @@ import com.sqsong.wanandroid.ui.scan.mvp.ScanningContract
 import com.sqsong.wanandroid.ui.scan.mvp.ScanningPresenter
 import com.sqsong.wanandroid.ui.web.WebViewActivity
 import com.sqsong.wanandroid.util.Constants
+import com.sqsong.wanandroid.util.DensityUtil
 import com.sqsong.wanandroid.util.ext.setupToolbar
 import com.sqsong.wanandroid.util.zxing.camera.CameraManager
 import com.sqsong.wanandroid.view.CheckableImageView
@@ -24,6 +26,7 @@ class ScanningActivity : BaseActivity<ScanningPresenter>(), ScanningContract.Vie
 
     override fun initEvent() {
         setupToolbar(toolbar)
+        (toolbar.layoutParams as ConstraintLayout.LayoutParams).topMargin = DensityUtil.getStatusBarHeight(this)
         mPresenter.onAttach(this)
     }
 

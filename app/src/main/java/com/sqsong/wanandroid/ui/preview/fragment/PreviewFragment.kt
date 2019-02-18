@@ -16,7 +16,6 @@ import kotlinx.android.synthetic.main.fragment_preview.*
 
 class PreviewFragment : BaseFragment(), PreviewContract.View {
 
-
     private var mImageUrl: String? = null
     private var mPresenter: PreviewPresenter? = null
 
