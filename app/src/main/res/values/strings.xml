@@ -108,4 +108,5 @@
     <string name="qr_code_image">QR Code Image</string>
     <string name="light">Light</string>
     <string name="text_scanning_tips">Align the QR code within the frame to scan</string>
+    <string name="text_version_info">Version: v%s</string>
 </resources>

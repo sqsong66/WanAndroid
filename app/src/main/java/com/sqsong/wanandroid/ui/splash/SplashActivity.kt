@@ -8,6 +8,7 @@ import com.sqsong.wanandroid.common.inter.TranslucentNavigation
 import com.sqsong.wanandroid.ui.base.BaseActivity
 import com.sqsong.wanandroid.ui.splash.mvp.SplashContract
 import com.sqsong.wanandroid.ui.splash.mvp.SplashPresenter
+import com.sqsong.wanandroid.util.CommonUtil
 import com.sqsong.wanandroid.util.ext.showImage
 import kotlinx.android.synthetic.main.activity_splash.*
 
@@ -19,6 +20,7 @@ class SplashActivity : BaseActivity<SplashPresenter>(), SplashContract.View, IAp
     }
 
     override fun initEvent() {
+        versionTv.text = String.format(getString(R.string.text_version_info), CommonUtil.getVersionName(this))
         mPresenter.onAttach(this)
     }
 

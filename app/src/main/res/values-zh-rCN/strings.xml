@@ -99,4 +99,5 @@
     <string name="qr_code_image">二维码图片</string>
     <string name="light">灯光</string>
     <string name="text_scanning_tips">将二维码/条形码放入框内，即可自动扫描</string>
+    <string name="text_version_info">版本号：v%s</string>
 </resources>

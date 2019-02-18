@@ -99,4 +99,5 @@
     <string name="qr_code_image">二維碼圖片</string>
     <string name="light">燈光</string>
     <string name="text_scanning_tips">將QR Code置於取景框內，即可自動掃描</string>
+    <string name="text_version_info">版本號：v%s</string>
 </resources>

@@ -47,7 +47,7 @@ object CommonUtil {
 
     fun setAssetsTextFont(textView: TextView?, languageType: Int?) {
         try {
-            val assetsFont =  "font/Pacifico-Regular.ttf"
+            val assetsFont = "font/Pacifico-Regular.ttf"
             /*if (languageType == Constants.LANGUAGE_TYPE_CHINESE
             *//*|| languageType == Constants.LANGUAGE_TYPE_TRADITION_CHINESE*//*) {
                 "font/XinKai.TTF"
@@ -113,5 +113,15 @@ object CommonUtil {
         } catch (e: java.lang.Exception) {
             e.printStackTrace()
         }
+    }
+
+    fun getVersionName(context: Context?): String {
+        try {
+            return context?.packageManager?.getPackageInfo(context.packageName, 0)?.versionName
+                    ?: ""
+        } catch (e: java.lang.Exception) {
+            e.printStackTrace()
+        }
+        return ""
     }
 }
