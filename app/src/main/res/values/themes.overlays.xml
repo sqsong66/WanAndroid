@@ -15,7 +15,7 @@
         <item name="colorTextDisable">@color/colorTextDisable</item>
         <item name="colorCardBackground">@color/colorWhite</item>
         <item name="colorDefaultBackground">?android:colorBackground</item>
-        <item name="colorSettingIconTint">@color/colorSettingIcon</item>
+        <item name="colorSettingIconTint">@color/colorPrimary</item> <!--@color/colorSettingIcon-->
         <item name="colorDialogIcon">@color/colorPrimary</item>
     </style>
 
@@ -46,6 +46,7 @@
         <item name="colorProgress">@color/colorRedPrimary</item>
         <item name="colorChipBackground">@color/colorRedPrimaryLight</item>
         <item name="colorDialogIcon">@color/colorRedPrimary</item>
+        <item name="colorSettingIconTint">@color/colorPrimary</item>
     </style>
 
     <style name="ThemeOverlay.Palette.Purple" parent="ThemeOverlay.Palette.Default">
@@ -57,6 +58,7 @@
         <item name="colorProgress">@color/colorPurplePrimary</item>
         <item name="colorChipBackground">@color/colorPurplePrimaryLight</item>
         <item name="colorDialogIcon">@color/colorPurplePrimary</item>
+        <item name="colorSettingIconTint">@color/colorPurplePrimary</item>
     </style>
 
     <style name="ThemeOverlay.Palette.Indigo" parent="ThemeOverlay.Palette.Default">
@@ -68,6 +70,7 @@
         <item name="colorProgress">@color/colorIndigoPrimary</item>
         <item name="colorChipBackground">@color/colorIndigoPrimaryLight</item>
         <item name="colorDialogIcon">@color/colorIndigoPrimary</item>
+        <item name="colorSettingIconTint">@color/colorIndigoPrimary</item>
     </style>
 
     <style name="ThemeOverlay.Palette.Green" parent="ThemeOverlay.Palette.Default">
@@ -79,6 +82,7 @@
         <item name="colorProgress">@color/colorGreenPrimary</item>
         <item name="colorChipBackground">@color/colorGreenPrimaryLight</item>
         <item name="colorDialogIcon">@color/colorGreenPrimary</item>
+        <item name="colorSettingIconTint">@color/colorGreenPrimary</item>
     </style>
 
     <style name="ThemeOverlay.Palette.Orange" parent="ThemeOverlay.Palette.Default">
@@ -90,6 +94,7 @@
         <item name="colorProgress">@color/colorOrangePrimary</item>
         <item name="colorChipBackground">@color/colorOrangePrimaryLight</item>
         <item name="colorDialogIcon">@color/colorOrangePrimary</item>
+        <item name="colorSettingIconTint">@color/colorOrangePrimary</item>
     </style>
 
     <style name="ThemeOverlay.Palette.BlueGrey" parent="ThemeOverlay.Palette.Default">
@@ -101,6 +106,7 @@
         <item name="colorProgress">@color/colorBlueGreyPrimary</item>
         <item name="colorChipBackground">@color/colorBlueGreyPrimaryLight</item>
         <item name="colorDialogIcon">@color/colorBlueGreyPrimary</item>
+        <item name="colorSettingIconTint">@color/colorBlueGreyPrimary</item>
     </style>
 
     <style name="ThemeOverlay.Palette.Yellow" parent="ThemeOverlay.Palette.Default">
@@ -112,6 +118,7 @@
         <item name="colorProgress">@color/colorYellowPrimary</item>
         <item name="colorChipBackground">@color/colorYellowPrimaryLight</item>
         <item name="colorDialogIcon">@color/colorYellowPrimary</item>
+        <item name="colorSettingIconTint">@color/colorYellowPrimary</item>
     </style>
 
     <style name="ThemeOverlay.Palette.Brown" parent="ThemeOverlay.Palette.Default">
@@ -123,6 +130,7 @@
         <item name="colorProgress">@color/colorBrownPrimary</item>
         <item name="colorChipBackground">@color/colorBrownPrimaryLight</item>
         <item name="colorDialogIcon">@color/colorBrownPrimary</item>
+        <item name="colorSettingIconTint">@color/colorBrownPrimary</item>
     </style>
 
     <style name="ThemeOverlay.Palette.Pink" parent="ThemeOverlay.Palette.Default">
@@ -134,6 +142,7 @@
         <item name="colorProgress">@color/colorPinkPrimary</item>
         <item name="colorChipBackground">@color/colorPinkPrimaryLight</item>
         <item name="colorDialogIcon">@color/colorPinkPrimary</item>
+        <item name="colorSettingIconTint">@color/colorPinkPrimary</item>
     </style>
 
     <style name="ThemeOverlay.Palette.Blue" parent="ThemeOverlay.Palette.Default">
@@ -145,6 +154,7 @@
         <item name="colorProgress">@color/colorBluePrimary</item>
         <item name="colorChipBackground">@color/colorBluePrimaryLight</item>
         <item name="colorDialogIcon">@color/colorBluePrimary</item>
+        <item name="colorSettingIconTint">@color/colorBluePrimary</item>
     </style>
 
 </resources>

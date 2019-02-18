@@ -1,6 +1,7 @@
 package com.sqsong.wanandroid.ui.preview
 
 import android.view.MenuItem
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.FragmentManager
 import androidx.viewpager.widget.ViewPager
 import com.sqsong.wanandroid.R
@@ -11,6 +12,7 @@ import com.sqsong.wanandroid.ui.base.BaseActivity
 import com.sqsong.wanandroid.ui.preview.mvp.ImagePreviewContract
 import com.sqsong.wanandroid.ui.preview.mvp.ImagePreviewPresenter
 import com.sqsong.wanandroid.util.Constants
+import com.sqsong.wanandroid.util.DensityUtil
 import com.sqsong.wanandroid.util.ext.setupToolbar
 import kotlinx.android.synthetic.main.activity_image_preview.*
 
@@ -34,6 +36,7 @@ class ImagePreviewActivity : BaseActivity<ImagePreviewPresenter>(), ImagePreview
     override fun initEvent() {
         setupToolbar(toolbar)
         mPresenter.onAttach(this)
+        (toolbar.layoutParams as ConstraintLayout.LayoutParams).topMargin = DensityUtil.getStatusBarHeight(this)
         toolbar.post { toolbar.title = String.format(getString(R.string.text_image_index), mCurPos + 1, mWelfareList?.size) }
         viewPager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
             override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
