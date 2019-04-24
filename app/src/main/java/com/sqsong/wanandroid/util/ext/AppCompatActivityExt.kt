@@ -93,7 +93,7 @@ fun AppCompatActivity.setupUi(rootView: View) {
     }
 
     if (rootView is ViewGroup) {
-        for (i in 0..(rootView.childCount - 1)) {
+        for (i in 0 until rootView.childCount) {
             setupUi(rootView.getChildAt(i))
         }
     }

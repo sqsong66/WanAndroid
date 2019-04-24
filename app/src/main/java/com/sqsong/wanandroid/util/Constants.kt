@@ -2,7 +2,7 @@ package com.sqsong.wanandroid.util
 
 object Constants {
 
-    const val BASE_URL: String = "http://www.wanandroid.com/"
+    const val BASE_URL: String = "https://www.wanandroid.com/"
 
     const val THEMEOVERLAY_INDEX: String = "themeOverlay_index"
 
