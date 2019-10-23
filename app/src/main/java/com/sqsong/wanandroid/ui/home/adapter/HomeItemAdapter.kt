@@ -2,6 +2,7 @@ package com.sqsong.wanandroid.ui.home.adapter
 
 import android.content.Context
 import android.text.Html
+import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -123,9 +124,19 @@ class HomeItemAdapter(context: Context?,
         }
 
         fun bindItemData(homeItem: HomeItem, position: Int) {
-            nameCircleTv?.setText(homeItem.author.trim().substring(0, 1))
             labelView?.visibility = if (homeItem.fresh) View.VISIBLE else View.INVISIBLE
-            authorTv?.text = homeItem.author
+
+            val name = if (!TextUtils.isEmpty(homeItem.author)) {
+                homeItem.author
+            } else {
+                homeItem.shareUser
+            }
+            if (!TextUtils.isEmpty(name)) {
+                nameCircleTv?.setText(name!!.trim().substring(0, 1))
+            } else {
+                nameCircleTv?.setText("")
+            }
+            authorTv?.text = name
             timeTv?.text = homeItem.niceDate
             titleTv?.text = Html.fromHtml(homeItem.title)
             superChapterChip?.text = Html.fromHtml(homeItem.superChapterName)

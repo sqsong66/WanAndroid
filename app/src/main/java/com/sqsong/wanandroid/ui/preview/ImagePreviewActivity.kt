@@ -5,6 +5,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.FragmentManager
 import androidx.viewpager.widget.ViewPager
 import com.sqsong.wanandroid.R
+import com.sqsong.wanandroid.common.DepthPageTransformer
 import com.sqsong.wanandroid.common.FragmentPagerAdapter
 import com.sqsong.wanandroid.common.inter.TranslucentNavigation
 import com.sqsong.wanandroid.data.WelfareData
@@ -38,6 +39,7 @@ class ImagePreviewActivity : BaseActivity<ImagePreviewPresenter>(), ImagePreview
         mPresenter.onAttach(this)
         (toolbar.layoutParams as ConstraintLayout.LayoutParams).topMargin = DensityUtil.getStatusBarHeight(this)
         toolbar.post { toolbar.title = String.format(getString(R.string.text_image_index), mCurPos + 1, mWelfareList?.size) }
+        viewPager.setPageTransformer(true, DepthPageTransformer())
         viewPager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
             override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
             }

@@ -4,9 +4,8 @@ import android.content.Intent
 import android.net.Uri
 import android.provider.Settings
 import android.text.TextUtils
-import android.view.Menu
-import android.view.MenuItem
-import android.view.View
+import android.view.*
+import android.view.animation.AccelerateInterpolator
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.annotation.IdRes
@@ -45,9 +44,38 @@ class MainActivity : BaseActivity<MainPresenter>(), MainContract.View, Navigatio
     }
 
     override fun initEvent() {
+        configReveal()
         setupDrawerAndToolbar()
         searchView.setOnSearchActionListener(this)
         mPresenter.onAttach(this)
+    }
+
+    private fun configReveal() {
+        if (intent.hasExtra("revealX") && intent.hasExtra("revealY")) {
+            rootView.visibility = View.INVISIBLE
+
+            val revealX = intent.getIntExtra("revealX", 0)
+            val revealY = intent.getIntExtra("revealY", 0)
+            val viewTreeObserver = rootView.viewTreeObserver
+            if (viewTreeObserver.isAlive) {
+                viewTreeObserver.addOnGlobalLayoutListener(object : ViewTreeObserver.OnGlobalLayoutListener {
+                    override fun onGlobalLayout() {
+                        revealActivity(revealX, revealY)
+                        rootView.viewTreeObserver.removeOnGlobalLayoutListener(this)
+                    }
+                })
+            }
+        }
+    }
+
+    private fun revealActivity(revealX: Int, revealY: Int) {
+        val radius = rootView.width.coerceAtLeast(rootView.height)
+        ViewAnimationUtils.createCircularReveal(rootView, revealX, revealY, 0f, radius.toFloat()).apply {
+            duration = 500
+            interpolator = AccelerateInterpolator()
+            rootView.visibility = View.VISIBLE
+            start()
+        }
     }
 
     private fun setupDrawerAndToolbar() {

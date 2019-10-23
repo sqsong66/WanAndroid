@@ -20,20 +20,20 @@ ext {
     http_log_interceptor_version = '3.11.0'
     cookie_jar_version = 'v1.0.1'
     rxbinding_version = '2.2.0'
-    butterknife_version = '9.0.0-rc1'
+    butterknife_version = '10.1.0'
     eventbus_version = '3.1.1'
     imagezoom_version = '2.3.0'
 }
 
 buildscript {
-    ext.kotlin_version = '1.2.71'
+    ext.kotlin_version = '1.3.41'
     repositories {
         google()
         jcenter()
         mavenCentral()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.2.1'
+        classpath 'com.android.tools.build:gradle:3.4.2'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     }
 }

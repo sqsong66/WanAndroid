@@ -2,6 +2,8 @@ package com.sqsong.wanandroid.ui.login
 
 import android.content.Intent
 import android.widget.TextView
+import androidx.core.app.ActivityCompat
+import androidx.core.app.ActivityOptionsCompat
 import com.jakewharton.rxbinding2.view.RxView
 import com.sqsong.wanandroid.R
 import com.sqsong.wanandroid.common.LoadingProgressDialog
@@ -94,7 +96,15 @@ class LoginActivity : BaseActivity<LoginPresenter>(), LoginContract.View, IAppCo
     }
 
     override fun startHomeActivity() {
-        startActivity(Intent(this, MainActivity::class.java))
+        val options = ActivityOptionsCompat.makeSceneTransitionAnimation(this, loginBtn, "transition")
+        val revealX = (loginBtn.x + loginBtn.width / 2).toInt()
+        val revealY = (loginBtn.y + loginBtn.height / 2).toInt()
+        val intent = Intent(this, MainActivity::class.java).apply {
+            putExtra("revealX", revealX)
+            putExtra("revealY", revealY)
+        }
+        ActivityCompat.startActivity(this, intent, options.toBundle())
+        // startActivity(Intent(this, MainActivity::class.java))
         finish()
     }
 

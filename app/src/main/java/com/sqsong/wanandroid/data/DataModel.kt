@@ -68,6 +68,7 @@ data class HomeItem(val apkLink: String,
                     val superChapterId: Int,
                     val superChapterName: String,
                     val title: String,
+                    val shareUser: String?,
                     val userId: Int,
                     val visible: Int,
                     var zan: Int)

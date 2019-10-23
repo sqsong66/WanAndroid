@@ -32,7 +32,7 @@ class WebViewPresenter @Inject constructor() : BasePresenter<WebViewContract.Vie
     private fun setWebSettings() {
         val webSettings = mView?.getWebView()?.settings
         //如果访问的页面中要与Javascript交互，则webview必须设置支持Javascript
-        webSettings?.javaScriptEnabled = true
+        webSettings?.javaScriptEnabled = false
         //设置自适应屏幕，两者合用
         webSettings?.useWideViewPort = true //将图片调整到适合webview的大小
         webSettings?.loadWithOverviewMode = true // 缩放至屏幕的大小
